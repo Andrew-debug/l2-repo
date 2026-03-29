@@ -47,7 +47,7 @@ export function LevelFilter({
         >
           <div className="flex items-center gap-2">
             <Skull className="h-4 w-4 text-primary" />
-            <h3 className="font-(family-name:--font-cinzel) text-sm font-semibold text-foreground">
+            <h3 className="font-marcellus text-sm font-semibold text-foreground">
               Level Range
             </h3>
           </div>
@@ -91,7 +91,7 @@ export function LevelFilter({
         >
           <div className="flex items-center gap-2">
             <Shield className="h-4 w-4 text-accent" />
-            <h3 className="font-(family-name:--font-cinzel) text-sm font-semibold text-foreground">
+            <h3 className="font-marcellus text-sm font-semibold text-foreground">
               Boss Type
             </h3>
           </div>
@@ -141,7 +141,7 @@ export function LevelFilter({
         >
           <div className="flex items-center gap-2">
             <MapPin className="h-4 w-4 text-primary" />
-            <h3 className="font-(family-name:--font-cinzel) text-sm font-semibold text-foreground">
+            <h3 className="font-marcellus text-sm font-semibold text-foreground">
               Region
             </h3>
           </div>

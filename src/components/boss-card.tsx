@@ -64,7 +64,7 @@ export function BossCard({ boss, onClose, compact = false }: BossCardProps) {
                   boss.type === "epic" ? "text-accent" : "text-primary"
                 }`}
               />
-              <h3 className="font-(family-name:--font-cinzel) text-lg font-bold text-foreground">
+              <h3 className="font-marcellus text-lg font-bold text-foreground">
                 {boss.name}
               </h3>
             </div>

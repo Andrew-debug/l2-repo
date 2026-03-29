@@ -1,18 +1,24 @@
 import type { Metadata } from "next";
-import { Cinzel, Inter, Marcellus } from "next/font/google";
+import { Inter, Marcellus } from "next/font/google";
 // import { Analytics } from '@vercel/analytics/next'
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import localFont from "next/font/local";
 
-const cinzel = Marcellus({
+const marcellus = Marcellus({
   subsets: ["latin"],
-  variable: "--font-cinzel",
+  variable: "--font-marcellus",
   weight: ["400"],
 });
 
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+const tahoma = localFont({
+  src: "../../public/fonts/tahoma-bit.otf",
+  variable: "--font-tahoma",
 });
 
 export const metadata: Metadata = {
@@ -46,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${cinzel.variable} ${inter.variable} font-sans antialiased`}
+        className={`${tahoma.variable} ${inter.variable} ${marcellus.variable} font-sans antialiased`}
       >
         {children}
         {/* <Analytics /> */}

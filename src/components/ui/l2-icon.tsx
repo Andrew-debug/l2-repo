@@ -44,7 +44,7 @@ export function L2Icon({
       {label && (
         <span
           className={cn(
-            "absolute inset-0 flex items-center justify-center text-xs text-white",
+            "absolute inset-0 flex items-center justify-center l2-original-style text-[17px]",
             "drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]",
           )}
         >

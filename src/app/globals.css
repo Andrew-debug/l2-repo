@@ -76,8 +76,8 @@
 
 @theme inline {
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
-  --font-mono: "Geist Mono", "Geist Mono Fallback";
-  --font-cinzel: var(--font-cinzel), "Cinzel", serif;
+  --font-marcellus: var(--font-marcellus), "Marcellus", sans-serif;
+  --font-tahoma: var(--font-tahoma), "Tahoma", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -123,4 +123,19 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+* {
+  cursor: url("../../public/default-cursor.cur"), auto;
+}
+
+.l2-original-style {
+  font-family: var(--font-tahoma), "Tahoma", sans-serif;
+
+  color: #b1b1b1;
+  text-shadow: 1px 1px 0px #000;
+
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  letter-spacing: 0.3px;
 }

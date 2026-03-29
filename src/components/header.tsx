@@ -13,7 +13,7 @@ export function Header() {
               <Sword className="h-4 w-4 text-accent absolute -bottom-1 -right-1" />
             </div>
             <div>
-              <h1 className="font-cinzel text-xl font-bold text-foreground tracking-wide">
+              <h1 className="font-marcellus text-xl font-bold text-foreground tracking-wide">
                 L2 Boss Tracker
               </h1>
               <p className="text-xs text-muted-foreground">
