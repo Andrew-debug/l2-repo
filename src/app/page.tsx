@@ -10,10 +10,9 @@ async function handleCloseAction() {
 
 export default function Home() {
   return (
-    <div className="space-y-8">
+    <div className="p-5 space-y-8 bg-amber-500">
       {/* <MainPage /> */}
 
-      {/* Example 1: Simple Icon without button behavior */}
       <L2Icon
         initialSrc="/icons/inventory_trash.png"
         hoveredSrc="/icons/inventory_trash_drag.png"
@@ -22,7 +21,6 @@ export default function Home() {
         sizes="32px"
       />
 
-      {/* Example 2: Button with label */}
       <L2Icon
         initialSrc="/icons/smallbutton2.png"
         hoveredSrc="/icons/smallbutton2_down.png"

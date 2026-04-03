@@ -78,6 +78,11 @@
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
   --font-marcellus: var(--font-marcellus), "Marcellus", sans-serif;
   --font-tahoma: var(--font-tahoma), "Tahoma", sans-serif;
+  --color-window-bg: rgb(44, 62, 81);
+  --color-window-inner-gray: rgb(81, 84, 88);
+  --color-window-content-border: rgb(37, 44, 52);
+  --color-window-content-bg: rgb(23, 30, 37);
+  /*  */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -130,12 +135,25 @@
 }
 
 .l2-original-style {
-  font-family: var(--font-tahoma), "Tahoma", sans-serif;
+  /* font-family: var(--font-tahoma), "Tahoma", sans-serif; */
 
   color: #b1b1b1;
   text-shadow: 1px 1px 0px #000;
 
-  image-rendering: pixelated;
-  -webkit-font-smoothing: none;
-  letter-spacing: 0.3px;
+  /* letter-spacing: 0.3px; */
+}
+
+@layer components {
+  .window-item-gradient {
+    border: 1px solid;
+
+    border-image-source: linear-gradient(
+      315deg,
+      rgba(82, 81, 82, 1) 0%,
+      rgba(82, 81, 82, 1) 50%,
+      rgb(176, 178, 176) 100%
+    );
+
+    border-image-slice: 1;
+  }
 }
