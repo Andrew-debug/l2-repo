@@ -10,7 +10,7 @@ async function handleCloseAction() {
 
 export default function Home() {
   return (
-    <div className="p-5 space-y-8 bg-amber-500">
+    <div className="p-5 pb-10 space-y-8 bg-amber-500">
       {/* <MainPage /> */}
 
       <L2Icon

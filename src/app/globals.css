@@ -78,10 +78,13 @@
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
   --font-marcellus: var(--font-marcellus), "Marcellus", sans-serif;
   --font-tahoma: var(--font-tahoma), "Tahoma", sans-serif;
-  --color-window-bg: rgb(44, 62, 81);
+  --color-window-bg: rgb(45, 62, 81);
   --color-window-inner-gray: rgb(81, 84, 88);
   --color-window-content-border: rgb(37, 44, 52);
   --color-window-content-bg: rgb(23, 30, 37);
+  --color-window-action-border: rgb(39, 47, 54);
+  --color-square-border: rgb(57, 56, 57);
+  --color-square-bg: rgb(19, 23, 27);
   /*  */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -134,17 +137,19 @@
   cursor: url("../../public/default-cursor.cur"), auto;
 }
 
-.l2-original-style {
-  /* font-family: var(--font-tahoma), "Tahoma", sans-serif; */
-
-  color: #b1b1b1;
+/* .l2-original-style { */
+body {
+  font-family: var(--font-tahoma), "Tahoma", sans-serif;
+  /* color: #b1b1b1; */
+  color: #d2d2d2;
+  font-size: 15px;
   text-shadow: 1px 1px 0px #000;
 
-  /* letter-spacing: 0.3px; */
+  letter-spacing: 0.3px;
 }
 
 @layer components {
-  .window-item-gradient {
+  .window-item-gradient-active {
     border: 1px solid;
 
     border-image-source: linear-gradient(
@@ -155,5 +160,125 @@
     );
 
     border-image-slice: 1;
+  }
+
+  /* .custom-scrollbar {
+    padding-right: 20px;
+  } */
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 14px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    border: 1px solid transparent;
+    background-origin: border-box;
+
+    background-image:
+      /* 1. Top Glare (Stays on top of everything) */
+      radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      /* 2. Bottom Glare */
+        radial-gradient(
+          ellipse at center,
+          rgba(255, 255, 255, 0.2) 0%,
+          rgba(255, 255, 255, 0) 100%
+        ),
+      /* 3. Main Body Color */
+        linear-gradient(
+          var(--color-window-content-bg),
+          var(--color-window-content-bg)
+        ),
+      /* 4. The Black Inner Shadow (This sits behind the Main Body) */
+        linear-gradient(#000000, #000000),
+      /* 5. Gradient Border */
+        linear-gradient(90deg, rgb(189, 174, 132), rgb(115, 89, 41));
+
+    background-size:
+      80% 2px,
+      /* Top Glare */ 80% 4px,
+      /* Bottom Glare */ calc(100% - 4px) calc(100% - 2px),
+      /* Main Body: Shrunk by 4px width (2L+2R) and 2px height (1T+1B) */ 100%
+        100%,
+      /* Black Shadow Box: Fills the entire inner area */ 100% 100%; /* Gradient Border: Fills the border area */
+
+    background-position:
+      center 1px,
+      /* Top glare pushed down 1px so it doesn't overlap the top black line */
+        center bottom 1px,
+      /* Bottom glare pushed up 1px to clear the bottom black line */ center
+        center,
+      /* Main body perfectly centered inside the black box */ center center,
+      center center;
+
+    background-repeat: no-repeat;
+
+    /* 5 Layers = 5 Clip Values. First 4 stay inside, last one fills the border */
+    background-clip:
+      padding-box, padding-box, padding-box, padding-box, border-box;
+  }
+
+  /* .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-image:
+      radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.4) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+      radial-gradient(
+        ellipse at center,
+        rgba(255, 255, 255, 0.3) 0%,
+        rgba(255, 255, 255, 0) 100%
+      ),
+        linear-gradient(
+          var(--color-window-content-bg),
+          var(--color-window-content-bg)
+        ),
+      linear-gradient(#000000, #000000),
+      linear-gradient(90deg, rgb(210, 195, 150), rgb(140, 110, 55));
+  } */
+
+  .custom-scrollbar::-webkit-scrollbar-button:single-button {
+    background-size: 14px 14px;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 14px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-button:single-button:vertical:decrement {
+    background-image: url("/icons/ScrollBarUpBtn.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-button:single-button:vertical:decrement:hover {
+    background-image: url("/icons/scrollbarupbtn_over.png");
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-button:single-button:vertical:decrement:active {
+    background-image: url("/icons/ScrollBarUpOnBtn.png");
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-button:single-button:vertical:increment {
+    background-image: url("/icons/ScrollBarDownBtn.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-button:single-button:vertical:increment:hover {
+    background-image: url("/icons/scrollbardownbtn_over.png");
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-button:single-button:vertical:increment:active {
+    background-image: url("/icons/ScrollBarDownOnBtn.png");
   }
 }
