@@ -69,8 +69,8 @@ export function IconStateButton({
       onMouseLeave={handleMouseLeave}
       className={cn(
         "relative flex items-center justify-center",
-        "size-3.5",
-        "shadow-[1px_1px_2px_0px_#000000]",
+        "size-4.5",
+        // "shadow-[1px_1px_2px_0px_#000000]",
         className,
       )}
       title={tooltipLabel}

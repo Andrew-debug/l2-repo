@@ -137,12 +137,11 @@
   cursor: url("../../public/default-cursor.cur"), auto;
 }
 
-/* .l2-original-style { */
 body {
   font-family: var(--font-tahoma), "Tahoma", sans-serif;
   /* color: #b1b1b1; */
   color: #d2d2d2;
-  font-size: 15px;
+  font-size: 19px;
   text-shadow: 1px 1px 0px #000;
 
   letter-spacing: 0.3px;
@@ -162,12 +161,8 @@ body {
     border-image-slice: 1;
   }
 
-  /* .custom-scrollbar {
-    padding-right: 20px;
-  } */
-
   .custom-scrollbar::-webkit-scrollbar {
-    width: 14px;
+    width: 18px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
@@ -225,31 +220,11 @@ body {
       padding-box, padding-box, padding-box, padding-box, border-box;
   }
 
-  /* .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-image:
-      radial-gradient(
-        ellipse at center,
-        rgba(255, 255, 255, 0.4) 0%,
-        rgba(255, 255, 255, 0) 100%
-      ),
-      radial-gradient(
-        ellipse at center,
-        rgba(255, 255, 255, 0.3) 0%,
-        rgba(255, 255, 255, 0) 100%
-      ),
-        linear-gradient(
-          var(--color-window-content-bg),
-          var(--color-window-content-bg)
-        ),
-      linear-gradient(#000000, #000000),
-      linear-gradient(90deg, rgb(210, 195, 150), rgb(140, 110, 55));
-  } */
-
   .custom-scrollbar::-webkit-scrollbar-button:single-button {
-    background-size: 14px 14px;
+    background-size: 18px 18px;
     background-position: center;
     background-repeat: no-repeat;
-    height: 14px;
+    height: 18px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-button:single-button:vertical:decrement {
