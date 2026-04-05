@@ -19,6 +19,7 @@ const MAP_CONFIG = {
 };
 
 // Helper function to clamp position within boundaries
+// Ensures the map stays visible without black areas
 const clampPosition = (
   x: number,
   y: number,
@@ -29,13 +30,13 @@ const clampPosition = (
   const scaledWidth = MAP_CONFIG.totalWidth * scale;
   const scaledHeight = MAP_CONFIG.totalHeight * scale;
 
-  // Allow some padding (500px) so the map can be moved partially off-screen
-  const padding = 500;
-
-  const minX = -(scaledWidth - padding);
-  const maxX = stageWidth - padding;
-  const minY = -(scaledHeight - padding);
-  const maxY = stageHeight - padding;
+  // Calculate bounds to prevent black areas
+  // If map is smaller than stage, keep it centered
+  // If map is larger, allow panning but keep it within bounds
+  const minX = Math.min(0, stageWidth - scaledWidth);
+  const maxX = 0;
+  const minY = Math.min(0, stageHeight - scaledHeight);
+  const maxY = 0;
 
   return {
     x: Math.max(minX, Math.min(maxX, x)),
@@ -86,7 +87,15 @@ const BOSS_DATA: Boss[] = [
   },
 ];
 
-export default function KonvaMapViewer() {
+interface KonvaMapViewerProps {
+  width?: number;
+  height?: number;
+}
+
+export default function KonvaMapViewer({
+  width = 500,
+  height = 600,
+}: KonvaMapViewerProps) {
   const stageRef = useRef<Konva.Stage>(null);
   const layerRef = useRef<Konva.Layer>(null);
   const [activeBossId, setActiveBossId] = useState<string | null>(null);
@@ -102,6 +111,12 @@ export default function KonvaMapViewer() {
   const velocityRef = useRef({ x: 0, y: 0 });
   const lastPosRef = useRef({ x: 0, y: 0 });
   const momentumRef = useRef<NodeJS.Timeout | null>(null);
+  const stageDimensionsRef = useRef({ width, height });
+
+  // Update stage dimensions ref when props change
+  useEffect(() => {
+    stageDimensionsRef.current = { width, height };
+  }, [width, height]);
 
   // Load all map tiles
   useEffect(() => {
@@ -277,8 +292,8 @@ export default function KonvaMapViewer() {
         newX,
         newY,
         scaleRef.current,
-        stageRef.current?.width() || window.innerWidth,
-        stageRef.current?.height() || window.innerHeight,
+        stageDimensionsRef.current.width,
+        stageDimensionsRef.current.height,
       );
 
       // If position was clamped (hit a boundary), stop the momentum
@@ -421,80 +436,73 @@ export default function KonvaMapViewer() {
   };
 
   return (
-    <div className="bg-gray-950 overflow-hidden relative">
-      <Stage
-        ref={stageRef}
-        width={window.innerWidth}
-        height={window.innerHeight}
-        onWheel={handleWheel}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        onMouseLeave={handleMouseUp}
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        style={{ cursor: isDragging ? "grabbing" : "grab" }}
+    <Stage
+      ref={stageRef}
+      width={width}
+      height={height}
+      onWheel={handleWheel}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      style={{ cursor: isDragging ? "grabbing" : "grab" }}
+    >
+      <Layer
+        ref={layerRef}
+        x={position.x}
+        y={position.y}
+        scaleX={scale}
+        scaleY={scale}
       >
-        <Layer
-          ref={layerRef}
-          x={position.x}
-          y={position.y}
-          scaleX={scale}
-          scaleY={scale}
-        >
-          {/* Background rect to catch drag events */}
-          <Rect
-            x={0}
-            y={0}
-            width={MAP_CONFIG.totalWidth}
-            height={MAP_CONFIG.totalHeight}
-            fill="transparent"
-            listening={true}
-          />
+        {/* Background rect to catch drag events */}
+        <Rect
+          x={0}
+          y={0}
+          width={MAP_CONFIG.totalWidth}
+          height={MAP_CONFIG.totalHeight}
+          fill="transparent"
+          listening={true}
+        />
 
-          {/* Render map tiles */}
-          {mapImages.length > 0 &&
-            Array.from({ length: MAP_CONFIG.rows }).map((_, row) =>
-              Array.from({ length: MAP_CONFIG.cols }).map((_, col) => {
-                const index = row * MAP_CONFIG.cols + col;
-                const img = mapImages[index];
-                if (!img || !img.complete) return null;
+        {/* Render map tiles */}
+        {mapImages.length > 0 &&
+          Array.from({ length: MAP_CONFIG.rows }).map((_, row) =>
+            Array.from({ length: MAP_CONFIG.cols }).map((_, col) => {
+              const index = row * MAP_CONFIG.cols + col;
+              const img = mapImages[index];
+              if (!img || !img.complete) return null;
 
-                return (
-                  <KonvaImage
-                    key={`tile-${row}-${col}`}
-                    image={img}
-                    x={col * MAP_CONFIG.tileWidth}
-                    y={row * MAP_CONFIG.tileHeight}
-                    width={MAP_CONFIG.tileWidth}
-                    height={MAP_CONFIG.tileHeight}
-                  />
-                );
-              }),
-            )}
+              return (
+                <KonvaImage
+                  key={`tile-${row}-${col}`}
+                  image={img}
+                  x={col * MAP_CONFIG.tileWidth}
+                  y={row * MAP_CONFIG.tileHeight}
+                  width={MAP_CONFIG.tileWidth}
+                  height={MAP_CONFIG.tileHeight}
+                />
+              );
+            }),
+          )}
 
-          {/* Render boss markers */}
-          <Group>
-            {BOSS_DATA.map((boss) => (
-              <BossMarkerKonva
-                key={boss.id}
-                boss={boss}
-                isActive={activeBossId === boss.id}
-                onSelect={(id) =>
-                  setActiveBossId(activeBossId === id ? null : id)
-                }
-                scale={scale}
-              />
-            ))}
-          </Group>
-        </Layer>
-      </Stage>
-
-      {/* Zoom level indicator (optional) */}
-      <div className="absolute top-4 right-4 bg-gray-900 px-3 py-2 rounded border border-gray-700 text-gray-300 text-sm font-mono">
-        Zoom: {(scale * 100).toFixed(0)}%
-      </div>
-    </div>
+        {/* Render boss markers */}
+        <Group>
+          {BOSS_DATA.map((boss) => (
+            <BossMarkerKonva
+              key={boss.id}
+              boss={boss}
+              isActive={activeBossId === boss.id}
+              onSelect={(id) =>
+                setActiveBossId(activeBossId === id ? null : id)
+              }
+              scale={scale}
+            />
+          ))}
+        </Group>
+      </Layer>
+    </Stage>
   );
 }

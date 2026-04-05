@@ -78,13 +78,13 @@
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
   --font-marcellus: var(--font-marcellus), "Marcellus", sans-serif;
   --font-tahoma: var(--font-tahoma), "Tahoma", sans-serif;
-  --color-window-bg: rgb(45, 62, 81);
+  --color-window-bg: rgba(0, 0, 0, 0.5);
   --color-window-inner-gray: rgb(81, 84, 88);
   --color-window-content-border: rgb(37, 44, 52);
-  --color-window-content-bg: rgb(23, 30, 37);
+  --color-window-content-bg: rgb(19, 23, 27);
   --color-window-action-border: rgb(39, 47, 54);
   --color-square-border: rgb(57, 56, 57);
-  --color-square-bg: rgb(19, 23, 27);
+  --color-square-bg: rgba(19, 23, 27, 0.9);
   /*  */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -141,7 +141,7 @@ body {
   font-family: var(--font-tahoma), "Tahoma", sans-serif;
   /* color: #b1b1b1; */
   color: #d2d2d2;
-  font-size: 19px;
+  font-size: 18px;
   text-shadow: 1px 1px 0px #000;
 
   letter-spacing: 0.3px;

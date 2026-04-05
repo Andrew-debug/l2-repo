@@ -31,8 +31,8 @@ export default function L2Window() {
 
       <div className="border-l border-r border-b border-black">
         <div className="border-l border-r border-b border-window-inner-gray bg-window-bg p-1.5 pt-2 pb-2">
-          <div className="flex items-center justify-between -mb-1.5">
-            <h3 className="ml-2.5">Macro List</h3>
+          <div className="flex items-center justify-between -mb-1.25">
+            <h3 className="ml-1.5">Macro List</h3>
             <span className="mr-4">(08/24)</span>
           </div>
           <div className="grid grid-cols-6 content-start w-full border border-window-content-border bg-window-content-bg overflow-y-scroll custom-scrollbar gap-x-1 p-0.5 pt-0 h-88.75 pr-2.25">

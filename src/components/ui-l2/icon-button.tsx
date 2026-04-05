@@ -10,7 +10,8 @@ interface IconStateButtonProps {
   clickIcon: string;
   onClick?: () => void;
   className?: string;
-  text?: string;
+  tooltipLabel?: string;
+  alt?: string;
 }
 
 export function IconStateButton({
@@ -19,7 +20,8 @@ export function IconStateButton({
   clickIcon,
   onClick,
   className,
-  text,
+  tooltipLabel,
+  alt = "icon",
 }: IconStateButtonProps) {
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -71,23 +73,14 @@ export function IconStateButton({
         // "shadow-[1px_1px_2px_0px_#000000]",
         className,
       )}
+      title={tooltipLabel}
     >
       <Image
         src={getCurrentIcon()}
-        alt=""
+        alt={alt}
         fill
         className="object-contain pointer-events-none"
       />
-      {text && (
-        <span
-          className={cn(
-            "absolute inset-0 flex items-center justify-center l2-original-style mt-px",
-            "drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]",
-          )}
-        >
-          {text}
-        </span>
-      )}
     </button>
   );
 }

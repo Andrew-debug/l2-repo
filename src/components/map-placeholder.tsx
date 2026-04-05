@@ -1,80 +1,62 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { useMapSize } from "./providers/MapProvider";
+import { cn } from "@/lib/utils";
+import { useRef, useState, useEffect } from "react";
 
 const DynamicKonvaMapViewer = dynamic(
   () => import("@/components/map/KonvaMapViewer"),
   { ssr: false },
 );
 
-import {
-  MapPin,
-  Maximize2,
-  ZoomIn,
-  ZoomOut,
-  Compass,
-  Layers,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-
 export function MapPlaceholder() {
+  const { mapSize, currentSize } = useMapSize();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [measuredSize, setMeasuredSize] = useState({ width: 0, height: 0 });
+
+  useEffect(() => {
+    if (mapSize === "small") return;
+
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Measure once on mount
+    const timer = requestAnimationFrame(() => {
+      const parent = container.parentElement;
+      if (!parent) return;
+
+      const rect = parent.getBoundingClientRect();
+      setMeasuredSize({
+        width: Math.floor(rect.width),
+        height: Math.floor(rect.height),
+      });
+    });
+
+    return () => cancelAnimationFrame(timer);
+  }, [mapSize]);
+
+  const mapWidth = mapSize === "large" ? measuredSize.width : currentSize.width;
+  const mapHeight =
+    mapSize === "large" ? measuredSize.height : currentSize.height;
+
   return (
-    <div className="relative w-full h-full bg-secondary/50 rounded-lg border border-border overflow-hidden">
-      {/* Map Controls */}
-      <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
-        <Button
-          size="icon"
-          variant="secondary"
-          className="h-9 w-9 bg-card/90 border border-border hover:bg-card hover:border-primary/50"
-        >
-          <ZoomIn className="h-4 w-4" />
-        </Button>
-        <Button
-          size="icon"
-          variant="secondary"
-          className="h-9 w-9 bg-card/90 border border-border hover:bg-card hover:border-primary/50"
-        >
-          <ZoomOut className="h-4 w-4" />
-        </Button>
-        <Button
-          size="icon"
-          variant="secondary"
-          className="h-9 w-9 bg-card/90 border border-border hover:bg-card hover:border-primary/50"
-        >
-          <Compass className="h-4 w-4" />
-        </Button>
-        <Button
-          size="icon"
-          variant="secondary"
-          className="h-9 w-9 bg-card/90 border border-border hover:bg-card hover:border-primary/50"
-        >
-          <Layers className="h-4 w-4" />
-        </Button>
-        <Button
-          size="icon"
-          variant="secondary"
-          className="h-9 w-9 bg-card/90 border border-border hover:bg-card hover:border-primary/50"
-        >
-          <Maximize2 className="h-4 w-4" />
-        </Button>
-      </div>
-
-      {/* Map Placeholder Content */}
-      <div className="">
-        <DynamicKonvaMapViewer />
-      </div>
-
-      {/* Coordinates display */}
-      <div className="absolute bottom-4 left-4 bg-card/90 px-3 py-1.5 rounded border border-border text-xs text-muted-foreground">
-        <span className="text-primary">X:</span> 147,432{" "}
-        <span className="text-primary ml-2">Y:</span> 26,892
-      </div>
-
-      {/* Scale indicator */}
-      <div className="absolute bottom-4 right-4 bg-card/90 px-3 py-1.5 rounded border border-border text-xs text-muted-foreground flex items-center gap-2">
-        <div className="w-16 h-0.5 bg-primary/50" />
-        <span>1km</span>
-      </div>
+    <div
+      ref={containerRef}
+      className={cn("flex-1 border border-black overflow-hidden px-0.5")}
+      style={
+        mapSize === "large" && measuredSize.width > 0
+          ? {
+              width: `${measuredSize.width}px`,
+              height: `${measuredSize.height}px`,
+            }
+          : undefined
+      }
+    >
+      <DynamicKonvaMapViewer
+        width={mapWidth - 6}
+        height={mapHeight - (mapSize === "large" ? 72 : 0)}
+      />
     </div>
   );
 }
