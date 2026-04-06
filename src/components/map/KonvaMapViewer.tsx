@@ -10,6 +10,8 @@ const MAP_CONFIG = {
   rows: 10,
   tileWidth: 302,
   tileHeight: 262,
+  minZoom: 0.7,
+  maxZoom: 1,
   get totalWidth() {
     return this.cols * this.tileWidth;
   },
@@ -88,14 +90,11 @@ const BOSS_DATA: Boss[] = [
 ];
 
 interface KonvaMapViewerProps {
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
 }
 
-export default function KonvaMapViewer({
-  width = 500,
-  height = 600,
-}: KonvaMapViewerProps) {
+export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const stageRef = useRef<Konva.Stage>(null);
   const layerRef = useRef<Konva.Layer>(null);
   const [activeBossId, setActiveBossId] = useState<string | null>(null);
@@ -165,7 +164,10 @@ export default function KonvaMapViewer({
     const oldScale = scaleRef.current;
 
     const newScale = e.evt.deltaY > 0 ? oldScale / scaleBy : oldScale * scaleBy;
-    const clampedScale = Math.max(0.5, Math.min(2, newScale));
+    const clampedScale = Math.max(
+      MAP_CONFIG.minZoom,
+      Math.min(MAP_CONFIG.maxZoom, newScale),
+    );
 
     if (clampedScale === scaleRef.current) return;
 
@@ -394,7 +396,10 @@ export default function KonvaMapViewer({
       if (lastDistanceRef.current !== null) {
         const scaleBy = distance / lastDistanceRef.current;
         const newScale = scale * scaleBy;
-        const clampedScale = Math.max(0.5, Math.min(2, newScale));
+        const clampedScale = Math.max(
+          MAP_CONFIG.minZoom,
+          Math.min(MAP_CONFIG.maxZoom, newScale),
+        );
 
         if (clampedScale !== scale) {
           setScale(clampedScale);
@@ -405,33 +410,15 @@ export default function KonvaMapViewer({
   };
 
   const handleTouchEnd = () => {
-    if (
-      isDragging &&
-      (Math.abs(velocityRef.current.x) > 1 ||
-        Math.abs(velocityRef.current.y) > 1)
-    ) {
-      // Apply momentum scrolling
-      startMomentumScroll();
-    } else {
-      // Sync position to state if no momentum
-      setPosition({ ...positionRef.current });
-    }
+    // Sync position to state (inertia disabled)
+    setPosition({ ...positionRef.current });
     setIsDragging(false);
     lastDistanceRef.current = null;
   };
 
   const handleMouseUp = () => {
-    if (
-      isDragging &&
-      (Math.abs(velocityRef.current.x) > 1 ||
-        Math.abs(velocityRef.current.y) > 1)
-    ) {
-      // Apply momentum scrolling
-      startMomentumScroll();
-    } else {
-      // Sync position to state if no momentum
-      setPosition({ ...positionRef.current });
-    }
+    // Sync position to state (inertia disabled)
+    setPosition({ ...positionRef.current });
     setIsDragging(false);
   };
 

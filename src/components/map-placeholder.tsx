@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useMapSize } from "./providers/MapProvider";
 import { cn } from "@/lib/utils";
-import { useRef, useState, useEffect } from "react";
+import { useContainerSize } from "./hooks/useContainerSize";
 
 const DynamicKonvaMapViewer = dynamic(
   () => import("@/components/map/KonvaMapViewer"),
@@ -11,52 +11,31 @@ const DynamicKonvaMapViewer = dynamic(
 );
 
 export function MapPlaceholder() {
-  const { mapSize, currentSize } = useMapSize();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [measuredSize, setMeasuredSize] = useState({ width: 0, height: 0 });
+  const { mapSize, minimizeSize } = useMapSize();
+  const [containerRef, dimensions] = useContainerSize<HTMLDivElement>();
 
-  useEffect(() => {
-    if (mapSize === "small") return;
+  const isLarge = mapSize === "large";
 
-    const container = containerRef.current;
-    if (!container) return;
-
-    // Measure once on mount
-    const timer = requestAnimationFrame(() => {
-      const parent = container.parentElement;
-      if (!parent) return;
-
-      const rect = parent.getBoundingClientRect();
-      setMeasuredSize({
-        width: Math.floor(rect.width),
-        height: Math.floor(rect.height),
-      });
-    });
-
-    return () => cancelAnimationFrame(timer);
-  }, [mapSize]);
-
-  const mapWidth = mapSize === "large" ? measuredSize.width : currentSize.width;
-  const mapHeight =
-    mapSize === "large" ? measuredSize.height : currentSize.height;
+  const baseWidth = isLarge ? dimensions.width : minimizeSize;
+  const baseHeight = isLarge ? dimensions.height : minimizeSize;
 
   return (
     <div
-      ref={containerRef}
-      className={cn("flex-1 border border-black overflow-hidden px-0.5")}
+      className={cn(
+        "relative border border-black overflow-hidden px-0.5",
+        isLarge ? "flex-1 w-full h-full" : "flex-none",
+      )}
       style={
-        mapSize === "large" && measuredSize.width > 0
-          ? {
-              width: `${measuredSize.width}px`,
-              height: `${measuredSize.height}px`,
-            }
+        !isLarge
+          ? { width: `${minimizeSize}px`, height: `${minimizeSize}px` }
           : undefined
       }
     >
-      <DynamicKonvaMapViewer
-        width={mapWidth - 6}
-        height={mapHeight - (mapSize === "large" ? 72 : 0)}
-      />
+      <div ref={containerRef} className="absolute inset-x-1 inset-y-0">
+        {baseWidth > 0 && baseHeight > 0 && (
+          <DynamicKonvaMapViewer width={baseWidth} height={baseHeight} />
+        )}
+      </div>
     </div>
   );
 }

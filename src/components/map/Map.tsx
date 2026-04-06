@@ -8,7 +8,7 @@ import { IconStateButton } from "../ui/icon-state-button";
 import { cn } from "@/lib/utils";
 
 export default function Map() {
-  const { mapSize, setMapSize, currentSize } = useMapSize();
+  const { mapSize, setMapSize } = useMapSize();
   return (
     <div
       className={cn(
@@ -25,7 +25,7 @@ export default function Map() {
       <div className={cn(mapSize === "small" ? "" : "flex-1")}>
         <WindowBorder>
           <div className="flex flex-col h-full">
-            <div className="flex justify-end gap-1.75 pb-1 pt-1.5 px-1.5">
+            <div className="flex justify-end gap-1.75 pt-1 pb-0.75 px-1.5">
               <IconStateButton
                 defaultIcon="/icons/smallbutton1.png"
                 hoverIcon="/icons/smallbutton1_over.png"
@@ -44,7 +44,7 @@ export default function Map() {
 
             <MapPlaceholder />
 
-            <div className="flex justify-end gap-1.75 pb-1 pt-1.5 px-1.5">
+            <div className="flex justify-end gap-1.75 pb-1 pt-0.75 px-1.5">
               <IconStateButton
                 defaultIcon="/icons/smallbutton2.png"
                 hoverIcon="/icons/smallbutton2_over.png"
