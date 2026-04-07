@@ -85,6 +85,9 @@
   --color-window-action-border: rgb(39, 47, 54);
   --color-square-border: rgb(57, 56, 57);
   --color-square-bg: rgba(19, 23, 27, 0.9);
+  --color-system-text: rgba(176, 153, 121);
+  --color-announcement-text: rgba(128, 251, 255);
+  --color-shout-text: rgba(255, 112, 0);
   /*  */
   --color-background: var(--background);
   --color-foreground: var(--foreground);

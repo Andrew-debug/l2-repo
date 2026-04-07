@@ -6,6 +6,7 @@ import { L2Icon } from "@/components/ui/l2-icon";
 import L2Window from "@/components/ui/l2-window";
 import { Header } from "@/components/header";
 import { HelpCircle, Info, Users } from "lucide-react";
+import Chat from "@/components/chat/chat";
 async function handleCloseAction() {
   "use server";
   console.log("This logs in your VSCode terminal, not the browser");
@@ -18,11 +19,12 @@ export default function Home() {
       <Header />
       {/* <MainPage /> */}
 
-      <div className="container mx-auto px-4 h-[calc(100dvh-77px-49px)]">
+      {/* <div className="container mx-auto px-4 h-[calc(100dvh-77px-49px)]">
         <MapProvider>
           <Map />
         </MapProvider>
-      </div>
+      </div> */}
+      <Chat />
 
       <footer className="border-t border-border bg-card/50 py-4">
         <div className="container mx-auto px-4">

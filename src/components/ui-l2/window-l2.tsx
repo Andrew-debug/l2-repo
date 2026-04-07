@@ -7,7 +7,12 @@ function WindowBorder({
   ...props
 }: React.ComponentProps<"div">) {
   return (
-    <div className={cn("border-l border-r border-b border-black h-full")}>
+    <div
+      className={cn(
+        "border-l border-r border-b border-black h-full",
+        className,
+      )}
+    >
       <div className="border-l border-r border-b border-window-inner-gray bg-window-bg h-full">
         {children}
       </div>
