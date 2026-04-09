@@ -16,11 +16,7 @@ export default function Map() {
         mapSize === "small" ? "w-[370px]" : "w-full aspect-square",
       )}
     >
-      <Header>
-        <Header.Title>Map</Header.Title>
-
-        <Header.Close />
-      </Header>
+      <Header title="Map" canClose />
 
       <div className={cn(mapSize === "small" ? "" : "flex-1")}>
         <WindowBorder>

@@ -7,6 +7,7 @@ import L2Window from "@/components/ui/l2-window";
 import { Header } from "@/components/header";
 import { HelpCircle, Info, Users } from "lucide-react";
 import Chat from "@/components/chat/chat";
+import SystemMenu from "@/components/ui-l2/system-menu";
 async function handleCloseAction() {
   "use server";
   console.log("This logs in your VSCode terminal, not the browser");
@@ -15,7 +16,7 @@ async function handleCloseAction() {
 
 export default function Home() {
   return (
-    <div className="">
+    <div className="relative w-full h-dvh">
       <Header />
       {/* <MainPage /> */}
 
@@ -26,7 +27,9 @@ export default function Home() {
       </div> */}
       <Chat />
 
-      <footer className="border-t border-border bg-card/50 py-4">
+      <SystemMenu />
+
+      {/* <footer className="border-t border-border bg-card/50 py-4">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
@@ -57,7 +60,7 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </footer>
+      </footer> */}
 
       {/* <L2Window /> */}
     </div>

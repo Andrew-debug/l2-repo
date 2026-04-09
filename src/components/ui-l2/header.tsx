@@ -2,9 +2,17 @@ import Image from "next/image";
 import { ReactNode } from "react";
 import { IconStateButton } from "../ui/icon-state-button";
 
-function HeaderContent({ children }: { children: ReactNode }) {
+function HeaderContent({
+  title,
+  canFold,
+  canClose,
+}: {
+  title: string;
+  canFold?: boolean;
+  canClose?: boolean;
+}) {
   return (
-    <div className="flex h-6 drop-shadow-[0_8px_4px_rgba(0,0,0,0.5)] select-none">
+    <div className="relative flex h-6 drop-shadow-[0_8px_4px_rgba(0,0,0,0.5)] select-none">
       <Image width={19} height={24} src="/icons/FrameBackLeft.png" alt="" />
       <div className="relative flex-1 flex items-center justify-between w-auto pl-1.5">
         <Image
@@ -13,15 +21,25 @@ function HeaderContent({ children }: { children: ReactNode }) {
           alt=""
           className="object-fill z-0"
         />
-        {children}
       </div>
       <Image width={19} height={24} src="/icons/FrameBackRight.png" alt="" />
+      <div className="absolute inset-0">
+        <div className="flex items-center pl-6.5">
+          <HeaderTitle>{title}</HeaderTitle>
+          {(canFold || canClose) && (
+            <div className="flex gap-1 ml-auto mr-2.5 mb-1">
+              {canFold && <HeaderFold />}
+              {canClose && <HeaderClose />}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
 
 function HeaderTitle({ children }: { children: ReactNode }) {
-  return <div className="relative mt-1">{children}</div>;
+  return <div className="mt-0.5">{children}</div>;
 }
 
 function HeaderClose() {
@@ -30,7 +48,16 @@ function HeaderClose() {
       defaultIcon={"/icons/FrameCloseBtn.png"}
       hoverIcon={"/icons/frameclosebtn_over.png"}
       clickIcon={"/icons/FrameCloseOnBtn.png"}
-      className="-mr-2.25"
+    />
+  );
+}
+
+function HeaderFold() {
+  return (
+    <IconStateButton
+      defaultIcon={"/icons/FrameMiniBtn.png"}
+      hoverIcon={"/icons/frameminibtn_over.png"}
+      clickIcon={"/icons/FrameMiniOnBtn.png"}
     />
   );
 }
@@ -38,4 +65,5 @@ function HeaderClose() {
 export default Object.assign(HeaderContent, {
   Title: HeaderTitle,
   Close: HeaderClose,
+  Fold: HeaderFold,
 });
