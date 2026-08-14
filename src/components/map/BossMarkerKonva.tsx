@@ -12,25 +12,27 @@ interface BossMarkerKonvaProps {
     absoluteX: number;
     absoluteY: number;
   };
-  isActive: boolean;
+  isSelected: boolean;
   onSelect: (id: string) => void;
   scale: number; // Current zoom scale from stage
 }
 
 export default function BossMarkerKonva({
   boss,
-  isActive,
+  isSelected,
   onSelect,
   scale,
 }: BossMarkerKonvaProps) {
   const groupRef = useRef<Konva.Group>(null);
   const [isHovered, setIsHovered] = useState(false);
 
+  const highlighted = isHovered || isSelected;
+
   // Inverse scale so marker appears constant size on screen
   const inverseScale = 1 / scale;
 
-  // Icon size on screen (constant regardless of zoom)
-  const iconScreenSize = 40;
+  // Icon size on screen (constant regardless of zoom), grows slightly when highlighted
+  const iconScreenSize = highlighted ? 48 : 40;
 
   // Actual size in canvas coordinates
   const iconSize = iconScreenSize * inverseScale;
@@ -55,10 +57,10 @@ export default function BossMarkerKonva({
       {/* Background circle for visual separation */}
       <Circle
         radius={iconSize / 2}
-        fill={isHovered ? "#dc2626" : "#ef4444"}
+        fill={highlighted ? "#facc15" : "#ef4444"}
         opacity={0.9}
-        shadowColor="#000"
-        shadowBlur={8}
+        shadowColor={highlighted ? "#facc15" : "#000"}
+        shadowBlur={highlighted ? 16 : 8}
         shadowOpacity={0.6}
         shadowOffset={{ x: 0, y: 2 }}
       />
@@ -73,8 +75,8 @@ export default function BossMarkerKonva({
         strokeWidth={1}
       />
 
-      {/* Tooltip - only shown when active, positioned above */}
-      {isActive && (
+      {/* Tooltip - only shown when selected, positioned above */}
+      {isSelected && (
         <Group
           y={-iconSize * 0.7 - 60 * inverseScale}
           onClick={(e) => (e.cancelBubble = true)}

@@ -4,21 +4,9 @@ import React, { useRef, useState, useEffect } from "react";
 import { Stage, Layer, Image as KonvaImage, Group, Rect } from "react-konva";
 import Konva from "konva";
 import BossMarkerKonva from "./BossMarkerKonva";
-
-const MAP_CONFIG = {
-  cols: 6,
-  rows: 10,
-  tileWidth: 302,
-  tileHeight: 262,
-  minZoom: 0.7,
-  maxZoom: 1,
-  get totalWidth() {
-    return this.cols * this.tileWidth;
-  },
-  get totalHeight() {
-    return this.rows * this.tileHeight;
-  },
-};
+import { bosses } from "@/lib/boss-data";
+import { MAP_CONFIG, bossPositions } from "@/lib/boss-positions";
+import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 
 // Helper function to clamp position within boundaries
 // Ensures the map stays visible without black areas
@@ -46,48 +34,21 @@ const clampPosition = (
   };
 };
 
-interface Boss {
-  id: string;
-  name: string;
-  level: number;
-  description: string;
-  absoluteX: number;
-  absoluteY: number;
-}
-
-const getAbsolutePosition = (
-  chunkCol: number,
-  chunkRow: number,
-  offsetX: number,
-  offsetY: number,
-) => ({
-  absoluteX: chunkCol * MAP_CONFIG.tileWidth + offsetX,
-  absoluteY: chunkRow * MAP_CONFIG.tileHeight + offsetY,
-});
-
-const BOSS_DATA: Boss[] = [
-  {
-    id: "baium",
-    name: "Baium",
-    level: 75,
-    description: "Emperor of Elmoreden.",
-    ...getAbsolutePosition(2, 1, 150, 100),
-  },
-  {
-    id: "queen-ant",
-    name: "Queen Ant",
-    level: 40,
-    description: "Ruler of the Wasteland.",
-    ...getAbsolutePosition(1, 5, 50, 200),
-  },
-  {
-    id: "zaken",
-    name: "Zaken",
-    level: 60,
-    description: "Cursed pirate captain.",
-    ...getAbsolutePosition(4, 8, 250, 120),
-  },
-];
+// Boss markers: cross-reference map coordinates with the shared boss list
+const MAP_BOSSES = bossPositions
+  .map((pos) => {
+    const boss = bosses.find((b) => b.id === pos.bossId);
+    if (!boss) return null;
+    return {
+      id: boss.id,
+      name: boss.name,
+      level: boss.level,
+      description: boss.description,
+      absoluteX: pos.absoluteX,
+      absoluteY: pos.absoluteY,
+    };
+  })
+  .filter((b): b is NonNullable<typeof b> => b !== null);
 
 interface KonvaMapViewerProps {
   width: number;
@@ -97,7 +58,7 @@ interface KonvaMapViewerProps {
 export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const stageRef = useRef<Konva.Stage>(null);
   const layerRef = useRef<Konva.Layer>(null);
-  const [activeBossId, setActiveBossId] = useState<string | null>(null);
+  const { selectedBossId, setSelectedBoss } = useBossSelection();
   const [scale, setScale] = useState(0.5);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [mapImages, setMapImages] = useState<HTMLImageElement[]>([]);
@@ -149,6 +110,47 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
       }
     }
   }, []);
+
+  // Smoothly pan/center the map onto whichever boss is selected, whether
+  // that selection came from clicking a list row or a marker on the map.
+  useEffect(() => {
+    if (!selectedBossId) return;
+
+    const stage = stageRef.current;
+    const layer = layerRef.current;
+    const boss = MAP_BOSSES.find((b) => b.id === selectedBossId);
+    if (!stage || !layer || !boss) return;
+
+    const targetScale = scaleRef.current;
+    const targetX = stage.width() / 2 - boss.absoluteX * targetScale;
+    const targetY = stage.height() / 2 - boss.absoluteY * targetScale;
+    const clamped = clampPosition(
+      targetX,
+      targetY,
+      targetScale,
+      stage.width(),
+      stage.height(),
+    );
+
+    const tween = new Konva.Tween({
+      node: layer,
+      duration: 0.6,
+      easing: Konva.Easings.EaseInOut,
+      x: clamped.x,
+      y: clamped.y,
+      onUpdate: () => {
+        positionRef.current = { x: layer.x(), y: layer.y() };
+      },
+      onFinish: () => {
+        setPosition({ x: layer.x(), y: layer.y() });
+      },
+    });
+    tween.play();
+
+    return () => {
+      tween.destroy();
+    };
+  }, [selectedBossId]);
 
   // Handle mouse wheel zoom
   const handleWheel = (e: Konva.KonvaEventObject<WheelEvent>) => {
@@ -477,13 +479,13 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
 
         {/* Render boss markers */}
         <Group>
-          {BOSS_DATA.map((boss) => (
+          {MAP_BOSSES.map((boss) => (
             <BossMarkerKonva
               key={boss.id}
               boss={boss}
-              isActive={activeBossId === boss.id}
+              isSelected={selectedBossId === boss.id}
               onSelect={(id) =>
-                setActiveBossId(activeBossId === id ? null : id)
+                setSelectedBoss(selectedBossId === id ? null : id, "map")
               }
               scale={scale}
             />

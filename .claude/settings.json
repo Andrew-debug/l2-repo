@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "WebFetch(domain:l2-servera.com)"
+    ]
+  }
+}

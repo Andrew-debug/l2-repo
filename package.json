@@ -12,11 +12,11 @@
     "class-variance-authority": "^0.7.1",
     "konva": "^10.2.3",
     "lucide-react": "^1.7.0",
-    "next": "v15.5.14",
+    "next": "^16.3.1",
     "next-themes": "^0.4.6",
     "radix-ui": "^1.4.3",
-    "react": "19.2.4",
-    "react-dom": "19.2.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
     "react-konva": "^19.2.3",
     "react-zoom-pan-pinch": "^3.7.0",
     "shadcn": "^4.1.1",
@@ -31,5 +31,8 @@
     "@types/react-dom": "^19",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "allowScripts": {
+    "msw@2.12.14": true
   }
 }
