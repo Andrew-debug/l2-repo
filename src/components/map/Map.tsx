@@ -3,71 +3,81 @@ import Header from "../ui-l2/header";
 import { MapPlaceholder } from "../map-placeholder";
 import { useMapSize } from "../providers/MapProvider";
 import { WindowBorder } from "../ui-l2/window-l2";
-import { L2Icon } from "../ui/l2-icon";
 import { IconStateButton } from "../ui/icon-state-button";
 import { cn } from "@/lib/utils";
 
+const BUTTON_CLASS = "w-16 h-4.5 text-[13px]";
+
 export default function Map() {
   const { mapSize, setMapSize } = useMapSize();
+  const isSmall = mapSize === "small";
+
   return (
     <div
       className={cn(
-        "flex flex-col max-w-[800px] max-h-[1000px] h-full py-4",
-        mapSize === "small" ? "w-[370px]" : "w-full aspect-square",
+        "relative flex flex-col max-w-[800px] max-h-[1000px] h-full py-4",
+        isSmall ? "w-[276px]" : "w-full aspect-square",
       )}
     >
-      <Header title="Map" canClose />
+      <Header title="Map" canFold canClose />
 
-      <div className={cn(mapSize === "small" ? "" : "flex-1")}>
+      <div className={cn(isSmall ? "" : "flex-1")}>
         <WindowBorder>
           <div className="flex flex-col h-full">
-            <div className="flex justify-end gap-1.75 pt-1 pb-0.75 px-1.5">
+            <div className="flex justify-end gap-1.75 pt-1.25 pb-1 pr-0.5">
               <IconStateButton
                 defaultIcon="/icons/smallbutton1.png"
                 hoverIcon="/icons/smallbutton1_over.png"
                 clickIcon="/icons/smallbutton1_down.png"
-                className="w-13.5 h-6.25"
+                className="w-10 h-4.5 text-[13px]"
                 text="Find"
               />
               <IconStateButton
                 defaultIcon="/icons/smallbutton2.png"
                 hoverIcon="/icons/smallbutton2_over.png"
                 clickIcon="/icons/smallbutton2_down.png"
-                className="w-21 h-6.25"
+                className="w-16 h-4.5 text-[13px]"
                 text="World info."
               />
             </div>
 
-            <MapPlaceholder />
+            <div className={cn(!isSmall && "flex-1 min-h-0")}>
+              <MapPlaceholder />
+            </div>
 
-            <div className="flex justify-end gap-1.75 pb-1 pt-0.75 px-1.5">
+            <div
+              className={cn(
+                "flex gap-0.5 pb-1 pt-0.75 px-0.5 ml-0.5",
+                isSmall ? "justify-center" : "justify-end",
+              )}
+            >
               <IconStateButton
                 defaultIcon="/icons/smallbutton2.png"
                 hoverIcon="/icons/smallbutton2_over.png"
                 clickIcon="/icons/smallbutton2_down.png"
-                className="w-21 h-6.25"
-                text="whatever"
+                className={BUTTON_CLASS}
+                text="Current Loc."
               />
               <IconStateButton
                 defaultIcon="/icons/smallbutton2.png"
                 hoverIcon="/icons/smallbutton2_over.png"
                 clickIcon="/icons/smallbutton2_down.png"
-                className="w-21 h-6.25"
-                text="whatever"
+                className={BUTTON_CLASS}
+                text="Party Member"
               />
               <IconStateButton
                 defaultIcon="/icons/smallbutton2.png"
                 hoverIcon="/icons/smallbutton2_over.png"
                 clickIcon="/icons/smallbutton2_down.png"
-                className="w-21 h-6.25"
-                text="whatever"
+                className={BUTTON_CLASS}
+                text="Target Loc."
               />
-              {mapSize === "small" ? (
+              {isSmall ? (
                 <IconStateButton
                   defaultIcon="/icons/smallbutton2.png"
                   hoverIcon="/icons/smallbutton2_over.png"
                   clickIcon="/icons/smallbutton2_down.png"
-                  className="w-21 h-6.25"
+                  className={BUTTON_CLASS}
                   text="Enlarge map"
                   onClick={() => setMapSize("large")}
                 />
@@ -76,7 +86,7 @@ export default function Map() {
                   defaultIcon="/icons/smallbutton2.png"
                   hoverIcon="/icons/smallbutton2_over.png"
                   clickIcon="/icons/smallbutton2_down.png"
-                  className="w-21 h-6.25"
+                  className={BUTTON_CLASS}
                   text="Minimize"
                   onClick={() => setMapSize("small")}
                 />

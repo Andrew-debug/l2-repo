@@ -8,8 +8,10 @@ import { Header } from "@/components/header";
 import { HelpCircle, Info, Users } from "lucide-react";
 import Chat from "@/components/chat/chat";
 import SystemMenu from "@/components/ui-l2/system-menu";
-import BossTracker from "@/components/ui-l2/boss/tracker";
+import BossLevelNavigator from "@/components/ui-l2/boss/level-navigator";
 import { BossSelectionProvider } from "@/components/providers/BossSelectionProvider";
+import { BossLootDisplay } from "@/components/ui-l2/boss/loot-display";
+import BossInfoDisplay from "@/components/ui-l2/boss/info-display";
 async function handleCloseAction() {
   "use server";
   console.log("This logs in your VSCode terminal, not the browser");
@@ -25,10 +27,12 @@ export default function Home() {
       <div className="container mx-auto px-4 h-[calc(100dvh-77px-49px)]">
         <BossSelectionProvider>
           <div className="flex gap-4">
-            <BossTracker />
+            <BossLevelNavigator />
             <MapProvider>
               <Map />
             </MapProvider>
+            <BossLootDisplay />
+            <BossInfoDisplay />
           </div>
         </BossSelectionProvider>
       </div>
@@ -36,7 +40,6 @@ export default function Home() {
       {/* <Chat /> */}
 
       {/* <SystemMenu /> */}
-
 
       {/* <footer className="border-t border-border bg-card/50 py-4">
         <div className="container mx-auto px-4">

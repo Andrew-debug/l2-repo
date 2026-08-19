@@ -12,8 +12,8 @@ function HeaderContent({
   canClose?: boolean;
 }) {
   return (
-    <div className="relative flex h-6 drop-shadow-[0_8px_4px_rgba(0,0,0,0.5)] select-none">
-      <Image width={19} height={24} src="/icons/FrameBackLeft.png" alt="" />
+    <div className="relative flex h-4 drop-shadow-[0_8px_4px_rgba(0,0,0,0.5)] select-none">
+      <Image width={13} height={16} src="/icons/FrameBackLeft.png" alt="" />
       <div className="relative flex-1 flex items-center justify-between w-auto pl-1.5">
         <Image
           fill
@@ -22,12 +22,12 @@ function HeaderContent({
           className="object-fill z-0"
         />
       </div>
-      <Image width={19} height={24} src="/icons/FrameBackRight.png" alt="" />
+      <Image width={13} height={16} src="/icons/FrameBackRight.png" alt="" />
       <div className="absolute inset-0">
-        <div className="flex items-center pl-6.5">
+        <div className="relative flex pl-4.5">
           <HeaderTitle>{title}</HeaderTitle>
           {(canFold || canClose) && (
-            <div className="flex gap-1 ml-auto mr-2.5 mb-1">
+            <div className="flex gap-1 ml-auto mr-1.75 mt-0.5">
               {canFold && <HeaderFold />}
               {canClose && <HeaderClose />}
             </div>
@@ -39,7 +39,7 @@ function HeaderContent({
 }
 
 function HeaderTitle({ children }: { children: ReactNode }) {
-  return <div className="mt-0.5">{children}</div>;
+  return <div className="text-[13px]">{children}</div>;
 }
 
 function HeaderClose() {

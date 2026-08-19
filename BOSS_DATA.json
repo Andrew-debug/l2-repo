@@ -324,7 +324,7 @@
           "chance": "4.63%",
           "count": "53–157"
         },
-        { "item": "Blood of Saints", "chance": "4.49%", "count": "1" },
+        { "item": "Sage's Blood", "chance": "4.49%", "count": "1" },
         { "item": "Tome of Blood", "chance": "4.49%", "count": "1" }
       ]
     },
@@ -346,25 +346,29 @@
       "drops": [
         {
           "item": "Salamander Skin Mail Texture",
-          "chance": "43.5%",
+          "chance": "51.51%",
           "count": "12–36"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (C)",
-          "chance": "36.2%",
+          "chance": "42.88%",
           "count": "1"
         },
-        { "item": "Bonebreaker Head", "chance": "20.2%", "count": "2–6" },
-        { "item": "Atuba Hammer Head", "chance": "16.2%", "count": "3–7" },
-        { "item": "Salamander Skin Mail", "chance": "15.2%", "count": "1" },
-        { "item": "Atuba Mace Head", "chance": "13.5%", "count": "3–9" },
-        { "item": "Ghost Staff Head", "chance": "6.12%", "count": "7–21" },
-        { "item": "Staff of Life Shaft", "chance": "3.57%", "count": "12–36" },
-        { "item": "Bonebreaker", "chance": "1.09%", "count": "1" },
-        { "item": "Atuba Mace", "chance": "1.09%", "count": "1" },
-        { "item": "Staff of Life", "chance": "1.09%", "count": "1" },
-        { "item": "Ghost Staff", "chance": "1.09%", "count": "1" },
-        { "item": "Atuba Hammer", "chance": "1.09%", "count": "1" }
+        { "item": "Bonebreaker Head", "chance": "23.93%", "count": "2–6" },
+        { "item": "Salamander Skin Mail", "chance": "21.05%", "count": "1" },
+        { "item": "Atuba Hammer Head", "chance": "19.15%", "count": "3–7" },
+        { "item": "Atuba Mace Head", "chance": "15.95%", "count": "3–9" },
+        { "item": "Ghost Staff Head", "chance": "7.25%", "count": "7–21" },
+        {
+          "item": "Staff of Life Shaft",
+          "chance": "4.229%",
+          "count": "12–36"
+        },
+        { "item": "Bonebreaker", "chance": "1.669%", "count": "1" },
+        { "item": "Atuba Hammer", "chance": "1.669%", "count": "1" },
+        { "item": "Ghost Staff", "chance": "1.669%", "count": "1" },
+        { "item": "Staff of Life", "chance": "1.669%", "count": "1" },
+        { "item": "Atuba Mace", "chance": "1.669%", "count": "1" }
       ]
     },
     {
@@ -385,15 +389,27 @@
       "drops": [
         {
           "item": "Scroll: Enchant Weapon (C)",
-          "chance": "79.6%",
-          "count": "1–3"
+          "chance": "33.52%",
+          "count": "3–9"
         },
-        { "item": "Plate Gaiters Part", "chance": "23.7%", "count": "24–72" },
-        { "item": "Scallop Jamadhr Edge", "chance": "23.3%", "count": "12–36" },
-        { "item": "Plate Gaiters", "chance": "18.5%", "count": "1" },
-        { "item": "Half Plate Armor", "chance": "11.5%", "count": "1" },
-        { "item": "Scallop Jamadhr", "chance": "7.51%", "count": "1" },
-        { "item": "Half Plate Temper", "chance": "6.96%", "count": "53–157" }
+        {
+          "item": "Plate Gaiters Part",
+          "chance": "29.91%",
+          "count": "24–72"
+        },
+        {
+          "item": "Scallop Jamadhr Edge",
+          "chance": "29.4%",
+          "count": "12–36"
+        },
+        { "item": "Half Plate Armor", "chance": "18.91%", "count": "1" },
+        { "item": "Scallop Jamadhr", "chance": "12.3%", "count": "1" },
+        {
+          "item": "Half Plate Temper",
+          "chance": "8.793%",
+          "count": "53–157"
+        },
+        { "item": "Plate Gaiters", "chance": "3.783%", "count": "4–12" }
       ]
     },
     {
@@ -674,7 +690,7 @@
       "hp": 69450,
       "isAggressive": false,
       "race": "Humanoids",
-      "description": "Remmel - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 35 humanoid by nature and does not attack first. Its lair is— Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Blessed Scroll: Enchant Armor (C), Salamander Skin Boot Lining, Plate Boots Design and other equipment.",
+      "description": "Remmel - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 35 humanoid by nature and does not attack first. Its lair is— Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Blessed Scroll: Enchant Armor (C), Scallop Jamadhr Edge, Plate Boots and other equipment.",
       "features": {
         "mp": 403,
         "exp": 1018607,
@@ -683,41 +699,59 @@
       "drops": [
         {
           "item": "Blessed Scroll: Enchant Armor (C)",
-          "chance": "28.3%",
+          "chance": "44.79%",
           "count": "1"
         },
         {
+          "item": "Scallop Jamadhr Edge",
+          "chance": "20.83%",
+          "count": "12–36"
+        },
+        { "item": "Plate Boots", "chance": "17.87%", "count": "1" },
+        { "item": "Sage's Worn Gloves", "chance": "17.87%", "count": "1" },
+        {
           "item": "Salamander Skin Boot Lining",
-          "chance": "21.6%",
+          "chance": "13.63%",
           "count": "28–82"
         },
-        { "item": "Plate Boots Design", "chance": "16.5%", "count": "36–108" },
+        {
+          "item": "Plate Boots Design",
+          "chance": "10.41%",
+          "count": "36–108"
+        },
+        { "item": "Scallop Jamadhr", "chance": "8.719%", "count": "1" },
         {
           "item": "Sage's Worn Gloves Lining",
-          "chance": "13%",
+          "chance": "8.241%",
           "count": "46–136"
         },
         {
           "item": "Mithril Gloves Design",
-          "chance": "5.29%",
+          "chance": "3.348%",
           "count": "112–336"
         },
         {
           "item": "Ogre Power Gauntlets Part",
-          "chance": "2.93%",
+          "chance": "1.852%",
           "count": "203–607"
         },
-        { "item": "Assault Boots Part", "chance": "1.85%", "count": "320–960" },
-        { "item": "Mithril Plate Gloves", "chance": "1.28%", "count": "9–25" },
-        { "item": "Ogre Power Gauntlets", "chance": "1.21%", "count": "9–27" },
-        { "item": "Assault Boots", "chance": "1.14%", "count": "10–28" },
+        {
+          "item": "Assault Boots Part",
+          "chance": "1.172%",
+          "count": "320–960"
+        },
+        { "item": "Mithril Gloves", "chance": "1.051%", "count": "9–25" },
+        {
+          "item": "Ogre Power Gauntlets",
+          "chance": "0.9927%",
+          "count": "9–27"
+        },
+        { "item": "Assault Boots", "chance": "0.9405%", "count": "10–28" },
         {
           "item": "Salamander Skin Boots",
-          "chance": "1.09%",
+          "chance": "0.8935%",
           "count": "10–30"
-        },
-        { "item": "Plate Boots", "chance": "1.03%", "count": "11–31" },
-        { "item": "Sage's Worn Gloves", "chance": "0.9877%", "count": "11–33" }
+        }
       ]
     },
     {
@@ -1397,7 +1431,7 @@
         { "item": "Dwarven Scale Gaiters", "chance": "9.76%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (D)",
-          "chance": "9.38%",
+          "chance": "3.94%",
           "count": "1"
         },
         { "item": "Mithril Breastplate", "chance": "6.78%", "count": "1" },
@@ -1459,32 +1493,44 @@
       "hp": 86871,
       "isAggressive": false,
       "race": "Spirits",
-      "description": "Leader of the Cat Gang - nominal raid boss: a leader among his kind, distinguished by strength and tenacity so great that he cannot be defeated alone. By nature, he is a level 39 spirit and does not attack first. His lair is— Giran Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Greater Dye of STR, Karmian Tunic Pattern, Stormbringer Blade and other equipment.",
+      "description": "Leader of the Cat Gang - nominal raid boss: a leader among his kind, distinguished by strength and tenacity so great that he cannot be defeated alone. By nature, he is a level 39 spirit and does not attack first. His lair is— Giran Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Greater Dye of STR, Stormbringer Blade, Greater Dye of STR and other equipment.",
       "features": {
         "mp": 463,
         "exp": 1078255,
         "sp": 134578
       },
       "drops": [
-        { "item": "Greater Dye of STR", "chance": "33.2%", "count": "1–3" },
-        { "item": "Karmian Tunic Pattern", "chance": "32.8%", "count": "8–22" },
-        { "item": "Stormbringer Blade", "chance": "22.9%", "count": "4–12" },
-        { "item": "Greater Dye of STR", "chance": "22.1%", "count": "2–4" },
+        {
+          "item": "Greater Dye of STR <Str+2 Con-2>",
+          "chance": "48.69%",
+          "count": "1–3"
+        },
+        { "item": "Stormbringer Blade", "chance": "33.55%", "count": "4–12" },
+        {
+          "item": "Greater Dye of STR <Str+2 Dex-2>",
+          "chance": "32.46%",
+          "count": "2–4"
+        },
         {
           "item": "Karmian Stocking Design",
-          "chance": "17%",
+          "chance": "24.96%",
           "count": "24–72"
         },
-        { "item": "Karmian Stockings", "chance": "13%", "count": "1" },
-        { "item": "Flamberge Blade", "chance": "11.4%", "count": "8–22" },
+        { "item": "Karmian Stockings", "chance": "24.75%", "count": "1" },
+        { "item": "Flamberge Blade", "chance": "16.74%", "count": "8–22" },
         {
           "item": "Blessed Scroll: Enchant Armor (C)",
-          "chance": "11.4%",
+          "chance": "16.69%",
           "count": "1"
         },
-        { "item": "Karmian Tunic", "chance": "8.11%", "count": "1" },
-        { "item": "Flamberge", "chance": "2.01%", "count": "1" },
-        { "item": "Stormbringer", "chance": "2.01%", "count": "1" }
+        { "item": "Karmian Tunic", "chance": "15.49%", "count": "1" },
+        {
+          "item": "Karmian Tunic Pattern",
+          "chance": "6.868%",
+          "count": "53–157"
+        },
+        { "item": "Flamberge", "chance": "3.835%", "count": "1" },
+        { "item": "Stormbringer", "chance": "3.835%", "count": "1" }
       ]
     },
     {
@@ -1730,7 +1776,7 @@
         },
         { "item": "Manticore Skin Gaiters", "chance": "15.5%", "count": "1" },
         { "item": "Manticore Skin Shirt", "chance": "9.66%", "count": "1" },
-        { "item": "Strengthened Longbow", "chance": "4.64%", "count": "1" }
+        { "item": "Strengthened Long Bow", "chance": "4.64%", "count": "1" }
       ]
     },
     {
@@ -1751,25 +1797,33 @@
       "drops": [
         {
           "item": "Scroll: Enchant Armor (C)",
-          "chance": "36.7%",
+          "chance": "58.06%",
           "count": "3–9"
         },
         {
           "item": "Salamander Skin Mail Texture",
-          "chance": "34%",
+          "chance": "53.8%",
           "count": "12–36"
         },
-        { "item": "Claymore Blade", "chance": "21%", "count": "4–12" },
-        { "item": "Greater Dye of STR", "chance": "13.8%", "count": "2–6" },
-        { "item": "Salamander Skin Mail", "chance": "11.9%", "count": "1" },
+        { "item": "Claymore Blade", "chance": "33.22%", "count": "4–12" },
+        { "item": "Salamander Skin Mail", "chance": "21.99%", "count": "1" },
+        {
+          "item": "Greater Dye of STR <Str+2 Con-2>",
+          "chance": "21.77%",
+          "count": "2–6"
+        },
         {
           "item": "Elven Long Sword Blade",
-          "chance": "11.1%",
+          "chance": "17.48%",
           "count": "8–22"
         },
-        { "item": "Greater Dye of STR", "chance": "11%", "count": "3–7" },
-        { "item": "Claymore", "chance": "2.13%", "count": "1" },
-        { "item": "Elven Long Sword", "chance": "2.13%", "count": "1" }
+        {
+          "item": "Greater Dye of STR <Str+2 Dex-2>",
+          "chance": "17.42%",
+          "count": "3–7"
+        },
+        { "item": "Claymore", "chance": "4.36%", "count": "1" },
+        { "item": "Elven Long Sword", "chance": "4.36%", "count": "1" }
       ]
     },
     {
@@ -2063,14 +2117,14 @@
     },
     {
       "id": 25112,
-      "name": "Agent of Beres Meana",
+      "name": "Agent of Beres, Meana",
       "title": "Raid Boss",
       "level": 30,
       "npcType": "RaidBoss",
       "hp": 53690,
       "isAggressive": false,
       "race": "Beasts",
-      "description": "Agent of Beres Meana - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 30 beast and does not attack first. Its lair is— Necropolis of Martyrdom. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Armor (D), Winged Spear Blade, Elven Earring and other equipment.",
+      "description": "Agent of Beres, Meana - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 30 beast and does not attack first. Its lair is— Necropolis of Martyrdom. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Armor (D), Winged Spear Blade, Elven Earring and other equipment.",
       "features": {
         "mp": 329,
         "exp": 890100,
@@ -2192,7 +2246,7 @@
     },
     {
       "id": 25118,
-      "name": "Guilotine Warden of the Execution Grounds",
+      "name": "Guilotine, Warden of the Execution Grounds",
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
@@ -2200,33 +2254,57 @@
       "isAggressive": false,
       "race": "Undead",
       "weakness": "Sacred",
-      "description": "Guilotine Warden of the Execution Grounds - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 35 undead and does not attack first; undead are vulnerable to holy magic. Its lair is... Execution Grounds. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Greater Dye of DEX, Half Plate Temper, Greater Dye of CON and other equipment.",
+      "description": "Guilotine, Warden of the Execution Grounds - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 35 undead and does not attack first; undead are vulnerable to holy magic. Its lair is... Execution Grounds. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Greater Dye of CON, Greater Dye of CON, Plate Gaiters and other equipment.",
       "features": {
         "mp": 403,
         "exp": 1193687,
         "sp": 138419
       },
       "drops": [
-        { "item": "Greater Dye of DEX", "chance": "53.2%", "count": "1" },
-        { "item": "Half Plate Temper", "chance": "35.5%", "count": "8–22" },
-        { "item": "Greater Dye of CON", "chance": "26.6%", "count": "1–3" },
-        { "item": "Bonebreaker Head", "chance": "20.4%", "count": "2–6" },
-        { "item": "Greater Dye of CON", "chance": "17.7%", "count": "2–4" },
-        { "item": "Plate Gaiters Part", "chance": "17.3%", "count": "24–72" },
-        { "item": "Atuba Hammer Head", "chance": "16.3%", "count": "3–7" },
-        { "item": "Atuba Mace Head", "chance": "13.6%", "count": "3–9" },
-        { "item": "Plate Gaiters", "chance": "13.5%", "count": "1" },
-        { "item": "Half Plate Armor", "chance": "8.4%", "count": "1" },
-        { "item": "Ghost Staff Head", "chance": "6.17%", "count": "7–21" },
-        { "item": "Staff of Life Shaft", "chance": "3.6%", "count": "12–36" },
-        { "item": "Bonebreaker", "chance": "1.09%", "count": "1" },
-        { "item": "Atuba Mace", "chance": "1.09%", "count": "1" },
-        { "item": "Staff of Life", "chance": "1.09%", "count": "1" },
-        { "item": "Ghost Staff", "chance": "1.09%", "count": "1" },
-        { "item": "Atuba Hammer", "chance": "1.09%", "count": "1" },
+        {
+          "item": "Greater Dye of CON <Con+2 Str-2>",
+          "chance": "32.66%",
+          "count": "1–3"
+        },
+        {
+          "item": "Greater Dye of CON <Con+2 Dex-2>",
+          "chance": "21.77%",
+          "count": "2–4"
+        },
+        { "item": "Plate Gaiters", "chance": "21.44%", "count": "1" },
+        {
+          "item": "Plate Gaiters Part",
+          "chance": "21.2%",
+          "count": "24–72"
+        },
+        { "item": "Atuba Hammer Head", "chance": "20%", "count": "3–7" },
+        { "item": "Atuba Mace Head", "chance": "16.67%", "count": "3–9" },
+        {
+          "item": "Greater Dye of DEX <Dex+2 Str-2>",
+          "chance": "16.33%",
+          "count": "2–6"
+        },
+        { "item": "Half Plate Armor", "chance": "13.4%", "count": "1" },
+        { "item": "Ghost Staff Head", "chance": "7.573%", "count": "7–21" },
+        {
+          "item": "Half Plate Temper",
+          "chance": "6.231%",
+          "count": "53–157"
+        },
+        {
+          "item": "Staff of Life Shaft",
+          "chance": "4.418%",
+          "count": "12–36"
+        },
+        { "item": "Bonebreaker Head", "chance": "2.778%", "count": "18–54" },
+        { "item": "Bonebreaker", "chance": "1.744%", "count": "1" },
+        { "item": "Atuba Hammer", "chance": "1.744%", "count": "1" },
+        { "item": "Ghost Staff", "chance": "1.744%", "count": "1" },
+        { "item": "Staff of Life", "chance": "1.744%", "count": "1" },
+        { "item": "Atuba Mace", "chance": "1.744%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
-          "chance": "1.06%",
+          "chance": "1.306%",
           "count": "1"
         }
       ]
@@ -2493,7 +2571,7 @@
           "count": "1"
         },
         { "item": "Poniard Dagger", "chance": "20.2%", "count": "1" },
-        { "item": "Wasp", "chance": "15.5%", "count": "4–12" },
+        { "item": "Aspis", "chance": "15.5%", "count": "4–12" },
         {
           "item": "Blessed Scroll: Enchant Weapon (D)",
           "chance": "3.13%",
@@ -2510,7 +2588,7 @@
       "hp": 62398,
       "isAggressive": false,
       "race": "Humanoids",
-      "description": "Vuku Grand Seer Gharmash - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 33 humanoid by nature and does not attack first. Its lair is— Monster Derby Track. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Armor (C), Scroll: Enchant Weapon (C), Necklace of Darkness and other equipment.",
+      "description": "Vuku Grand Seer Gharmash - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 33 humanoid by nature and does not attack first. Its lair is— Monster Derby Track. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Armor (C), Scroll: Enchant Weapon (C), Bonebreaker Head and other equipment.",
       "features": {
         "mp": 373,
         "exp": 984555,
@@ -2519,35 +2597,53 @@
       "drops": [
         {
           "item": "Scroll: Enchant Armor (C)",
-          "chance": "36.2%",
+          "chance": "53.33%",
           "count": "3–9"
         },
         {
           "item": "Scroll: Enchant Weapon (C)",
-          "chance": "29.6%",
+          "chance": "43.63%",
           "count": "1"
         },
-        { "item": "Necklace of Darkness", "chance": "25.8%", "count": "1" },
+        { "item": "Bonebreaker Head", "chance": "22.96%", "count": "2–6" },
+        {
+          "item": "Mithril Ring Wire",
+          "chance": "21.2%",
+          "count": "40–120"
+        },
+        { "item": "Necklace of Darkness", "chance": "19.84%", "count": "1" },
+        { "item": "Atuba Hammer Head", "chance": "18.37%", "count": "3–7" },
+        { "item": "Atuba Mace Head", "chance": "15.31%", "count": "3–9" },
         {
           "item": "Omen Beast's Eye Earring Gemstone",
-          "chance": "12.6%",
+          "chance": "7.411%",
           "count": "81–243"
         },
+        { "item": "Ghost Staff Head", "chance": "6.956%", "count": "7–21" },
+        {
+          "item": "Staff of Life Shaft",
+          "chance": "4.057%",
+          "count": "12–36"
+        },
+        { "item": "Mithril Ring", "chance": "3.968%", "count": "5–15" },
         {
           "item": "Necklace of Darkness Gem",
-          "chance": "5.2%",
-          "count": "140–420"
+          "chance": "2.787%",
+          "count": "154–462"
         },
-        { "item": "Mithril Ring", "chance": "4.71%", "count": "6–16" },
-        { "item": "Mithril Ring Wire", "chance": "3%", "count": "480–1440" },
         {
           "item": "Omen Beast's Eye Earring",
-          "chance": "2.66%",
-          "count": "7–19"
+          "chance": "2.205%",
+          "count": "6–18"
         },
+        { "item": "Bonebreaker", "chance": "1.602%", "count": "1" },
+        { "item": "Atuba Hammer", "chance": "1.602%", "count": "1" },
+        { "item": "Ghost Staff", "chance": "1.602%", "count": "1" },
+        { "item": "Staff of Life", "chance": "1.602%", "count": "1" },
+        { "item": "Atuba Mace", "chance": "1.602%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
-          "chance": "1.09%",
+          "chance": "1.6%",
           "count": "1"
         }
       ]
@@ -2832,25 +2928,41 @@
       "hp": 69450,
       "isAggressive": false,
       "race": "Demons",
-      "description": "Flame Lord Shadar - nominal raid boss: a master among his kind, he stands out for his strength and tenacity, so much so that he cannot be defeated alone. By nature, he is a level 35 demon and does not attack first. His lair is— Pilgrim's Necropolis. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scallop Jamadhr Edge, Sage's Rag Lining, Greater Dye of DEX and other equipment.",
+      "description": "Flame Lord Shadar - nominal raid boss: a master among his kind, he stands out for his strength and tenacity, so much so that he cannot be defeated alone. By nature, he is a level 35 demon and does not attack first. His lair is— Pilgrim's Necropolis. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Sage's Rag Lining, Greater Dye of DEX, Sage's Rag and other equipment.",
       "features": {
         "mp": 403,
         "exp": 1193687,
         "sp": 138419
       },
       "drops": [
-        { "item": "Scallop Jamadhr Edge", "chance": "67.9%", "count": "3–9" },
-        { "item": "Sage's Rag Lining", "chance": "43.8%", "count": "12–36" },
-        { "item": "Greater Dye of DEX", "chance": "26.6%", "count": "1–3" },
-        { "item": "Greater Dye of INT", "chance": "17.7%", "count": "2–4" },
-        { "item": "Sage's Rag", "chance": "15.3%", "count": "1" },
-        { "item": "Greater Dye of INT", "chance": "13.3%", "count": "2–6" },
+        { "item": "Sage's Rag Lining", "chance": "53.8%", "count": "12–36" },
+        {
+          "item": "Greater Dye of DEX <Dex+2 Con-2>",
+          "chance": "32.66%",
+          "count": "1–3"
+        },
+        { "item": "Sage's Rag", "chance": "21.99%", "count": "1" },
+        {
+          "item": "Greater Dye of INT <Int+2 Men-2>",
+          "chance": "21.77%",
+          "count": "2–4"
+        },
+        {
+          "item": "Scallop Jamadhr Edge",
+          "chance": "20.83%",
+          "count": "12–36"
+        },
+        {
+          "item": "Greater Dye of INT <Int+2 Wit-2>",
+          "chance": "16.33%",
+          "count": "2–6"
+        },
         {
           "item": "Blessed Scroll: Enchant Armor (C)",
-          "chance": "9.12%",
+          "chance": "11.2%",
           "count": "1"
         },
-        { "item": "Scallop Jamadhr", "chance": "5.47%", "count": "1" }
+        { "item": "Scallop Jamadhr", "chance": "8.719%", "count": "1" }
       ]
     },
     {
@@ -3175,79 +3287,107 @@
       "hp": 141484,
       "isAggressive": false,
       "race": "Humanoids",
-      "description": "Ragraman - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 30 humanoid by nature and does not attack first. Its lair is— Forgotten Temple. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Greater Dye of STR, Sword of Revolution Blade, Greater Dye of STR and other equipment.",
+      "description": "Ragraman - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 30 humanoid by nature and does not attack first. Its lair is— Forgotten Temple. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Sword of Revolution Blade, Greater Dye of STR, Greater Dye of CON and other equipment.",
       "features": {
         "mp": 329,
         "exp": 1329219,
         "sp": 122342
       },
       "drops": [
-        { "item": "Greater Dye of STR", "chance": "37.3%", "count": "1–3" },
         {
           "item": "Sword of Revolution Blade",
-          "chance": "25.3%",
+          "chance": "32.73%",
           "count": "12–36"
         },
-        { "item": "Greater Dye of STR", "chance": "24.8%", "count": "2–4" },
-        { "item": "Greater Dye of CON", "chance": "18.6%", "count": "2–6" },
-        { "item": "Mithril Gloves", "chance": "12.8%", "count": "1" },
-        { "item": "Brigandine Gauntlets", "chance": "12.8%", "count": "1" },
-        { "item": "Manticore Skin Gloves", "chance": "12.8%", "count": "1" },
+        {
+          "item": "Greater Dye of STR <Str+1 Dex-1>",
+          "chance": "32.13%",
+          "count": "2–4"
+        },
+        {
+          "item": "Greater Dye of CON <Con+1 Str-1>",
+          "chance": "24.1%",
+          "count": "2–6"
+        },
+        {
+          "item": "Manticore Skin Boot Lining",
+          "chance": "17.44%",
+          "count": "24–72"
+        },
+        { "item": "Sword of Revolution", "chance": "13.85%", "count": "1" },
         {
           "item": "Brigandine Boots Design",
-          "chance": "9.96%",
+          "chance": "12.88%",
           "count": "33–97"
         },
-        { "item": "Sword of Revolution", "chance": "8.21%", "count": "1" },
         {
           "item": "Elven Mithril Boots Design",
-          "chance": "7.71%",
+          "chance": "9.968%",
           "count": "42–126"
         },
         {
+          "item": "Greater Dye of STR <Str+1 Con-1>",
+          "chance": "9.639%",
+          "count": "5–15"
+        },
+        {
           "item": "Manticore Skin Gloves Lining",
-          "chance": "6.17%",
+          "chance": "7.975%",
           "count": "53–157"
         },
         {
-          "item": "Brigandine Gauntlet Pattern",
-          "chance": "5.06%",
+          "item": "Brigandine Gauntlets Pattern",
+          "chance": "6.542%",
           "count": "64–192"
         },
         {
-          "item": "Mithril Gloves Design",
-          "chance": "4.23%",
+          "item": "Elven Mithril Gloves Design",
+          "chance": "5.473%",
           "count": "77–229"
         },
         {
           "item": "Blessed Scroll: Enchant Weapon (D)",
-          "chance": "4.14%",
+          "chance": "5.355%",
           "count": "1"
         },
         {
-          "item": "Rip Gauntlet Pattern",
-          "chance": "1.8%",
+          "item": "Rip Gauntlets Pattern",
+          "chance": "2.326%",
           "count": "180–540"
         },
         {
           "item": "Boots of Power Pattern",
-          "chance": "1.03%",
+          "chance": "1.335%",
           "count": "314–940"
         },
-        {
-          "item": "Manticore Skin Boot Lining",
-          "chance": "0.6746%",
-          "count": "480–1440"
-        },
-        { "item": "Rip Gauntlets", "chance": "0.611%", "count": "11–31" },
-        { "item": "Boots of Power", "chance": "0.5832%", "count": "11–33" },
+        { "item": "Rip Gauntlets", "chance": "1.079%", "count": "10–30" },
+        { "item": "Boots of Power", "chance": "1.028%", "count": "11–31" },
         {
           "item": "Manticore Skin Boots",
-          "chance": "0.5578%",
-          "count": "12–34"
+          "chance": "0.9814%",
+          "count": "11–33"
         },
-        { "item": "Brigandine Boots", "chance": "0.5346%", "count": "12–36" },
-        { "item": "Elven Mithril Boots", "chance": "0.5132%", "count": "13–37" }
+        { "item": "Brigandine Boots", "chance": "0.9387%", "count": "12–34" },
+        {
+          "item": "Elven Mithril Boots",
+          "chance": "0.8996%",
+          "count": "12–36"
+        },
+        {
+          "item": "Manticore Skin Gloves",
+          "chance": "0.8636%",
+          "count": "13–37"
+        },
+        {
+          "item": "Brigandine Gauntlets",
+          "chance": "0.8303%",
+          "count": "13–39"
+        },
+        {
+          "item": "Elven Mithril Gloves",
+          "chance": "0.7997%",
+          "count": "14–40"
+        }
       ]
     },
     {
@@ -3268,27 +3408,39 @@
       "drops": [
         {
           "item": "Scroll: Enchant Weapon (C)",
-          "chance": "54%",
+          "chance": "76.33%",
           "count": "1–3"
         },
-        { "item": "Cursed Dagger Blade", "chance": "22.7%", "count": "4–12" },
-        { "item": "Eldarake", "chance": "15.3%", "count": "1" },
-        { "item": "Chain Shield", "chance": "15.3%", "count": "1" },
+        {
+          "item": "Cursed Dagger Blade",
+          "chance": "32.15%",
+          "count": "4–12"
+        },
+        { "item": "Chain Shield", "chance": "28.22%", "count": "1" },
+        { "item": "Chain Hood", "chance": "19.76%", "count": "1" },
         {
           "item": "Dark Elven Dagger Edge",
-          "chance": "12.1%",
+          "chance": "17.14%",
           "count": "8–22"
         },
-        { "item": "Chain Hood", "chance": "10.8%", "count": "1" },
-        { "item": "Eldarake Temper", "chance": "10.3%", "count": "40–120" },
+        {
+          "item": "Eldarake Temper",
+          "chance": "14.54%",
+          "count": "40–120"
+        },
         {
           "item": "Chain Shield Fragment",
-          "chance": "5.07%",
+          "chance": "7.18%",
           "count": "81–243"
         },
-        { "item": "Chain Hood Pattern", "chance": "2.67%", "count": "140–420" },
-        { "item": "Dark Elven Dagger", "chance": "2%", "count": "1" },
-        { "item": "Cursed Dagger", "chance": "2%", "count": "1" }
+        {
+          "item": "Chain Hood Pattern",
+          "chance": "3.773%",
+          "count": "140–420"
+        },
+        { "item": "Cursed Dagger", "chance": "3.674%", "count": "1" },
+        { "item": "Dark Elven Dagger", "chance": "3.674%", "count": "1" },
+        { "item": "Eldarake", "chance": "2.566%", "count": "6–16" }
       ]
     },
     {
@@ -3504,33 +3656,61 @@
       "hp": 69450,
       "isAggressive": false,
       "race": "Humanoids",
-      "description": "Tasaba Patriarch Hellena - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 35 humanoid by nature and does not attack first. Its lair is— Field of Silence. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Light Crossbow Shaft, Scroll: Enchant Weapon (C), Greater Dye of Men and other equipment.",
+      "description": "Tasaba Patriarch Hellena - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 35 humanoid by nature and does not attack first. Its lair is— Field of Silence. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Greater Dye of Men, Mithril Ring Wire, Greater Dye of Men and other equipment.",
       "features": {
         "mp": 403,
         "exp": 1193687,
         "sp": 138419
       },
       "drops": [
-        { "item": "Light Crossbow Shaft", "chance": "69.9%", "count": "3–9" },
-        { "item": "Scroll: Enchant Weapon (C)", "chance": "29%", "count": "1" },
-        { "item": "Greater Dye of Men", "chance": "26.6%", "count": "1–3" },
-        { "item": "Mithril Ring Wire", "chance": "18.8%", "count": "40–120" },
-        { "item": "Omen Beast's Eye Earring", "chance": "18.1%", "count": "1" },
-        { "item": "Greater Dye of Men", "chance": "17.7%", "count": "2–4" },
-        { "item": "Necklace of Darkness", "chance": "13.5%", "count": "1" },
-        { "item": "Greater Dye of WIT", "chance": "13.3%", "count": "2–6" },
+        {
+          "item": "Greater Dye of Men <Men+2 Int-2>",
+          "chance": "32.66%",
+          "count": "1–3"
+        },
+        {
+          "item": "Mithril Ring Wire",
+          "chance": "23.09%",
+          "count": "40–120"
+        },
+        {
+          "item": "Greater Dye of Men <Men+2 Wit-2>",
+          "chance": "21.77%",
+          "count": "2–4"
+        },
+        { "item": "Necklace of Darkness", "chance": "21.6%", "count": "1" },
+        {
+          "item": "Light Crossbow Shaft",
+          "chance": "21.44%",
+          "count": "12–36"
+        },
+        {
+          "item": "Greater Dye of WIT <Wit+2 Int-2>",
+          "chance": "16.33%",
+          "count": "2–6"
+        },
+        { "item": "Light Crossbow", "chance": "8.719%", "count": "1" },
         {
           "item": "Omen Beast's Eye Earring Gemstone",
-          "chance": "6.57%",
+          "chance": "8.069%",
           "count": "81–243"
         },
-        { "item": "Light Crossbow", "chance": "5.47%", "count": "1" },
+        {
+          "item": "Scroll: Enchant Weapon (C)",
+          "chance": "7.126%",
+          "count": "3–7"
+        },
+        { "item": "Mithril Ring", "chance": "4.321%", "count": "5–15" },
         {
           "item": "Necklace of Darkness Gem",
-          "chance": "2.72%",
-          "count": "140–420"
+          "chance": "3.035%",
+          "count": "154–462"
         },
-        { "item": "Mithril Ring", "chance": "2.46%", "count": "6–16" }
+        {
+          "item": "Omen Beast's Eye Earring",
+          "chance": "2.4%",
+          "count": "6–18"
+        }
       ]
     },
     {
@@ -3542,49 +3722,73 @@
       "hp": 107380,
       "isAggressive": false,
       "race": "Beasts",
-      "description": "Apepi - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 30 beast and does not attack first. Its lair is— Innadril Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Greater Dye of DEX, Tarbar Head, Blessed Scroll: Enchant Armor (D) and other equipment.",
+      "description": "Apepi - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 30 beast and does not attack first. Its lair is— Innadril Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Blessed Scroll: Enchant Armor (D), Brigandine Helmet, Greater Dye of DEX and other equipment.",
       "features": {
         "mp": 329,
         "exp": 759553,
         "sp": 78807
       },
       "drops": [
-        { "item": "Greater Dye of DEX", "chance": "42%", "count": "1" },
-        { "item": "Tarbar Head", "chance": "21.9%", "count": "2–4" },
         {
           "item": "Blessed Scroll: Enchant Armor (D)",
-          "chance": "21%",
+          "chance": "33.36%",
           "count": "1"
         },
-        { "item": "Greater Dye of CON", "chance": "21%", "count": "1–3" },
-        { "item": "Brigandine Shield", "chance": "18.4%", "count": "1" },
-        { "item": "Kite Shield", "chance": "18.4%", "count": "1" },
-        { "item": "Skull Breaker Head", "chance": "16.4%", "count": "2–6" },
-        { "item": "Greater Dye of DEX", "chance": "14%", "count": "2–4" },
-        { "item": "Heavy Bone Club Head", "chance": "13.1%", "count": "3–7" },
-        { "item": "Brigandine Helmet", "chance": "12.9%", "count": "1" },
-        { "item": "Goat Head Staff Head", "chance": "9.98%", "count": "3–9" },
+        { "item": "Brigandine Helmet", "chance": "26.57%", "count": "1" },
+        {
+          "item": "Greater Dye of DEX <Dex+1 Str-1>",
+          "chance": "22.24%",
+          "count": "2–4"
+        },
+        {
+          "item": "Heavy Bone Club Head",
+          "chance": "20.84%",
+          "count": "3–7"
+        },
+        {
+          "item": "Greater Dye of DEX <Dex+1 Con-1>",
+          "chance": "16.68%",
+          "count": "2–6"
+        },
+        {
+          "item": "Goat Head Staff Head",
+          "chance": "15.85%",
+          "count": "3–9"
+        },
         {
           "item": "Brigandine Shield Fragment",
-          "chance": "8.64%",
+          "chance": "13.72%",
           "count": "60–180"
         },
         {
           "item": "Brigandine Helmet Design",
-          "chance": "5.14%",
+          "chance": "8.157%",
           "count": "27–81"
         },
-        { "item": "Morning Star Head", "chance": "4.69%", "count": "7–21" },
+        { "item": "Morning Star Head", "chance": "7.442%", "count": "7–21" },
+        {
+          "item": "Greater Dye of CON <Con+1 Dex-1>",
+          "chance": "6.671%",
+          "count": "5–15"
+        },
+        { "item": "Tarbar Head", "chance": "4.341%", "count": "12–36" },
+        { "item": "Kite Shield", "chance": "3.793%", "count": "5–15" },
+        { "item": "Brigandine Shield", "chance": "3.448%", "count": "6–16" },
+        {
+          "item": "Skull Breaker Head",
+          "chance": "2.894%",
+          "count": "18–54"
+        },
         {
           "item": "Kite Shield Fragment",
-          "chance": "1.85%",
-          "count": "280–840"
+          "chance": "2.45%",
+          "count": "336–1008"
         },
-        { "item": "Morning Star", "chance": "0.926%", "count": "1" },
-        { "item": "Goat Head Staff", "chance": "0.926%", "count": "1" },
-        { "item": "Tarbar", "chance": "0.926%", "count": "1" },
-        { "item": "Skull Breaker", "chance": "0.926%", "count": "1" },
-        { "item": "Heavy Bone Club", "chance": "0.926%", "count": "1" }
+        { "item": "Morning Star", "chance": "1.917%", "count": "1" },
+        { "item": "Goat Head Staff", "chance": "1.917%", "count": "1" },
+        { "item": "Tarbar", "chance": "1.917%", "count": "1" },
+        { "item": "Skull Breaker", "chance": "1.917%", "count": "1" },
+        { "item": "Heavy Bone Club", "chance": "1.917%", "count": "1" }
       ]
     },
     {
@@ -3603,15 +3807,19 @@
         "sp": 100648
       },
       "drops": [
-        { "item": "Light Crossbow Shaft", "chance": "53.8%", "count": "3–9" },
-        { "item": "Sage's Rag Lining", "chance": "33.8%", "count": "12–36" },
+        { "item": "Sage's Rag Lining", "chance": "51.51%", "count": "12–36" },
         {
           "item": "Scroll: Enchant Armor (C)",
-          "chance": "27.3%",
+          "chance": "41.69%",
           "count": "12–36"
         },
-        { "item": "Sage's Rag", "chance": "11.8%", "count": "1" },
-        { "item": "Light Crossbow", "chance": "4.21%", "count": "1" }
+        { "item": "Sage's Rag", "chance": "21.05%", "count": "1" },
+        {
+          "item": "Light Crossbow Shaft",
+          "chance": "20.53%",
+          "count": "12–36"
+        },
+        { "item": "Light Crossbow", "chance": "8.347%", "count": "1" }
       ]
     },
     {
@@ -3954,34 +4162,42 @@
       "hp": 73381,
       "isAggressive": false,
       "race": "Humanoids",
-      "description": "Sebek - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 36 humanoid by nature and does not attack first. Its lair is— Innadril Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scallop Jamadhr Edge, Mithril Ring Wire, Omen Beast's Eye Earring and other equipment.",
+      "description": "Sebek - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 36 humanoid by nature and does not attack first. Its lair is— Innadril Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Mithril Ring Wire, Necklace of Darkness, Scallop Jamadhr Edge and other equipment.",
       "features": {
         "mp": 418,
         "exp": 1212311,
         "sp": 142855
       },
       "drops": [
-        { "item": "Scallop Jamadhr Edge", "chance": "68.5%", "count": "3–9" },
-        { "item": "Mithril Ring Wire", "chance": "19%", "count": "40–120" },
-        { "item": "Omen Beast's Eye Earring", "chance": "18.3%", "count": "1" },
-        { "item": "Necklace of Darkness", "chance": "13.6%", "count": "1" },
+        { "item": "Mithril Ring Wire", "chance": "24.12%", "count": "40–120" },
+        { "item": "Necklace of Darkness", "chance": "22.57%", "count": "1" },
+        {
+          "item": "Scallop Jamadhr Edge",
+          "chance": "21.76%",
+          "count": "12–36"
+        },
+        { "item": "Scallop Jamadhr", "chance": "9.109%", "count": "1" },
         {
           "item": "Omen Beast's Eye Earring Gemstone",
-          "chance": "6.63%",
+          "chance": "8.429%",
           "count": "81–243"
         },
-        { "item": "Scallop Jamadhr", "chance": "5.52%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
-          "chance": "4.29%",
+          "chance": "5.459%",
           "count": "1"
         },
+        { "item": "Mithril Ring", "chance": "4.514%", "count": "5–15" },
         {
           "item": "Necklace of Darkness Gem",
-          "chance": "2.74%",
-          "count": "140–420"
+          "chance": "3.171%",
+          "count": "154–462"
         },
-        { "item": "Mithril Ring", "chance": "2.48%", "count": "6–16" }
+        {
+          "item": "Omen Beast's Eye Earring",
+          "chance": "2.508%",
+          "count": "6–18"
+        }
       ]
     },
     {
@@ -4145,52 +4361,72 @@
       "isAggressive": false,
       "race": "Demons",
       "weakness": "Sacred",
-      "description": "Soul Collector Acheron - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity, so much so that it cannot be defeated alone. By nature, it is a level 35 demon and does not attack first. Its lair is— Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Mithril Dagger Blade, Scroll: Enchant Armor (C), Greater Dye of WIT and other equipment.",
+      "description": "Soul Collector Acheron - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity, so much so that it cannot be defeated alone. By nature, it is a level 35 demon and does not attack first. Its lair is— Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Greater Dye of WIT, Mithril Dagger Blade, Plate Boots and other equipment.",
       "features": {
         "mp": 403,
         "exp": 1018607,
         "sp": 103175
       },
       "drops": [
-        { "item": "Mithril Dagger Blade", "chance": "55.3%", "count": "3–9" },
+        {
+          "item": "Greater Dye of WIT <Wit+2 Men-2>",
+          "chance": "32.66%",
+          "count": "2–6"
+        },
+        {
+          "item": "Mithril Dagger Blade",
+          "chance": "21.85%",
+          "count": "12–36"
+        },
+        { "item": "Plate Boots", "chance": "17.87%", "count": "1" },
+        { "item": "Sage's Worn Gloves", "chance": "17.87%", "count": "1" },
         {
           "item": "Scroll: Enchant Armor (C)",
-          "chance": "55.1%",
-          "count": "3–9"
+          "chance": "17.42%",
+          "count": "15–45"
         },
-        { "item": "Greater Dye of WIT", "chance": "20.7%", "count": "2–6" },
-        { "item": "Mithril Plate Gloves", "chance": "8.69%", "count": "1" },
-        { "item": "Plate Boots", "chance": "8.69%", "count": "1" },
-        { "item": "Salamander Skin Boots", "chance": "8.69%", "count": "1" },
-        { "item": "Assault Boots", "chance": "8.69%", "count": "1" },
-        { "item": "Ogre Power Gauntlets", "chance": "8.69%", "count": "1" },
-        { "item": "Sage's Worn Gloves", "chance": "8.69%", "count": "1" },
         {
           "item": "Salamander Skin Boot Lining",
-          "chance": "8.62%",
+          "chance": "13.63%",
           "count": "28–82"
         },
-        { "item": "Plate Boots Design", "chance": "6.59%", "count": "36–108" },
+        {
+          "item": "Plate Boots Design",
+          "chance": "10.41%",
+          "count": "36–108"
+        },
+        { "item": "Mithril Dagger", "chance": "8.719%", "count": "1" },
         {
           "item": "Sage's Worn Gloves Lining",
-          "chance": "5.21%",
+          "chance": "8.241%",
           "count": "46–136"
         },
-        { "item": "Mithril Dagger", "chance": "4.25%", "count": "1" },
         {
           "item": "Mithril Gloves Design",
-          "chance": "2.12%",
+          "chance": "3.348%",
           "count": "112–336"
         },
         {
           "item": "Ogre Power Gauntlets Part",
-          "chance": "1.17%",
+          "chance": "1.852%",
           "count": "203–607"
         },
         {
           "item": "Assault Boots Part",
-          "chance": "0.7412%",
+          "chance": "1.172%",
           "count": "320–960"
+        },
+        { "item": "Mithril Gloves", "chance": "1.051%", "count": "9–25" },
+        {
+          "item": "Ogre Power Gauntlets",
+          "chance": "0.9927%",
+          "count": "9–27"
+        },
+        { "item": "Assault Boots", "chance": "0.9405%", "count": "10–28" },
+        {
+          "item": "Salamander Skin Boots",
+          "chance": "0.8935%",
+          "count": "10–30"
         }
       ]
     },
@@ -6956,35 +7192,51 @@
       "hp": 53690,
       "isAggressive": false,
       "race": "Beasts",
-      "description": "Giant Wasteland Basilisk - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 30 beast and does not attack first. Its lair is— Gludio Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Bich'Hwa Edge, Greater Dye of INT, Greater Dye of Men and other equipment.",
+      "description": "Giant Wasteland Basilisk - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 30 beast and does not attack first. Its lair is— Gludio Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Manticore Skin Gaiters Pattern, Blessed Scroll of Resurrection for Pets, Bich'Hwa Edge and other equipment.",
       "features": {
         "mp": 329,
         "exp": 636918,
         "sp": 59660
       },
       "drops": [
-        { "item": "Bich'Hwa Edge", "chance": "43.2%", "count": "3–9" },
-        { "item": "Greater Dye of INT", "chance": "33.2%", "count": "1" },
-        { "item": "Greater Dye of Men", "chance": "33.2%", "count": "1" },
-        {
-          "item": "Manticore Skin Shirt Texture",
-          "chance": "29%",
-          "count": "8–22"
-        },
         {
           "item": "Manticore Skin Gaiters Pattern",
-          "chance": "14.1%",
+          "chance": "28.39%",
           "count": "24–72"
         },
         {
           "item": "Blessed Scroll of Resurrection for Pets",
-          "chance": "13.8%",
+          "chance": "27.8%",
           "count": "12–36"
         },
-        { "item": "Manticore Skin Gaiters", "chance": "12.2%", "count": "1" },
-        { "item": "Manticore Skin Shirt", "chance": "7.62%", "count": "1" },
-        { "item": "Greater Dye of INT", "chance": "6.64%", "count": "3–7" },
-        { "item": "Bich'Hwa", "chance": "3.66%", "count": "1" }
+        { "item": "Bich'Hwa Edge", "chance": "21.71%", "count": "12–36" },
+        { "item": "Manticore Skin Shirt", "chance": "19.95%", "count": "1" },
+        {
+          "item": "Greater Dye of INT <Int+1 Men-1>",
+          "chance": "13.34%",
+          "count": "3–7"
+        },
+        {
+          "item": "Greater Dye of INT <Int+1 Wit-1>",
+          "chance": "11.12%",
+          "count": "3–9"
+        },
+        { "item": "Bich'Hwa", "chance": "9.584%", "count": "1" },
+        {
+          "item": "Greater Dye of Men <Men+1 Int-1>",
+          "chance": "9.53%",
+          "count": "4–10"
+        },
+        {
+          "item": "Manticore Skin Shirt Texture",
+          "chance": "8.334%",
+          "count": "53–157"
+        },
+        {
+          "item": "Manticore Skin Gaiters",
+          "chance": "3.982%",
+          "count": "4–12"
+        }
       ]
     },
     {
@@ -6996,7 +7248,7 @@
       "hp": 69450,
       "isAggressive": false,
       "race": "Magical creatures",
-      "description": "Gargoyle Lord Sirocco - nominal raid boss: a master among his kind, distinguished by his strength and tenacity, so much so that he cannot be defeated alone. By nature, he is a magical creature of level 35 and does not attack first. His lair is— Wastelands. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Armor (C), Scroll: Enchant Weapon (C), Plate Helmet and other equipment.",
+      "description": "Gargoyle Lord Sirocco - nominal raid boss: a master among his kind, distinguished by his strength and tenacity, so much so that he cannot be defeated alone. By nature, he is a magical creature of level 35 and does not attack first. His lair is— Wastelands. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Weapon (C), Tempered Mithril Gaiters, Plate Helmet and other equipment.",
       "features": {
         "mp": 403,
         "exp": 1193687,
@@ -7004,36 +7256,52 @@
       },
       "drops": [
         {
-          "item": "Scroll: Enchant Armor (C)",
-          "chance": "47.3%",
-          "count": "3–9"
-        },
-        {
           "item": "Scroll: Enchant Weapon (C)",
-          "chance": "38.7%",
+          "chance": "47.51%",
           "count": "1"
         },
-        { "item": "Plate Helmet", "chance": "37.2%", "count": "1" },
+        {
+          "item": "Tempered Mithril Gaiters",
+          "chance": "33.21%",
+          "count": "1"
+        },
+        { "item": "Plate Helmet", "chance": "23.83%", "count": "1" },
+        { "item": "Mithril Shirt", "chance": "20.78%", "count": "1" },
+        {
+          "item": "Square Shield Fragment",
+          "chance": "19.07%",
+          "count": "40–120"
+        },
+        {
+          "item": "Scroll: Enchant Armor (C)",
+          "chance": "14.52%",
+          "count": "12–36"
+        },
         {
           "item": "Plate Shield Fragment",
-          "chance": "19.2%",
+          "chance": "9.415%",
           "count": "81–243"
         },
         {
+          "item": "Mithril Shirt Fabric",
+          "chance": "9.214%",
+          "count": "53–157"
+        },
+        {
+          "item": "Tempered Mithril Gaiters Fragment",
+          "chance": "4.186%",
+          "count": "192–576"
+        },
+        {
           "item": "Plate Helmet Design",
-          "chance": "7.88%",
+          "chance": "3.869%",
           "count": "140–420"
         },
-        { "item": "Square Shield", "chance": "4.83%", "count": "6–16" },
-        { "item": "Plate Shield", "chance": "4.43%", "count": "6–18" },
-        {
-          "item": "Square Shield Fragment",
-          "chance": "2.99%",
-          "count": "520–1560"
-        },
+        { "item": "Square Shield", "chance": "3.093%", "count": "6–16" },
+        { "item": "Plate Shield", "chance": "2.835%", "count": "6–18" },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
-          "chance": "1.42%",
+          "chance": "1.742%",
           "count": "1"
         }
       ]
@@ -7104,7 +7372,7 @@
         { "item": "Compound Scale Mail", "chance": "5.35%", "count": "1" },
         { "item": "Blast Plate", "chance": "4.82%", "count": "1" },
         { "item": "Tome of Blood", "chance": "3.54%", "count": "1" },
-        { "item": "Blood of Saints", "chance": "3.54%", "count": "1" }
+        { "item": "Sage's Blood", "chance": "3.54%", "count": "1" }
       ]
     },
     {
@@ -7116,7 +7384,7 @@
       "hp": 40330,
       "isAggressive": false,
       "race": "Humanoids",
-      "description": "Tracker Leader Sharuk - nominal raid boss: a leader among his kind, distinguished by strength and tenacity so great that he cannot be defeated alone. By nature, he is a level 23 humanoid and does not attack first. His lair is Forgotten Temple. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Weapon (D), Mace of Judgement Head, Scroll: Enchant Armor (D) and other equipment.",
+      "description": "Tracker Leader Sharuk - nominal raid boss: a leader among his kind, distinguished by strength and tenacity so great that he cannot be defeated alone. By nature, he is a level 23 humanoid and does not attack first. His lair is Forgotten Temple. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Weapon (D), Mace of Judgment Head, Scroll: Enchant Armor (D) and other equipment.",
       "features": {
         "mp": 232,
         "exp": 599425,
@@ -7128,7 +7396,7 @@
           "chance": "45.3%",
           "count": "1"
         },
-        { "item": "Mace of Judgement Head", "chance": "40.8%", "count": "1–3" },
+        { "item": "Mace of Judgment Head", "chance": "40.8%", "count": "1–3" },
         {
           "item": "Scroll: Enchant Armor (D)",
           "chance": "25.2%",
@@ -7297,7 +7565,7 @@
           "chance": "7.98%",
           "count": "24–72"
         },
-        { "item": "Sabre", "chance": "5.42%", "count": "1" },
+        { "item": "Saber", "chance": "5.42%", "count": "1" },
         { "item": "Heavy Sword", "chance": "5.42%", "count": "1" }
       ]
     },
@@ -7310,7 +7578,7 @@
       "hp": 37886,
       "isAggressive": false,
       "race": "Demons",
-      "description": "Malex Herald of Dagoniel - nominal raid boss: a herald among his kind, distinguished by his strength and tenacity, so much so that he cannot be defeated alone. By nature, he is a level 21 demon and does not attack first. His lair is— Oren Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Blessed Scroll of Resurrection for Pets, Wasp, Bronze Helmet and other equipment.",
+      "description": "Malex Herald of Dagoniel - nominal raid boss: a herald among his kind, distinguished by his strength and tenacity, so much so that he cannot be defeated alone. By nature, he is a level 21 demon and does not attack first. His lair is— Oren Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Blessed Scroll of Resurrection for Pets, Aspis, Bronze Helmet and other equipment.",
       "features": {
         "mp": 205,
         "exp": 578451,
@@ -7322,7 +7590,7 @@
           "chance": "74%",
           "count": "3–9"
         },
-        { "item": "Wasp", "chance": "48.9%", "count": "1–3" },
+        { "item": "Aspis", "chance": "48.9%", "count": "1–3" },
         { "item": "Bronze Helmet", "chance": "22.8%", "count": "2–4" },
         {
           "item": "Blessed Scroll: Enchant Armor (D)",
@@ -7458,33 +7726,45 @@
       "isAggressive": false,
       "race": "Undead",
       "weakness": "Sacred",
-      "description": "Revenant of Sir Calibus - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 34 undead and does not attack first; undead are vulnerable to holy magic. Its lair is... Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Mithril Dagger Blade, Necklace of Darkness Gem, Mithril Ring and other equipment.",
+      "description": "Revenant of Sir Calibus - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. By nature, it is a level 34 undead and does not attack first; undead are vulnerable to holy magic. Its lair is... Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Mithril Ring Wire, Mithril Dagger Blade, Necklace of Darkness and other equipment.",
       "features": {
         "mp": 388,
         "exp": 840195,
         "sp": 76283
       },
       "drops": [
-        { "item": "Mithril Dagger Blade", "chance": "43.4%", "count": "3–9" },
         {
-          "item": "Necklace of Darkness Gem",
-          "chance": "16.6%",
-          "count": "14–42"
+          "item": "Mithril Ring Wire",
+          "chance": "22.1%",
+          "count": "40–120"
         },
-        { "item": "Mithril Ring", "chance": "16.5%", "count": "1" },
-        { "item": "Mithril Ring Wire", "chance": "11.5%", "count": "40–120" },
-        { "item": "Omen Beast's Eye Earring", "chance": "11%", "count": "1" },
-        { "item": "Necklace of Darkness", "chance": "8.23%", "count": "1" },
+        {
+          "item": "Mithril Dagger Blade",
+          "chance": "20.92%",
+          "count": "12–36"
+        },
+        { "item": "Necklace of Darkness", "chance": "20.68%", "count": "1" },
+        { "item": "Mithril Dagger", "chance": "8.347%", "count": "1" },
         {
           "item": "Omen Beast's Eye Earring Gemstone",
-          "chance": "4%",
+          "chance": "7.725%",
           "count": "81–243"
         },
-        { "item": "Mithril Dagger", "chance": "3.33%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
-          "chance": "2.59%",
+          "chance": "5.003%",
           "count": "1"
+        },
+        { "item": "Mithril Ring", "chance": "4.136%", "count": "5–15" },
+        {
+          "item": "Necklace of Darkness Gem",
+          "chance": "2.906%",
+          "count": "154–462"
+        },
+        {
+          "item": "Omen Beast's Eye Earring",
+          "chance": "2.298%",
+          "count": "6–18"
         }
       ]
     },
@@ -7497,48 +7777,68 @@
       "hp": 73381,
       "isAggressive": false,
       "race": "Demons",
-      "description": "Evil Spirit Tempest - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity, so much so that it cannot be defeated alone. By nature, it is a level 36 demon and does not attack first. Its lair is— Execution Grounds. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Light Crossbow Shaft, Blessed Scroll: Enchant Armor (C), Assault Boots Part and other equipment.",
+      "description": "Evil Spirit Tempest - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity, so much so that it cannot be defeated alone. By nature, it is a level 36 demon and does not attack first. Its lair is— Execution Grounds. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Blessed Scroll: Enchant Armor (C), Light Crossbow Shaft, Sage's Worn Gloves and other equipment.",
       "features": {
         "mp": 418,
         "exp": 867472,
         "sp": 80701
       },
       "drops": [
-        { "item": "Light Crossbow Shaft", "chance": "43.3%", "count": "3–9" },
         {
           "item": "Blessed Scroll: Enchant Armor (C)",
-          "chance": "22.6%",
+          "chance": "46.79%",
           "count": "1"
         },
-        { "item": "Assault Boots Part", "chance": "9.46%", "count": "20–60" },
-        { "item": "Mithril Plate Gloves", "chance": "6.93%", "count": "1" },
-        { "item": "Sage's Worn Gloves", "chance": "6.93%", "count": "1" },
-        { "item": "Plate Boots", "chance": "6.93%", "count": "1" },
-        { "item": "Salamander Skin Boots", "chance": "6.93%", "count": "1" },
-        { "item": "Assault Boots", "chance": "6.93%", "count": "1" },
-        { "item": "Ogre Power Gauntlets", "chance": "6.93%", "count": "1" },
+        {
+          "item": "Light Crossbow Shaft",
+          "chance": "22.4%",
+          "count": "12–36"
+        },
+        { "item": "Sage's Worn Gloves", "chance": "18.67%", "count": "1" },
         {
           "item": "Salamander Skin Boot Lining",
-          "chance": "6.88%",
+          "chance": "14.24%",
           "count": "28–82"
         },
-        { "item": "Plate Boots Design", "chance": "5.25%", "count": "36–108" },
+        {
+          "item": "Plate Boots Design",
+          "chance": "10.88%",
+          "count": "36–108"
+        },
+        { "item": "Light Crossbow", "chance": "9.109%", "count": "1" },
         {
           "item": "Sage's Worn Gloves Lining",
-          "chance": "4.16%",
+          "chance": "8.608%",
           "count": "46–136"
         },
-        { "item": "Light Crossbow", "chance": "3.39%", "count": "1" },
         {
           "item": "Mithril Gloves Design",
-          "chance": "1.69%",
+          "chance": "3.497%",
           "count": "112–336"
         },
         {
           "item": "Ogre Power Gauntlets Part",
-          "chance": "0.9343%",
+          "chance": "1.934%",
           "count": "203–607"
-        }
+        },
+        {
+          "item": "Assault Boots Part",
+          "chance": "1.224%",
+          "count": "320–960"
+        },
+        { "item": "Mithril Gloves", "chance": "1.098%", "count": "9–25" },
+        {
+          "item": "Ogre Power Gauntlets",
+          "chance": "1.037%",
+          "count": "9–27"
+        },
+        { "item": "Assault Boots", "chance": "0.9825%", "count": "10–28" },
+        {
+          "item": "Salamander Skin Boots",
+          "chance": "0.9334%",
+          "count": "10–30"
+        },
+        { "item": "Plate Boots", "chance": "0.889%", "count": "11–31" }
       ]
     },
     {
@@ -7581,47 +7881,63 @@
       "hp": 124796,
       "isAggressive": false,
       "race": "Humanoids",
-      "description": "Nurka's Messenger - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 33 humanoid by nature and does not attack first. Its lair is— Pilgrim's Necropolis. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Glaive Edge, Blessed Scroll: Enchant Armor (C), Assault Boots Part and other equipment.",
+      "description": "Nurka's Messenger - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 33 humanoid by nature and does not attack first. Its lair is— Pilgrim's Necropolis. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Blessed Scroll: Enchant Armor (C), Glaive Edge, Salamander Skin Boot Lining and other equipment.",
       "features": {
         "mp": 373,
         "exp": 825587,
         "sp": 73993
       },
       "drops": [
-        { "item": "Glaive Edge", "chance": "41.1%", "count": "3–9" },
         {
           "item": "Blessed Scroll: Enchant Armor (C)",
-          "chance": "22.1%",
+          "chance": "41.14%",
           "count": "1"
         },
-        { "item": "Assault Boots Part", "chance": "9.24%", "count": "20–60" },
-        { "item": "Mithril Plate Gloves", "chance": "6.77%", "count": "1" },
-        { "item": "Sage's Worn Gloves", "chance": "6.77%", "count": "1" },
-        { "item": "Plate Boots", "chance": "6.77%", "count": "1" },
-        { "item": "Salamander Skin Boots", "chance": "6.77%", "count": "1" },
-        { "item": "Assault Boots", "chance": "6.77%", "count": "1" },
-        { "item": "Ogre Power Gauntlets", "chance": "6.77%", "count": "1" },
+        { "item": "Glaive Edge", "chance": "19.13%", "count": "12–36" },
+        { "item": "Plate Boots", "chance": "16.41%", "count": "1" },
+        { "item": "Sage's Worn Gloves", "chance": "16.41%", "count": "1" },
         {
           "item": "Salamander Skin Boot Lining",
-          "chance": "6.72%",
+          "chance": "12.52%",
           "count": "28–82"
         },
-        { "item": "Plate Boots Design", "chance": "5.13%", "count": "36–108" },
+        {
+          "item": "Plate Boots Design",
+          "chance": "9.565%",
+          "count": "36–108"
+        },
+        { "item": "Glaive", "chance": "8.008%", "count": "1" },
         {
           "item": "Sage's Worn Gloves Lining",
-          "chance": "4.06%",
+          "chance": "7.568%",
           "count": "46–136"
         },
-        { "item": "Glaive", "chance": "3.31%", "count": "1" },
         {
           "item": "Mithril Gloves Design",
-          "chance": "1.65%",
+          "chance": "3.075%",
           "count": "112–336"
         },
         {
           "item": "Ogre Power Gauntlets Part",
-          "chance": "0.9125%",
+          "chance": "1.701%",
           "count": "203–607"
+        },
+        {
+          "item": "Assault Boots Part",
+          "chance": "1.076%",
+          "count": "320–960"
+        },
+        { "item": "Mithril Gloves", "chance": "0.9654%", "count": "9–25" },
+        {
+          "item": "Ogre Power Gauntlets",
+          "chance": "0.9117%",
+          "count": "9–27"
+        },
+        { "item": "Assault Boots", "chance": "0.8638%", "count": "10–28" },
+        {
+          "item": "Salamander Skin Boots",
+          "chance": "0.8206%",
+          "count": "10–30"
         }
       ]
     },
@@ -7634,7 +7950,7 @@
       "hp": 59258,
       "isAggressive": false,
       "race": "Humanoids",
-      "description": "Captain of Queen's Royal Guards - nominal raid boss: a queen among its kind, distinguished by its strength and tenacity, so much so that it cannot be defeated alone. By nature, it is a level 32 humanoid and does not attack first. Its lair is Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Strengthened Long Bow Shaft, Scroll: Enchant Weapon (D), Brigandine Gaiters Material and other equipment.",
+      "description": "Captain of Queen's Royal Guards - nominal raid boss: a queen among its kind, distinguished by its strength and tenacity, so much so that it cannot be defeated alone. By nature, it is a level 32 humanoid and does not attack first. Its lair is Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Greater Dye of Men, Strengthened Long Bow Shaft, Greater Dye of WIT and other equipment.",
       "features": {
         "mp": 358,
         "exp": 810271,
@@ -7642,33 +7958,45 @@
       },
       "drops": [
         {
-          "item": "Strengthened Long Bow Shaft",
-          "chance": "56.9%",
-          "count": "3–9"
+          "item": "Greater Dye of Men <Men+1 Wit-1>",
+          "chance": "34.42%",
+          "count": "1–3"
         },
         {
+          "item": "Strengthened Long Bow Shaft",
+          "chance": "25.6%",
+          "count": "12–36"
+        },
+        {
+          "item": "Greater Dye of WIT <Wit+1 Int-1>",
+          "chance": "22.95%",
+          "count": "2–4"
+        },
+        {
+          "item": "Greater Dye of WIT <Wit+1 Men-1>",
+          "chance": "17.21%",
+          "count": "2–6"
+        },
+        { "item": "Brigandine Temper", "chance": "16.76%", "count": "14–42" },
+        { "item": "Mithril Scale Gaiters", "chance": "16.44%", "count": "1" },
+        { "item": "Brigandine Gaiters", "chance": "16.44%", "count": "1" },
+        {
           "item": "Scroll: Enchant Weapon (D)",
-          "chance": "38.2%",
-          "count": "1"
+          "chance": "13.77%",
+          "count": "3–7"
+        },
+        { "item": "Brigandine Tunic", "chance": "10.28%", "count": "1" },
+        { "item": "Strengthened Long Bow", "chance": "9.89%", "count": "1" },
+        {
+          "item": "Mithril Scale Gaiters Material",
+          "chance": "8.753%",
+          "count": "40–120"
         },
         {
           "item": "Brigandine Gaiters Material",
-          "chance": "21.6%",
-          "count": "9–27"
-        },
-        { "item": "Greater Dye of Men", "chance": "19.1%", "count": "1–3" },
-        { "item": "Greater Dye of WIT", "chance": "12.7%", "count": "2–4" },
-        { "item": "Greater Dye of WIT", "chance": "9.56%", "count": "2–6" },
-        { "item": "Brigandine Temper", "chance": "9.31%", "count": "14–42" },
-        { "item": "Brigandine Gaiters", "chance": "7.01%", "count": "1" },
-        { "item": "Mithril Scale Gaiters", "chance": "7.01%", "count": "1" },
-        {
-          "item": "Mithril Scale Gaiters Material",
-          "chance": "4.86%",
-          "count": "40–120"
-        },
-        { "item": "Brigandine Tunic", "chance": "4.39%", "count": "1" },
-        { "item": "Strengthened Longbow", "chance": "4.21%", "count": "1" }
+          "chance": "4.322%",
+          "count": "81–243"
+        }
       ]
     },
     {
@@ -7687,25 +8015,33 @@
         "sp": 99116
       },
       "drops": [
-        { "item": "Orcish Glaive Blade", "chance": "31.5%", "count": "2–4" },
-        { "item": "Body Slasher Blade", "chance": "23.6%", "count": "2–6" },
-        { "item": "Chain Gaiters Part", "chance": "22%", "count": "15–45" },
+        { "item": "Body Slasher Blade", "chance": "42.34%", "count": "2–6" },
         {
           "item": "Chain Mail Shirt Material",
-          "chance": "13.5%",
+          "chance": "24.23%",
           "count": "12–36"
         },
-        { "item": "Scythe Edge", "chance": "9.45%", "count": "5–15" },
-        { "item": "Chain Gaiters", "chance": "7.62%", "count": "1" },
-        { "item": "Chain Mail Shirt", "chance": "4.77%", "count": "1" },
+        { "item": "Chain Gaiters", "chance": "17.78%", "count": "1" },
+        { "item": "Scythe Edge", "chance": "16.93%", "count": "5–15" },
+        { "item": "Chain Mail Shirt", "chance": "11.11%", "count": "1" },
+        {
+          "item": "Orcish Glaive Blade",
+          "chance": "9.408%",
+          "count": "9–27"
+        },
+        {
+          "item": "Chain Gaiters Part",
+          "chance": "5.634%",
+          "count": "105–315"
+        },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
-          "chance": "3.12%",
+          "chance": "5.598%",
           "count": "1"
         },
-        { "item": "Scythe", "chance": "1.05%", "count": "1" },
-        { "item": "Body Slasher", "chance": "1.05%", "count": "1" },
-        { "item": "Orcish Glaive", "chance": "1.05%", "count": "1" }
+        { "item": "Scythe", "chance": "2.45%", "count": "1" },
+        { "item": "Orcish Glaive", "chance": "2.45%", "count": "1" },
+        { "item": "Body Slasher", "chance": "2.45%", "count": "1" }
       ]
     },
     {
@@ -7791,7 +8127,7 @@
       "hp": 69450,
       "isAggressive": false,
       "race": "Magical creatures",
-      "description": "Eye of Beleth - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity, making it impossible to defeat alone. By nature, it is a magical creature of level 35 and does not attack first. Its lair is— Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Weapon (C), Elven Long Sword Blade, Half Plate Temper and other equipment.",
+      "description": "Eye of Beleth - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity, making it impossible to defeat alone. By nature, it is a magical creature of level 35 and does not attack first. Its lair is— Dion Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Weapon (C), Claymore Blade, Plate Gaiters and other equipment.",
       "features": {
         "mp": 403,
         "exp": 854153,
@@ -7800,17 +8136,29 @@
       "drops": [
         {
           "item": "Scroll: Enchant Weapon (C)",
-          "chance": "71.3%",
-          "count": "1"
+          "chance": "71.26%",
+          "count": "1–3"
         },
-        { "item": "Elven Long Sword Blade", "chance": "43.7%", "count": "2–4" },
-        { "item": "Half Plate Temper", "chance": "21.8%", "count": "8–22" },
-        { "item": "Claymore Blade", "chance": "16.6%", "count": "4–12" },
-        { "item": "Plate Gaiters Part", "chance": "10.6%", "count": "24–72" },
-        { "item": "Plate Gaiters", "chance": "8.27%", "count": "1" },
-        { "item": "Half Plate Armor", "chance": "5.16%", "count": "1" },
-        { "item": "Claymore", "chance": "1.68%", "count": "1" },
-        { "item": "Elven Long Sword", "chance": "1.68%", "count": "1" }
+        { "item": "Claymore Blade", "chance": "33.22%", "count": "4–12" },
+        { "item": "Plate Gaiters", "chance": "21.44%", "count": "1" },
+        {
+          "item": "Plate Gaiters Part",
+          "chance": "21.2%",
+          "count": "24–72"
+        },
+        {
+          "item": "Elven Long Sword Blade",
+          "chance": "17.48%",
+          "count": "8–22"
+        },
+        { "item": "Half Plate Armor", "chance": "13.4%", "count": "1" },
+        {
+          "item": "Half Plate Temper",
+          "chance": "6.231%",
+          "count": "53–157"
+        },
+        { "item": "Claymore", "chance": "4.36%", "count": "1" },
+        { "item": "Elven Long Sword", "chance": "4.36%", "count": "1" }
       ]
     },
     {
@@ -7858,36 +8206,44 @@
       "isAggressive": false,
       "race": "Undead",
       "weakness": "Sacred",
-      "description": "Corsair Captain Kylon - nominal raid boss: a captain among his kind, who stands out for his strength and vitality, so much so that he cannot be defeated alone. By nature, he is an undead of level 33 and does not attack first; undead are vulnerable to holy magic. His lair is Giran Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Elven Long Sword Blade, Plate Helmet Design, Claymore Blade and other equipment.",
+      "description": "Corsair Captain Kylon - nominal raid boss: a captain among his kind, who stands out for his strength and vitality, so much so that he cannot be defeated alone. By nature, he is an undead of level 33 and does not attack first; undead are vulnerable to holy magic. His lair is Giran Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Claymore Blade, Plate Helmet, Square Shield Fragment and other equipment.",
       "features": {
         "mp": 373,
         "exp": 825587,
         "sp": 73993
       },
       "drops": [
-        { "item": "Elven Long Sword Blade", "chance": "43.1%", "count": "2–4" },
-        { "item": "Plate Helmet Design", "chance": "19.1%", "count": "14–42" },
-        { "item": "Claymore Blade", "chance": "16.4%", "count": "4–12" },
-        { "item": "Plate Shield", "chance": "12.9%", "count": "1" },
-        { "item": "Square Shield", "chance": "12.9%", "count": "1" },
+        { "item": "Claymore Blade", "chance": "30.51%", "count": "4–12" },
+        { "item": "Plate Helmet", "chance": "21.88%", "count": "1" },
         {
           "item": "Square Shield Fragment",
-          "chance": "9.4%",
+          "chance": "17.51%",
           "count": "40–120"
         },
-        { "item": "Plate Helmet", "chance": "9.01%", "count": "1" },
+        {
+          "item": "Elven Long Sword Blade",
+          "chance": "16.05%",
+          "count": "8–22"
+        },
         {
           "item": "Plate Shield Fragment",
-          "chance": "4.64%",
+          "chance": "8.647%",
           "count": "81–243"
         },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
-          "chance": "2.58%",
+          "chance": "4.799%",
           "count": "1"
         },
-        { "item": "Elven Long Sword", "chance": "1.66%", "count": "1" },
-        { "item": "Claymore", "chance": "1.66%", "count": "1" }
+        { "item": "Claymore", "chance": "4.004%", "count": "1" },
+        { "item": "Elven Long Sword", "chance": "4.004%", "count": "1" },
+        {
+          "item": "Plate Helmet Design",
+          "chance": "3.553%",
+          "count": "140–420"
+        },
+        { "item": "Square Shield", "chance": "2.84%", "count": "6–16" },
+        { "item": "Plate Shield", "chance": "2.604%", "count": "6–18" }
       ]
     },
     {
@@ -9643,20 +9999,32 @@
       },
       "drops": [
         { "item": "Maingauche Edge", "chance": "34%", "count": "4–12" },
-        { "item": "Greater Dye of STR", "chance": "33.4%", "count": "1–3" },
+        {
+          "item": "Greater Dye of STR <Str+1 Con-1>",
+          "chance": "33.4%",
+          "count": "1–3"
+        },
         {
           "item": "Manticore Skin Gaiters Pattern",
           "chance": "28.4%",
           "count": "24–72"
         },
-        { "item": "Greater Dye of STR", "chance": "22.2%", "count": "2–4" },
+        {
+          "item": "Greater Dye of STR <Str+1 Dex-1>",
+          "chance": "22.2%",
+          "count": "2–4"
+        },
         { "item": "Manticore Skin Shirt", "chance": "19.9%", "count": "1" },
         {
           "item": "Cursed Maingauche Edge",
           "chance": "18.1%",
           "count": "8–22"
         },
-        { "item": "Greater Dye of CON", "chance": "16.7%", "count": "2–6" },
+        {
+          "item": "Greater Dye of CON <Con+1 Str-1>",
+          "chance": "16.7%",
+          "count": "2–6"
+        },
         {
           "item": "Manticore Skin Shirt Texture",
           "chance": "8.33%",
@@ -9694,39 +10062,43 @@
       "drops": [
         {
           "item": "Scroll: Enchant Weapon (C)",
-          "chance": "53.1%",
+          "chance": "53.12%",
           "count": "1"
         },
-        { "item": "Body Slasher Blade", "chance": "44.2%", "count": "2–6" },
-        { "item": "Scythe Edge", "chance": "17.7%", "count": "5–15" },
+        { "item": "Body Slasher Blade", "chance": "44.19%", "count": "2–6" },
+        { "item": "Scythe Edge", "chance": "17.68%", "count": "5–15" },
         {
           "item": "Scroll: Enchant Armor (C)",
-          "chance": "16.2%",
+          "chance": "16.23%",
           "count": "12–36"
         },
-        { "item": "Boots of Seal", "chance": "10.3%", "count": "1" },
+        { "item": "Boots of Seal", "chance": "10.32%", "count": "1" },
         {
           "item": "Reinforced Mithril Gloves",
-          "chance": "10.3%",
+          "chance": "10.32%",
           "count": "1"
         },
-        { "item": "Chain Gloves", "chance": "10.3%", "count": "1" },
-        { "item": "Karmian Gloves", "chance": "10.3%", "count": "1" },
+        { "item": "Chain Gloves", "chance": "10.32%", "count": "1" },
+        { "item": "Karmian Gloves", "chance": "10.32%", "count": "1" },
         { "item": "Orcish Glaive Blade", "chance": "9.82%", "count": "9–27" },
-        { "item": "Karmian Boots Fabric", "chance": "8.66%", "count": "26–78" },
+        {
+          "item": "Karmian Boots Fabric",
+          "chance": "8.657%",
+          "count": "26–78"
+        },
         {
           "item": "Plate Leather Boot Lining",
-          "chance": "6.43%",
+          "chance": "6.431%",
           "count": "35–105"
         },
         {
           "item": "Dwarven Chain Boots Part",
-          "chance": "5%",
+          "chance": "5.002%",
           "count": "45–135"
         },
         {
           "item": "Boots of Seal Pattern",
-          "chance": "4.02%",
+          "chance": "4.019%",
           "count": "56–168"
         },
         {
@@ -9734,23 +10106,27 @@
           "chance": "3.31%",
           "count": "68–204"
         },
-        { "item": "Chain Gloves Design", "chance": "2.78%", "count": "81–243" },
-        { "item": "Scythe", "chance": "2.56%", "count": "1" },
-        { "item": "Orcish Glaive", "chance": "2.56%", "count": "1" },
-        { "item": "Body Slasher", "chance": "2.56%", "count": "1" },
+        {
+          "item": "Chain Gloves Design",
+          "chance": "2.779%",
+          "count": "81–243"
+        },
+        { "item": "Scythe", "chance": "2.557%", "count": "1" },
+        { "item": "Orcish Glaive", "chance": "2.557%", "count": "1" },
+        { "item": "Body Slasher", "chance": "2.557%", "count": "1" },
         {
           "item": "Karmian Gloves Fabric",
-          "chance": "2.37%",
+          "chance": "2.369%",
           "count": "95–285"
         },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
-          "chance": "1.95%",
+          "chance": "1.948%",
           "count": "1"
         },
         {
           "item": "Mithril Boots Design",
-          "chance": "1.02%",
+          "chance": "1.023%",
           "count": "220–660"
         },
         {
@@ -9766,7 +10142,11 @@
           "chance": "0.4126%",
           "count": "13–37"
         },
-        { "item": "Dwarven Chain Boots", "chance": "0.3967%", "count": "13–39" }
+        {
+          "item": "Dwarven Chain Boots",
+          "chance": "0.3967%",
+          "count": "13–39"
+        }
       ]
     },
     {
@@ -9787,23 +10167,31 @@
       "drops": [
         {
           "item": "Blessed Scroll: Enchant Armor (C)",
-          "chance": "46%",
+          "chance": "46.03%",
           "count": "1"
         },
         {
           "item": "Tempered Mithril Gaiters Fragment",
-          "chance": "22.9%",
+          "chance": "22.94%",
           "count": "24–72"
         },
-        { "item": "Tempered Mithril Gaiters", "chance": "22.8%", "count": "1" },
+        {
+          "item": "Tempered Mithril Gaiters",
+          "chance": "22.75%",
+          "count": "1"
+        },
         {
           "item": "Crystallized Ice Bow Shaft",
-          "chance": "18.3%",
+          "chance": "18.34%",
           "count": "12–36"
         },
-        { "item": "Mithril Shirt", "chance": "14.2%", "count": "1" },
+        { "item": "Mithril Shirt", "chance": "14.24%", "count": "1" },
         { "item": "Crystallized Ice Bow", "chance": "7.05%", "count": "1" },
-        { "item": "Mithril Shirt Fabric", "chance": "6.31%", "count": "53–157" }
+        {
+          "item": "Mithril Shirt Fabric",
+          "chance": "6.313%",
+          "count": "53–157"
+        }
       ]
     },
     {
@@ -10486,7 +10874,11 @@
           "chance": "33%",
           "count": "1"
         },
-        { "item": "Sealed Major Arcana Circlet", "chance": "33%", "count": "1" },
+        {
+          "item": "Sealed Major Arcana Circlet",
+          "chance": "33%",
+          "count": "1"
+        },
         { "item": "Sealed Majestic Necklace", "chance": "30%", "count": "1–5" },
         { "item": "Sealed Phoenix Necklace", "chance": "30%", "count": "1–5" },
         { "item": "Sealed Tateossian Necklace", "chance": "30%", "count": "1" },
@@ -10510,7 +10902,11 @@
           "count": "1–3"
         },
         { "item": "Sealed Tallum Tunic", "chance": "25%", "count": "1–3" },
-        { "item": "Sealed Tallum Plate Armor", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Sealed Tallum Plate Armor",
+          "chance": "25%",
+          "count": "1–3"
+        },
         { "item": "Sealed Dark Crystal Robe", "chance": "25%", "count": "1–3" },
         {
           "item": "Sealed Tallum Leather Armor",

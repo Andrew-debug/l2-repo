@@ -77,7 +77,7 @@
 @theme inline {
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
   --font-marcellus: var(--font-marcellus), "Marcellus", sans-serif;
-  --font-tahoma: var(--font-tahoma), "Tahoma", sans-serif;
+  --font-fs-tahoma-8px: var(--font-fs-tahoma-8px), Tahoma, sans-serif;
   --color-window-bg: rgba(0, 0, 0, 0.5);
   --color-window-inner-gray: rgb(81, 84, 88);
   --color-window-content-border: rgb(37, 44, 52);
@@ -88,6 +88,7 @@
   --color-system-text: rgba(176, 153, 121);
   --color-announcement-text: rgba(128, 251, 255);
   --color-shout-text: rgba(255, 112, 0);
+  --color-button-text: rgb(141, 190, 255);
   /*  */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -141,13 +142,20 @@
 }
 
 body {
-  font-family: var(--font-tahoma), "Tahoma", sans-serif;
-  /* color: #b1b1b1; */
+  /* fs-tahoma-8px.otf: pixel-aligned at 8px (or clean multiples) per its
+     own internal font name — a vector trace of the client's bitmap font. */
+  font-family: var(--font-fs-tahoma-8px), Tahoma, sans-serif;
   color: #d2d2d2;
-  font-size: 18px;
+  /* font-size: 18px; */
   text-shadow: 1px 1px 0px #000;
+  /* letter-spacing: 0.3px; */
 
-  letter-spacing: 0.3px;
+  /* Forces hard pixel edges instead of the OS's normal smoothed AA, closer
+     to the game's non-antialiased bitmap-blitted text. */
+  -webkit-font-smoothing: none;
+  text-rendering: optimizeSpeed;
+  font-kerning: none;
+  font-variant-ligatures: none;
 }
 
 @layer components {
@@ -165,7 +173,7 @@ body {
   }
 
   .custom-scrollbar::-webkit-scrollbar {
-    width: 18px;
+    width: 12px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-track {
@@ -224,10 +232,10 @@ body {
   }
 
   .custom-scrollbar::-webkit-scrollbar-button:single-button {
-    background-size: 18px 18px;
+    background-size: 12px 12px;
     background-position: center;
     background-repeat: no-repeat;
-    height: 18px;
+    height: 12px;
   }
 
   .custom-scrollbar::-webkit-scrollbar-button:single-button:vertical:decrement {

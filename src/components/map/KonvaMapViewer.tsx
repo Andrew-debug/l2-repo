@@ -1,11 +1,11 @@
 "use client";
 
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect, useMemo } from "react";
 import { Stage, Layer, Image as KonvaImage, Group, Rect } from "react-konva";
 import Konva from "konva";
 import BossMarkerKonva from "./BossMarkerKonva";
 import { bosses } from "@/lib/boss-data";
-import { MAP_CONFIG, bossPositions } from "@/lib/boss-positions";
+import { MAP_CONFIG, type BossMapPosition } from "@/lib/boss-positions";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 
 // Helper function to clamp position within boundaries
@@ -35,20 +35,23 @@ const clampPosition = (
 };
 
 // Boss markers: cross-reference map coordinates with the shared boss list
-const MAP_BOSSES = bossPositions
-  .map((pos) => {
-    const boss = bosses.find((b) => b.id === pos.bossId);
-    if (!boss) return null;
-    return {
-      id: boss.id,
-      name: boss.name,
-      level: boss.level,
-      description: boss.description,
-      absoluteX: pos.absoluteX,
-      absoluteY: pos.absoluteY,
-    };
-  })
-  .filter((b): b is NonNullable<typeof b> => b !== null);
+function deriveMapBosses(positions: BossMapPosition[]) {
+  return positions
+    .map((pos) => {
+      const boss = bosses.find((b) => b.id === pos.bossId);
+      if (!boss) return null;
+      return {
+        id: boss.id,
+        name: boss.name,
+        level: boss.level,
+        description: boss.description,
+        absoluteX: pos.absoluteX,
+        absoluteY: pos.absoluteY,
+        killed: pos.killed ?? false,
+      };
+    })
+    .filter((b): b is NonNullable<typeof b> => b !== null);
+}
 
 interface KonvaMapViewerProps {
   width: number;
@@ -58,20 +61,40 @@ interface KonvaMapViewerProps {
 export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const stageRef = useRef<Konva.Stage>(null);
   const layerRef = useRef<Konva.Layer>(null);
-  const { selectedBossId, setSelectedBoss } = useBossSelection();
+  const {
+    selectedBossId,
+    setSelectedBoss,
+    isPlacingLocation,
+    setIsPlacingLocation,
+  } = useBossSelection();
   const [scale, setScale] = useState(0.5);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [mapImages, setMapImages] = useState<HTMLImageElement[]>([]);
   const [isDragging, setIsDragging] = useState(false);
+  const [bossPositions, setBossPositions] = useState<BossMapPosition[]>([]);
+  const MAP_BOSSES = useMemo(
+    () => deriveMapBosses(bossPositions),
+    [bossPositions],
+  );
 
   // Use refs for smooth dragging without re-renders
   const positionRef = useRef({ x: 0, y: 0 });
   const scaleRef = useRef(0.5);
   const dragStartPos = useRef({ x: 0, y: 0 });
+  const mouseDownScreenPos = useRef({ x: 0, y: 0 });
   const velocityRef = useRef({ x: 0, y: 0 });
   const lastPosRef = useRef({ x: 0, y: 0 });
   const momentumRef = useRef<NodeJS.Timeout | null>(null);
   const stageDimensionsRef = useRef({ width, height });
+
+  // Load boss map positions from the API (not a static import, so newly
+  // placed locations show up without a rebuild)
+  useEffect(() => {
+    fetch("/api/boss-position")
+      .then((res) => res.json())
+      .then(setBossPositions)
+      .catch((err) => console.warn("Failed to load boss positions:", err));
+  }, []);
 
   // Update stage dimensions ref when props change
   useEffect(() => {
@@ -150,7 +173,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     return () => {
       tween.destroy();
     };
-  }, [selectedBossId]);
+  }, [selectedBossId, MAP_BOSSES]);
 
   // Handle mouse wheel zoom
   const handleWheel = (e: Konva.KonvaEventObject<WheelEvent>) => {
@@ -218,6 +241,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
       setIsDragging(true);
       const pos = stageRef.current?.getPointerPosition();
       if (pos) {
+        mouseDownScreenPos.current = pos;
         dragStartPos.current = {
           x: pos.x - positionRef.current.x,
           y: pos.y - positionRef.current.y,
@@ -230,6 +254,28 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
         }
       }
     }
+  };
+
+  // Saves the click's map-space coordinates as the selected boss's
+  // position. Only fires for an actual click (not the end of a pan drag).
+  const placeSelectedBossAt = (absoluteX: number, absoluteY: number) => {
+    if (!selectedBossId) return;
+    setIsPlacingLocation(false);
+
+    fetch("/api/boss-position", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        bossId: selectedBossId,
+        absoluteX: Math.round(absoluteX),
+        absoluteY: Math.round(absoluteY),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data: { positions?: BossMapPosition[] }) => {
+        if (data.positions) setBossPositions(data.positions);
+      })
+      .catch((err) => console.warn("Failed to save boss position:", err));
   };
 
   const handleMouseMove = (e: Konva.KonvaEventObject<PointerEvent>) => {
@@ -422,6 +468,22 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     // Sync position to state (inertia disabled)
     setPosition({ ...positionRef.current });
     setIsDragging(false);
+
+    if (isPlacingLocation && selectedBossId) {
+      const stage = stageRef.current;
+      const layer = layerRef.current;
+      const pos = stage?.getPointerPosition();
+      if (stage && layer && pos) {
+        const dx = pos.x - mouseDownScreenPos.current.x;
+        const dy = pos.y - mouseDownScreenPos.current.y;
+        const isClick = Math.hypot(dx, dy) < 5;
+        if (isClick) {
+          const absoluteX = (pos.x - layer.x()) / layer.scaleX();
+          const absoluteY = (pos.y - layer.y()) / layer.scaleY();
+          placeSelectedBossAt(absoluteX, absoluteY);
+        }
+      }
+    }
   };
 
   return (
@@ -437,7 +499,13 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      style={{ cursor: isDragging ? "grabbing" : "grab" }}
+      style={{
+        cursor: isPlacingLocation
+          ? "crosshair"
+          : isDragging
+            ? "grabbing"
+            : "grab",
+      }}
     >
       <Layer
         ref={layerRef}

@@ -18,7 +18,10 @@ interface MapProviderProps {
 
 export function MapProvider({ children }: MapProviderProps) {
   const defaultSize = "large";
-  const minimizeSize = 370;
+  // Small-mode map canvas is rendered at this fixed size (see
+  // MapPlaceholder) — keep in sync with Map.tsx's small-mode window width
+  // (currently 276px) minus WindowBorder's 4px of nested borders.
+  const minimizeSize = 272;
   const [mapSize, setMapSize] = useState<MapSize>(defaultSize);
 
   const value: MapContextType = {

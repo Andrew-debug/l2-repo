@@ -16,9 +16,12 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-const tahoma = localFont({
-  src: "../../public/fonts/tahoma-bit.otf",
-  variable: "--font-tahoma",
+// Its own internal name is "fs Tahoma 8px" — a vector trace of the client's
+// bitmap font, pixel-aligned at 8px (or clean multiples: 16/24/32px). Not
+// wired up as the body font yet — see the font-check block in page.tsx.
+const fsTahoma8px = localFont({
+  src: "../../public/fonts/fs-tahoma-8px.otf",
+  variable: "--font-fs-tahoma-8px",
 });
 
 export const metadata: Metadata = {
@@ -52,7 +55,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${tahoma.variable} ${inter.variable} ${marcellus.variable} font-sans antialiased`}
+        className={`${inter.variable} ${marcellus.variable} ${fsTahoma8px.variable} font-sans antialiased`}
       >
         {children}
         {/* <Analytics /> */}

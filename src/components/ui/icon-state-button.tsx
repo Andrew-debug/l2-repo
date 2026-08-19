@@ -11,6 +11,10 @@ interface IconStateButtonProps {
   onClick?: () => void;
   className?: string;
   text?: string;
+  // "contain" (default) preserves the icon's aspect ratio — right for
+  // square icons. "fill" stretches it to the button's box, for pill-shaped
+  // button backgrounds that need to actually grow wider/taller on demand.
+  fit?: "contain" | "fill";
 }
 
 export function IconStateButton({
@@ -20,6 +24,7 @@ export function IconStateButton({
   onClick,
   className,
   text,
+  fit = "contain",
 }: IconStateButtonProps) {
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -67,7 +72,10 @@ export function IconStateButton({
       onMouseLeave={handleMouseLeave}
       className={cn(
         "relative flex items-center justify-center",
-        "size-4.5",
+        // Longhand, not `size-3` — the installed tailwind-merge doesn't
+        // recognize size-* as conflicting with a later w-*/h-* override, so
+        // custom width/height passed via className was silently ignored.
+        "w-3 h-3",
         // "shadow-[1px_1px_2px_0px_#000000]",
         className,
       )}
@@ -76,15 +84,13 @@ export function IconStateButton({
         src={getCurrentIcon()}
         alt=""
         fill
-        className="object-contain pointer-events-none"
+        className={cn(
+          "pointer-events-none",
+          fit === "fill" ? "object-fill" : "object-contain",
+        )}
       />
       {text && (
-        <span
-          className={cn(
-            "absolute inset-0 flex items-center justify-center l2-original-style mt-px",
-            "drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]",
-          )}
-        >
+        <span className="absolute inset-0 flex items-center justify-center mt-px">
           {text}
         </span>
       )}

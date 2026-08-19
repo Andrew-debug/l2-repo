@@ -1,0 +1,1896 @@
+[
+  {
+    "item": "Adamantite Necklace",
+    "best": "accessary_adamantite_necklace_i00.png",
+    "allCandidates": [
+      "accessary_adamantite_necklace_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Adamantite Ring",
+    "best": "accessary_adamantite_ring_i00.png",
+    "allCandidates": [
+      "accessary_adamantite_ring_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Akat Long Bow",
+    "best": "weapon_akat_long_bow_i00.png",
+    "allCandidates": [
+      "time_weapon_akat_long_bow_i00.png",
+      "weapon_akat_long_bow_i00.png",
+      "weapon_akat_long_bow_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Angel Slayer",
+    "best": "weapon_angel_slayer_i00.png",
+    "allCandidates": [
+      "weapon_angel_slayer_i00.png",
+      "weapon_angel_slayer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Aquastone Necklace",
+    "best": "accessary_aquastone_necklace_i00.png",
+    "allCandidates": [
+      "accessary_aquastone_necklace_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Aquastone Ring",
+    "best": "accessary_aquastone_ring_i00.png",
+    "allCandidates": [
+      "accessary_aquastone_ring_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Arcana Mace",
+    "best": "weapon_arcana_mace_i00.png",
+    "allCandidates": [
+      "weapon_arcana_mace_i00.png",
+      "weapon_arcana_mace_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Art of Battle Axe",
+    "best": "weapon_art_of_battle_axe_i00.png",
+    "allCandidates": [
+      "weapon_art_of_battle_axe_i00.png",
+      "weapon_art_of_battle_axe_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Arthro Nail",
+    "best": "weapon_arthro_nail_i00.png",
+    "allCandidates": [
+      "time_weapon_arthro_nail_i00.png",
+      "weapon_arthro_nail_i00.png",
+      "weapon_arthro_nail_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Artisan's Sword",
+    "best": "weapon_artisans_sword_i00.png",
+    "allCandidates": [
+      "weapon_artisans_sword_i00.png",
+      "weapon_artisans_sword_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Aspis",
+    "best": "shield_aspis_i00.png",
+    "allCandidates": [
+      "shield_aspis_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Assault Boots",
+    "best": "armor_assault_boots_i00.png",
+    "allCandidates": [
+      "armor_assault_boots_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Atuba Hammer",
+    "best": "weapon_atuba_hammer_i00.png",
+    "allCandidates": [
+      "weapon_atuba_hammer_i00.png",
+      "weapon_atuba_hammer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Atuba Mace",
+    "best": "weapon_atuba_mace_i00.png",
+    "allCandidates": [
+      "weapon_atuba_mace_i00.png",
+      "weapon_atuba_mace_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Avadon Shield",
+    "best": "shield_avadon_shield_i00.png",
+    "allCandidates": [
+      "shield_avadon_shield_i00.png",
+      "shield_avadon_shield_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Basalt Battlehammer",
+    "best": "weapon_basalt_battlehammer_i00.png",
+    "allCandidates": [
+      "weapon_basalt_battlehammer_i00.png",
+      "weapon_basalt_battlehammer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Bastard Sword",
+    "best": "weapon_bastard_sword_i00.png",
+    "allCandidates": [
+      "weapon_bastard_sword_i00.png",
+      "weapon_bastard_sword_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Bellion Cestus",
+    "best": "weapon_bellion_cestus_i00.png",
+    "allCandidates": [
+      "weapon_bellion_cestus_i00.png",
+      "weapon_bellion_cestus_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Berserker Blade",
+    "best": "weapon_berserker_blade_i00.png",
+    "allCandidates": [
+      "weapon_berserker_blade_i00.png",
+      "weapon_berserker_blade_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Bich'Hwa",
+    "best": "weapon_bichhwa_i00.png",
+    "allCandidates": [
+      "weapon_bichhwa_i00.png",
+      "weapon_bichhwa_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Big Hammer",
+    "best": "weapon_big_hammer_i00.png",
+    "allCandidates": [
+      "weapon_big_hammer_i00.png",
+      "weapon_big_hammer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Black Pearl Ring",
+    "best": "accessary_black_pearl_ring_i00.png",
+    "allCandidates": [
+      "accessary_black_pearl_ring_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blast Plate",
+    "best": "armor_blast_plate_i00.png",
+    "allCandidates": [
+      "armor_blast_plate_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Armor (A)",
+    "best": "blessed_scroll_of_enchant_armor_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Armor (B)",
+    "best": "blessed_scroll_of_enchant_armor_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Armor (C)",
+    "best": "blessed_scroll_of_enchant_armor_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Armor (D)",
+    "best": "blessed_scroll_of_enchant_armor_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Armor (S)",
+    "best": "blessed_scroll_of_enchant_armor_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Weapon (A)",
+    "best": "blessed_scroll_of_enchant_weapon_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Weapon (B)",
+    "best": "blessed_scroll_of_enchant_weapon_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Weapon (C)",
+    "best": "blessed_scroll_of_enchant_weapon_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Weapon (D)",
+    "best": "blessed_scroll_of_enchant_weapon_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blessed Scroll: Enchant Weapon (S)",
+    "best": "blessed_scroll_of_enchant_weapon_i06.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blood Tornado",
+    "best": "weapon_blood_tornado_i00.png",
+    "allCandidates": [
+      "time_weapon_blood_tornado_i00.png",
+      "weapon_blood_tornado_i00.png",
+      "weapon_blood_tornado_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Bloody Orchid",
+    "best": "weapon_bloody_orchid_i00.png",
+    "allCandidates": [
+      "time_weapon_bloody_orchid_i00.png",
+      "weapon_bloody_orchid_i00.png",
+      "weapon_bloody_orchid_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Blue Buckskin Boots",
+    "best": "armor_blue_buckskin_boots_i00.png",
+    "allCandidates": [
+      "armor_blue_buckskin_boots_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Body Slasher",
+    "best": "weapon_body_slasher_i00.png",
+    "allCandidates": [
+      "weapon_body_slasher_i00.png",
+      "weapon_body_slasher_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Bonebreaker",
+    "best": "weapon_bonebreaker_i00.png",
+    "allCandidates": [
+      "weapon_bonebreaker_i00.png",
+      "weapon_bonebreaker_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Brigandine Gaiters",
+    "best": "armor_brigandine_gaiters_i00.png",
+    "allCandidates": [
+      "armor_brigandine_gaiters_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Brigandine Shield",
+    "best": "shield_brigandine_shield_i00.png",
+    "allCandidates": [
+      "shield_brigandine_shield_i00.png",
+      "shield_brigandine_shield_i02.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Chakram",
+    "best": "weapon_chakram_i00.png",
+    "allCandidates": [
+      "weapon_chakram_i00.png",
+      "weapon_chakram_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Claymore",
+    "best": "weapon_claymore_i00.png",
+    "allCandidates": [
+      "weapon_claymore_i00.png",
+      "weapon_claymore_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Club of Nature",
+    "best": "weapon_club_of_nature_i00.png",
+    "allCandidates": [
+      "weapon_club_of_nature_i00.png",
+      "weapon_club_of_nature_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Composite Armor",
+    "best": "armor_composite_armor_i00.png",
+    "allCandidates": [
+      "armor_composite_armor_i00.png",
+      "armor_composite_armor_i01.png",
+      "armor_composite_armor_i02.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Composite Shield",
+    "best": "shield_composite_shield_i00.png",
+    "allCandidates": [
+      "shield_composite_shield_i00.png",
+      "shield_composite_shield_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Compound Scale Gaiters",
+    "best": "armor_compound_scale_gaiters_i00.png",
+    "allCandidates": [
+      "armor_compound_scale_gaiters_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Compound Scale Mail",
+    "best": "armor_compound_scale_mail_i00.png",
+    "allCandidates": [
+      "armor_compound_scale_mail_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Crimson Sword",
+    "best": "weapon_crimson_sword_i00.png",
+    "allCandidates": [
+      "time_weapon_crimson_sword_i00.png",
+      "weapon_crimson_sword_i00.png",
+      "weapon_crimson_sword_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Crucifix of Blood",
+    "best": "weapon_crucifix_of_blood_i00.png",
+    "allCandidates": [
+      "weapon_crucifix_of_blood_i00.png",
+      "weapon_crucifix_of_blood_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Crystal Dagger",
+    "best": "weapon_crystal_dagger_i00.png",
+    "allCandidates": [
+      "weapon_crystal_dagger_i00.png",
+      "weapon_crystal_dagger_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Crystal Staff",
+    "best": "weapon_crystal_staff_i00.png",
+    "allCandidates": [
+      "weapon_crystal_staff_i00.png",
+      "weapon_crystal_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Crystallized Ice Bow",
+    "best": "weapon_crystallized_ice_bow_i00.png",
+    "allCandidates": [
+      "weapon_crystallized_ice_bow_i00.png",
+      "weapon_crystallized_ice_bow_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Cursed Dagger",
+    "best": "weapon_cursed_dagger_i00.png",
+    "allCandidates": [
+      "weapon_cursed_dagger_i00.png",
+      "weapon_cursed_dagger_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Cursed Tunic",
+    "best": "armor_cursed_tunic_i00.png",
+    "allCandidates": [
+      "armor_cursed_tunic_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dagger of Mana",
+    "best": "weapon_dagger_of_mana_i00.png",
+    "allCandidates": [
+      "time_weapon_dagger_of_mana_i00.png",
+      "weapon_dagger_of_mana_i00.png",
+      "weapon_dagger_of_mana_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dark Legion's Edge",
+    "best": "weapon_dark_legions_edge_i00.png",
+    "allCandidates": [
+      "weapon_dark_legions_edge_i00.png",
+      "weapon_dark_legions_edge_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dark Screamer",
+    "best": "weapon_dark_screamer_i00.png",
+    "allCandidates": [
+      "time_weapon_dark_screamer_i00.png",
+      "weapon_dark_screamer_i00.png",
+      "weapon_dark_screamer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dasparion's Staff",
+    "best": "weapon_dasparions_staff_i00.png",
+    "allCandidates": [
+      "time_weapon_dasparions_staff_i00.png",
+      "weapon_dasparions_staff_i00.png",
+      "weapon_dasparions_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Deadman's Glory",
+    "best": "weapon_deadmans_glory_i00.png",
+    "allCandidates": [
+      "weapon_deadmans_glory_i00.png",
+      "weapon_deadmans_glory_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Deadman's Staff",
+    "best": "weapon_deadmans_staff_i00.png",
+    "allCandidates": [
+      "weapon_deadmans_staff_i00.png",
+      "weapon_deadmans_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Demon Circlet",
+    "best": "accessary_demon_circlet_i00.png",
+    "allCandidates": [
+      "accessary_demon_circlet_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Demon Splinter",
+    "best": "weapon_demon_splinter_i00.png",
+    "allCandidates": [
+      "weapon_demon_splinter_i00.png",
+      "weapon_demon_splinter_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Demon's Staff",
+    "best": "weapon_demons_staff_i00.png",
+    "allCandidates": [
+      "weapon_demons_staff_i00.png",
+      "weapon_demons_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Divine Tome",
+    "best": "weapon_divine_tome_i00.png",
+    "allCandidates": [
+      "weapon_divine_tome_i00.png",
+      "weapon_divine_tome_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Divine Tunic",
+    "best": "armor_divine_tunic_i00.png",
+    "allCandidates": [
+      "armor_divine_tunic_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Doom Shield",
+    "best": "shield_doom_shield_i00.png",
+    "allCandidates": [
+      "shield_doom_shield_i00.png",
+      "shield_doom_shield_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Draconic Bow",
+    "best": "weapon_draconic_bow_i00.png",
+    "allCandidates": [
+      "weapon_draconic_bow_i00.png",
+      "weapon_draconic_bow_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dragon Grinder",
+    "best": "weapon_dragon_grinder_i00.png",
+    "allCandidates": [
+      "weapon_dragon_grinder_i00.png",
+      "weapon_dragon_grinder_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dragon Hunter Axe",
+    "best": "weapon_dragon_hunter_axe_i00.png",
+    "allCandidates": [
+      "weapon_dragon_hunter_axe_i00.png",
+      "weapon_dragon_hunter_axe_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dragon Slayer",
+    "best": "weapon_dragon_slayer_i00.png",
+    "allCandidates": [
+      "weapon_dragon_slayer_i00.png",
+      "weapon_dragon_slayer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dwarven Chain Boots",
+    "best": "armor_dwarven_chain_boots_i00.png",
+    "allCandidates": [
+      "armor_dwarven_chain_boots_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dwarven Chain Gaiters",
+    "best": "armor_dwarven_chain_gaiters_i00.png",
+    "allCandidates": [
+      "armor_dwarven_chain_gaiters_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dwarven Chain Mail Shirt",
+    "best": "armor_dwarven_chain_mail_shirt_i00.png",
+    "allCandidates": [
+      "armor_dwarven_chain_mail_shirt_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dwarven Pike",
+    "best": "weapon_dwarven_pike_i00.png",
+    "allCandidates": [
+      "weapon_dwarven_pike_i00.png",
+      "weapon_dwarven_pike_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dwarven Scale Gaiters",
+    "best": "armor_dwarven_scale_gaiters_i00.png",
+    "allCandidates": [
+      "armor_dwarven_scale_gaiters_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Dwarven Scale Mail",
+    "best": "armor_dwarven_scale_mail_i00.png",
+    "allCandidates": [
+      "armor_dwarven_scale_mail_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Eldarake",
+    "best": "shield_eldarake_i00.png",
+    "allCandidates": [
+      "shield_eldarake_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Elemental Bow",
+    "best": "weapon_elemental_bow_i00.png",
+    "allCandidates": [
+      "time_weapon_elemental_bow_i00.png",
+      "weapon_elemental_bow_i00.png",
+      "weapon_elemental_bow_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Elemental Sword",
+    "best": "weapon_elemental_sword_i00.png",
+    "allCandidates": [
+      "weapon_elemental_sword_i00.png",
+      "weapon_elemental_sword_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Elven Long Sword",
+    "best": "weapon_elven_long_sword_i00.png",
+    "allCandidates": [
+      "weapon_elven_long_sword_i00.png",
+      "weapon_elven_long_sword_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Elven Mithril Boots",
+    "best": "armor_elven_mithril_boots_i00.png",
+    "allCandidates": [
+      "armor_elven_mithril_boots_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Elven Necklace",
+    "best": "accessary_elven_necklace_i00.png",
+    "allCandidates": [
+      "accessary_elven_necklace_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Elven Ring",
+    "best": "accessary_elven_ring_i00.png",
+    "allCandidates": [
+      "accessary_elven_ring_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Elven Tunic",
+    "best": "armor_elven_tunic_i00.png",
+    "allCandidates": [
+      "armor_elven_tunic_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Elysian",
+    "best": "weapon_elysian_i00.png",
+    "allCandidates": [
+      "weapon_elysian_i00.png",
+      "weapon_elysian_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Eminence Bow",
+    "best": "weapon_eminence_bow_i00.png",
+    "allCandidates": [
+      "weapon_eminence_bow_i00.png",
+      "weapon_eminence_bow_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Enchanted Necklace",
+    "best": "accessary_enchanted_necklace_i00.png",
+    "allCandidates": [
+      "accessary_enchanted_necklace_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Enchanted Ring",
+    "best": "accessary_enchanted_ring_i00.png",
+    "allCandidates": [
+      "accessary_enchanted_ring_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Flamberge",
+    "best": "weapon_flamberge_i00.png",
+    "allCandidates": [
+      "weapon_flamberge_i00.png",
+      "weapon_flamberge_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Forgotten Blade",
+    "best": "weapon_forgotten_blade_i00.png",
+    "allCandidates": [
+      "weapon_forgotten_blade_i00.png",
+      "weapon_forgotten_blade_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Full Plate Shield",
+    "best": "shield_full_plate_shield_i00.png",
+    "allCandidates": [
+      "shield_full_plate_shield_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Gastraphetes",
+    "best": "weapon_gastraphetes_i00.png",
+    "allCandidates": [
+      "time_weapon_gastraphetes_i00.png",
+      "weapon_gastraphetes_i00.png",
+      "weapon_gastraphetes_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Ghost Staff",
+    "best": "weapon_ghost_staff_i00.png",
+    "allCandidates": [
+      "weapon_ghost_staff_i00.png",
+      "weapon_ghost_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Ghoul's Staff",
+    "best": "weapon_ghouls_staff_i00.png",
+    "allCandidates": [
+      "weapon_ghouls_staff_i00.png",
+      "weapon_ghouls_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Grace Dagger",
+    "best": "weapon_grace_dagger_i00.png",
+    "allCandidates": [
+      "weapon_grace_dagger_i00.png",
+      "weapon_grace_dagger_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Great Axe",
+    "best": "weapon_great_axe_i00.png",
+    "allCandidates": [
+      "time_weapon_great_axe_i00.png",
+      "weapon_great_axe_i00.png",
+      "weapon_great_axe_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Great Pata",
+    "best": "weapon_great_pata_i00.png",
+    "allCandidates": [
+      "weapon_great_pata_i00.png",
+      "weapon_great_pata_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Great Sword",
+    "best": "weapon_great_sword_i00.png",
+    "allCandidates": [
+      "time_weapon_great_sword_i00.png",
+      "weapon_great_sword_i00.png",
+      "weapon_great_sword_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Half Plate Armor",
+    "best": "armor_half_plate_i00.png",
+    "allCandidates": [
+      "armor_half_plate_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Heathen's Book",
+    "best": "weapon_heathens_book_i00.png",
+    "allCandidates": [
+      "weapon_heathens_book_i00.png",
+      "weapon_heathens_book_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Heaven's Divider",
+    "best": "weapon_heavens_divider_i00.png",
+    "allCandidates": [
+      "weapon_heavens_divider_i00.png",
+      "weapon_heavens_divider_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Heavy Bone Club",
+    "best": "weapon_heavy_bone_club_i00.png",
+    "allCandidates": [
+      "weapon_heavy_bone_club_i00.png",
+      "weapon_heavy_bone_club_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Heavy Doom Axe",
+    "best": "weapon_heavy_doom_axe_i00.png",
+    "allCandidates": [
+      "weapon_heavy_doom_axe_i00.png",
+      "weapon_heavy_doom_axe_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Heavy Doom Hammer",
+    "best": "weapon_heavy_doom_hammer_i00.png",
+    "allCandidates": [
+      "weapon_heavy_doom_hammer_i00.png",
+      "weapon_heavy_doom_hammer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Heavy War Axe",
+    "best": "weapon_heavy_war_axe_i00.png",
+    "allCandidates": [
+      "time_weapon_heavy_war_axe_i00.png",
+      "weapon_heavy_war_axe_i00.png",
+      "weapon_heavy_war_axe_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Hell Knife",
+    "best": "weapon_hell_knife_i00.png",
+    "allCandidates": [
+      "weapon_hell_knife_i00.png",
+      "weapon_hell_knife_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Hoplon",
+    "best": "shield_hoplon_i00.png",
+    "allCandidates": [
+      "shield_hoplon_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Horn of Glory",
+    "best": "weapon_horn_of_glory_i00.png",
+    "allCandidates": [
+      "weapon_horn_of_glory_i00.png",
+      "weapon_horn_of_glory_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Ice Storm Hammer",
+    "best": "weapon_ice_storm_hammer_i00.png",
+    "allCandidates": [
+      "weapon_ice_storm_hammer_i00.png",
+      "weapon_ice_storm_hammer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Imperial Staff",
+    "best": "weapon_imperial_staff_i00.png",
+    "allCandidates": [
+      "weapon_imperial_staff_i00.png",
+      "weapon_imperial_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Iron Boots",
+    "best": "armor_iron_boots_i00.png",
+    "allCandidates": [
+      "armor_iron_boots_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Iron Plate Gaiters",
+    "best": "armor_iron_plate_gaiters_i00.png",
+    "allCandidates": [
+      "armor_iron_plate_gaiters_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Karmian Boots",
+    "best": "armor_karmian_boots_i00.png",
+    "allCandidates": [
+      "armor_karmian_boots_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Karmian Gloves",
+    "best": "armor_karmian_gloves_i00.png",
+    "allCandidates": [
+      "armor_karmian_gloves_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Karmian Tunic",
+    "best": "armor_karmian_tunic_i00.png",
+    "allCandidates": [
+      "armor_karmian_tunic_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Kite Shield",
+    "best": "shield_kite_shield_i00.png",
+    "allCandidates": [
+      "shield_kite_shield_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Knight's Sword",
+    "best": "weapon_knights_sword_i00.png",
+    "allCandidates": [
+      "weapon_knights_sword_i00.png",
+      "weapon_knights_sword_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Kris",
+    "best": "weapon_kris_i00.png",
+    "allCandidates": [
+      "time_weapon_kris_i00.png",
+      "weapon_kris_i00.png",
+      "weapon_kris_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Kukuri",
+    "best": "weapon_kukuri_i00.png",
+    "allCandidates": [
+      "time_weapon_kukuri_i00.png",
+      "weapon_kukuri_i00.png",
+      "weapon_kukuri_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Lion Skin Gaiters",
+    "best": "armor_lion_skin_gaiters_i00.png",
+    "allCandidates": [
+      "armor_lion_skin_gaiters_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Lion Skin Shirt",
+    "best": "armor_lion_skin_shirt_i00.png",
+    "allCandidates": [
+      "armor_lion_skin_shirt_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mace of Judgment",
+    "best": "weapon_mace_of_judgment_i00.png",
+    "allCandidates": [
+      "weapon_mace_of_judgment_i00.png",
+      "weapon_mace_of_judgment_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mace of Miracle",
+    "best": "weapon_mace_of_miracle_i00.png",
+    "allCandidates": [
+      "weapon_mace_of_miracle_i00.png",
+      "weapon_mace_of_miracle_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mace of Prayer",
+    "best": "weapon_mace_of_prayer_i00.png",
+    "allCandidates": [
+      "weapon_mace_of_prayer_i00.png",
+      "weapon_mace_of_prayer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mace of the Underworld",
+    "best": "weapon_mace_of_underworld_i00.png",
+    "allCandidates": [
+      "weapon_mace_of_underworld_i00.png",
+      "weapon_mace_of_underworld_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Maingauche",
+    "best": "weapon_maingauche_i00.png",
+    "allCandidates": [
+      "weapon_maingauche_i00.png",
+      "weapon_maingauche_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mermaid Necklace",
+    "best": "accessary_necklace_of_mermaid_i00.png",
+    "allCandidates": [
+      "accessary_necklace_of_mermaid_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Meteor Shower",
+    "best": "weapon_meteor_shower_i00.png",
+    "allCandidates": [
+      "time_weapon_meteor_shower_i00.png",
+      "weapon_meteor_shower_i00.png",
+      "weapon_meteor_shower_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mithril Banded Gaiters",
+    "best": "armor_mithril_banded_gaiters_i00.png",
+    "allCandidates": [
+      "armor_mithril_banded_gaiters_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mithril Banded Mail",
+    "best": "armor_mithril_banded_mail_i00.png",
+    "allCandidates": [
+      "armor_mithril_banded_mail_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mithril Breastplate",
+    "best": "armor_mithril_breastplate_i00.png",
+    "allCandidates": [
+      "armor_mithril_breastplate_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mithril Dagger",
+    "best": "weapon_mithril_dagger_i00.png",
+    "allCandidates": [
+      "weapon_mithril_dagger_i00.png",
+      "weapon_mithril_dagger_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mithril Ring",
+    "best": "accessary_mithril_ring_i00.png",
+    "allCandidates": [
+      "accessary_mithril_ring_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mithril Shirt",
+    "best": "armor_tempered_mithril_shirt_i00.png",
+    "allCandidates": [
+      "armor_tempered_mithril_shirt_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mithril Tunic",
+    "best": "armor_mithril_tunic_i00.png",
+    "allCandidates": [
+      "armor_mithril_tunic_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Morning Star",
+    "best": "weapon_morning_star_i00.png",
+    "allCandidates": [
+      "weapon_morning_star_i00.png",
+      "weapon_morning_star_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mystic Knife",
+    "best": "weapon_mystic_knife_i00.png",
+    "allCandidates": [
+      "weapon_mystic_knife_i00.png",
+      "weapon_mystic_knife_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Mystic Staff",
+    "best": "weapon_mystic_staff_i00.png",
+    "allCandidates": [
+      "weapon_mystic_staff_i00.png",
+      "weapon_mystic_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Near Forest Necklace",
+    "best": "accessary_near_forest_necklace_i00.png",
+    "allCandidates": [
+      "accessary_near_forest_necklace_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Necklace of Binding",
+    "best": "accessary_necklace_of_binding_i00.png",
+    "allCandidates": [
+      "accessary_necklace_of_binding_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Necklace of Black Ore",
+    "best": "accessary_necklace_of_black_ore_i00.png",
+    "allCandidates": [
+      "accessary_necklace_of_black_ore_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Necklace of Darkness",
+    "best": "accessary_necklace_of_darkness_i00.png",
+    "allCandidates": [
+      "accessary_necklace_of_darkness_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Nirvana Axe",
+    "best": "weapon_nirvana_axe_i00.png",
+    "allCandidates": [
+      "weapon_nirvana_axe_i00.png",
+      "weapon_nirvana_axe_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Noble Elven Bow",
+    "best": "weapon_noble_elven_bow_i00.png",
+    "allCandidates": [
+      "weapon_noble_elven_bow_i00.png",
+      "weapon_noble_elven_bow_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Orcish Glaive",
+    "best": "weapon_orcish_glaive_i00.png",
+    "allCandidates": [
+      "weapon_orcish_glaive_i00.png",
+      "weapon_orcish_glaive_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Orcish Poleaxe",
+    "best": "weapon_orcish_poleaxe_i00.png",
+    "allCandidates": [
+      "weapon_orcish_poleaxe_i00.png",
+      "weapon_orcish_poleaxe_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Paradia Staff",
+    "best": "weapon_paradia_staff_i00.png",
+    "allCandidates": [
+      "weapon_paradia_staff_i00.png",
+      "weapon_paradia_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Plate Boots",
+    "best": "armor_plate_boots_i00.png",
+    "allCandidates": [
+      "armor_plate_boots_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Ring of Ages",
+    "best": "accessary_ring_of_ages_i00.png",
+    "allCandidates": [
+      "accessary_ring_of_ages_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Ring of Binding",
+    "best": "accessary_ring_of_binding_i00.png",
+    "allCandidates": [
+      "accessary_ring_of_binding_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Ring of Black Ore",
+    "best": "accessary_ring_of_black_ore_i00.png",
+    "allCandidates": [
+      "accessary_ring_of_black_ore_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Sage's Staff",
+    "best": "weapon_sages_staff_i00.png",
+    "allCandidates": [
+      "weapon_sages_staff_i00.png",
+      "weapon_sages_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Sage's Worn Gloves",
+    "best": "armor_sage's_worn_gloves_i00.png",
+    "allCandidates": [
+      "armor_sage's_worn_gloves_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Saint Spear",
+    "best": "weapon_saint_spear_i00.png",
+    "allCandidates": [
+      "weapon_saint_spear_i00.png",
+      "weapon_saint_spear_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Scallop Jamadhr",
+    "best": "weapon_scallop_jamadhr_i00.png",
+    "allCandidates": [
+      "weapon_scallop_jamadhr_i00.png",
+      "weapon_scallop_jamadhr_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Scalpel",
+    "best": "weapon_scalpel_i00.png",
+    "allCandidates": [
+      "weapon_scalpel_i00.png",
+      "weapon_scalpel_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Scorpion",
+    "best": "weapon_scorpion_i00.png",
+    "allCandidates": [
+      "weapon_scorpion_i00.png",
+      "weapon_scorpion_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Scythe",
+    "best": "weapon_scythe_i00.png",
+    "allCandidates": [
+      "weapon_scythe_i00.png",
+      "weapon_scythe_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Shining Circlet",
+    "best": "accessory_shining_circlet_i00.png",
+    "allCandidates": [
+      "accessory_shining_circlet_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Single-Edged Jamadhr",
+    "best": "weapon_single-edged_jamadhr_i00.png",
+    "allCandidates": [
+      "weapon_single-edged_jamadhr_i00.png",
+      "weapon_single-edged_jamadhr_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Skull Breaker",
+    "best": "weapon_skull_breaker_i00.png",
+    "allCandidates": [
+      "weapon_skull_breaker_i00.png",
+      "weapon_skull_breaker_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Soul Bow",
+    "best": "weapon_soul_bow_i00.png",
+    "allCandidates": [
+      "weapon_soul_bow_i00.png",
+      "weapon_soul_bow_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Soul Separator",
+    "best": "weapon_soul_separator_i00.png",
+    "allCandidates": [
+      "weapon_soul_separator_i00.png",
+      "weapon_soul_separator_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Spell Breaker",
+    "best": "weapon_spell_breaker_i00.png",
+    "allCandidates": [
+      "weapon_spell_breaker_i00.png",
+      "weapon_spell_breaker_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Spinebone Sword",
+    "best": "weapon_spinebone_sword_i00.png",
+    "allCandidates": [
+      "weapon_spinebone_sword_i00.png",
+      "weapon_spinebone_sword_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Sprite's Staff",
+    "best": "weapon_sprites_staff_i00.png",
+    "allCandidates": [
+      "time_weapon_sprites_staff_i00.png",
+      "weapon_sprites_staff_i00.png",
+      "weapon_sprites_staff_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Square Shield",
+    "best": "shield_square_shield_i00.png",
+    "allCandidates": [
+      "shield_square_shield_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Staff of Mana",
+    "best": "weapon_staff_of_mana_i00.png",
+    "allCandidates": [
+      "weapon_staff_of_mana_i00.png",
+      "weapon_staff_of_mana_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Stick of Eternity",
+    "best": "weapon_stick_of_eternity_i00.png",
+    "allCandidates": [
+      "time_weapon_stick_of_eternity_i00.png",
+      "weapon_stick_of_eternity_i00.png",
+      "weapon_stick_of_eternity_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Stick of Faith",
+    "best": "weapon_stick_of_faith_i00.png",
+    "allCandidates": [
+      "weapon_stick_of_faith_i00.png",
+      "weapon_stick_of_faith_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Stiletto",
+    "best": "weapon_stiletto_i00.png",
+    "allCandidates": [
+      "time_weapon_stiletto_i00.png",
+      "weapon_stiletto_i00.png",
+      "weapon_stiletto_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Stormbringer",
+    "best": "weapon_stormbringer_i00.png",
+    "allCandidates": [
+      "time_weapon_stormbringer_i00.png",
+      "weapon_stormbringer_i00.png",
+      "weapon_stormbringer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Sword of Damascus",
+    "best": "weapon_sword_of_damascus_i00.png",
+    "allCandidates": [
+      "weapon_sword_of_damascus_i00.png",
+      "weapon_sword_of_damascus_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Sword of Delusion",
+    "best": "weapon_sword_of_delusion_i00.png",
+    "allCandidates": [
+      "time_weapon_sword_of_delusion_i00.png",
+      "weapon_sword_of_delusion_i00.png",
+      "weapon_sword_of_delusion_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Sword of Nightmare",
+    "best": "weapon_sword_of_nightmare_i00.png",
+    "allCandidates": [
+      "weapon_sword_of_nightmare_i00.png",
+      "weapon_sword_of_nightmare_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Sword of Occult",
+    "best": "weapon_sword_of_occult_i00.png",
+    "allCandidates": [
+      "weapon_sword_of_occult_i00.png",
+      "weapon_sword_of_occult_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Sword of Revolution",
+    "best": "weapon_sword_of_revolution_i00.png",
+    "allCandidates": [
+      "time_weapon_sword_of_revolution_i00.png",
+      "weapon_sword_of_revolution_i00.png",
+      "weapon_sword_of_revolution_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Sword of Valhalla",
+    "best": "weapon_sword_of_valhalla_i00.png",
+    "allCandidates": [
+      "time_weapon_sword_of_valhalla_i00.png",
+      "weapon_sword_of_valhalla_i00.png",
+      "weapon_sword_of_valhalla_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Tallum Blade",
+    "best": "weapon_tallum_blade_i00.png",
+    "allCandidates": [
+      "time_weapon_tallum_blade_i00.png",
+      "weapon_tallum_blade_i00.png",
+      "weapon_tallum_blade_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Tallum Glaive",
+    "best": "weapon_tallum_glaive_i00.png",
+    "allCandidates": [
+      "weapon_tallum_glaive_i00.png",
+      "weapon_tallum_glaive_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Tarbar",
+    "best": "weapon_tarbar_i00.png",
+    "allCandidates": [
+      "weapon_tarbar_i00.png",
+      "weapon_tarbar_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Tempered Mithril Gaiters",
+    "best": "armor_tempered_mithril_gaiters_i00.png",
+    "allCandidates": [
+      "armor_tempered_mithril_gaiters_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Theca Leather Boots",
+    "best": "armor_theca_leather_boots_i00.png",
+    "allCandidates": [
+      "armor_theca_leather_boots_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Theca Leather Gaiters",
+    "best": "armor_theca_leather_gaiters_i00.png",
+    "allCandidates": [
+      "armor_theca_leather_gaiters_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Theca Leather Gloves",
+    "best": "armor_theca_leather_gloves_i00.png",
+    "allCandidates": [
+      "armor_theca_leather_gloves_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Tomahawk",
+    "best": "weapon_tomahawk_i00.png",
+    "allCandidates": [
+      "weapon_tomahawk_i00.png",
+      "weapon_tomahawk_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Tome of Blood",
+    "best": "weapon_tome_of_blood_i00.png",
+    "allCandidates": [
+      "weapon_tome_of_blood_i00.png",
+      "weapon_tome_of_blood_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Tower Shield",
+    "best": "shield_tower_shield_i00.png",
+    "allCandidates": [
+      "shield_tower_shield_i00.png",
+      "shield_tower_shield_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Tunic of Knowledge",
+    "best": "armor_tunic_of_knowledge_i00.png",
+    "allCandidates": [
+      "armor_tunic_of_knowledge_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "War Hammer",
+    "best": "weapon_war_hammer_i00.png",
+    "allCandidates": [
+      "time_weapon_war_hammer_i00.png",
+      "weapon_war_hammer_i00.png",
+      "weapon_war_hammer_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "War Pick",
+    "best": "weapon_war_pick_i00.png",
+    "allCandidates": [
+      "weapon_war_pick_i00.png",
+      "weapon_war_pick_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "White Tunic",
+    "best": "armor_white_tunic_i00.png",
+    "allCandidates": [
+      "armor_white_tunic_i00.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Winged Spear",
+    "best": "weapon_winged_spear_i00.png",
+    "allCandidates": [
+      "weapon_winged_spear_i00.png",
+      "weapon_winged_spear_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  },
+  {
+    "item": "Yaksa Mace",
+    "best": "weapon_yaksa_mace_i00.png",
+    "allCandidates": [
+      "weapon_yaksa_mace_i00.png",
+      "weapon_yaksa_mace_i01.png"
+    ],
+    "distinctCount": 1,
+    "ambiguous": false
+  }
+]

@@ -1,0 +1,515 @@
+[
+  {
+    "item": "Adena",
+    "best": "etc_adena_i00.png",
+    "allCandidates": [
+      "adena.png",
+      "etc_adena_i00.png",
+      "etc_ancient_adena_i00.png",
+      "etc_pig_adena_i00.png",
+      "etc_pig_adena_i01.png",
+      "fairy_adena_joke.png"
+    ],
+    "distinctCount": 5,
+    "ambiguous": true
+  },
+  {
+    "item": "Chain Boots",
+    "best": "armor_chain_boots_i00.png",
+    "allCandidates": [
+      "armor_chain_boots_i00.png",
+      "armor_dwarven_chain_boots_i00.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Chain Gaiters",
+    "best": "armor_chain_gaiters_i00.png",
+    "allCandidates": [
+      "armor_chain_gaiters_i00.png",
+      "armor_dwarven_chain_gaiters_i00.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Chain Gloves",
+    "best": "armor_chain_gloves_i00.png",
+    "allCandidates": [
+      "armor_chain_gloves_i00.png",
+      "armor_dwarven_chain_gloves_i00.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Chain Mail Shirt",
+    "best": "armor_chain_mail_shirt_i00.png",
+    "allCandidates": [
+      "armor_chain_mail_shirt_i00.png",
+      "armor_dwarven_chain_mail_shirt_i00.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Chain Shield",
+    "best": "shield_chain_shield_i00.png",
+    "allCandidates": [
+      "shield_chain_shield_i00.png",
+      "shield_dwarven_chain_shield_i00.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Doom Hammer",
+    "best": "weapon_doom_hammer_i00.png",
+    "allCandidates": [
+      "weapon_doom_hammer_i00.png",
+      "weapon_doom_hammer_i01.png",
+      "weapon_heavy_doom_hammer_i00.png",
+      "weapon_heavy_doom_hammer_i01.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Elven Bow",
+    "best": "weapon_elven_bow_i00.png",
+    "allCandidates": [
+      "time_weapon_dark_elven_long_bow_i00.png",
+      "weapon_dark_elven_bow_i00.png",
+      "weapon_dark_elven_bow_i01.png",
+      "weapon_dark_elven_long_bow_i00.png",
+      "weapon_dark_elven_long_bow_i01.png",
+      "weapon_elven_bow_i00.png",
+      "weapon_elven_bow_i01.png",
+      "weapon_noble_elven_bow_i00.png",
+      "weapon_noble_elven_bow_i01.png"
+    ],
+    "distinctCount": 4,
+    "ambiguous": true
+  },
+  {
+    "item": "Elven Sword",
+    "best": "weapon_elven_sword_i00.png",
+    "allCandidates": [
+      "weapon_elven_long_sword_i00.png",
+      "weapon_elven_long_sword_i01.png",
+      "weapon_elven_sword_i00.png",
+      "weapon_elven_sword_i01.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Glaive",
+    "best": "weapon_glaive_i00.png",
+    "allCandidates": [
+      "weapon_glaive_i00.png",
+      "weapon_glaive_i01.png",
+      "weapon_orcish_glaive_i00.png",
+      "weapon_orcish_glaive_i01.png",
+      "weapon_tallum_glaive_i00.png",
+      "weapon_tallum_glaive_i01.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Hand Axe",
+    "best": "weapon_hand_axe_i00.png",
+    "allCandidates": [
+      "weapon_hand_axe_i00.png",
+      "weapon_hand_axe_i01.png",
+      "weapon_tauti_one_hand_axe_i01.png",
+      "weapon_tauti_one_hand_magic_axe_i01.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Helmet",
+    "best": "armor_helmet_i00.png",
+    "allCandidates": [
+      "armor_cloth_helmet_i00.png",
+      "armor_cloth_helmet_i02.png",
+      "armor_helmet_i00.png",
+      "armor_helmet_i00_piece.png",
+      "armor_helmet_i02.png",
+      "armor_leather_helmet_i00.png",
+      "armor_leather_helmet_i00_piece.png",
+      "armor_leather_helmet_i02.png",
+      "bm_armor_helmet_i00.png",
+      "bm_armor_leather_helmet_i00.png",
+      "buff_helmet.png",
+      "etc_sealed_blluelycan_helmet_piece_I00.png",
+      "etc_sealed_blluelycan_leather_helmet_piece_I00.png",
+      "etc_sealed_vesper_helmet_piece_I00.png",
+      "etc_sealed_vesper_leather_helmet_piece_I00.png"
+    ],
+    "distinctCount": 12,
+    "ambiguous": true
+  },
+  {
+    "item": "Long Bow",
+    "best": "weapon_long_bow_i00.png",
+    "allCandidates": [
+      "time_weapon_akat_long_bow_i00.png",
+      "time_weapon_dark_elven_long_bow_i00.png",
+      "weapon_akat_long_bow_i00.png",
+      "weapon_akat_long_bow_i01.png",
+      "weapon_dark_elven_long_bow_i00.png",
+      "weapon_dark_elven_long_bow_i01.png",
+      "weapon_long_bow_i00.png",
+      "weapon_long_bow_i01.png",
+      "weapon_strengthening_long_bow_i00.png",
+      "weapon_strengthening_long_bow_i01.png"
+    ],
+    "distinctCount": 4,
+    "ambiguous": true
+  },
+  {
+    "item": "Mithril Boots",
+    "best": "armor_mithril_boots_i00.png",
+    "allCandidates": [
+      "armor_elven_mithril_boots_i00.png",
+      "armor_mithril_boots_i00.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Mithril Gaiters",
+    "best": "armor_mithril_gaiters_i00.png",
+    "allCandidates": [
+      "armor_mithril_banded_gaiters_i00.png",
+      "armor_mithril_gaiters_i00.png",
+      "armor_tempered_mithril_gaiters_i00.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Mithril Gloves",
+    "best": "armor_elven_mithril_gloves_i00.png",
+    "allCandidates": [
+      "armor_elven_mithril_gloves_i00.png",
+      "armor_reinforce_mithril_gloves_i00.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Pike",
+    "best": "weapon_pike_i00.png",
+    "allCandidates": [
+      "weapon_dwarven_pike_i00.png",
+      "weapon_dwarven_pike_i01.png",
+      "weapon_pike_i00.png",
+      "weapon_pike_i01.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Plate Gaiters",
+    "best": "armor_plate_gaiters_i00.png",
+    "allCandidates": [
+      "armor_iron_plate_gaiters_i00.png",
+      "armor_plate_gaiters_i00.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Plate Shield",
+    "best": "shield_plate_shield_i00.png",
+    "allCandidates": [
+      "armor_dynasty_platinum_plate_shield_i00.png",
+      "shield_full_plate_shield_i00.png",
+      "shield_plate_shield_i00.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Samurai Longsword",
+    "best": "weapon_samurai_longsword_i00.png",
+    "allCandidates": [
+      "weapon_samurai_longsword_i00.png",
+      "weapon_samurai_longsword_i01.png",
+      "weapon_samurai_old_longsword_i00.png",
+      "weapon_samurai_old_longsword_i01.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Scale Gaiters",
+    "best": "armor_scale_gaiters_i00.png",
+    "allCandidates": [
+      "armor_compound_scale_gaiters_i00.png",
+      "armor_dwarven_scale_gaiters_i00.png",
+      "armor_scale_gaiters_i00.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Scale Mail",
+    "best": "armor_scale_mail_i00.png",
+    "allCandidates": [
+      "armor_compound_scale_mail_i00.png",
+      "armor_dwarven_scale_mail_i00.png",
+      "armor_scale_mail_i00.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Armor (A)",
+    "best": "etc_scroll_of_enchant_armor_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png",
+      "etc_scroll_of_enchant_armor_i00.png",
+      "etc_scroll_of_enchant_armor_i01.png",
+      "etc_scroll_of_enchant_armor_i02.png",
+      "etc_scroll_of_enchant_armor_i03.png",
+      "etc_scroll_of_enchant_armor_i04.png",
+      "etc_scroll_of_enchant_armor_i05.png",
+      "scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Armor (B)",
+    "best": "etc_scroll_of_enchant_armor_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png",
+      "etc_scroll_of_enchant_armor_i00.png",
+      "etc_scroll_of_enchant_armor_i01.png",
+      "etc_scroll_of_enchant_armor_i02.png",
+      "etc_scroll_of_enchant_armor_i03.png",
+      "etc_scroll_of_enchant_armor_i04.png",
+      "etc_scroll_of_enchant_armor_i05.png",
+      "scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Armor (C)",
+    "best": "etc_scroll_of_enchant_armor_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png",
+      "etc_scroll_of_enchant_armor_i00.png",
+      "etc_scroll_of_enchant_armor_i01.png",
+      "etc_scroll_of_enchant_armor_i02.png",
+      "etc_scroll_of_enchant_armor_i03.png",
+      "etc_scroll_of_enchant_armor_i04.png",
+      "etc_scroll_of_enchant_armor_i05.png",
+      "scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Armor (D)",
+    "best": "etc_scroll_of_enchant_armor_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png",
+      "etc_scroll_of_enchant_armor_i00.png",
+      "etc_scroll_of_enchant_armor_i01.png",
+      "etc_scroll_of_enchant_armor_i02.png",
+      "etc_scroll_of_enchant_armor_i03.png",
+      "etc_scroll_of_enchant_armor_i04.png",
+      "etc_scroll_of_enchant_armor_i05.png",
+      "scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Armor (S)",
+    "best": "etc_scroll_of_enchant_armor_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_armor_i06.png",
+      "etc_scroll_of_enchant_armor_i00.png",
+      "etc_scroll_of_enchant_armor_i01.png",
+      "etc_scroll_of_enchant_armor_i02.png",
+      "etc_scroll_of_enchant_armor_i03.png",
+      "etc_scroll_of_enchant_armor_i04.png",
+      "etc_scroll_of_enchant_armor_i05.png",
+      "scroll_of_enchant_armor_i06.png"
+    ],
+    "distinctCount": 3,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Weapon (A)",
+    "best": "etc_scroll_of_enchant_weapon_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png",
+      "etc_scroll_of_enchant_weapon_i00.png",
+      "etc_scroll_of_enchant_weapon_i01.png",
+      "etc_scroll_of_enchant_weapon_i02.png",
+      "etc_scroll_of_enchant_weapon_i03.png",
+      "etc_scroll_of_enchant_weapon_i04.png",
+      "etc_scroll_of_enchant_weapon_i05.png",
+      "scroll_of_enchant_weapon_i06.png",
+      "yogi_scroll_of_enchant_weapon_grade_i00.png"
+    ],
+    "distinctCount": 4,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Weapon (B)",
+    "best": "etc_scroll_of_enchant_weapon_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png",
+      "etc_scroll_of_enchant_weapon_i00.png",
+      "etc_scroll_of_enchant_weapon_i01.png",
+      "etc_scroll_of_enchant_weapon_i02.png",
+      "etc_scroll_of_enchant_weapon_i03.png",
+      "etc_scroll_of_enchant_weapon_i04.png",
+      "etc_scroll_of_enchant_weapon_i05.png",
+      "scroll_of_enchant_weapon_i06.png",
+      "yogi_scroll_of_enchant_weapon_grade_i00.png"
+    ],
+    "distinctCount": 4,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Weapon (C)",
+    "best": "etc_scroll_of_enchant_weapon_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png",
+      "etc_scroll_of_enchant_weapon_i00.png",
+      "etc_scroll_of_enchant_weapon_i01.png",
+      "etc_scroll_of_enchant_weapon_i02.png",
+      "etc_scroll_of_enchant_weapon_i03.png",
+      "etc_scroll_of_enchant_weapon_i04.png",
+      "etc_scroll_of_enchant_weapon_i05.png",
+      "scroll_of_enchant_weapon_i06.png",
+      "yogi_scroll_of_enchant_weapon_grade_i00.png"
+    ],
+    "distinctCount": 4,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Weapon (D)",
+    "best": "etc_scroll_of_enchant_weapon_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png",
+      "etc_scroll_of_enchant_weapon_i00.png",
+      "etc_scroll_of_enchant_weapon_i01.png",
+      "etc_scroll_of_enchant_weapon_i02.png",
+      "etc_scroll_of_enchant_weapon_i03.png",
+      "etc_scroll_of_enchant_weapon_i04.png",
+      "etc_scroll_of_enchant_weapon_i05.png",
+      "scroll_of_enchant_weapon_i06.png",
+      "yogi_scroll_of_enchant_weapon_grade_i00.png"
+    ],
+    "distinctCount": 4,
+    "ambiguous": true
+  },
+  {
+    "item": "Scroll: Enchant Weapon (S)",
+    "best": "etc_scroll_of_enchant_weapon_i00.png",
+    "allCandidates": [
+      "blessed_scroll_of_enchant_weapon_i06.png",
+      "etc_scroll_of_enchant_weapon_i00.png",
+      "etc_scroll_of_enchant_weapon_i01.png",
+      "etc_scroll_of_enchant_weapon_i02.png",
+      "etc_scroll_of_enchant_weapon_i03.png",
+      "etc_scroll_of_enchant_weapon_i04.png",
+      "etc_scroll_of_enchant_weapon_i05.png",
+      "scroll_of_enchant_weapon_i06.png",
+      "yogi_scroll_of_enchant_weapon_grade_i00.png"
+    ],
+    "distinctCount": 4,
+    "ambiguous": true
+  },
+  {
+    "item": "Sword of Magic",
+    "best": "weapon_sword_of_magic_i00.png",
+    "allCandidates": [
+      "npoint_weapon_onehand_magic_sword.png",
+      "weapon_R99_onehand_magic_sword_pve_i00.png",
+      "weapon_R99_onehand_magic_sword_pve_i01.png",
+      "weapon_R99_onehand_magic_sword_pvp_i10.png",
+      "weapon_R99_onehand_magic_sword_pvp_i11.png",
+      "weapon_antaras_onehand_magic_sword_i00.png",
+      "weapon_antaras_onehand_magic_sword_i01.png",
+      "weapon_dynasty_magic_sword_i00.png",
+      "weapon_dynasty_magic_sword_i01.png",
+      "weapon_shadow_magic_sword.png",
+      "weapon_sword_of_magic_fog_i00.png",
+      "weapon_sword_of_magic_fog_i01.png",
+      "weapon_sword_of_magic_i00.png",
+      "weapon_sword_of_magic_i01.png",
+      "weapon_tysandy_magic_sword_i00.png",
+      "weapon_tysandy_magic_sword_i01.png",
+      "weapon_valrakas_onehand_magic_sword_i00.png",
+      "weapon_valrakas_onehand_magic_sword_i01.png"
+    ],
+    "distinctCount": 10,
+    "ambiguous": true
+  },
+  {
+    "item": "Theca Leather Armor",
+    "best": "armor_theca_leather_mail_i00.png",
+    "allCandidates": [
+      "armor_theca_leather_boots_i00.png",
+      "armor_theca_leather_gaiters_i00.png",
+      "armor_theca_leather_gloves_i00.png",
+      "armor_theca_leather_mail_i00.png"
+    ],
+    "distinctCount": 4,
+    "ambiguous": true
+  },
+  {
+    "item": "Triple-Edged Jamadhr",
+    "best": "weapon_triple-edged_jamadhr_i00.png",
+    "allCandidates": [
+      "time_weapon_triple_edged_jamadhr_i00.png",
+      "weapon_triple-edged_jamadhr_i00.png",
+      "weapon_triple-edged_jamadhr_i01.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  },
+  {
+    "item": "Two-Handed Sword",
+    "best": "weapon_two_handed_sword_i00.png",
+    "allCandidates": [
+      "bm_the_two_handed_sword_of_hero.png",
+      "time_weapon_two_handed_sword_i00.png",
+      "weapon_he_two_handed_sword_of_hero_i00.png",
+      "weapon_he_two_handed_sword_of_hero_i01.png",
+      "weapon_the_two_handed_sword_of_hero_i00.png",
+      "weapon_the_two_handed_sword_of_hero_i01.png",
+      "weapon_two_handed_sword_i00.png",
+      "weapon_two_handed_sword_i01.png"
+    ],
+    "distinctCount": 4,
+    "ambiguous": true
+  },
+  {
+    "item": "War Axe",
+    "best": "weapon_war_axe_i00.png",
+    "allCandidates": [
+      "time_weapon_heavy_war_axe_i00.png",
+      "weapon_heavy_war_axe_i00.png",
+      "weapon_heavy_war_axe_i01.png",
+      "weapon_war_axe_i00.png",
+      "weapon_war_axe_i01.png"
+    ],
+    "distinctCount": 2,
+    "ambiguous": true
+  }
+]

@@ -1,7 +1,84 @@
 "use client";
-import React, { useRef, useState } from "react";
-import { Group, Circle, Star, Text, Rect, Line } from "react-konva";
+import React, { useEffect, useRef, useState } from "react";
+import { Group, Image as KonvaImage, Text, Rect, Line } from "react-konva";
 import Konva from "konva";
+
+const MARKER_ICON_SRC = "/icons/rb-available1.png";
+
+// The source icon is tiny (~19x18) — render outline compositing at a
+// multiple of that so the blur stays smooth once Konva scales it back down.
+const RENDER_SCALE = 4;
+const OUTLINE_PAD = 6; // px, in the upscaled render space
+const OUTLINE_BLUR = 3; // px, in the upscaled render space
+
+interface IconVariants {
+  normal: HTMLCanvasElement;
+  normalBright: HTMLCanvasElement;
+  gray: HTMLCanvasElement;
+  grayBright: HTMLCanvasElement;
+  sizeRatio: number; // total canvas size / bare icon size, for display sizing
+}
+
+// Renders the icon (optionally grayscaled/brightened) with a soft blurred
+// black outline behind it, replacing a plain drop shadow with something that
+// actually follows the icon's silhouette.
+function buildOutlinedVariant(
+  img: HTMLImageElement,
+  { gray = false, brightness = 1 }: { gray?: boolean; brightness?: number },
+): { canvas: HTMLCanvasElement; sizeRatio: number } {
+  const upW = img.naturalWidth * RENDER_SCALE;
+  const upH = img.naturalHeight * RENDER_SCALE;
+  const totalW = upW + OUTLINE_PAD * 2;
+  const totalH = upH + OUTLINE_PAD * 2;
+
+  // Crisp, color-filtered icon layer
+  const colorCanvas = document.createElement("canvas");
+  colorCanvas.width = upW;
+  colorCanvas.height = upH;
+  const colorCtx = colorCanvas.getContext("2d")!;
+  const filters: string[] = [];
+  if (gray) filters.push("grayscale(1)");
+  if (brightness !== 1) filters.push(`brightness(${brightness})`);
+  colorCtx.filter = filters.length ? filters.join(" ") : "none";
+  colorCtx.drawImage(img, 0, 0, upW, upH);
+
+  // Solid black silhouette matching the icon's alpha shape
+  const silhouetteCanvas = document.createElement("canvas");
+  silhouetteCanvas.width = upW;
+  silhouetteCanvas.height = upH;
+  const silhouetteCtx = silhouetteCanvas.getContext("2d")!;
+  silhouetteCtx.drawImage(colorCanvas, 0, 0);
+  silhouetteCtx.globalCompositeOperation = "source-in";
+  silhouetteCtx.fillStyle = "#000";
+  silhouetteCtx.fillRect(0, 0, upW, upH);
+
+  // Compose: blurred silhouette behind, crisp icon on top
+  const canvas = document.createElement("canvas");
+  canvas.width = totalW;
+  canvas.height = totalH;
+  const ctx = canvas.getContext("2d")!;
+  ctx.filter = `blur(${OUTLINE_BLUR}px)`;
+  ctx.drawImage(silhouetteCanvas, OUTLINE_PAD, OUTLINE_PAD);
+  ctx.filter = "none";
+  ctx.drawImage(colorCanvas, OUTLINE_PAD, OUTLINE_PAD);
+
+  return { canvas, sizeRatio: totalW / upW };
+}
+
+// Same font as the l2-window title bar (see globals.css: body font-family).
+// fs-tahoma-8px is a real loaded local font with a Next.js-generated family
+// name, so — unlike a plain system-font string — it has to be read off the
+// DOM at runtime; Konva's canvas text can't resolve a CSS var() itself.
+function useTitleFontFamily(): string {
+  const [family, setFamily] = useState("Tahoma, sans-serif");
+  useEffect(() => {
+    const resolved = getComputedStyle(document.body)
+      .getPropertyValue("--font-fs-tahoma-8px")
+      .trim();
+    if (resolved) setFamily(`${resolved}, Tahoma, sans-serif`);
+  }, []);
+  return family;
+}
 
 interface BossMarkerKonvaProps {
   boss: {
@@ -11,6 +88,7 @@ interface BossMarkerKonvaProps {
     description: string;
     absoluteX: number;
     absoluteY: number;
+    killed?: boolean;
   };
   isSelected: boolean;
   onSelect: (id: string) => void;
@@ -25,17 +103,59 @@ export default function BossMarkerKonva({
 }: BossMarkerKonvaProps) {
   const groupRef = useRef<Konva.Group>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [variants, setVariants] = useState<IconVariants | null>(null);
+  const fontFamily = useTitleFontFamily();
+
+  useEffect(() => {
+    const img = new window.Image();
+    img.src = MARKER_ICON_SRC;
+    img.onload = () => {
+      const normal = buildOutlinedVariant(img, {});
+      const normalBright = buildOutlinedVariant(img, { brightness: 1.2 });
+      const gray = buildOutlinedVariant(img, { gray: true, brightness: 0.7 });
+      const grayBright = buildOutlinedVariant(img, {
+        gray: true,
+        brightness: 0.84,
+      });
+      setVariants({
+        normal: normal.canvas,
+        normalBright: normalBright.canvas,
+        gray: gray.canvas,
+        grayBright: grayBright.canvas,
+        sizeRatio: normal.sizeRatio,
+      });
+    };
+  }, []);
 
   const highlighted = isHovered || isSelected;
+  const showTooltip = highlighted;
 
   // Inverse scale so marker appears constant size on screen
   const inverseScale = 1 / scale;
 
-  // Icon size on screen (constant regardless of zoom), grows slightly when highlighted
-  const iconScreenSize = highlighted ? 48 : 40;
-
-  // Actual size in canvas coordinates
+  // Icon size stays constant — only brightness changes on hover/selection
+  const iconScreenSize = 15;
   const iconSize = iconScreenSize * inverseScale;
+
+  const iconSource = variants
+    ? boss.killed
+      ? highlighted
+        ? variants.grayBright
+        : variants.gray
+      : highlighted
+        ? variants.normalBright
+        : variants.normal
+    : null;
+
+  // The rendered canvas includes the outline padding, so it draws a bit
+  // larger than the bare glyph size while staying centered on it.
+  const displaySize = iconSize * (variants?.sizeRatio ?? 1);
+
+  // Tooltip box, laid out in fixed screen-pixel units (the group itself is
+  // scaled by inverseScale so it stays a constant size regardless of zoom).
+  const boxWidth = 130;
+  const boxHeight = 50;
+  const gap = 4;
 
   return (
     <Group
@@ -54,86 +174,89 @@ export default function BossMarkerKonva({
       }}
       listening={true}
     >
-      {/* Background circle for visual separation */}
-      <Circle
-        radius={iconSize / 2}
-        fill={highlighted ? "#facc15" : "#ef4444"}
-        opacity={0.9}
-        shadowColor={highlighted ? "#facc15" : "#000"}
-        shadowBlur={highlighted ? 16 : 8}
-        shadowOpacity={0.6}
-        shadowOffset={{ x: 0, y: 2 }}
-      />
+      {/* Marker icon — the outline is baked into the canvas, no drop shadow needed */}
+      {iconSource && (
+        <KonvaImage
+          image={iconSource}
+          x={-displaySize / 2}
+          y={-displaySize / 2}
+          width={displaySize}
+          height={displaySize}
+        />
+      )}
 
-      {/* Star icon */}
-      <Star
-        numPoints={5}
-        innerRadius={iconSize * 0.15}
-        outerRadius={iconSize * 0.35}
-        fill="#facc15"
-        stroke="#1e293b"
-        strokeWidth={1}
-      />
-
-      {/* Tooltip - only shown when selected, positioned above */}
-      {isSelected && (
+      {/* Tooltip - shown on hover or when selected, anchored to the icon's top-right */}
+      {showTooltip && (
         <Group
-          y={-iconSize * 0.7 - 60 * inverseScale}
+          x={iconSize / 2 + gap * inverseScale}
+          y={-iconSize / 2 - boxHeight * inverseScale - gap * inverseScale}
+          scaleX={inverseScale}
+          scaleY={inverseScale}
           onClick={(e) => (e.cancelBubble = true)}
           onTap={(e) => (e.cancelBubble = true)}
+          listening={isSelected}
         >
           {/* Tooltip background box */}
           <Rect
-            x={-80 * inverseScale}
-            y={-40 * inverseScale}
-            width={160 * inverseScale}
-            height={80 * inverseScale}
-            fill="#0f172a"
-            stroke="#334155"
-            strokeWidth={1 * inverseScale}
-            cornerRadius={4}
+            width={boxWidth}
+            height={boxHeight}
+            fill="#100c07"
+            opacity={0.92}
+            stroke="#7c5e2e"
+            strokeWidth={1}
+            cornerRadius={2}
             shadowColor="#000"
-            shadowBlur={8 * inverseScale}
+            shadowBlur={8}
             shadowOpacity={0.8}
           />
 
           {/* Boss name */}
           <Text
-            x={-75 * inverseScale}
-            y={-30 * inverseScale}
+            x={7}
+            y={5}
             text={boss.name}
-            fontSize={12 * inverseScale}
-            fontFamily="Arial, sans-serif"
+            fontSize={10}
+            fontFamily={fontFamily}
             fontStyle="bold"
-            fill="#f87171"
+            fill="#e3d3a3"
+            width={boxWidth - 14}
+            wrap="none"
+            ellipsis
           />
 
-          {/* Level */}
-          <Text
-            x={-75 * inverseScale}
-            y={-12 * inverseScale}
-            text={`Lvl ${boss.level}`}
-            fontSize={10 * inverseScale}
-            fontFamily="Arial, sans-serif"
-            fill="#cbd5e1"
-          />
-
-          {/* Description */}
-          <Text
-            x={-75 * inverseScale}
-            y={4 * inverseScale}
-            text={boss.description}
-            fontSize={9 * inverseScale}
-            fontFamily="Arial, sans-serif"
-            fill="#e2e8f0"
-            width={150 * inverseScale}
-          />
-
-          {/* Arrow pointing down to marker */}
+          {/* Divider under the name */}
           <Line
-            points={[0, 40 * inverseScale, 0, 50 * inverseScale]}
-            stroke="#334155"
-            strokeWidth={1 * inverseScale}
+            points={[7, 18, boxWidth - 7, 18]}
+            stroke="#7c5e2e"
+            strokeWidth={1}
+          />
+
+          {/* Level + type */}
+          <Text
+            x={7}
+            y={22}
+            text={`${boss.level}Lv. Raid Monster`}
+            fontSize={9}
+            fontFamily={fontFamily}
+            fill="#f5c518"
+          />
+
+          {/* Current state */}
+          <Text
+            x={7}
+            y={36}
+            text="Current State : "
+            fontSize={8.5}
+            fontFamily={fontFamily}
+            fill="#c7c7c7"
+          />
+          <Text
+            x={70}
+            y={36}
+            text={boss.killed ? "Killed" : "Currently visible"}
+            fontSize={8.5}
+            fontFamily={fontFamily}
+            fill={boss.killed ? "#c25c5c" : "#7ed957"}
           />
         </Group>
       )}
