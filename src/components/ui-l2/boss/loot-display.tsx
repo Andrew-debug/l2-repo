@@ -5,7 +5,12 @@ import { Sword } from "lucide-react";
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
 import { getBossById } from "@/lib/boss-data";
-import { compareDrops, getItemIcon } from "@/lib/item-icons";
+import {
+  compareDrops,
+  getItemCategory,
+  getItemGrade,
+  getItemIcon,
+} from "@/lib/item-icons";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 
 function DropIcon({ item }: { item: string }) {
@@ -25,6 +30,14 @@ function DropIcon({ item }: { item: string }) {
       )}
     </div>
   );
+}
+
+function dropLabel(item: string): string {
+  const category = getItemCategory(item);
+  if (category !== "weapon" && category !== "armor" && category !== "accessory")
+    return item;
+  const grade = getItemGrade(item);
+  return grade === "none" ? item : `${item} (${grade})`;
 }
 
 export function BossLootDisplay() {
@@ -55,14 +68,16 @@ export function BossLootDisplay() {
               </div>
 
               <ul className="flex flex-col gap-1">
-                {sortedDrops.map((drop) => (
+                {sortedDrops.map((drop, index) => (
                   <li
-                    key={drop.item}
+                    key={`${drop.item}-${index}`}
                     className="flex items-center gap-2 border border-window-content-border bg-window-content-bg px-2 py-1.5"
                   >
                     <DropIcon item={drop.item} />
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-xs">{drop.item}</p>
+                      <p className="truncate text-xs">
+                        {dropLabel(drop.item)}
+                      </p>
                       <p className="text-[10px] text-white/40">x{drop.count}</p>
                     </div>
                     <span className="shrink-0 text-[11px] tabular-nums text-system-text">

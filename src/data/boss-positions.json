@@ -248,8 +248,8 @@
   },
   {
     "bossId": "25223",
-    "absoluteX": 875,
-    "absoluteY": 2071
+    "absoluteX": 1019,
+    "absoluteY": 1643
   },
   {
     "bossId": "25185",
@@ -290,5 +290,500 @@
     "bossId": "25504",
     "absoluteX": 1271,
     "absoluteY": 608
+  },
+  {
+    "bossId": "25214",
+    "absoluteX": 1216,
+    "absoluteY": 2358
+  },
+  {
+    "bossId": "25490",
+    "absoluteX": 1088,
+    "absoluteY": 2398
+  },
+  {
+    "bossId": "25115",
+    "absoluteX": 1286,
+    "absoluteY": 2350
+  },
+  {
+    "bossId": "25134",
+    "absoluteX": 1093,
+    "absoluteY": 1696
+  },
+  {
+    "bossId": "25415",
+    "absoluteX": 1291,
+    "absoluteY": 2001
+  },
+  {
+    "bossId": "25410",
+    "absoluteX": 1020,
+    "absoluteY": 1935
+  },
+  {
+    "bossId": "25064",
+    "absoluteX": 1120,
+    "absoluteY": 1731
+  },
+  {
+    "bossId": "25007",
+    "absoluteX": 1278,
+    "absoluteY": 1689
+  },
+  {
+    "bossId": "25088",
+    "absoluteX": 1116,
+    "absoluteY": 1389
+  },
+  {
+    "bossId": "25192",
+    "absoluteX": 1281,
+    "absoluteY": 2261
+  },
+  {
+    "bossId": "25418",
+    "absoluteX": 968,
+    "absoluteY": 1348
+  },
+  {
+    "bossId": "25431",
+    "absoluteX": 1052,
+    "absoluteY": 1409
+  },
+  {
+    "bossId": "25099",
+    "absoluteX": 972,
+    "absoluteY": 1393
+  },
+  {
+    "bossId": "25438",
+    "absoluteX": 1189,
+    "absoluteY": 1771
+  },
+  {
+    "bossId": "25085",
+    "absoluteX": 991,
+    "absoluteY": 1649
+  },
+  {
+    "bossId": "25395",
+    "absoluteX": 723,
+    "absoluteY": 1912
+  },
+  {
+    "bossId": "25057",
+    "absoluteX": 1190,
+    "absoluteY": 2151
+  },
+  {
+    "bossId": "25102",
+    "absoluteX": 1223,
+    "absoluteY": 1737
+  },
+  {
+    "bossId": "25173",
+    "absoluteX": 1035,
+    "absoluteY": 1864
+  },
+  {
+    "bossId": "25437",
+    "absoluteX": 989,
+    "absoluteY": 1630
+  },
+  {
+    "bossId": "25044",
+    "absoluteX": 1193,
+    "absoluteY": 1453
+  },
+  {
+    "bossId": "25412",
+    "absoluteX": 1059,
+    "absoluteY": 1880
+  },
+  {
+    "bossId": "25158",
+    "absoluteX": 1040,
+    "absoluteY": 1342
+  },
+  {
+    "bossId": "25420",
+    "absoluteX": 867,
+    "absoluteY": 1432
+  },
+  {
+    "bossId": "25047",
+    "absoluteX": 1228,
+    "absoluteY": 1453
+  },
+  {
+    "bossId": "25026",
+    "absoluteX": 1118,
+    "absoluteY": 1351
+  },
+  {
+    "bossId": "25456",
+    "absoluteX": 1329,
+    "absoluteY": 1750
+  },
+  {
+    "bossId": "25441",
+    "absoluteX": 1210,
+    "absoluteY": 1729
+  },
+  {
+    "bossId": "25498",
+    "absoluteX": 1290,
+    "absoluteY": 2184
+  },
+  {
+    "bossId": "25260",
+    "absoluteX": 1116,
+    "absoluteY": 1415
+  },
+  {
+    "bossId": "25131",
+    "absoluteX": 1035,
+    "absoluteY": 1268
+  },
+  {
+    "bossId": "25273",
+    "absoluteX": 773,
+    "absoluteY": 1911
+  },
+  {
+    "bossId": "25217",
+    "absoluteX": 1106,
+    "absoluteY": 1843
+  },
+  {
+    "bossId": "25013",
+    "absoluteX": 1503,
+    "absoluteY": 1369
+  },
+  {
+    "bossId": "25277",
+    "absoluteX": 928,
+    "absoluteY": 2212
+  },
+  {
+    "bossId": "25119",
+    "absoluteX": 1262,
+    "absoluteY": 1629
+  },
+  {
+    "bossId": "25484",
+    "absoluteX": 877,
+    "absoluteY": 2411
+  },
+  {
+    "bossId": "25460",
+    "absoluteX": 1409,
+    "absoluteY": 1649
+  },
+  {
+    "bossId": "25050",
+    "absoluteX": 1277,
+    "absoluteY": 1454
+  },
+  {
+    "bossId": "25067",
+    "absoluteX": 1130,
+    "absoluteY": 1196
+  },
+  {
+    "bossId": "25496",
+    "absoluteX": 1087,
+    "absoluteY": 2598
+  },
+  {
+    "bossId": "25512",
+    "absoluteX": 1138,
+    "absoluteY": 759
+  },
+  {
+    "bossId": "25473",
+    "absoluteX": 1540,
+    "absoluteY": 1462
+  },
+  {
+    "bossId": "25029",
+    "absoluteX": 935,
+    "absoluteY": 2342
+  },
+  {
+    "bossId": "25509",
+    "absoluteX": 1026,
+    "absoluteY": 797
+  },
+  {
+    "bossId": "25481",
+    "absoluteX": 917,
+    "absoluteY": 2334
+  },
+  {
+    "bossId": "25159",
+    "absoluteX": 1279,
+    "absoluteY": 1521
+  },
+  {
+    "bossId": "25434",
+    "absoluteX": 1176,
+    "absoluteY": 1221
+  },
+  {
+    "bossId": "25137",
+    "absoluteX": 1282,
+    "absoluteY": 1816
+  },
+  {
+    "bossId": "25176",
+    "absoluteX": 1115,
+    "absoluteY": 1890
+  },
+  {
+    "bossId": "25070",
+    "absoluteX": 1283,
+    "absoluteY": 1565
+  },
+  {
+    "bossId": "25493",
+    "absoluteX": 1073,
+    "absoluteY": 2586
+  },
+  {
+    "bossId": "25010",
+    "absoluteX": 1218,
+    "absoluteY": 1575
+  },
+  {
+    "bossId": "25475",
+    "absoluteX": 1567,
+    "absoluteY": 1436
+  },
+  {
+    "bossId": "25241",
+    "absoluteX": 1487,
+    "absoluteY": 1745
+  },
+  {
+    "bossId": "25463",
+    "absoluteX": 1485,
+    "absoluteY": 1650
+  },
+  {
+    "bossId": "25280",
+    "absoluteX": 1041,
+    "absoluteY": 1700
+  },
+  {
+    "bossId": "25103",
+    "absoluteX": 1338,
+    "absoluteY": 1779
+  },
+  {
+    "bossId": "25259",
+    "absoluteX": 866,
+    "absoluteY": 2350
+  },
+  {
+    "bossId": "25122",
+    "absoluteX": 1085,
+    "absoluteY": 1270
+  },
+  {
+    "bossId": "25230",
+    "absoluteX": 987,
+    "absoluteY": 1543
+  },
+  {
+    "bossId": "25032",
+    "absoluteX": 1101,
+    "absoluteY": 2544
+  },
+  {
+    "bossId": "25238",
+    "absoluteX": 1430,
+    "absoluteY": 1740
+  },
+  {
+    "bossId": "29060",
+    "absoluteX": 1184,
+    "absoluteY": 673
+  },
+  {
+    "bossId": "25182",
+    "absoluteX": 864,
+    "absoluteY": 2388
+  },
+  {
+    "bossId": "25089",
+    "absoluteX": 1479,
+    "absoluteY": 1780
+  },
+  {
+    "bossId": "25234",
+    "absoluteX": 1258,
+    "absoluteY": 1869
+  },
+  {
+    "bossId": "25106",
+    "absoluteX": 1524,
+    "absoluteY": 1258
+  },
+  {
+    "bossId": "25162",
+    "absoluteX": 1622,
+    "absoluteY": 1583
+  },
+  {
+    "bossId": "25179",
+    "absoluteX": 1560,
+    "absoluteY": 1577
+  },
+  {
+    "bossId": "29056",
+    "absoluteX": 1171,
+    "absoluteY": 687
+  },
+  {
+    "bossId": "25407",
+    "absoluteX": 1229,
+    "absoluteY": 1872
+  },
+  {
+    "bossId": "25256",
+    "absoluteX": 1505,
+    "absoluteY": 1525
+  },
+  {
+    "bossId": "25016",
+    "absoluteX": 1047,
+    "absoluteY": 2545
+  },
+  {
+    "bossId": "25423",
+    "absoluteX": 1222,
+    "absoluteY": 1548
+  },
+  {
+    "bossId": "25226",
+    "absoluteX": 1184,
+    "absoluteY": 1291
+  },
+  {
+    "bossId": "25467",
+    "absoluteX": 1589,
+    "absoluteY": 1616
+  },
+  {
+    "bossId": "25444",
+    "absoluteX": 1221,
+    "absoluteY": 1398
+  },
+  {
+    "bossId": "25125",
+    "absoluteX": 1512,
+    "absoluteY": 1733
+  },
+  {
+    "bossId": "25255",
+    "absoluteX": 1505,
+    "absoluteY": 1185
+  },
+  {
+    "bossId": "25140",
+    "absoluteX": 1618,
+    "absoluteY": 1596
+  },
+  {
+    "bossId": "25051",
+    "absoluteX": 1250,
+    "absoluteY": 1264
+  },
+  {
+    "bossId": "25478",
+    "absoluteX": 1499,
+    "absoluteY": 1448
+  },
+  {
+    "bossId": "25322",
+    "absoluteX": 1123,
+    "absoluteY": 933
+  },
+  {
+    "bossId": "25470",
+    "absoluteX": 1590,
+    "absoluteY": 1588
+  },
+  {
+    "bossId": "25263",
+    "absoluteX": 1378,
+    "absoluteY": 1172
+  },
+  {
+    "bossId": "25073",
+    "absoluteX": 1371,
+    "absoluteY": 1859
+  },
+  {
+    "bossId": "25233",
+    "absoluteX": 1583,
+    "absoluteY": 1180
+  },
+  {
+    "bossId": "25281",
+    "absoluteX": 1405,
+    "absoluteY": 1748
+  },
+  {
+    "bossId": "25269",
+    "absoluteX": 1273,
+    "absoluteY": 1193
+  },
+  {
+    "bossId": "25198",
+    "absoluteX": 1166,
+    "absoluteY": 2106
+  },
+  {
+    "bossId": "25325",
+    "absoluteX": 1110,
+    "absoluteY": 879
+  },
+  {
+    "bossId": "25092",
+    "absoluteX": 1240,
+    "absoluteY": 1393
+  },
+  {
+    "bossId": "25453",
+    "absoluteX": 1431,
+    "absoluteY": 1273
+  },
+  {
+    "bossId": "25252",
+    "absoluteX": 1620,
+    "absoluteY": 1421
+  },
+  {
+    "bossId": "25163",
+    "absoluteX": 1310,
+    "absoluteY": 1601
+  },
+  {
+    "bossId": "25035",
+    "absoluteX": 1562,
+    "absoluteY": 1378
+  },
+  {
+    "bossId": "25328",
+    "absoluteX": 952,
+    "absoluteY": 1099
+  },
+  {
+    "bossId": "25447",
+    "absoluteX": 1229,
+    "absoluteY": 1407
   }
 ]

@@ -2,7 +2,45 @@
   "permissions": {
     "allow": [
       "Bash(npx tsc *)",
-      "WebFetch(domain:l2-servera.com)"
+      "WebFetch(domain:l2-servera.com)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_helmet_i00.png\" public/items-icons/armour/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/shield_shrnoens_shield_i00.png\" public/items-icons/armour/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/shield_avadon_shield_i00.png\" public/items-icons/armour/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/weapon_kris_i00.png\" public/items-icons/weapon/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/weapon_hell_knife_i00.png\" public/items-icons/weapon/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/weapon_spell_breaker_i00.png\" public/items-icons/weapon/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/weapon_ice_storm_hammer_i00.png\" public/items-icons/weapon/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t69_ul_i00.png\" public/items-icons/armour/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t72_ul_i00.png\" public/items-icons/armour/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/weapon_demons_sword_i00.png\" public/items-icons/weapon/B/)",
+      "Bash(cd d:/projects/l2-repo && cp \"D:/projects/IconsHelios/icon/weapon_lancia_i00.png\" public/items-icons/weapon/B/ && ls public/items-icons/weapon/B/ | grep lancia)",
+      "Bash(cd d:/projects/l2-repo && cp \"D:/projects/IconsHelios/icon/weapon_bellion_cestus_i00.png\" public/items-icons/weapon/B/ && ls public/items-icons/weapon/B/ | grep bellion)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t70_u_i00.png\" public/items-icons/armour/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t70_l_i00.png\" public/items-icons/armour/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t73_u_i00.png\" public/items-icons/armour/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t73_l_i00.png\" public/items-icons/armour/B/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/weapon_sword_of_damascus_i00.png\" public/items-icons/weapon/B/)",
+      "Bash(mkdir -p public/items-icons/armour/A public/items-icons/weapon/A public/items-icons/scrolls/A)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t75_u_i02.png\" public/items-icons/armour/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t75_l_i02.png\" public/items-icons/armour/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t78_ul_i02.png\" public/items-icons/armour/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/weapon_carnium_bow_i00.png\" public/items-icons/weapon/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_helmet_i02.png\" public/items-icons/armour/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/shield_dark_crystal_shield_i02.png\" public/items-icons/armour/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/weapon_tallum_blade_i00.png\" public/items-icons/weapon/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/weapon_elemental_sword_i00.png\" public/items-icons/weapon/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/etc_blessed_scrl_of_ench_wp_a_i04.png\" public/items-icons/scrolls/A/)",
+      "Bash(cd d:/projects/l2-repo && ls \"D:/projects/IconsHelios/icon/\" | grep -iE \"^etc_scroll_of_enchant_armor_i04\" && cp \"D:/projects/IconsHelios/icon/etc_scroll_of_enchant_armor_i04.png\" public/items-icons/scrolls/A/ && ls public/items-icons/scrolls/A/)",
+      "Read(//d/projects/IconsHelios/icon/**)",
+      "Bash(cd d:/projects/l2-repo && cp \"D:/projects/IconsHelios/icon/weapon_hazard_bow_i00.png\" public/items-icons/weapon/B/ && ls public/items-icons/weapon/B/ | grep hazard)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t74_g_i02.png\" public/items-icons/armour/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t74_b_i02.png\" public/items-icons/armour/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t77_g_i02.png\" public/items-icons/armour/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/armor_t77_b_i02.png\" public/items-icons/armour/A/)",
+      "Bash(cp \"D:/projects/IconsHelios/icon/etc_piece_of_cloth_black_i00.png\" public/items-icons/craft/)"
+    ],
+    "additionalDirectories": [
+      "D:\\projects\\IconsHelios\\icon"
     ]
   }
 }
