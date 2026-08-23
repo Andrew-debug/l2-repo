@@ -997,6 +997,104 @@ export const itemIcons: Record<string, string> = {
   "Dragon Slayer Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Sword of Miracles Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Dark Legion's Edge Blade": "/items-icons/craft/etc_sword_body_i00.png",
+  "Sealed Imperial Crusader Breastplate":
+    "/items-icons/armour/S/armor_t88_u_i02.png",
+  "Sealed Imperial Crusader Gaiters":
+    "/items-icons/armour/S/armor_t88_l_i02.png",
+  "Sealed Imperial Crusader Breastplate Part":
+    "/items-icons/craft/etc_plate_silver_i00.png",
+  "Sealed Imperial Crusader Gaiters Pattern":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Forgotten Blade": "/items-icons/weapon/S/weapon_forgotten_blade_i00.png",
+  "Heaven's Divider": "/items-icons/weapon/S/weapon_heavens_divider_i00.png",
+  "Forgotten Blade Edge": "/items-icons/craft/etc_sword_body_i00.png",
+  "Heaven's Divider Edge": "/items-icons/craft/etc_sword_body_i00.png",
+  "Sealed Major Arcana Robe": "/items-icons/armour/S/armor_t90_ul_i02.png",
+  "Sealed Major Arcana Robe Part": "/items-icons/craft/etc_plate_silver_i00.png",
+  "Saint Spear": "/items-icons/weapon/S/weapon_saint_spear_i00.png",
+  "Saint Spear Blade": "/items-icons/craft/etc_sword_body_i00.png",
+  "Sealed Tateossian Earring":
+    "/items-icons/accessary/S/accessory_tateossian_earring_i02.png",
+  "Sealed Tateossian Ring":
+    "/items-icons/accessary/S/accessory_tateossian_ring_i02.png",
+  "Sealed Tateossian Necklace":
+    "/items-icons/accessary/S/accessory_tateossian_necklace_i02.png",
+  "Sealed Tateossian Earring Part":
+    "/items-icons/craft/etc_broken_crystal_silver_i00.png",
+  "Sealed Tateossian Ring Gem":
+    "/items-icons/craft/etc_crystal_ball_gold_i00.png",
+  "Sealed Tateossian Necklace Chain":
+    "/items-icons/craft/etc_jewel_box_i00.png",
+  "Blessed Scroll of Resurrection":
+    "/items-icons/scrolls/etc_scroll_of_resurrection_i01.png",
+  "Sealed Imperial Crusader Gauntlet":
+    "/items-icons/armour/S/armor_t88_g_i02.png",
+  "Sealed Imperial Crusader Boots": "/items-icons/armour/S/armor_t88_b_i02.png",
+  "Sealed Draconic Leather Glove": "/items-icons/armour/S/armor_t89_g_i02.png",
+  "Sealed Draconic Leather Boots": "/items-icons/armour/S/armor_t89_b_i02.png",
+  "Sealed Major Arcana Glove": "/items-icons/armour/S/armor_t90_g_i02.png",
+  "Sealed Major Arcana Boots": "/items-icons/armour/S/armor_t90_b_i02.png",
+  "Sealed Imperial Crusader Gauntlets Design":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Sealed Imperial Crusader Boots Design":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Sealed Draconic Leather Gloves Fabric":
+    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Sealed Draconic Leather Boots Design":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Sealed Major Arcana Gloves fabric":
+    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Sealed Major Arcana Boots Design":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Basalt Battlehammer":
+    "/items-icons/weapon/S/weapon_basalt_battlehammer_i00.png",
+  "Imperial Staff": "/items-icons/weapon/S/weapon_imperial_staff_i00.png",
+  "Dragon Hunter Axe":
+    "/items-icons/weapon/S/weapon_dragon_hunter_axe_i00.png",
+  "Arcana Mace": "/items-icons/weapon/S/weapon_arcana_mace_i00.png",
+  "Basalt Battlehammer Head": "/items-icons/craft/etc_squares_gray_i00.png",
+  "Imperial Staff Head": "/items-icons/craft/etc_bark_blue_i00.png",
+  "Dragon Hunter Axe Blade": "/items-icons/craft/etc_sword_body_i00.png",
+  "Arcana Mace Head": "/items-icons/craft/etc_squares_gray_i00.png",
+  "Demon Splinter": "/items-icons/weapon/S/weapon_demon_splinter_i00.png",
+  "Demon Splinter Blade": "/items-icons/craft/etc_sword_body_i00.png",
+  "Sealed Draconic Leather Armor": "/items-icons/armour/S/armor_t89_ul_i02.png",
+  "Sealed Draconic Leather Armor Part":
+    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Angel Slayer": "/items-icons/weapon/S/weapon_angel_slayer_i00.png",
+  "Angel Slayer Blade": "/items-icons/craft/etc_sword_body_i00.png",
+  "Sealed Imperial Crusader Shield":
+    "/items-icons/armour/S/shield_imperial_crusader_shield_i02.png",
+  "Sealed Imperial Crusader Helmet":
+    "/items-icons/armour/S/armor_helmet_i02.png",
+  "Sealed Draconic Leather Helmet":
+    "/items-icons/armour/S/armor_leather_helmet_i02.png",
+  "Sealed Major Arcana Circlet":
+    "/items-icons/armour/S/armor_leather_helmet_i02.png",
+  "Sealed Imperial Crusader Shield Part":
+    "/items-icons/craft/etc_plate_silver_i00.png",
+  "Sealed Imperial Crusader Helmet Pattern":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Sealed Draconic Leather Helmet Pattern":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Sealed Major Arcana Circlet Pattern":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Draconic Bow": "/items-icons/weapon/S/weapon_draconic_bow_i00.png",
+  "Draconic Bow Shaft": "/items-icons/craft/etc_branch_gold_i00.png",
+  "Life Stone: level 70":
+    "/items-icons/consumable/life_stones/etc_mineral_general_i02.png",
+  "High-Grade Life Stone: level 70":
+    "/items-icons/consumable/life_stones/etc_mineral_rare_i02.png",
+  "Top-Grade Life Stone: level 70":
+    "/items-icons/consumable/life_stones/etc_mineral_unique_i02.png",
+  "Angel Halo": "/items-icons/cosmetics/accessary_angel_circlet_i00.png",
+  "Life Stone: level 76":
+    "/items-icons/consumable/life_stones/etc_mineral_general_i03.png",
+  "Mid-Grade Life Stone: level 76":
+    "/items-icons/consumable/life_stones/etc_mineral_special_i03.png",
+  "High-Grade Life Stone: level 76":
+    "/items-icons/consumable/life_stones/etc_mineral_rare_i03.png",
+  "Demon Circlet": "/items-icons/cosmetics/accessary_demon_circlet_i00.png",
 };
 
 export function getItemIcon(itemName: string): string | undefined {

@@ -68,7 +68,11 @@
           "chance": "27.6%",
           "count": "60–180"
         },
-        { "item": "Cursed Maingauche Edge", "chance": "22.5%", "count": "8–22" },
+        {
+          "item": "Cursed Maingauche Edge",
+          "chance": "22.5%",
+          "count": "8–22"
+        },
         { "item": "Brigandine Temper", "chance": "20.1%", "count": "14–42" },
         { "item": "Brigandine Gaiters", "chance": "15.2%", "count": "1" },
         { "item": "Mithril Scale Gaiters", "chance": "15.2%", "count": "1" },
@@ -454,7 +458,11 @@
           "chance": "34.1%",
           "count": "1–3"
         },
-        { "item": "Skull of the Dead C-Grade", "chance": "25%", "count": "4–6" },
+        {
+          "item": "Skull of the Dead C-Grade",
+          "chance": "25%",
+          "count": "4–6"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "2–3" },
         {
           "item": "Greater Dye of INT <Int+3 Wit-3>",
@@ -647,7 +655,11 @@
           "count": "1"
         },
         { "item": "Tallum Glaive Edge", "chance": "25.23%", "count": "12–36" },
-        { "item": "Skull of the Dead A-Grade", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Skull of the Dead A-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–9" },
         {
           "item": "Sealed Majestic Gauntlets Design",
@@ -669,7 +681,11 @@
           "chance": "5.431%",
           "count": "1"
         },
-        { "item": "Sealed Majestic Gauntlets", "chance": "5.431%", "count": "1" },
+        {
+          "item": "Sealed Majestic Gauntlets",
+          "chance": "5.431%",
+          "count": "1"
+        },
         { "item": "Sealed Majestic Boots", "chance": "5.431%", "count": "1" },
         {
           "item": "Sealed Gauntlets of Nightmare Design",
@@ -752,7 +768,11 @@
           "chance": "44.79%",
           "count": "1"
         },
-        { "item": "Scallop Jamadhr Edge", "chance": "20.83%", "count": "12–36" },
+        {
+          "item": "Scallop Jamadhr Edge",
+          "chance": "20.83%",
+          "count": "12–36"
+        },
         { "item": "Plate Boots", "chance": "17.87%", "count": "1" },
         { "item": "Sage's Worn Gloves", "chance": "17.87%", "count": "1" },
         {
@@ -777,9 +797,17 @@
           "chance": "1.852%",
           "count": "203–607"
         },
-        { "item": "Assault Boots Part", "chance": "1.172%", "count": "320–960" },
+        {
+          "item": "Assault Boots Part",
+          "chance": "1.172%",
+          "count": "320–960"
+        },
         { "item": "Mithril Gloves", "chance": "1.051%", "count": "9–25" },
-        { "item": "Ogre Power Gauntlets", "chance": "0.9927%", "count": "9–27" },
+        {
+          "item": "Ogre Power Gauntlets",
+          "chance": "0.9927%",
+          "count": "9–27"
+        },
         { "item": "Assault Boots", "chance": "0.9405%", "count": "10–28" },
         {
           "item": "Salamander Skin Boots",
@@ -807,7 +835,11 @@
       "drops": [
         { "item": "Crystal Dagger Blade", "chance": "66.82%", "count": "3–9" },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "2–3" },
-        { "item": "Skull of the Dead C-Grade", "chance": "25%", "count": "1–2" },
+        {
+          "item": "Skull of the Dead C-Grade",
+          "chance": "25%",
+          "count": "1–2"
+        },
         {
           "item": "Greater Dye of CON <Con+3 Dex-3>",
           "chance": "15.84%",
@@ -985,7 +1017,11 @@
           "count": "9–27"
         },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "2" },
-        { "item": "Skull of the Dead B-Grade", "chance": "25%", "count": "2–3" },
+        {
+          "item": "Skull of the Dead B-Grade",
+          "chance": "25%",
+          "count": "2–3"
+        },
         {
           "item": "Greater Dye of WIT <Wit+3 Int-3>",
           "chance": "22.21%",
@@ -1071,7 +1107,11 @@
           "chance": "2.697%",
           "count": "1"
         },
-        { "item": "Sealed Tallum Plate Armor", "chance": "1.66%", "count": "1" },
+        {
+          "item": "Sealed Tallum Plate Armor",
+          "chance": "1.66%",
+          "count": "1"
+        },
         {
           "item": "Blessed Scroll: Enchant Weapon (A)",
           "chance": "1.245%",
@@ -1095,69 +1135,81 @@
         "sp": 1054472
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "47.7%", "count": "1" },
-        { "item": "Demon Splinter Blade", "chance": "24.4%", "count": "12–36" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "39.11%",
+          "count": "1"
+        },
+        { "item": "Demon Splinter Blade", "chance": "20%", "count": "12–36" },
         {
           "item": "Sealed Imperial Crusader Boots Design",
-          "chance": "16.2%",
+          "chance": "13.26%",
           "count": "14–40"
         },
         {
           "item": "Sealed Draconic Leather Gloves Fabric",
-          "chance": "10.9%",
+          "chance": "8.95%",
           "count": "20–60"
         },
         {
           "item": "Sealed Draconic Leather Boots Design",
-          "chance": "7.94%",
+          "chance": "6.509%",
           "count": "28–82"
         },
         {
           "item": "Sealed Major Arcana Gloves fabric",
-          "chance": "6.07%",
+          "chance": "4.972%",
           "count": "36–108"
         },
         {
           "item": "Sealed Major Arcana Boots Design",
-          "chance": "4.8%",
+          "chance": "3.934%",
           "count": "46–136"
         },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "4.77%",
+          "chance": "3.911%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Gauntlets Design",
-          "chance": "1.95%",
-          "count": "112–336"
+          "chance": "22.37%",
+          "count": "8–24"
         },
-        { "item": "Sealed Major Arcana Boots", "chance": "1.71%", "count": "1" },
-        { "item": "Sealed Major Arcana Glove", "chance": "1.71%", "count": "1" },
         {
-          "item": "Sealed Dragon Leather Boots",
-          "chance": "1.71%",
+          "item": "Sealed Major Arcana Boots",
+          "chance": "1.574%",
           "count": "1"
         },
         {
-          "item": "Sealed Dragon Leather Glove",
-          "chance": "1.71%",
+          "item": "Sealed Major Arcana Glove",
+          "chance": "1.574%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Boots",
+          "chance": "1.574%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Glove",
+          "chance": "1.574%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Boots",
-          "chance": "1.71%",
+          "chance": "1.574%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Gauntlet",
-          "chance": "1.71%",
+          "chance": "1.574%",
           "count": "1"
         },
-        { "item": "Demon Splinter", "chance": "1.13%", "count": "1" },
+        { "item": "Demon Splinter", "chance": "1.058%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.7955%",
+          "chance": "0.6519%",
           "count": "1"
         }
       ]
@@ -1362,7 +1414,11 @@
           "chance": "2.17%",
           "count": "480–1440"
         },
-        { "item": "Heavy Doom Axe Blade", "chance": "2.062%", "count": "17–49" },
+        {
+          "item": "Heavy Doom Axe Blade",
+          "chance": "2.062%",
+          "count": "17–49"
+        },
         { "item": "Big Hammer", "chance": "0.9846%", "count": "1" },
         { "item": "Battle Axe", "chance": "0.9846%", "count": "1" },
         { "item": "Silver Axe", "chance": "0.9846%", "count": "1" },
@@ -1527,7 +1583,11 @@
           "count": "1"
         },
         { "item": "Soul Bow Stave", "chance": "25.14%", "count": "12–36" },
-        { "item": "Skull of the Dead A-Grade", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Skull of the Dead A-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–6" },
         {
           "item": "Ancient Book - Divine Inspiration (Original Language Version)",
@@ -1614,7 +1674,11 @@
           "count": "12–36"
         },
         { "item": "Mithril Tunic", "chance": "17.1%", "count": "1" },
-        { "item": "Mithril Tunic Fabric", "chance": "9.31%", "count": "53–157" },
+        {
+          "item": "Mithril Tunic Fabric",
+          "chance": "9.31%",
+          "count": "53–157"
+        },
         { "item": "Crucifix of Blood", "chance": "8.21%", "count": "1" },
         {
           "item": "Mithril Stocking Design",
@@ -1749,7 +1813,11 @@
         { "item": "Soulfire Dirk Blade", "chance": "26.58%", "count": "8–22" },
         { "item": "Dwarven Chain Gaiters", "chance": "25.84%", "count": "1" },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3" },
-        { "item": "Dwarven Chain Mail Shirt", "chance": "16.15%", "count": "1" },
+        {
+          "item": "Dwarven Chain Mail Shirt",
+          "chance": "16.15%",
+          "count": "1"
+        },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
           "chance": "10.37%",
@@ -1804,7 +1872,11 @@
           "chance": "16.99%",
           "count": "2–4"
         },
-        { "item": "Deadman's Glory Stone", "chance": "16.61%", "count": "5–15" },
+        {
+          "item": "Deadman's Glory Stone",
+          "chance": "16.61%",
+          "count": "5–15"
+        },
         {
           "item": "Greater Dye of DEX <Dex+4 Con-4>",
           "chance": "12.74%",
@@ -1871,7 +1943,11 @@
         },
         { "item": "Tallum Glaive Edge", "chance": "25.23%", "count": "12–36" },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–9" },
-        { "item": "Skull of the Dead A-Grade", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Skull of the Dead A-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         {
           "item": "Sealed Majestic Circlet Design",
           "chance": "20.95%",
@@ -1892,7 +1968,11 @@
           "chance": "6.359%",
           "count": "1"
         },
-        { "item": "Sealed Helm of Nightmare", "chance": "4.829%", "count": "1" },
+        {
+          "item": "Sealed Helm of Nightmare",
+          "chance": "4.829%",
+          "count": "1"
+        },
         { "item": "Sealed Majestic Circlet", "chance": "4.829%", "count": "1" },
         { "item": "Tallum Glaive", "chance": "2.129%", "count": "1" }
       ]
@@ -2268,11 +2348,15 @@
       "drops": [
         {
           "item": "Sealed Armor of Nightmare Pattern",
-          "chance": "38.6%",
+          "chance": "31.95%",
           "count": "4–12"
         },
-        { "item": "Tallum Glaive Edge", "chance": "31.1%", "count": "12–36" },
-        { "item": "Skull of the Dead A-Grade", "chance": "25%", "count": "1–3" },
+        { "item": "Tallum Glaive Edge", "chance": "25.73%", "count": "12–36" },
+        {
+          "item": "Skull of the Dead A-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         {
           "item": "Ancient Book - Divine Inspiration (Original Language Version)",
           "chance": "81.25%",
@@ -2281,24 +2365,28 @@
         { "item": "Destruction Tombstone", "chance": "25%", "count": "4–9" },
         {
           "item": "Sealed Majestic Plate Armor Pattern",
-          "chance": "20.6%",
+          "chance": "17.04%",
           "count": "8–22"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (A)",
-          "chance": "19.6%",
+          "chance": "16.21%",
           "count": "1"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "7.83%",
+          "chance": "6.486%",
           "count": "1"
         },
-        { "item": "Tallum Glaive", "chance": "2.01%", "count": "1" },
-        { "item": "Sealed Armor of Nightmare", "chance": "1.76%", "count": "1" },
+        { "item": "Tallum Glaive", "chance": "2.171%", "count": "1" },
+        {
+          "item": "Sealed Armor of Nightmare",
+          "chance": "1.705%",
+          "count": "1"
+        },
         {
           "item": "Sealed Majestic Plate Armor",
-          "chance": "1.76%",
+          "chance": "1.705%",
           "count": "1"
         }
       ]
@@ -2379,7 +2467,11 @@
           "count": "3–9"
         },
         { "item": "Karmian Gloves", "chance": "16.7%", "count": "1" },
-        { "item": "Karmian Boots Fabric", "chance": "14.02%", "count": "26–78" },
+        {
+          "item": "Karmian Boots Fabric",
+          "chance": "14.02%",
+          "count": "26–78"
+        },
         { "item": "Chakram", "chance": "12.42%", "count": "1" },
         {
           "item": "Scroll: Enchant Armor (C)",
@@ -2417,7 +2509,11 @@
           "chance": "1.657%",
           "count": "220–660"
         },
-        { "item": "Chain Boots Part", "chance": "0.9643%", "count": "378–1134" },
+        {
+          "item": "Chain Boots Part",
+          "chance": "0.9643%",
+          "count": "378–1134"
+        },
         { "item": "Mithril Boots", "chance": "0.7593%", "count": "11–33" },
         { "item": "Chain Boots", "chance": "0.7263%", "count": "12–34" },
         { "item": "Karmian Boots", "chance": "0.696%", "count": "12–36" },
@@ -2426,7 +2522,11 @@
           "chance": "0.6682%",
           "count": "13–37"
         },
-        { "item": "Dwarven Chain Boots", "chance": "0.6424%", "count": "13–39" },
+        {
+          "item": "Dwarven Chain Boots",
+          "chance": "0.6424%",
+          "count": "13–39"
+        },
         { "item": "Boots of Seal", "chance": "0.6187%", "count": "14–40" },
         {
           "item": "Reinforced Mithril Gloves",
@@ -2661,7 +2761,11 @@
         },
         { "item": "Sealed Tallum Stockings", "chance": "5.752%", "count": "1" },
         { "item": "Sealed Tallum Tunic", "chance": "3.596%", "count": "1" },
-        { "item": "Sealed Dark Crystal Robe", "chance": "2.213%", "count": "1" },
+        {
+          "item": "Sealed Dark Crystal Robe",
+          "chance": "2.213%",
+          "count": "1"
+        },
         {
           "item": "Blessed Scroll: Enchant Weapon (A)",
           "chance": "1.868%",
@@ -2689,70 +2793,74 @@
       "drops": [
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "47.6%",
+          "chance": "49.16%",
           "count": "1–3"
         },
-        { "item": "Arcana Mace Head", "chance": "31.1%", "count": "3–7" },
+        { "item": "Arcana Mace Head", "chance": "32.17%", "count": "3–7" },
         {
           "item": "Sealed Major Arcana Circlet Pattern",
-          "chance": "24.8%",
+          "chance": "25.63%",
           "count": "16–48"
         },
         {
           "item": "Sealed Imperial Crusader Shield Part",
-          "chance": "15.2%",
+          "chance": "15.67%",
           "count": "23–67"
         },
         {
           "item": "Dragon Hunter Axe Blade",
-          "chance": "13.5%",
+          "chance": "13.91%",
           "count": "6–18"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "8.46%",
+          "chance": "8.74%",
           "count": "1"
         },
-        { "item": "Imperial Staff Head", "chance": "7.57%", "count": "11–31" },
+        {
+          "item": "Imperial Staff Head",
+          "chance": "7.821%",
+          "count": "11–31"
+        },
         {
           "item": "Sealed Imperial Crusader Helmet Pattern",
-          "chance": "6.61%",
+          "chance": "6.835%",
           "count": "60–180"
         },
         {
           "item": "Basalt Battlehammer Head",
-          "chance": "4.86%",
+          "chance": "5.026%",
           "count": "16–48"
         },
         {
           "item": "Sealed Draconic Leather Helmet Pattern",
-          "chance": "3.44%",
+          "chance": "3.551%",
           "count": "116–346"
         },
         {
           "item": "Sealed Imperial Crusader Shield",
-          "chance": "2.6%",
+          "chance": "3.014%",
           "count": "1"
         },
         {
           "item": "Sealed Major Arcana Circlet",
-          "chance": "1.82%",
+          "chance": "2.11%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Helmet",
-          "chance": "1.82%",
+          "chance": "2.11%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Helmet",
-          "chance": "1.82%",
+          "chance": "2.11%",
           "count": "1"
         },
-        { "item": "Arcana Mace", "chance": "0.3008%", "count": "1" },
-        { "item": "Basalt Battlehammer", "chance": "0.3008%", "count": "1" },
-        { "item": "Imperial Staff", "chance": "0.3008%", "count": "1" },
-        { "item": "Dragon Hunter Axe", "chance": "0.3008%", "count": "1" }
+        { "item": "Arcana Mace", "chance": "0.3548%", "count": "1" },
+        { "item": "Basalt Battlehammer", "chance": "0.3548%", "count": "1" },
+        { "item": "Imperial Staff", "chance": "0.3548%", "count": "1" },
+        { "item": "Dragon Hunter Axe", "chance": "0.3548%", "count": "1" }
       ]
     },
     {
@@ -2874,8 +2982,16 @@
           "count": "1–3"
         },
         { "item": "Heavy War Axe Head", "chance": "33.01%", "count": "4–12" },
-        { "item": "Tunic of Zubei Fabric", "chance": "26.86%", "count": "9–27" },
-        { "item": "Skull of the Dead B-Grade", "chance": "25%", "count": "2–3" },
+        {
+          "item": "Tunic of Zubei Fabric",
+          "chance": "26.86%",
+          "count": "9–27"
+        },
+        {
+          "item": "Skull of the Dead B-Grade",
+          "chance": "25%",
+          "count": "2–3"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "2" },
         {
           "item": "Greater Dye of WIT <Wit+3 Int-3>",
@@ -2952,7 +3068,11 @@
           "chance": "7.697%",
           "count": "81–243"
         },
-        { "item": "Chain Hood Pattern", "chance": "4.044%", "count": "140–420" },
+        {
+          "item": "Chain Hood Pattern",
+          "chance": "4.044%",
+          "count": "140–420"
+        },
         { "item": "Eldarake", "chance": "2.75%", "count": "6–16" },
         { "item": "Chain Shield", "chance": "2.521%", "count": "6–18" },
         {
@@ -3097,27 +3217,35 @@
         "sp": 1166150
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "50.7%", "count": "1" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "53.92%",
+          "count": "1"
+        },
         {
           "item": "Sealed Draconic Leather Armor Part",
-          "chance": "40.4%",
+          "chance": "42.93%",
           "count": "12–36"
         },
-        { "item": "Demon Splinter Blade", "chance": "25.9%", "count": "12–36" },
+        {
+          "item": "Demon Splinter Blade",
+          "chance": "27.56%",
+          "count": "12–36"
+        },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "5.07%",
+          "chance": "5.392%",
           "count": "1"
         },
         {
-          "item": "Sealed Dragon Leather Armor",
-          "chance": "2.25%",
+          "item": "Sealed Draconic Leather Armor",
+          "chance": "2.67%",
           "count": "1"
         },
-        { "item": "Demon Splinter", "chance": "1.2%", "count": "1" },
+        { "item": "Demon Splinter", "chance": "1.459%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.8456%",
+          "chance": "0.8986%",
           "count": "1"
         }
       ]
@@ -3221,7 +3349,11 @@
           "chance": "21.77%",
           "count": "2–4"
         },
-        { "item": "Scallop Jamadhr Edge", "chance": "20.83%", "count": "12–36" },
+        {
+          "item": "Scallop Jamadhr Edge",
+          "chance": "20.83%",
+          "count": "12–36"
+        },
         {
           "item": "Greater Dye of INT <Int+2 Wit-2>",
           "chance": "16.33%",
@@ -3526,7 +3658,11 @@
         },
         { "item": "Dragon Heart: A-Grade", "chance": "25%", "count": "1–3" },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–9" },
-        { "item": "Sword of Miracles Edge", "chance": "22.18%", "count": "5–15" },
+        {
+          "item": "Sword of Miracles Edge",
+          "chance": "22.18%",
+          "count": "5–15"
+        },
         {
           "item": "Sealed Majestic Leather Armor Fabric",
           "chance": "22.01%",
@@ -3688,7 +3824,11 @@
           "count": "11–33"
         },
         { "item": "Brigandine Boots", "chance": "0.9387%", "count": "12–34" },
-        { "item": "Elven Mithril Boots", "chance": "0.8996%", "count": "12–36" },
+        {
+          "item": "Elven Mithril Boots",
+          "chance": "0.8996%",
+          "count": "12–36"
+        },
         {
           "item": "Manticore Skin Gloves",
           "chance": "0.8636%",
@@ -3741,7 +3881,11 @@
           "chance": "7.18%",
           "count": "81–243"
         },
-        { "item": "Chain Hood Pattern", "chance": "3.773%", "count": "140–420" },
+        {
+          "item": "Chain Hood Pattern",
+          "chance": "3.773%",
+          "count": "140–420"
+        },
         { "item": "Cursed Dagger", "chance": "3.674%", "count": "1" },
         { "item": "Dark Elven Dagger", "chance": "3.674%", "count": "1" },
         { "item": "Eldarake", "chance": "2.566%", "count": "6–16" }
@@ -3825,7 +3969,11 @@
           "chance": "29.49%",
           "count": "9–27"
         },
-        { "item": "Skull of the Dead B-Grade", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Skull of the Dead B-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "1–2" },
         {
           "item": "Dark Elven Longbow Shaft",
@@ -4013,7 +4161,11 @@
           "count": "2–4"
         },
         { "item": "Necklace of Darkness", "chance": "21.6%", "count": "1" },
-        { "item": "Light Crossbow Shaft", "chance": "21.44%", "count": "12–36" },
+        {
+          "item": "Light Crossbow Shaft",
+          "chance": "21.44%",
+          "count": "12–36"
+        },
         {
           "item": "Greater Dye of WIT <Wit+2 Int-2>",
           "chance": "16.33%",
@@ -4132,7 +4284,11 @@
           "count": "12–36"
         },
         { "item": "Sage's Rag", "chance": "21.05%", "count": "1" },
-        { "item": "Light Crossbow Shaft", "chance": "20.53%", "count": "12–36" },
+        {
+          "item": "Light Crossbow Shaft",
+          "chance": "20.53%",
+          "count": "12–36"
+        },
         { "item": "Light Crossbow", "chance": "8.347%", "count": "1" }
       ]
     },
@@ -4253,7 +4409,7 @@
         "sp": 805512
       },
       "drops": [
-        { "item": "Dragon Grinder Edge", "chance": "33.1%", "count": "5–13" },
+        { "item": "Dragon Grinder Edge", "chance": "34%", "count": "5–13" },
         { "item": "Earth Egg: A-Grade", "chance": "25%", "count": "1–3" },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–9" },
         {
@@ -4263,33 +4419,37 @@
         },
         {
           "item": "Blessed Scroll: Enchant Armor (A)",
-          "chance": "15.6%",
+          "chance": "16.07%",
           "count": "1"
         },
         {
           "item": "Sealed Majestic Earring Gemstone",
-          "chance": "13.7%",
+          "chance": "14.04%",
           "count": "90–270"
         },
-        { "item": "Sealed Majestic Ring", "chance": "11.1%", "count": "1" },
-        { "item": "Sealed Majestic Earring", "chance": "7.43%", "count": "1" },
+        { "item": "Sealed Majestic Ring", "chance": "14.89%", "count": "1" },
+        { "item": "Sealed Majestic Earring", "chance": "9.929%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "6.26%",
+          "chance": "6.427%",
           "count": "1"
         },
         {
           "item": "Sealed Majestic Ring Gemstone",
-          "chance": "5.74%",
+          "chance": "5.896%",
           "count": "308–924"
         },
-        { "item": "Sealed Majestic Necklace", "chance": "5.57%", "count": "1" },
+        {
+          "item": "Sealed Majestic Necklace",
+          "chance": "7.444%",
+          "count": "1"
+        },
         {
           "item": "Sealed Majestic Necklace Beads",
-          "chance": "3.32%",
+          "chance": "3.407%",
           "count": "240–720"
         },
-        { "item": "Dragon Grinder", "chance": "0.5364%", "count": "1" }
+        { "item": "Dragon Grinder", "chance": "0.7171%", "count": "1" }
       ]
     },
     {
@@ -4308,10 +4468,14 @@
         "sp": 1028870
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "47%", "count": "1" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "38.92%",
+          "count": "1"
+        },
         {
           "item": "Sealed Nightmare Robe Fabric",
-          "chance": "35%",
+          "chance": "28.97%",
           "count": "7–21"
         },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–9" },
@@ -4323,27 +4487,39 @@
         { "item": "Earth Egg: A-Grade", "chance": "25%", "count": "1–3" },
         {
           "item": "Sealed Majestic Robe Fabric",
-          "chance": "20.4%",
+          "chance": "16.9%",
           "count": "12–36"
         },
-        { "item": "Sword of Miracles Edge", "chance": "9.1%", "count": "18–54" },
-        { "item": "Dragon Slayer Edge", "chance": "5.97%", "count": "25–75" },
-        { "item": "Scroll: Enchant Weapon (S)", "chance": "4.7%", "count": "1" },
         {
-          "item": "Dark Legion's Edge Blade",
-          "chance": "4.52%",
-          "count": "33–99"
+          "item": "Sword of Miracles Edge",
+          "chance": "7.539%",
+          "count": "18–54"
         },
-        { "item": "Sealed Nightmare Robe", "chance": "1.88%", "count": "1" },
-        { "item": "Sealed Majestic Robe", "chance": "1.88%", "count": "1" },
         {
-          "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.7833%",
+          "item": "Dragon Slayer Edge",
+          "chance": "4.942%",
+          "count": "25–75"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (S)",
+          "chance": "3.892%",
           "count": "1"
         },
-        { "item": "Dragon Slayer", "chance": "0.5371%", "count": "1" },
-        { "item": "Dark Legion's Edge", "chance": "0.5371%", "count": "1" },
-        { "item": "Sword of Miracles", "chance": "0.5371%", "count": "1" }
+        {
+          "item": "Dark Legion's Edge Blade",
+          "chance": "3.744%",
+          "count": "33–99"
+        },
+        { "item": "Sealed Nightmare Robe", "chance": "1.819%", "count": "1" },
+        { "item": "Sealed Majestic Robe", "chance": "1.819%", "count": "1" },
+        {
+          "item": "Blessed Scroll: Enchant Weapon (S)",
+          "chance": "0.6486%",
+          "count": "1"
+        },
+        { "item": "Dragon Slayer", "chance": "0.579%", "count": "1" },
+        { "item": "Dark Legion's Edge", "chance": "0.579%", "count": "1" },
+        { "item": "Sword of Miracles", "chance": "0.579%", "count": "1" }
       ]
     },
     {
@@ -4364,56 +4540,60 @@
       "drops": [
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "80.7%",
-          "count": "1"
+          "chance": "49.17%",
+          "count": "1–3"
         },
         {
           "item": "Sealed Imperial Crusader Shield Part",
-          "chance": "30.9%",
-          "count": "23–67"
+          "chance": "2.687%",
+          "count": "315–945"
         },
-        { "item": "Demon Splinter Blade", "chance": "21.1%", "count": "5–15" },
+        {
+          "item": "Demon Splinter Blade",
+          "chance": "25.74%",
+          "count": "5–15"
+        },
         {
           "item": "Sealed Imperial Crusader Helmet Pattern",
-          "chance": "12.2%",
+          "chance": "14.92%",
           "count": "66–198"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "7.17%",
+          "chance": "8.741%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Helmet Pattern",
-          "chance": "6.41%",
+          "chance": "7.814%",
           "count": "126–378"
         },
         {
           "item": "Sealed Major Arcana Circlet Pattern",
-          "chance": "3.88%",
+          "chance": "4.733%",
           "count": "208–624"
         },
         {
           "item": "Sealed Imperial Crusader Shield",
-          "chance": "3.53%",
+          "chance": "4.824%",
           "count": "1"
         },
         {
           "item": "Sealed Major Arcana Circlet",
-          "chance": "2.47%",
+          "chance": "3.377%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Helmet",
-          "chance": "2.47%",
+          "chance": "3.377%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Helmet",
-          "chance": "2.47%",
+          "chance": "3.377%",
           "count": "1"
         },
-        { "item": "Demon Splinter", "chance": "0.272%", "count": "1" }
+        { "item": "Demon Splinter", "chance": "0.3785%", "count": "1" }
       ]
     },
     {
@@ -4477,7 +4657,11 @@
       "drops": [
         { "item": "Mithril Ring Wire", "chance": "24.12%", "count": "40–120" },
         { "item": "Necklace of Darkness", "chance": "22.57%", "count": "1" },
-        { "item": "Scallop Jamadhr Edge", "chance": "21.76%", "count": "12–36" },
+        {
+          "item": "Scallop Jamadhr Edge",
+          "chance": "21.76%",
+          "count": "12–36"
+        },
         { "item": "Scallop Jamadhr", "chance": "9.109%", "count": "1" },
         {
           "item": "Omen Beast's Eye Earring Gemstone",
@@ -4630,37 +4814,47 @@
           "chance": "81.25%",
           "count": "1–2"
         },
-        { "item": "Scroll: Enchant Armor (S)", "chance": "46.3%", "count": "1" },
-        { "item": "Skull of the Dead A-Grade", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "38.74%",
+          "count": "1"
+        },
+        {
+          "item": "Skull of the Dead A-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–9" },
         {
           "item": "Sealed Leather Armor of Nightmare Fabric",
-          "chance": "20.9%",
-          "count": "24–72"
+          "chance": "41.9%",
+          "count": "4–12"
         },
         {
           "item": "Sealed Majestic Leather Armor Fabric",
-          "chance": "9.53%",
-          "count": "53–157"
+          "chance": "22.35%",
+          "count": "8–22"
         },
+        { "item": "Soul Bow Stave", "chance": "25.64%", "count": "12–36" },
         {
           "item": "Sealed Leather Armor of Nightmare",
-          "chance": "5.77%",
+          "chance": "2.263%",
           "count": "1"
         },
         {
           "item": "Sealed Majestic Leather Armor",
-          "chance": "5.77%",
+          "chance": "2.263%",
           "count": "1"
         },
+        { "item": "Soul Bow", "chance": "2.161%", "count": "1" },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "4.63%",
+          "chance": "3.874%",
           "count": "1"
         },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.771%",
+          "chance": "0.6456%",
           "count": "1"
         }
       ]
@@ -4687,7 +4881,11 @@
           "chance": "32.66%",
           "count": "2–6"
         },
-        { "item": "Mithril Dagger Blade", "chance": "21.85%", "count": "12–36" },
+        {
+          "item": "Mithril Dagger Blade",
+          "chance": "21.85%",
+          "count": "12–36"
+        },
         { "item": "Plate Boots", "chance": "17.87%", "count": "1" },
         { "item": "Sage's Worn Gloves", "chance": "17.87%", "count": "1" },
         {
@@ -4717,9 +4915,17 @@
           "chance": "1.852%",
           "count": "203–607"
         },
-        { "item": "Assault Boots Part", "chance": "1.172%", "count": "320–960" },
+        {
+          "item": "Assault Boots Part",
+          "chance": "1.172%",
+          "count": "320–960"
+        },
         { "item": "Mithril Gloves", "chance": "1.051%", "count": "9–25" },
-        { "item": "Ogre Power Gauntlets", "chance": "0.9927%", "count": "9–27" },
+        {
+          "item": "Ogre Power Gauntlets",
+          "chance": "0.9927%",
+          "count": "9–27"
+        },
         { "item": "Assault Boots", "chance": "0.9405%", "count": "10–28" },
         {
           "item": "Salamander Skin Boots",
@@ -4804,56 +5010,60 @@
       "drops": [
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "89.5%",
+          "chance": "73.33%",
           "count": "1"
         },
-        { "item": "Draconic Bow Shaft", "chance": "25.2%", "count": "12–36" },
+        {
+          "item": "Draconic Bow Shaft",
+          "chance": "20.61%",
+          "count": "12–36"
+        },
         {
           "item": "Sealed Major Arcana Circlet Pattern",
-          "chance": "23.3%",
+          "chance": "19.12%",
           "count": "16–48"
         },
         {
           "item": "Sealed Imperial Crusader Shield Part",
-          "chance": "14.3%",
+          "chance": "11.69%",
           "count": "23–67"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "7.95%",
+          "chance": "6.518%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Helmet Pattern",
-          "chance": "6.22%",
+          "chance": "5.098%",
           "count": "60–180"
         },
         {
           "item": "Sealed Draconic Leather Helmet Pattern",
-          "chance": "3.23%",
-          "count": "116–346"
+          "chance": "29.13%",
+          "count": "11–31"
         },
         {
           "item": "Sealed Imperial Crusader Shield",
-          "chance": "2.45%",
+          "chance": "2.248%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Helmet",
-          "chance": "1.71%",
+          "chance": "1.574%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Helmet",
-          "chance": "1.71%",
+          "chance": "1.574%",
           "count": "1"
         },
         {
           "item": "Sealed Major Arcana Circlet",
-          "chance": "1.71%",
+          "chance": "1.574%",
           "count": "1"
         },
-        { "item": "Dragon Bow", "chance": "1.13%", "count": "1" }
+        { "item": "Draconic Bow", "chance": "1.058%", "count": "1" }
       ]
     },
     {
@@ -4953,7 +5163,11 @@
           "chance": "3.852%",
           "count": "1"
         },
-        { "item": "Sealed Majestic Necklace", "chance": "2.974%", "count": "1" },
+        {
+          "item": "Sealed Majestic Necklace",
+          "chance": "2.974%",
+          "count": "1"
+        },
         { "item": "Soul Separator", "chance": "1.289%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (A)",
@@ -4978,8 +5192,16 @@
         "sp": 581209
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (A)", "chance": "50.1%", "count": "1" },
-        { "item": "Dasparion's Staff Edge", "chance": "29.6%", "count": "4–12" },
+        {
+          "item": "Scroll: Enchant Armor (A)",
+          "chance": "50.1%",
+          "count": "1"
+        },
+        {
+          "item": "Dasparion's Staff Edge",
+          "chance": "29.6%",
+          "count": "4–12"
+        },
         {
           "item": "Sealed Dark Crystal Helmet Design",
           "chance": "26.55%",
@@ -5039,52 +5261,72 @@
         "sp": 977072
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "45.6%", "count": "1" },
-        { "item": "Soul Bow Stave", "chance": "30.1%", "count": "12–36" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "38.56%",
+          "count": "1"
+        },
+        { "item": "Soul Bow Stave", "chance": "25.52%", "count": "12–36" },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–7" },
         {
           "item": "Ancient Book - Divine Inspiration (Original Language Version)",
           "chance": "81.25%",
           "count": "1–2"
         },
-        { "item": "Skull of the Dead A-Grade", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Skull of the Dead A-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         {
           "item": "Sealed Majestic Gauntlets Design",
-          "chance": "23.2%",
+          "chance": "19.62%",
           "count": "16–48"
         },
         {
           "item": "Sealed Majestic Boots Lining",
-          "chance": "16.5%",
+          "chance": "13.96%",
           "count": "23–67"
         },
         {
           "item": "Sealed Gauntlets of Nightmare Design",
-          "chance": "6.18%",
+          "chance": "5.233%",
           "count": "60–180"
         },
         {
           "item": "Sealed Gauntlets of Nightmare",
-          "chance": "4.99%",
+          "chance": "5.488%",
           "count": "1"
         },
-        { "item": "Sealed Boots of Nightmare", "chance": "4.99%", "count": "1" },
-        { "item": "Sealed Majestic Gauntlets", "chance": "4.99%", "count": "1" },
-        { "item": "Sealed Majestic Boots", "chance": "4.99%", "count": "1" },
+        {
+          "item": "Sealed Boots of Nightmare",
+          "chance": "5.488%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Gauntlets",
+          "chance": "5.488%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Boots",
+          "chance": "5.488%",
+          "count": "1"
+        },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "4.56%",
+          "chance": "3.856%",
           "count": "1"
         },
         {
           "item": "Sealed Boots of Nightmare Lining",
-          "chance": "3.21%",
+          "chance": "2.719%",
           "count": "116–346"
         },
-        { "item": "Soul Bow", "chance": "1.95%", "count": "1" },
+        { "item": "Soul Bow", "chance": "2.151%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.7593%",
+          "chance": "0.6427%",
           "count": "1"
         }
       ]
@@ -5236,27 +5478,31 @@
         "sp": 847950
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "38.4%", "count": "1" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "39.11%",
+          "count": "1"
+        },
         {
           "item": "Sealed Draconic Leather Armor Part",
-          "chance": "30.6%",
+          "chance": "31.14%",
           "count": "12–36"
         },
-        { "item": "Angel Slayer Blade", "chance": "20%", "count": "12–36" },
+        { "item": "Angel Slayer Blade", "chance": "20.38%", "count": "12–36" },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "3.84%",
+          "chance": "3.911%",
           "count": "1"
         },
         {
-          "item": "Sealed Dragon Leather Armor",
-          "chance": "1.7%",
+          "item": "Sealed Draconic Leather Armor",
+          "chance": "1.937%",
           "count": "1"
         },
-        { "item": "Angel Slayer", "chance": "0.9101%", "count": "1" },
+        { "item": "Angel Slayer", "chance": "1.058%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.6396%",
+          "chance": "0.6519%",
           "count": "1"
         }
       ]
@@ -5276,35 +5522,39 @@
         "sp": 943547
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "39.5%", "count": "1" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "52.42%",
+          "count": "1"
+        },
         {
           "item": "Sealed Draconic Leather Armor Part",
-          "chance": "31.45%",
+          "chance": "41.74%",
           "count": "12–36"
         },
-        { "item": "Draconic Bow Shaft", "chance": "20.82%", "count": "12–36" },
+        { "item": "Draconic Bow Shaft", "chance": "27.63%", "count": "12–36" },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "3.96%",
+          "chance": "5.242%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Armor",
-          "chance": "1.76%",
+          "chance": "2.596%",
           "count": "1"
         },
-        { "item": "Draconic Bow", "chance": "0.945%", "count": "1" },
+        { "item": "Draconic Bow", "chance": "1.419%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.668%",
+          "chance": "0.8737%",
           "count": "1"
         }
       ]
     },
     {
       "id": 25248,
-      "name": "Doom Blade Thanatos",
-      "synonyms": ["Doom Blade Tanatos"],
+      "name": "Doom Blade Tanatos",
+      "synonyms": ["Doom Blade Thanatos"],
       "title": "Raid Boss",
       "level": 72,
       "npcType": "RaidBoss",
@@ -5312,18 +5562,42 @@
       "isAggressive": false,
       "race": "Demons",
       "weakness": "Sacred",
-      "description": "Doom Blade Thanatos - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity, so much so that it cannot be defeated alone. By nature, it is a level 72 demon and does not attack first. Its lair is— Aden Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Armor (A), Sealed Helm of Nightmare Design, Destruction Tombstone and other equipment.",
+      "description": "Doom Blade Tanatos - nominal raid boss: a unique, far more formidable relative of the common creatures of its kind, distinguished by its strength and tenacity, so much so that it cannot be defeated alone. By nature, it is a level 72 demon and does not attack first. Its lair is— Aden Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Scroll: Enchant Armor (A), Sealed Helm of Nightmare Design, Destruction Tombstone and other equipment.",
       "features": {
         "mp": 1410,
         "exp": 4362667,
         "sp": 764172
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (A)", "chance": "53%", "count": "1–3" },
         {
-          "item": "Sealed Helm of Nightmare Design",
-          "chance": "29%",
-          "count": "9–27"
+          "item": "Scroll: Enchant Armor (A)",
+          "chance": "60.25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Soul Separator Head",
+          "chance": "25.5%",
+          "count": "12–36"
+        },
+        {
+          "item": "Sealed Majestic Circlet Design",
+          "chance": "21.17%",
+          "count": "14–42"
+        },
+        {
+          "item": "Sealed Shield of Nightmare Fragment",
+          "chance": "9.41%",
+          "count": "40–120"
+        },
+        {
+          "item": "Blessed Scroll: Enchant Armor (S)",
+          "chance": "6.427%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Shield of Nightmare",
+          "chance": "6.973%",
+          "count": "1"
         },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–9" },
         {
@@ -5332,30 +5606,14 @@
           "count": "1–2"
         },
         { "item": "Skull of the Dead A-Grade", "chance": "25%", "count": "1" },
-        { "item": "Soul Separator Head", "chance": "22.4%", "count": "12–36" },
         {
-          "item": "Sealed Majestic Circlet Design",
-          "chance": "18.6%",
-          "count": "14–42"
+          "item": "Sealed Helm of Nightmare Design",
+          "chance": "3.659%",
+          "count": "81–243"
         },
-        {
-          "item": "Sealed Shield of Nightmare Fragment",
-          "chance": "8.28%",
-          "count": "40–120"
-        },
-        {
-          "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "5.65%",
-          "count": "1"
-        },
-        {
-          "item": "Sealed Shield of Nightmare",
-          "chance": "4.72%",
-          "count": "1"
-        },
-        { "item": "Sealed Helm of Nightmare", "chance": "3.3%", "count": "1" },
-        { "item": "Sealed Majestic Circlet", "chance": "3.3%", "count": "1" },
-        { "item": "Soul Separator", "chance": "1.45%", "count": "1" }
+        { "item": "Sealed Helm of Nightmare", "chance": "4.88%", "count": "1" },
+        { "item": "Sealed Majestic Circlet", "chance": "4.88%", "count": "1" },
+        { "item": "Soul Separator", "chance": "2.151%", "count": "1" }
       ]
     },
     {
@@ -5377,32 +5635,32 @@
       "drops": [
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "72%",
+          "chance": "73.33%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Gaiters Pattern",
-          "chance": "26.4%",
+          "chance": "26.92%",
           "count": "24–72"
         },
         {
           "item": "Sealed Imperial Crusader Breastplate Part",
-          "chance": "9.38%",
+          "chance": "9.562%",
           "count": "53–157"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "6.4%",
+          "chance": "6.518%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Gaiters",
-          "chance": "4.13%",
+          "chance": "4.721%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Breastplate",
-          "chance": "2.59%",
+          "chance": "2.951%",
           "count": "1"
         }
       ]
@@ -5537,7 +5795,11 @@
         "sp": 424759
       },
       "drops": [
-        { "item": "Skull of the Dead B-Grade", "chance": "25%", "count": "5–8" },
+        {
+          "item": "Skull of the Dead B-Grade",
+          "chance": "25%",
+          "count": "5–8"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "1–3" },
         {
           "item": "Blue Wolf Breastplate Part",
@@ -5820,23 +6082,31 @@
         "sp": 1054472
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "47.7%", "count": "1" },
         {
-          "item": "Sealed Major Arcana Robe Part",
-          "chance": "38%",
-          "count": "12–36"
-        },
-        { "item": "Saint Spear Blade", "chance": "25.3%", "count": "12–36" },
-        {
-          "item": "Scroll: Enchant Weapon (S)",
-          "chance": "4.77%",
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "39.11%",
           "count": "1"
         },
-        { "item": "Sealed Major Arcana Robe", "chance": "2.12%", "count": "1" },
-        { "item": "Saint Spear", "chance": "1.13%", "count": "1" },
+        {
+          "item": "Sealed Major Arcana Robe Part",
+          "chance": "31.14%",
+          "count": "12–36"
+        },
+        { "item": "Saint Spear Blade", "chance": "20.75%", "count": "12–36" },
+        {
+          "item": "Scroll: Enchant Weapon (S)",
+          "chance": "3.911%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Robe",
+          "chance": "1.937%",
+          "count": "1"
+        },
+        { "item": "Saint Spear", "chance": "1.058%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.7955%",
+          "chance": "0.6519%",
           "count": "1"
         }
       ]
@@ -6025,40 +6295,52 @@
       "drops": [
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "89.5%",
+          "chance": "73.33%",
           "count": "1"
         },
-        { "item": "Heaven's Divider Edge", "chance": "37.9%", "count": "4–12" },
+        {
+          "item": "Heaven's Divider Edge",
+          "chance": "31.05%",
+          "count": "4–12"
+        },
         {
           "item": "Sealed Tateossian Necklace Chain",
-          "chance": "26.2%",
+          "chance": "21.5%",
           "count": "14–42"
         },
-        { "item": "Forgotten Blade Edge", "chance": "19.9%", "count": "8–22" },
+        { "item": "Forgotten Blade Edge", "chance": "16.3%", "count": "8–22" },
         {
           "item": "Sealed Tateossian Ring Gem",
-          "chance": "16.7%",
+          "chance": "13.7%",
           "count": "40–120"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "7.95%",
+          "chance": "6.518%",
           "count": "1"
         },
         {
           "item": "Sealed Tateossian Earring Part",
-          "chance": "7.44%",
+          "chance": "6.097%",
           "count": "81–243"
         },
-        { "item": "Sealed Tateossian Ring", "chance": "4.97%", "count": "1" },
-        { "item": "Sealed Tateossian Earring", "chance": "3.32%", "count": "1" },
         {
-          "item": "Sealed Tateossian Necklace",
-          "chance": "2.48%",
+          "item": "Sealed Tateossian Ring",
+          "chance": "4.613%",
           "count": "1"
         },
-        { "item": "Heaven's Divider", "chance": "0.5659%", "count": "1" },
-        { "item": "Forgotten Blade", "chance": "0.5659%", "count": "1" }
+        {
+          "item": "Sealed Tateossian Earring",
+          "chance": "3.076%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Necklace",
+          "chance": "2.306%",
+          "count": "1"
+        },
+        { "item": "Heaven's Divider", "chance": "0.5292%", "count": "1" },
+        { "item": "Forgotten Blade", "chance": "0.5292%", "count": "1" }
       ]
     },
     {
@@ -6223,7 +6505,11 @@
           "chance": "5.431%",
           "count": "1"
         },
-        { "item": "Sealed Majestic Gauntlets", "chance": "5.431%", "count": "1" },
+        {
+          "item": "Sealed Majestic Gauntlets",
+          "chance": "5.431%",
+          "count": "1"
+        },
         { "item": "Sealed Majestic Boots", "chance": "5.431%", "count": "1" },
         {
           "item": "Sealed Gauntlets of Nightmare Design",
@@ -6265,85 +6551,101 @@
         "sp": 1054472
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "47.7%", "count": "1" },
-        { "item": "Arcana Mace Head", "chance": "29.3%", "count": "3–7" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "39.11%",
+          "count": "1"
+        },
+        { "item": "Arcana Mace Head", "chance": "24%", "count": "3–7" },
         {
           "item": "Sealed Imperial Crusader Boots Design",
-          "chance": "16.2%",
+          "chance": "13.26%",
           "count": "14–40"
         },
         {
           "item": "Dragon Hunter Axe Blade",
-          "chance": "12.7%",
+          "chance": "10.38%",
           "count": "6–18"
         },
         {
           "item": "Sealed Draconic Leather Gloves Fabric",
-          "chance": "10.9%",
+          "chance": "8.95%",
           "count": "20–60"
         },
         {
           "item": "Sealed Draconic Leather Boots Design",
-          "chance": "7.94%",
+          "chance": "6.509%",
           "count": "28–82"
         },
-        { "item": "Imperial Staff Head", "chance": "7.12%", "count": "11–31" },
+        {
+          "item": "Imperial Staff Head",
+          "chance": "5.834%",
+          "count": "11–31"
+        },
         {
           "item": "Sealed Major Arcana Gloves fabric",
-          "chance": "6.07%",
+          "chance": "4.972%",
           "count": "36–108"
         },
         {
           "item": "Sealed Major Arcana Boots Design",
-          "chance": "4.8%",
+          "chance": "3.934%",
           "count": "46–136"
         },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "4.77%",
+          "chance": "3.911%",
           "count": "1"
         },
         {
           "item": "Basalt Battlehammer Head",
-          "chance": "4.58%",
-          "count": "16–48"
+          "chance": "30%",
+          "count": "2–6"
         },
         {
           "item": "Sealed Imperial Crusader Gauntlets Design",
-          "chance": "1.95%",
-          "count": "112–336"
+          "chance": "22.37%",
+          "count": "8–24"
         },
-        { "item": "Sealed Major Arcana Boots", "chance": "1.71%", "count": "1" },
-        { "item": "Sealed Major Arcana Glove", "chance": "1.71%", "count": "1" },
         {
-          "item": "Sealed Dragon Leather Boots",
-          "chance": "1.71%",
+          "item": "Sealed Major Arcana Boots",
+          "chance": "1.574%",
           "count": "1"
         },
         {
-          "item": "Sealed Dragon Leather Glove",
-          "chance": "1.71%",
+          "item": "Sealed Major Arcana Glove",
+          "chance": "1.574%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Boots",
+          "chance": "1.574%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Glove",
+          "chance": "1.574%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Boots",
-          "chance": "1.71%",
+          "chance": "1.574%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Gauntlet",
-          "chance": "1.71%",
+          "chance": "1.574%",
           "count": "1"
         },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.7955%",
+          "chance": "0.6519%",
           "count": "1"
         },
-        { "item": "Arcana Mace", "chance": "0.283%", "count": "1" },
-        { "item": "Basalt Battlehammer", "chance": "0.2829%", "count": "1" },
-        { "item": "Imperial Staff", "chance": "0.2829%", "count": "1" },
-        { "item": "Dragon Hunter Axe", "chance": "0.2829%", "count": "1" }
+        { "item": "Arcana Mace", "chance": "0.2646%", "count": "1" },
+        { "item": "Basalt Battlehammer", "chance": "0.2646%", "count": "1" },
+        { "item": "Imperial Staff", "chance": "0.2646%", "count": "1" },
+        { "item": "Dragon Hunter Axe", "chance": "0.2646%", "count": "1" }
       ]
     },
     {
@@ -6364,20 +6666,28 @@
       "drops": [
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "48.3%",
+          "chance": "65.32%",
           "count": "1–3"
         },
-        { "item": "Heaven's Divider Edge", "chance": "27.3%", "count": "4–12" },
-        { "item": "Draconic Bow Shaft", "chance": "27.1%", "count": "12–36" },
-        { "item": "Forgotten Blade Edge", "chance": "14.3%", "count": "8–22" },
+        {
+          "item": "Heaven's Divider Edge",
+          "chance": "36.88%",
+          "count": "4–12"
+        },
+        { "item": "Draconic Bow Shaft", "chance": "36.72%", "count": "12–36" },
+        {
+          "item": "Forgotten Blade Edge",
+          "chance": "19.36%",
+          "count": "8–22"
+        },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "8.58%",
+          "chance": "11.61%",
           "count": "1"
         },
-        { "item": "Dragon Bow", "chance": "1.22%", "count": "1" },
-        { "item": "Forgotten Blade", "chance": "0.4072%", "count": "1" },
-        { "item": "Heaven's Divider", "chance": "0.4072%", "count": "1" }
+        { "item": "Draconic Bow", "chance": "1.885%", "count": "1" },
+        { "item": "Forgotten Blade", "chance": "0.6285%", "count": "1" },
+        { "item": "Heaven's Divider", "chance": "0.6285%", "count": "1" }
       ]
     },
     {
@@ -6396,35 +6706,47 @@
         "sp": 1196456
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "51.5%", "count": "1" },
-        { "item": "Angel Slayer Blade", "chance": "26.8%", "count": "12–36" },
         {
-          "item": "Basalt Battlehammer Head",
-          "chance": "26.3%",
-          "count": "2–6"
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "69.67%",
+          "count": "1"
         },
-        { "item": "Arcana Mace Head", "chance": "21.1%", "count": "3–7" },
+        { "item": "Angel Slayer Blade", "chance": "36.3%", "count": "12–36" },
+        {
+          "item": "Arcana Mace Head",
+          "chance": "28.49%",
+          "count": "3–7"
+        },
         {
           "item": "Dragon Hunter Axe Blade",
-          "chance": "9.11%",
+          "chance": "12.32%",
           "count": "6–18"
         },
         {
+          "item": "Basalt Battlehammer Head",
+          "chance": "4.452%",
+          "count": "16–48"
+        },
+        {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "5.15%",
+          "chance": "6.967%",
           "count": "1"
         },
-        { "item": "Imperial Staff Head", "chance": "5.12%", "count": "11–31" },
-        { "item": "Angel Slayer", "chance": "1.22%", "count": "1" },
+        {
+          "item": "Imperial Staff Head",
+          "chance": "6.928%",
+          "count": "11–31"
+        },
+        { "item": "Angel Slayer", "chance": "1.885%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.8585%",
+          "chance": "1.161%",
           "count": "1"
         },
-        { "item": "Arcana Mace", "chance": "0.2036%", "count": "1" },
-        { "item": "Dragon Hunter Axe", "chance": "0.2036%", "count": "1" },
-        { "item": "Imperial Staff", "chance": "0.2036%", "count": "1" },
-        { "item": "Basalt Battlehammer", "chance": "0.2036%", "count": "1" }
+        { "item": "Arcana Mace", "chance": "0.3142%", "count": "1" },
+        { "item": "Dragon Hunter Axe", "chance": "0.3142%", "count": "1" },
+        { "item": "Imperial Staff", "chance": "0.3142%", "count": "1" },
+        { "item": "Basalt Battlehammer", "chance": "0.3142%", "count": "1" }
       ]
     },
     {
@@ -6479,7 +6801,7 @@
     },
     {
       "id": 25293,
-      "name": "Hestia Guardian Deity of the Hot Springs",
+      "name": "Hestia, Guardian Deity of the Hot Springs",
       "title": "Raid Boss",
       "level": 78,
       "npcType": "RaidBoss",
@@ -6492,7 +6814,11 @@
         "sp": 1193017
       },
       "drops": [
-        { "item": "Sealed Major Arcana Robe", "chance": "2.596%", "count": "1" },
+        {
+          "item": "Sealed Major Arcana Robe",
+          "chance": "2.596%",
+          "count": "1"
+        },
         {
           "item": "Sealed Major Arcana Robe Part",
           "chance": "41.74%",
@@ -6552,40 +6878,48 @@
       "drops": [
         {
           "item": "Scroll: Enchant Armor (A)",
-          "chance": "73.43%",
+          "chance": "60.8%",
           "count": "1–3"
         },
-        { "item": "Elysian Head", "chance": "46.62%", "count": "4–12" },
+        { "item": "Elysian Head", "chance": "38.6%", "count": "4–12" },
         {
-          "item": "Branch of the Mother Tree Head",
-          "chance": "24.84%",
+          "item": "Branch of The Mother Tree Head",
+          "chance": "20.57%",
           "count": "8–22"
         },
         {
           "item": "Sealed Majestic Necklace Beads",
-          "chance": "22.15%",
+          "chance": "18.34%",
           "count": "20–60"
         },
-        { "item": "Sealed Majestic Ring", "chance": "9.3%", "count": "1" },
+        { "item": "Sealed Majestic Ring", "chance": "10.02%", "count": "1" },
         {
           "item": "Sealed Majestic Earring Gemstone",
-          "chance": "8.46%",
+          "chance": "6.996%",
           "count": "81–243"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "7.84%",
+          "chance": "6.486%",
           "count": "1"
         },
-        { "item": "Sealed Majestic Earring", "chance": "6.21%", "count": "1" },
-        { "item": "Sealed Majestic Necklace", "chance": "4.66%", "count": "1" },
+        { "item": "Sealed Majestic Earring", "chance": "6.68%", "count": "1" },
+        {
+          "item": "Sealed Majestic Necklace",
+          "chance": "5.008%",
+          "count": "1"
+        },
         {
           "item": "Sealed Majestic Ring Gemstone",
-          "chance": "3.52%",
-          "count": "280–840"
+          "chance": "29.09%",
+          "count": "28–84"
         },
-        { "item": "Branch of the Mother Tree", "chance": "1.02%", "count": "1" },
-        { "item": "Elysian", "chance": "1.02%", "count": "1" }
+        {
+          "item": "Branch of The Mother Tree",
+          "chance": "1.086%",
+          "count": "1"
+        },
+        { "item": "Elysian", "chance": "1.086%", "count": "1" }
       ]
     },
     {
@@ -6605,26 +6939,30 @@
       "drops": [
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "50.91%",
+          "chance": "53.9841%",
           "count": "1"
         },
-        { "item": "Angel Slayer Blade", "chance": "56.59%", "count": "3–9" },
+        {
+          "item": "Angel Slayer Blade",
+          "chance": "60.0077%",
+          "count": "3–9"
+        },
         {
           "item": "Sealed Draconic Leather Armor Part",
-          "chance": "21.62%",
+          "chance": "22.9268%",
           "count": "12–36"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "4.525%",
+          "chance": "4.7987%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Armor",
-          "chance": "1.345%",
+          "chance": "1.2765%",
           "count": "1"
         },
-        { "item": "Angel Slayer", "chance": "0.7348%", "count": "1" }
+        { "item": "Angel Slayer", "chance": "0.6828%", "count": "1" }
       ]
     },
     {
@@ -6639,22 +6977,26 @@
       "drops": [
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "56.4%",
+          "chance": "55.629%",
           "count": "1"
         },
-        { "item": "Saint Spear Blade", "chance": "63.83%", "count": "3–9" },
+        { "item": "Saint Spear Blade", "chance": "62.9566%", "count": "3–9" },
         {
           "item": "Sealed Major Arcana Robe Part",
-          "chance": "23.95%",
+          "chance": "23.6254%",
           "count": "12–36"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "5.013%",
+          "chance": "4.9449%",
           "count": "1"
         },
-        { "item": "Sealed Major Arcana Robe", "chance": "1.49%", "count": "1" },
-        { "item": "Saint Spear", "chance": "0.814%", "count": "1" }
+        {
+          "item": "Sealed Major Arcana Robe",
+          "chance": "1.3154%",
+          "count": "1"
+        },
+        { "item": "Saint Spear", "chance": "0.7036%", "count": "1" }
       ]
     },
     {
@@ -6673,33 +7015,45 @@
         "sp": 952059
       },
       "drops": [
-        { "item": "Saint Spear Blade", "chance": "64.4%", "count": "3–9" },
+        { "item": "Saint Spear Blade", "chance": "64.4043%", "count": "3–9" },
         {
           "item": "Sealed Tateossian Earring Part",
-          "chance": "42.6%",
+          "chance": "42.5832%",
           "count": "9–27"
         },
-        { "item": "Scroll: Enchant Armor (S)", "chance": "30.4%", "count": "1" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "30.3513%",
+          "count": "1"
+        },
         {
           "item": "Sealed Tateossian Necklace Chain",
-          "chance": "16.7%",
+          "chance": "16.6845%",
           "count": "14–42"
         },
         {
           "item": "Sealed Tateossian Ring Gem",
-          "chance": "10.6%",
+          "chance": "10.6317%",
           "count": "40–120"
         },
-        { "item": "Sealed Tateossian Ring", "chance": "3.16%", "count": "1" },
         {
-          "item": "Scroll: Enchant Weapon (S)",
-          "chance": "3.04%",
+          "item": "Sealed Tateossian Ring",
+          "chance": "3.1598%",
           "count": "1"
         },
-        { "item": "Sealed Tateossian Earring", "chance": "2.11%", "count": "1" },
+        {
+          "item": "Scroll: Enchant Weapon (S)",
+          "chance": "3.0352%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Earring",
+          "chance": "2.1094%",
+          "count": "1"
+        },
         {
           "item": "Sealed Tateossian Necklace",
-          "chance": "1.58%",
+          "chance": "1.5799%",
           "count": "1"
         },
         { "item": "Saint Spear", "chance": "0.7197%", "count": "1" },
@@ -6732,7 +7086,11 @@
           "count": "1"
         },
         { "item": "Forgotten Blade Edge", "chance": "47.09%", "count": "2–4" },
-        { "item": "Heavens Divider Edge", "chance": "17.94%", "count": "4–12" },
+        {
+          "item": "Heaven's Divider Edge",
+          "chance": "17.94%",
+          "count": "4–12"
+        },
         {
           "item": "Sealed Imperial Crusader Gauntlets Design",
           "chance": "12.92%",
@@ -6812,41 +7170,39 @@
         "sp": 557272
       },
       "drops": [
-        { "item": "Angel Slayer Blade", "chance": "56.59%", "count": "3–9" },
         {
           "item": "Sealed Imperial Crusader Gaiters Pattern",
-          "chance": "44.86%",
-          "count": "4–12"
+          "chance": "19.8203%",
+          "count": "24–72"
         },
         {
           "item": "Scroll: Enchant Armor (S)",
-          "chance": "27.15%",
+          "chance": "28.7918%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Breastplate Part",
-          "chance": "18.59%",
+          "chance": "49.2709%",
           "count": "8–22"
         },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "2.715%",
+          "chance": "2.8792%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Gaiters",
-          "chance": "1.311%",
+          "chance": "3.0986%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Breastplate",
-          "chance": "0.8194%",
+          "chance": "1.9415%",
           "count": "1"
         },
-        { "item": "Angel Slayer", "chance": "0.7348%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.4525%",
+          "chance": "0.4799%",
           "count": "1"
         }
       ]
@@ -6863,49 +7219,57 @@
       "drops": [
         {
           "item": "Scroll: Enchant Armor (S)",
-          "chance": "30.08%",
+          "chance": "29.6691%",
           "count": "1"
         },
         {
           "item": "Sealed Tateossian Earring Part",
-          "chance": "42.2%",
+          "chance": "41.626%",
           "count": "9–27"
         },
-        { "item": "Heavens Divider Edge", "chance": "23.88%", "count": "4–12" },
+        {
+          "item": "Heaven's Divider Edge",
+          "chance": "23.5583%",
+          "count": "4–12"
+        },
         {
           "item": "Sealed Tateossian Necklace Chain",
-          "chance": "16.54%",
+          "chance": "16.3095%",
           "count": "14–42"
         },
-        { "item": "Forgotten Blade Edge", "chance": "12.54%", "count": "8–22" },
+        {
+          "item": "Forgotten Blade Edge",
+          "chance": "12.3679%",
+          "count": "8–22"
+        },
         {
           "item": "Sealed Tateossian Ring Gem",
-          "chance": "10.54%",
+          "chance": "10.3927%",
           "count": "40–120"
         },
-        { "item": "Sealed Tateossian Ring", "chance": "3.548%", "count": "1" },
+        { "item": "Sealed Tateossian Ring", "chance": "3.0887%", "count": "1" },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "3.008%",
+          "chance": "2.9669%",
           "count": "1"
         },
         {
           "item": "Sealed Tateossian Earring",
-          "chance": "2.365%",
+          "chance": "2.062%",
           "count": "1"
         },
         {
           "item": "Sealed Tateossian Necklace",
-          "chance": "1.774%",
+          "chance": "1.5444%",
           "count": "1"
         },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.5014%",
+          "chance": "0.4946%",
           "count": "1"
         },
-        { "item": "Forgotten Blade", "chance": "0.407%", "count": "1" },
-        { "item": "Heaven's Divider", "chance": "0.407%", "count": "1" }
+        { "item": "Forgotten Blade", "chance": "0.3518%", "count": "1" },
+        { "item": "Heaven's Divider", "chance": "0.3518%", "count": "1" }
       ]
     },
     {
@@ -6920,75 +7284,79 @@
       "drops": [
         {
           "item": "Scroll: Enchant Armor (S)",
-          "chance": "32.28%",
+          "chance": "30.3513%",
           "count": "1"
         },
         {
           "item": "Basalt Battlehammer Head",
-          "chance": "24.75%",
+          "chance": "23.2743%",
           "count": "2–6"
         },
         {
           "item": "Sealed Draconic Leather Helmet Pattern",
-          "chance": "24.04%",
+          "chance": "22.6083%",
           "count": "11–31"
         },
-        { "item": "Arcana Mace Head", "chance": "19.8%", "count": "3–7" },
+        { "item": "Arcana Mace Head", "chance": "18.6193%", "count": "3–7" },
         {
           "item": "Sealed Major Arcana Circlet Pattern",
-          "chance": "15.78%",
+          "chance": "14.8367%",
           "count": "16–48"
         },
         {
           "item": "Sealed Imperial Crusader Shield Part",
-          "chance": "9.646%",
+          "chance": "9.0703%",
           "count": "23–67"
         },
         {
           "item": "Dragon Hunter Axe Blade",
-          "chance": "8.563%",
+          "chance": "8.0504%",
           "count": "6–18"
         },
-        { "item": "Imperial Staff Head", "chance": "4.815%", "count": "11–31" },
+        {
+          "item": "Imperial Staff Head",
+          "chance": "4.527%",
+          "count": "11–31"
+        },
         {
           "item": "Sealed Imperial Crusader Helmet Pattern",
-          "chance": "4.207%",
+          "chance": "3.9565%",
           "count": "60–180"
         },
         {
           "item": "Scroll: Enchant Weapon (S)",
-          "chance": "3.228%",
+          "chance": "3.0352%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Shield",
-          "chance": "1.855%",
+          "chance": "1.5568%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Helmet",
-          "chance": "1.299%",
+          "chance": "1.0901%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Helmet",
-          "chance": "1.299%",
+          "chance": "1.0901%",
           "count": "1"
         },
         {
           "item": "Sealed Major Arcana Circlet",
-          "chance": "1.299%",
+          "chance": "1.0901%",
           "count": "1"
         },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.538%",
+          "chance": "0.5059%",
           "count": "1"
         },
-        { "item": "Basalt Battlehammer", "chance": "0.2184%", "count": "1" },
-        { "item": "Imperial Staff", "chance": "0.2184%", "count": "1" },
-        { "item": "Dragon Hunter Axe", "chance": "0.2184%", "count": "1" },
-        { "item": "Arcana Mace", "chance": "0.2184%", "count": "1" }
+        { "item": "Basalt Battlehammer", "chance": "0.18%", "count": "1" },
+        { "item": "Imperial Staff", "chance": "0.18%", "count": "1" },
+        { "item": "Dragon Hunter Axe", "chance": "0.18%", "count": "1" },
+        { "item": "Arcana Mace", "chance": "0.18%", "count": "1" }
       ]
     },
     {
@@ -7007,28 +7375,28 @@
         "sp": 952059
       },
       "drops": [
-        { "item": "Demon Splinter Blade", "chance": "62.08%", "count": "3–9" },
+        { "item": "Demon Splinter Blade", "chance": "46.2%", "count": "3–9" },
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "56.92%",
+          "chance": "42.36%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Armor Part",
-          "chance": "24.18%",
-          "count": "12–36"
+          "chance": "71.96%",
+          "count": "3–9"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "5.07%",
+          "chance": "3.766%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Armor",
-          "chance": "1.36%",
+          "chance": "1.119%",
           "count": "1"
         },
-        { "item": "Demon Splinter", "chance": "0.729%", "count": "1" }
+        { "item": "Demon Splinter", "chance": "0.6114%", "count": "1" }
       ]
     },
     {
@@ -7049,82 +7417,94 @@
       "drops": [
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "51.9%",
+          "chance": "51.8769%",
           "count": "1–3"
         },
-        { "item": "Arcana Mace Head", "chance": "33.9%", "count": "3–7" },
+        { "item": "Arcana Mace Head", "chance": "33.9485%", "count": "3–7" },
         {
           "item": "Sealed Imperial Crusader Boots Design",
-          "chance": "18.8%",
+          "chance": "18.7585%",
           "count": "14–40"
         },
         {
           "item": "Dragon Hunter Axe Blade",
-          "chance": "14.7%",
+          "chance": "14.6782%",
           "count": "6–18"
         },
         {
           "item": "Sealed Draconic Leather Gloves Fabric",
-          "chance": "12.7%",
+          "chance": "12.662%",
           "count": "20–60"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "9.22%",
+          "chance": "9.2226%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Boots Design",
-          "chance": "9.21%",
+          "chance": "9.2087%",
           "count": "28–82"
         },
-        { "item": "Imperial Staff Head", "chance": "8.25%", "count": "11–31" },
+        {
+          "item": "Imperial Staff Head",
+          "chance": "8.254%",
+          "count": "11–31"
+        },
         {
           "item": "Sealed Major Arcana Gloves fabric",
-          "chance": "7.03%",
+          "chance": "7.0345%",
           "count": "36–108"
         },
         {
           "item": "Sealed Major Arcana Boots Design",
-          "chance": "5.57%",
+          "chance": "5.5657%",
           "count": "46–136"
         },
         {
           "item": "Basalt Battlehammer Head",
-          "chance": "5.3%",
+          "chance": "5.3045%",
           "count": "16–48"
         },
         {
           "item": "Sealed Imperial Crusader Gauntlets Design",
-          "chance": "2.26%",
+          "chance": "2.2611%",
           "count": "112–336"
         },
-        { "item": "Sealed Major Arcana Boots", "chance": "1.99%", "count": "1" },
-        { "item": "Sealed Major Arcana Glove", "chance": "1.99%", "count": "1" },
         {
-          "item": "Sealed Dragon Leather Boots",
-          "chance": "1.99%",
+          "item": "Sealed Major Arcana Boots",
+          "chance": "1.9873%",
           "count": "1"
         },
         {
-          "item": "Sealed Dragon Leather Glove",
-          "chance": "1.99%",
+          "item": "Sealed Major Arcana Glove",
+          "chance": "1.9873%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Boots",
+          "chance": "1.9873%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Glove",
+          "chance": "1.9873%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Boots",
-          "chance": "1.99%",
+          "chance": "1.9873%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Gauntlet",
-          "chance": "1.99%",
+          "chance": "1.9873%",
           "count": "1"
         },
-        { "item": "Basalt Battlehammer", "chance": "0.328%", "count": "1" },
-        { "item": "Imperial Staff", "chance": "0.328%", "count": "1" },
-        { "item": "Dragon Hunter Axe", "chance": "0.328%", "count": "1" },
-        { "item": "Arcana Mace", "chance": "0.328%", "count": "1" }
+        { "item": "Basalt Battlehammer", "chance": "0.3281%", "count": "1" },
+        { "item": "Imperial Staff", "chance": "0.3281%", "count": "1" },
+        { "item": "Dragon Hunter Axe", "chance": "0.3281%", "count": "1" },
+        { "item": "Arcana Mace", "chance": "0.3281%", "count": "1" }
       ]
     },
     {
@@ -7251,7 +7631,11 @@
           "chance": "6.359%",
           "count": "1"
         },
-        { "item": "Sealed Helm of Nightmare", "chance": "4.829%", "count": "1" },
+        {
+          "item": "Sealed Helm of Nightmare",
+          "chance": "4.829%",
+          "count": "1"
+        },
         { "item": "Sealed Majestic Circlet", "chance": "4.829%", "count": "1" },
         {
           "item": "Sealed Armor of Nightmare",
@@ -7296,7 +7680,11 @@
           "chance": "31.52%",
           "count": "4–12"
         },
-        { "item": "Skull of the Dead A-Grade", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Skull of the Dead A-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–9" },
         {
           "item": "Sword of Miracles Edge",
@@ -7496,7 +7884,11 @@
           "count": "6–18"
         },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "1–3" },
-        { "item": "Skull of the Dead B-Grade", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Skull of the Dead B-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         {
           "item": "Greater Dye of STR <Str+4 Con-4>",
           "chance": "17.34%",
@@ -7602,40 +7994,245 @@
         "sp": 462266
       },
       "drops": [
-        { "item": "Saint Spear Blade", "chance": "37.5%", "count": "3–9" },
+        { "item": "Saint Spear Blade", "chance": "39.02%", "count": "3–9" },
         {
           "item": "Blessed Scroll of Resurrection",
-          "chance": "33.1%",
+          "chance": "34.48%",
           "count": "1"
         },
         {
           "item": "Sealed Tateossian Earring Part",
-          "chance": "24.8%",
+          "chance": "25.8%",
           "count": "9–27"
         },
         {
           "item": "Sealed Tateossian Necklace Chain",
-          "chance": "9.71%",
+          "chance": "10.11%",
           "count": "14–42"
         },
         {
           "item": "Sealed Tateossian Ring Gem",
-          "chance": "6.19%",
+          "chance": "6.442%",
           "count": "40–120"
         },
         {
           "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "2.94%",
+          "chance": "3.065%",
           "count": "1"
         },
-        { "item": "Sealed Tateossian Ring", "chance": "1.84%", "count": "1" },
-        { "item": "Sealed Tateossian Earring", "chance": "1.23%", "count": "1" },
+        {
+          "item": "Sealed Tateossian Ring",
+          "chance": "2.169%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Earring",
+          "chance": "1.446%",
+          "count": "1"
+        },
         {
           "item": "Sealed Tateossian Necklace",
-          "chance": "0.9194%",
+          "chance": "1.084%",
           "count": "1"
         },
-        { "item": "Saint Spear", "chance": "0.4189%", "count": "1" }
+        { "item": "Saint Spear", "chance": "0.4976%", "count": "1" }
+      ]
+    },
+    {
+      "id": 25346,
+      "name": "Shadow of Halisha (81) (IC)",
+      "title": "Raid Boss",
+      "level": 81,
+      "npcType": "RaidBoss",
+      "hp": 508960,
+      "isAggressive": false,
+      "race": "Demons",
+      "weakness": "Blunt",
+      "features": {
+        "mp": 3831,
+        "exp": 2643173,
+        "sp": 390090
+      },
+      "drops": [
+        {
+          "item": "Sealed Imperial Crusader Breastplate",
+          "chance": "0.589%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Gaiters",
+          "chance": "0.9425%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Breastplate Part",
+          "chance": "13.36%",
+          "count": "8–22"
+        },
+        {
+          "item": "Sealed Imperial Crusader Gaiters Pattern",
+          "chance": "32.25%",
+          "count": "4–12"
+        },
+        { "item": "Angel Slayer", "chance": "0.5282%", "count": "1" },
+        { "item": "Angel Slayer Blade", "chance": "40.68%", "count": "3–9" },
+        {
+          "item": "Scroll: Enchant Weapon (S)",
+          "chance": "1.952%",
+          "count": "1"
+        },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "19.52%",
+          "count": "1"
+        },
+        {
+          "item": "Blessed Scroll: Enchant Weapon (S)",
+          "chance": "0.3253%",
+          "count": "1"
+        }
+      ]
+    },
+    {
+      "id": 25342,
+      "name": "Shadow of Halisha (81) (DB)",
+      "title": "Raid Boss",
+      "level": 81,
+      "npcType": "RaidBoss",
+      "hp": 508960,
+      "isAggressive": false,
+      "race": "Demons",
+      "weakness": "Blunt",
+      "features": {
+        "mp": 3831,
+        "exp": 2643173,
+        "sp": 390090
+      },
+      "drops": [
+        {
+          "item": "Sealed Draconic Leather Armor",
+          "chance": "0.9666%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Armor Part",
+          "chance": "62.17%",
+          "count": "3–9"
+        },
+        { "item": "Draconic Bow", "chance": "0.5282%", "count": "1" },
+        { "item": "Draconic Bow Shaft", "chance": "41.15%", "count": "3–9" },
+        {
+          "item": "Blessed Scroll: Enchant Armor (S)",
+          "chance": "3.253%",
+          "count": "1"
+        },
+        {
+          "item": "Blessed Scroll of Resurrection",
+          "chance": "36.6%",
+          "count": "1"
+        }
+      ]
+    },
+    {
+      "id": 25339,
+      "name": "Shadow of Halisha (81) (DS)",
+      "title": "Raid Boss",
+      "level": 81,
+      "npcType": "RaidBoss",
+      "hp": 508960,
+      "isAggressive": false,
+      "race": "Demons",
+      "weakness": "Blunt",
+      "features": {
+        "mp": 3831,
+        "exp": 2643173,
+        "sp": 390090
+      },
+      "drops": [
+        {
+          "item": "Sealed Imperial Crusader Helmet Pattern",
+          "chance": "21.9051%",
+          "count": "6–18"
+        },
+        {
+          "item": "Sealed Draconic Leather Helmet Pattern",
+          "chance": "12.5172%",
+          "count": "11–31"
+        },
+        {
+          "item": "Sealed Major Arcana Circlet Pattern",
+          "chance": "8.2144%",
+          "count": "16–48"
+        },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "16.8043%",
+          "count": "1"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (S)",
+          "chance": "1.6805%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Shield",
+          "chance": "0.862%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Helmet",
+          "chance": "0.6036%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Helmet",
+          "chance": "0.6036%",
+          "count": "1"
+        },
+        { "item": "Demon Splinter", "chance": "0.3985%", "count": "1" },
+        {
+          "item": "Blessed Scroll: Enchant Weapon (S)",
+          "chance": "0.2801%",
+          "count": "1"
+        }
+      ]
+    },
+    {
+      "id": 25349,
+      "name": "Shadow of Halisha (81) (MA)",
+      "title": "Raid Boss",
+      "level": 81,
+      "npcType": "RaidBoss",
+      "hp": 508960,
+      "isAggressive": false,
+      "race": "Demons",
+      "weakness": "Blunt",
+      "features": {
+        "mp": 3831,
+        "exp": 2643173,
+        "sp": 390090
+      },
+      "drops": [
+        {
+          "item": "Sealed Major Arcana Robe Part",
+          "chance": "33.4528%",
+          "count": "12–36"
+        },
+        {
+          "item": "Blessed Scroll of Resurrection",
+          "chance": "31.5078%",
+          "count": "1"
+        },
+        {
+          "item": "Blessed Scroll: Enchant Armor (S)",
+          "chance": "2.8007%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Robe",
+          "chance": "1.8626%",
+          "count": "1"
+        }
       ]
     },
     {
@@ -7715,7 +8312,11 @@
           "chance": "47.51%",
           "count": "1"
         },
-        { "item": "Tempered Mithril Gaiters", "chance": "33.21%", "count": "1" },
+        {
+          "item": "Tempered Mithril Gaiters",
+          "chance": "33.21%",
+          "count": "1"
+        },
         { "item": "Plate Helmet", "chance": "23.83%", "count": "1" },
         { "item": "Mithril Shirt", "chance": "20.78%", "count": "1" },
         {
@@ -7964,7 +8565,11 @@
           "count": "1–3"
         },
         { "item": "Boots of Knowledge", "chance": "19.3%", "count": "1" },
-        { "item": "Reinforced Leather Gloves", "chance": "19.3%", "count": "1" },
+        {
+          "item": "Reinforced Leather Gloves",
+          "chance": "19.3%",
+          "count": "1"
+        },
         { "item": "Gloves of Knowledge", "chance": "19.3%", "count": "1" },
         { "item": "Triple-Edged Jamadhr", "chance": "10.6%", "count": "1" },
         { "item": "Iron Boots Design", "chance": "6.09%", "count": "60–180" },
@@ -8181,7 +8786,11 @@
       },
       "drops": [
         { "item": "Mithril Ring Wire", "chance": "22.1%", "count": "40–120" },
-        { "item": "Mithril Dagger Blade", "chance": "20.92%", "count": "12–36" },
+        {
+          "item": "Mithril Dagger Blade",
+          "chance": "20.92%",
+          "count": "12–36"
+        },
         { "item": "Necklace of Darkness", "chance": "20.68%", "count": "1" },
         { "item": "Mithril Dagger", "chance": "8.347%", "count": "1" },
         {
@@ -8252,7 +8861,11 @@
           "chance": "1.934%",
           "count": "203–607"
         },
-        { "item": "Assault Boots Part", "chance": "1.224%", "count": "320–960" },
+        {
+          "item": "Assault Boots Part",
+          "chance": "1.224%",
+          "count": "320–960"
+        },
         { "item": "Mithril Gloves", "chance": "1.098%", "count": "9–25" },
         { "item": "Ogre Power Gauntlets", "chance": "1.037%", "count": "9–27" },
         { "item": "Assault Boots", "chance": "0.9825%", "count": "10–28" },
@@ -8341,9 +8954,17 @@
           "chance": "1.701%",
           "count": "203–607"
         },
-        { "item": "Assault Boots Part", "chance": "1.076%", "count": "320–960" },
+        {
+          "item": "Assault Boots Part",
+          "chance": "1.076%",
+          "count": "320–960"
+        },
         { "item": "Mithril Gloves", "chance": "0.9654%", "count": "9–25" },
-        { "item": "Ogre Power Gauntlets", "chance": "0.9117%", "count": "9–27" },
+        {
+          "item": "Ogre Power Gauntlets",
+          "chance": "0.9117%",
+          "count": "9–27"
+        },
         { "item": "Assault Boots", "chance": "0.8638%", "count": "10–28" },
         {
           "item": "Salamander Skin Boots",
@@ -8436,7 +9057,11 @@
         { "item": "Scythe Edge", "chance": "16.93%", "count": "5–15" },
         { "item": "Chain Mail Shirt", "chance": "11.11%", "count": "1" },
         { "item": "Orcish Glaive Blade", "chance": "9.408%", "count": "9–27" },
-        { "item": "Chain Gaiters Part", "chance": "5.634%", "count": "105–315" },
+        {
+          "item": "Chain Gaiters Part",
+          "chance": "5.634%",
+          "count": "105–315"
+        },
         {
           "item": "Blessed Scroll: Enchant Weapon (C)",
           "chance": "5.598%",
@@ -8676,7 +9301,11 @@
           "count": "1–3"
         },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "1–3" },
-        { "item": "Skull of the Dead B-Grade", "chance": "25%", "count": "4–5" },
+        {
+          "item": "Skull of the Dead B-Grade",
+          "chance": "25%",
+          "count": "4–5"
+        },
         {
           "item": "Stockings of Doom Pattern",
           "chance": "21.79%",
@@ -8738,7 +9367,11 @@
       "drops": [
         { "item": "Stormbringer Blade", "chance": "34.46%", "count": "4–12" },
         { "item": "Moonstone Earring", "chance": "25.87%", "count": "1" },
-        { "item": "Skull of the Dead C-Grade", "chance": "25%", "count": "4–9" },
+        {
+          "item": "Skull of the Dead C-Grade",
+          "chance": "25%",
+          "count": "4–9"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "1" },
         { "item": "Aquastone Necklace", "chance": "19.41%", "count": "1" },
         { "item": "Flamberge Blade", "chance": "17.19%", "count": "8–22" },
@@ -8796,7 +9429,11 @@
           "count": "1–3"
         },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "1" },
-        { "item": "Skull of the Dead C-Grade", "chance": "25%", "count": "1–2" },
+        {
+          "item": "Skull of the Dead C-Grade",
+          "chance": "25%",
+          "count": "1–2"
+        },
         {
           "item": "Greater Dye of INT <Int+3 Wit-3>",
           "chance": "21.12%",
@@ -9498,7 +10135,11 @@
           "count": "4–12"
         },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "3–9" },
-        { "item": "Skull of the Dead A-Grade", "chance": "25%", "count": "1–3" },
+        {
+          "item": "Skull of the Dead A-Grade",
+          "chance": "25%",
+          "count": "1–3"
+        },
         {
           "item": "Scroll: Enchant Armor (S)",
           "chance": "23.97%",
@@ -9551,69 +10192,93 @@
         "sp": 1136977
       },
       "drops": [
-        { "item": "Scroll: Enchant Armor (S)", "chance": "50%", "count": "1" },
-        { "item": "Heaven's Divider Edge", "chance": "39.7%", "count": "4–12" },
-        { "item": "Forgotten Blade Edge", "chance": "20.8%", "count": "8–22" },
+        {
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "50.98%",
+          "count": "1"
+        },
+        {
+          "item": "Heaven's Divider Edge",
+          "chance": "40.48%",
+          "count": "4–12"
+        },
+        {
+          "item": "Forgotten Blade Edge",
+          "chance": "21.25%",
+          "count": "8–22"
+        },
         {
           "item": "Sealed Imperial Crusader Boots Design",
-          "chance": "16.9%",
+          "chance": "17.28%",
           "count": "14–40"
         },
         {
           "item": "Sealed Draconic Leather Gloves Fabric",
-          "chance": "11.4%",
+          "chance": "11.67%",
           "count": "20–60"
         },
         {
           "item": "Sealed Draconic Leather Boots Design",
-          "chance": "8.31%",
+          "chance": "8.485%",
           "count": "28–82"
         },
         {
           "item": "Sealed Major Arcana Gloves fabric",
-          "chance": "6.35%",
+          "chance": "6.481%",
           "count": "36–108"
         },
         {
           "item": "Sealed Major Arcana Boots Design",
-          "chance": "5.02%",
+          "chance": "5.128%",
           "count": "46–136"
         },
-        { "item": "Scroll: Enchant Weapon (S)", "chance": "5%", "count": "1" },
         {
-          "item": "Sealed Imperial Crusader Gauntlets Design",
-          "chance": "2.04%",
-          "count": "112–336"
-        },
-        { "item": "Sealed Major Arcana Boots", "chance": "1.79%", "count": "1" },
-        { "item": "Sealed Major Arcana Glove", "chance": "1.79%", "count": "1" },
-        {
-          "item": "Sealed Dragon Leather Boots",
-          "chance": "1.79%",
+          "item": "Scroll: Enchant Weapon (S)",
+          "chance": "5.098%",
           "count": "1"
         },
         {
-          "item": "Sealed Dragon Leather Glove",
-          "chance": "1.79%",
+          "item": "Sealed Imperial Crusader Gauntlets Design",
+          "chance": "2.083%",
+          "count": "112–336"
+        },
+        {
+          "item": "Sealed Major Arcana Boots",
+          "chance": "2.052%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Glove",
+          "chance": "2.052%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Boots",
+          "chance": "2.052%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Glove",
+          "chance": "2.052%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Boots",
-          "chance": "1.79%",
+          "chance": "2.052%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Gauntlet",
-          "chance": "1.79%",
+          "chance": "2.052%",
           "count": "1"
         },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.8327%",
+          "chance": "0.8498%",
           "count": "1"
         },
-        { "item": "Heaven's Divider", "chance": "0.5923%", "count": "1" },
-        { "item": "Forgotten Blade", "chance": "0.5923%", "count": "1" }
+        { "item": "Heaven's Divider", "chance": "0.6899%", "count": "1" },
+        { "item": "Forgotten Blade", "chance": "0.6899%", "count": "1" }
       ]
     },
     {
@@ -9753,7 +10418,11 @@
           "chance": "33.32%",
           "count": "1–3"
         },
-        { "item": "Skull of the Dead B-Grade", "chance": "25%", "count": "1–2" },
+        {
+          "item": "Skull of the Dead B-Grade",
+          "chance": "25%",
+          "count": "1–2"
+        },
         { "item": "Destruction Tombstone", "chance": "25%", "count": "2–3" },
         {
           "item": "Greater Dye of STR <Str+3 Dex-3>",
@@ -10361,13 +11030,21 @@
           "chance": "3.399%",
           "count": "68–204"
         },
-        { "item": "Chain Gloves Design", "chance": "2.854%", "count": "81–243" },
+        {
+          "item": "Chain Gloves Design",
+          "chance": "2.854%",
+          "count": "81–243"
+        },
         {
           "item": "Karmian Gloves Fabric",
           "chance": "2.433%",
           "count": "95–285"
         },
-        { "item": "Heavy Doom Axe Blade", "chance": "2.062%", "count": "17–49" },
+        {
+          "item": "Heavy Doom Axe Blade",
+          "chance": "2.062%",
+          "count": "17–49"
+        },
         {
           "item": "Mithril Boots Design",
           "chance": "1.051%",
@@ -10381,7 +11058,11 @@
         { "item": "Crystal Staff", "chance": "0.9846%", "count": "1" },
         { "item": "Stick of Faith", "chance": "0.9846%", "count": "1" },
         { "item": "Heavy Doom Axe", "chance": "0.9846%", "count": "1" },
-        { "item": "Chain Boots Part", "chance": "0.6115%", "count": "378–1134" },
+        {
+          "item": "Chain Boots Part",
+          "chance": "0.6115%",
+          "count": "378–1134"
+        },
         { "item": "Mithril Boots", "chance": "0.4815%", "count": "11–33" },
         { "item": "Chain Boots", "chance": "0.4606%", "count": "12–34" },
         { "item": "Karmian Boots", "chance": "0.4414%", "count": "12–36" },
@@ -10425,7 +11106,11 @@
           "chance": "7.697%",
           "count": "81–243"
         },
-        { "item": "Chain Hood Pattern", "chance": "4.044%", "count": "140–420" },
+        {
+          "item": "Chain Hood Pattern",
+          "chance": "4.044%",
+          "count": "140–420"
+        },
         { "item": "Eldarake", "chance": "2.75%", "count": "6–16" },
         { "item": "Chain Shield", "chance": "2.521%", "count": "6–18" }
       ]
@@ -10541,7 +11226,11 @@
         { "item": "Avadon Boots", "chance": "7.684%", "count": "1" },
         { "item": "Zubei's Gauntlets", "chance": "7.684%", "count": "1" },
         { "item": "Avadon Gloves", "chance": "7.684%", "count": "1" },
-        { "item": "Zubei's Boots Design", "chance": "6.65%", "count": "60–180" },
+        {
+          "item": "Zubei's Boots Design",
+          "chance": "6.65%",
+          "count": "60–180"
+        },
         {
           "item": "Avadon Boots Design",
           "chance": "3.455%",
@@ -10650,7 +11339,11 @@
           "count": "2–4"
         },
         { "item": "Manticore Skin Shirt", "chance": "19.9%", "count": "1" },
-        { "item": "Cursed Maingauche Edge", "chance": "18.1%", "count": "8–22" },
+        {
+          "item": "Cursed Maingauche Edge",
+          "chance": "18.1%",
+          "count": "8–22"
+        },
         {
           "item": "Greater Dye of CON <Con+1 Str-1>",
           "chance": "16.7%",
@@ -10663,7 +11356,11 @@
         },
         { "item": "Maingauche", "chance": "4.79%", "count": "1" },
         { "item": "Cursed Maingauche", "chance": "4.79%", "count": "1" },
-        { "item": "Manticore Skin Gaiters", "chance": "3.98%", "count": "4–12" },
+        {
+          "item": "Manticore Skin Gaiters",
+          "chance": "3.98%",
+          "count": "4–12"
+        },
         {
           "item": "Blessed Scroll: Enchant Weapon (D)",
           "chance": "3.71%",
@@ -10708,7 +11405,11 @@
         { "item": "Chain Gloves", "chance": "10.32%", "count": "1" },
         { "item": "Karmian Gloves", "chance": "10.32%", "count": "1" },
         { "item": "Orcish Glaive Blade", "chance": "9.82%", "count": "9–27" },
-        { "item": "Karmian Boots Fabric", "chance": "8.657%", "count": "26–78" },
+        {
+          "item": "Karmian Boots Fabric",
+          "chance": "8.657%",
+          "count": "26–78"
+        },
         {
           "item": "Plate Leather Boot Lining",
           "chance": "6.431%",
@@ -10729,7 +11430,11 @@
           "chance": "3.31%",
           "count": "68–204"
         },
-        { "item": "Chain Gloves Design", "chance": "2.779%", "count": "81–243" },
+        {
+          "item": "Chain Gloves Design",
+          "chance": "2.779%",
+          "count": "81–243"
+        },
         { "item": "Scythe", "chance": "2.557%", "count": "1" },
         { "item": "Orcish Glaive", "chance": "2.557%", "count": "1" },
         { "item": "Body Slasher", "chance": "2.557%", "count": "1" },
@@ -10748,7 +11453,11 @@
           "chance": "1.023%",
           "count": "220–660"
         },
-        { "item": "Chain Boots Part", "chance": "0.5955%", "count": "378–1134" },
+        {
+          "item": "Chain Boots Part",
+          "chance": "0.5955%",
+          "count": "378–1134"
+        },
         { "item": "Mithril Boots", "chance": "0.4689%", "count": "11–33" },
         { "item": "Chain Boots", "chance": "0.4485%", "count": "12–34" },
         { "item": "Karmian Boots", "chance": "0.4298%", "count": "12–36" },
@@ -10786,7 +11495,11 @@
           "chance": "22.94%",
           "count": "24–72"
         },
-        { "item": "Tempered Mithril Gaiters", "chance": "22.75%", "count": "1" },
+        {
+          "item": "Tempered Mithril Gaiters",
+          "chance": "22.75%",
+          "count": "1"
+        },
         {
           "item": "Crystallized Ice Bow Shaft",
           "chance": "18.34%",
@@ -10824,7 +11537,11 @@
           "count": "1"
         },
         { "item": "Sprite's Staff Head", "chance": "33.43%", "count": "2–6" },
-        { "item": "Tunic of Zubei Fabric", "chance": "27.66%", "count": "9–27" },
+        {
+          "item": "Tunic of Zubei Fabric",
+          "chance": "27.66%",
+          "count": "9–27"
+        },
         { "item": "Ice Storm Hammer Head", "chance": "24.45%", "count": "3–7" },
         {
           "item": "Greater Dye of STR <Str+4 Con-4>",
@@ -10942,57 +11659,65 @@
       "race": "Humanoids",
       "drops": [
         {
-          "item": "Blessed Scroll of Resurrection",
-          "chance": "50.91%",
-          "count": "1"
+          "item": "Angel Slayer Blade",
+          "chance": "35.0234%",
+          "count": "3–9"
         },
-        { "item": "Angel Slayer Blade", "chance": "56.59%", "count": "3–9" },
         {
           "item": "Sealed Draconic Leather Helmet Pattern",
-          "chance": "20.23%",
-          "count": "11–31"
+          "chance": "18.5083%",
+          "count": "14–30"
         },
         {
           "item": "Sealed Major Arcana Circlet Pattern",
-          "chance": "13.27%",
-          "count": "16–48"
+          "chance": "14.8367%",
+          "count": "16–45"
         },
         {
-          "item": "Sealed Imperial Crusader Shield Part",
-          "chance": "8.114%",
-          "count": "23–67"
-        },
-        {
-          "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "4.525%",
+          "item": "Life Stone: level 76",
+          "chance": "23.2743%",
           "count": "1"
         },
         {
-          "item": "Sealed Imperial Crusader Helmet Pattern",
-          "chance": "3.539%",
-          "count": "60–180"
+          "item": "Dragon Hunter Axe Blade",
+          "chance": "8.0504%",
+          "count": "6–18"
+        },
+        {
+          "item": "High-Grade Life Stone: level 76",
+          "chance": "8.8231%",
+          "count": "2–4"
+        },
+        {
+          "item": "Imperial Staff Head",
+          "chance": "7.1191%",
+          "count": "11–31"
         },
         {
           "item": "Sealed Imperial Crusader Shield",
-          "chance": "1.561%",
+          "chance": "5.862%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Helmet",
-          "chance": "1.093%",
+          "chance": "5.2901%",
           "count": "1"
         },
         {
           "item": "Sealed Draconic Leather Helmet",
-          "chance": "1.093%",
+          "chance": "4.7901%",
           "count": "1"
         },
         {
-          "item": "Sealed Major Arcana Circlet",
-          "chance": "1.093%",
-          "count": "1"
+          "item": "Basalt Battlehammer Head",
+          "chance": "4.5752%",
+          "count": "16–48"
         },
-        { "item": "Angel Slayer", "chance": "0.7348%", "count": "1" }
+        {
+          "item": "Mid-Grade Life Stone: level 76",
+          "chance": "11.2321%",
+          "count": "1"
+        }
       ]
     },
     {
@@ -11012,57 +11737,11 @@
       },
       "drops": [
         {
-          "item": "Sealed Imperial Crusader Shield",
-          "chance": "2.227%",
-          "count": "1"
+          "item": "False Nucleus of Life: A-Grade",
+          "chance": "25%",
+          "count": "1–2"
         },
-        {
-          "item": "Sealed Imperial Crusader Helmet",
-          "chance": "1.559%",
-          "count": "1"
-        },
-        {
-          "item": "Sealed Draconic Leather Helmet",
-          "chance": "1.559%",
-          "count": "1"
-        },
-        {
-          "item": "Sealed Major Arcana Circlet",
-          "chance": "1.559%",
-          "count": "1"
-        },
-        {
-          "item": "Sealed Imperial Crusader Shield Part",
-          "chance": "11.58%",
-          "count": "23–67"
-        },
-        {
-          "item": "Sealed Imperial Crusader Helmet Pattern",
-          "chance": "5.049%",
-          "count": "60–180"
-        },
-        {
-          "item": "Sealed Draconic Leather Helmet Pattern",
-          "chance": "28.85%",
-          "count": "11–31"
-        },
-        {
-          "item": "Sealed Major Arcana Circlet Pattern",
-          "chance": "18.94%",
-          "count": "16–48"
-        },
-        { "item": "Angel Slayer", "chance": "1.048%", "count": "1" },
-        { "item": "Angel Slayer Blade", "chance": "20.18%", "count": "12–36" },
-        {
-          "item": "Blessed Scroll: Enchant Armor (S)",
-          "chance": "6.456%",
-          "count": "1"
-        },
-        {
-          "item": "Blessed Scroll: Enchant Armor (A)",
-          "chance": "16.14%",
-          "count": "1"
-        }
+        { "item": "Destruction Tombstone", "chance": "25%", "count": "4–8" }
       ]
     },
     {
@@ -11081,31 +11760,43 @@
       },
       "drops": [
         {
+          "item": "Life Stone: level 70",
+          "chance": "51.2715%",
+          "count": "1"
+        },
+        {
           "item": "Sealed Tateossian Earring Part",
-          "chance": "42.59%",
+          "chance": "42.5832%",
           "count": "11–27"
         },
-        { "item": "Imperial Staff Head", "chance": "42.59%", "count": "2–4" },
         {
-          "item": "Basalt Battlehammer Head",
-          "chance": "32.3%",
-          "count": "2–6"
+          "item": "High-Grade Life Stone: level 70",
+          "chance": "15.2713%",
+          "count": "1"
         },
         {
           "item": "Sealed Tateossian Necklace Chain",
-          "chance": "16.69%",
+          "chance": "16.6845%",
           "count": "25–37"
         },
-        { "item": "Arcana Mace Head", "chance": "11.53%", "count": "3–6" },
         {
           "item": "Sealed Tateossian Ring Gem",
-          "chance": "10.64%",
+          "chance": "10.6317%",
           "count": "43–108"
         },
-        { "item": "Sealed Tateossian Ring", "chance": "3.17%", "count": "1" },
+        {
+          "item": "Top-Grade Life Stone: level 70",
+          "chance": "8.6125%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Ring",
+          "chance": "3.1598%",
+          "count": "1"
+        },
         {
           "item": "Sealed Tateossian Necklace",
-          "chance": "1.59%",
+          "chance": "1.5799%",
           "count": "1"
         }
       ]
@@ -11128,32 +11819,44 @@
       "drops": [
         {
           "item": "Basalt Battlehammer Head",
-          "chance": "28.9%",
+          "chance": "28.9231%",
           "count": "2–6"
         },
-        { "item": "Arcana Mace Head", "chance": "23.1%", "count": "3–7" },
+        { "item": "Arcana Mace Head", "chance": "23.1387%", "count": "3–7" },
         {
           "item": "Sealed Tateossian Necklace Chain",
-          "chance": "20.7%",
+          "chance": "20.7304%",
           "count": "14–42"
         },
         {
           "item": "Sealed Tateossian Ring Gem",
-          "chance": "13.2%",
+          "chance": "13.2098%",
           "count": "40–120"
         },
-        { "item": "Dragon Hunter Axe Blade", "chance": "10%", "count": "6–18" },
+        {
+          "item": "Dragon Hunter Axe Blade",
+          "chance": "10.0043%",
+          "count": "6–18"
+        },
         {
           "item": "Sealed Tateossian Earring Part",
-          "chance": "5.88%",
+          "chance": "5.8788%",
           "count": "81–243"
         },
-        { "item": "Imperial Staff Head", "chance": "5.63%", "count": "11–31" },
-        { "item": "Sealed Tateossian Ring", "chance": "4.45%", "count": "1" },
-        { "item": "Sealed Tateossian Earring", "chance": "2.97%", "count": "1" },
+        {
+          "item": "Imperial Staff Head",
+          "chance": "5.6257%",
+          "count": "11–31"
+        },
+        { "item": "Sealed Tateossian Ring", "chance": "4.4482%", "count": "1" },
+        {
+          "item": "Sealed Tateossian Earring",
+          "chance": "2.9654%",
+          "count": "1"
+        },
         {
           "item": "Sealed Tateossian Necklace",
-          "chance": "2.22%",
+          "chance": "2.2236%",
           "count": "1"
         },
         { "item": "Basalt Battlehammer", "chance": "0.2551%", "count": "1" },
@@ -11181,24 +11884,32 @@
       "drops": [
         {
           "item": "Sealed Imperial Crusader Breastplate Part",
-          "chance": "45.4%",
+          "chance": "45.37%",
           "count": "8–22"
         },
-        { "item": "Forgotten Blade Edge", "chance": "27.6%", "count": "8–22" },
+        {
+          "item": "Forgotten Blade Edge",
+          "chance": "27.63%",
+          "count": "8–22"
+        },
         {
           "item": "Sealed Imperial Crusader Gaiters Pattern",
-          "chance": "18.3%",
+          "chance": "18.25%",
           "count": "24–72"
         },
-        { "item": "Heaven's Divider Edge", "chance": "8.77%", "count": "24–72" },
+        {
+          "item": "Heaven's Divider Edge",
+          "chance": "8.773%",
+          "count": "24–72"
+        },
         {
           "item": "Sealed Imperial Crusader Gaiters",
-          "chance": "2.85%",
+          "chance": "2.854%",
           "count": "1"
         },
         {
           "item": "Sealed Imperial Crusader Breastplate",
-          "chance": "1.79%",
+          "chance": "1.788%",
           "count": "1"
         },
         { "item": "Forgotten Blade", "chance": "0.7859%", "count": "1" },
@@ -11306,254 +12017,100 @@
     },
     {
       "id": 29062,
-      "name": "Andreas Van Halter",
+      "name": "High Priestess van Halter",
+      "synonyms": ["Andreas Van Halter"],
       "title": "Seer of Pagan",
       "level": 87,
       "npcType": "RaidBoss",
       "hp": 115708,
       "isAggressive": false,
       "race": "Humanoids",
-      "description": "Andreas Van Halter - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 80 humanoid by nature and does not attack first. Its lair is— Rune Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Demon Circlet, Scroll: Enchant Armor (S), Sealed Major Arcana Robe Part and other equipment.",
+      "description": "High Priestess van Halter - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. It is a level 80 humanoid by nature and does not attack first. Its lair is— Rune Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Demon Circlet, Scroll: Enchant Armor (S), Sealed Major Arcana Robe Part and other equipment.",
       "features": {
         "mp": 2051,
         "exp": 440000,
         "sp": 40000
       },
       "drops": [
-        { "item": "Demon Circlet", "chance": "32%", "count": "1" },
-        { "item": "Scroll: Enchant Armor (S)", "chance": "32%", "count": "1" },
+        { "item": "Demon Circlet", "chance": "32.0095%", "count": "1" },
         {
-          "item": "Sealed Major Arcana Robe Part",
-          "chance": "30.6%",
-          "count": "12–36"
-        },
-        { "item": "Draconic Bow Shaft", "chance": "23.4%", "count": "12–36" },
-        {
-          "item": "Scroll: Enchant Weapon (S)",
-          "chance": "3.23%",
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "32.0095%",
           "count": "1"
         },
-        { "item": "Sealed Major Arcana Robe", "chance": "1.72%", "count": "1" },
-        { "item": "Dragon Bow", "chance": "1.05%", "count": "1" },
+        {
+          "item": "Sealed Major Arcana Robe Part",
+          "chance": "30.6342%",
+          "count": "12–36"
+        },
+        {
+          "item": "Draconic Bow Shaft",
+          "chance": "23.3504%",
+          "count": "12–36"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (S)",
+          "chance": "3.2009%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Robe",
+          "chance": "1.7056%",
+          "count": "1"
+        },
+        { "item": "Draconic Bow", "chance": "1.0504%", "count": "1" },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.5347%",
+          "chance": "0.5335%",
           "count": "1"
         }
       ]
     },
     {
-      "id": 29066,
-      "name": "Antharas",
+      "id": 29065,
+      "name": "Sailren",
       "title": "Raid Boss",
-      "level": 79,
+      "level": 87,
       "npcType": "RaidBoss",
-      "hp": 6100000,
+      "hp": 1639965,
       "isAggressive": true,
-      "race": "Dragons",
-      "description": "Antharas is a dragon of level 79. It is an aggressive enemy that attacks first within a 2000 radius. When killed, you can obtain Scroll: Enchant Weapon (A), Blessed Scroll of Escape, and other loot. Spawn locations are shown on the habitat map in the card.",
+      "race": "Beasts",
       "features": {
-        "mp": 1800000,
-        "exp": 230931676,
-        "sp": 25593295
+        "mp": 4553,
+        "exp": 4569145,
+        "sp": 592766
       },
       "drops": [
         {
-          "item": "Scroll: Enchant Weapon (A)",
-          "chance": "100%",
-          "count": "1–19"
-        },
-        {
-          "item": "Blessed Scroll of Escape",
-          "chance": "100%",
-          "count": "1–59"
-        },
-        {
-          "item": "Blessed Scroll of Resurrection",
-          "chance": "100%",
-          "count": "1–39"
-        },
-        { "item": "Adena", "chance": "100%", "count": "14000000–18000000" },
-        { "item": "Adena", "chance": "100%", "count": "14000000–18000000" },
-        { "item": "Adena", "chance": "100%", "count": "14000000–18000000" },
-        { "item": "Adena", "chance": "100%", "count": "14000000–18000000" },
-        { "item": "Adena", "chance": "100%", "count": "14000000–18000000" },
-        { "item": "Adena", "chance": "100%", "count": "14000000–18000000" },
-        { "item": "Adena", "chance": "100%", "count": "9000000–13000000" },
-        { "item": "Earring of Antharas", "chance": "100%", "count": "1" },
-        {
-          "item": "High-Grade Life Stone: level 76",
-          "chance": "54%",
-          "count": "3–4"
-        },
-        {
-          "item": "Sealed Dark Crystal breastplate",
-          "chance": "50%",
-          "count": "1–3"
-        },
-        {
-          "item": "Sealed Shield of Nightmare",
-          "chance": "40%",
-          "count": "1–3"
-        },
-        {
-          "item": "Sealed Dark Crystal Shield",
-          "chance": "40%",
-          "count": "1–3"
-        },
-        { "item": "Sealed Majestic Ring", "chance": "35%", "count": "1–5" },
-        { "item": "Sealed Majestic Earring", "chance": "35%", "count": "1–5" },
-        { "item": "Sealed Phoenix Ring", "chance": "35%", "count": "1–5" },
-        { "item": "Sealed Phoenix Earring", "chance": "35%", "count": "1–5" },
-        { "item": "Sealed Tateossian Earring", "chance": "35%", "count": "1" },
-        { "item": "Sealed Tateossian Ring", "chance": "35%", "count": "1" },
-        {
-          "item": "Sealed Leather Armor of Nightmare",
-          "chance": "35%",
-          "count": "1–3"
-        },
-        { "item": "Sealed Armor of Nightmare", "chance": "35%", "count": "1–3" },
-        {
-          "item": "Sealed Dark Crystal Gaiters",
-          "chance": "35%",
-          "count": "1–3"
-        },
-        {
-          "item": "Sealed Dark Crystal Leggings",
-          "chance": "35%",
-          "count": "1–3"
-        },
-        { "item": "Sealed Major Arcana Robe", "chance": "35%", "count": "1" },
-        { "item": "Sealed Dragon Leather Armor", "chance": "35%", "count": "1" },
-        {
-          "item": "Sealed Imperial Crusader Gauntlet",
-          "chance": "34%",
+          "item": "Sealed Draconic Leather Armor",
+          "chance": "0.7303%",
           "count": "1"
         },
         {
-          "item": "Sealed Imperial Crusader Boots",
-          "chance": "34%",
+          "item": "Sealed Draconic Leather Armor Part",
+          "chance": "52.4645%",
+          "count": "3–9"
+        },
+        { "item": "Angel Slayer", "chance": "0.4497%", "count": "1" },
+        {
+          "item": "Angel Slayer Blade",
+          "chance": "39.5312%",
+          "count": "3–9"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (S)",
+          "chance": "1.8273%",
           "count": "1"
         },
         {
-          "item": "Sealed Imperial Crusader Helmet",
-          "chance": "34%",
-          "count": "1"
-        },
-        { "item": "Sealed Dragon Leather Glove", "chance": "33%", "count": "1" },
-        { "item": "Sealed Major Arcana Glove", "chance": "33%", "count": "1" },
-        { "item": "Sealed Major Arcana Boots", "chance": "33%", "count": "1" },
-        { "item": "Sealed Dragon Leather Boots", "chance": "33%", "count": "1" },
-        {
-          "item": "Sealed Draconic Leather Helmet",
-          "chance": "33%",
-          "count": "1"
-        },
-        { "item": "Sealed Major Arcana Circlet", "chance": "33%", "count": "1" },
-        { "item": "Sealed Majestic Necklace", "chance": "30%", "count": "1–5" },
-        { "item": "Sealed Phoenix Necklace", "chance": "30%", "count": "1–5" },
-        { "item": "Sealed Tateossian Necklace", "chance": "30%", "count": "1" },
-        { "item": "Sealed Nightmare Robe", "chance": "30%", "count": "1–3" },
-        { "item": "Sealed Tallum Stockings", "chance": "30%", "count": "1–3" },
-        { "item": "Halberd", "chance": "25%", "count": "1–2" },
-        { "item": "Meteor Shower", "chance": "25%", "count": "1–2" },
-        { "item": "Blood Tornado", "chance": "25%", "count": "1–2" },
-        { "item": "Tallum Blade", "chance": "25%", "count": "1–2" },
-        { "item": "Dasparion's Staff", "chance": "25%", "count": "1–2" },
-        { "item": "Elemental Sword", "chance": "25%", "count": "1–2" },
-        { "item": "Bloody Orchid", "chance": "25%", "count": "1–2" },
-        { "item": "Carnage Bow", "chance": "25%", "count": "1–2" },
-        { "item": "Sword of Miracles", "chance": "25%", "count": "1–2" },
-        { "item": "Elysian", "chance": "25%", "count": "1–2" },
-        { "item": "Dark Legion's Edge", "chance": "25%", "count": "1–2" },
-        { "item": "Dragon Slayer", "chance": "25%", "count": "1–2" },
-        {
-          "item": "Sealed Dark Crystal Leather Armor",
-          "chance": "25%",
-          "count": "1–3"
-        },
-        { "item": "Sealed Tallum Tunic", "chance": "25%", "count": "1–3" },
-        { "item": "Sealed Tallum Plate Armor", "chance": "25%", "count": "1–3" },
-        { "item": "Sealed Dark Crystal Robe", "chance": "25%", "count": "1–3" },
-        {
-          "item": "Sealed Tallum Leather Armor",
-          "chance": "25%",
-          "count": "1–3"
-        },
-        { "item": "Sealed Tallum Helmet", "chance": "25%", "count": "1–3" },
-        { "item": "Sealed Majestic Circlet", "chance": "25%", "count": "1–3" },
-        {
-          "item": "Sealed Dark Crystal Helmet",
-          "chance": "25%",
-          "count": "1–3"
-        },
-        { "item": "Sealed Helm of Nightmare", "chance": "25%", "count": "1–3" },
-        { "item": "Sealed Tallum Boots", "chance": "25%", "count": "1–3" },
-        { "item": "Sealed Majestic Boots", "chance": "25%", "count": "1–3" },
-        { "item": "Sealed Dark Crystal Boots", "chance": "25%", "count": "1–3" },
-        { "item": "Sealed Boots of Nightmare", "chance": "25%", "count": "1–3" },
-        {
-          "item": "Sealed Dark Crystal Gloves",
-          "chance": "25%",
-          "count": "1–3"
-        },
-        { "item": "Sealed Tallum Gloves", "chance": "25%", "count": "1–3" },
-        {
-          "item": "Sealed Gauntlets of Nightmare",
-          "chance": "25%",
-          "count": "1–3"
-        },
-        { "item": "Sealed Majestic Gauntlets", "chance": "25%", "count": "1–3" },
-        { "item": "Dragon Grinder", "chance": "20%", "count": "1–2" },
-        { "item": "Soul Bow", "chance": "20%", "count": "1–2" },
-        { "item": "Tallum Glaive", "chance": "20%", "count": "1–2" },
-        { "item": "Soul Separator", "chance": "20%", "count": "1–2" },
-        { "item": "Branch of the Mother Tree", "chance": "20%", "count": "1–2" },
-        { "item": "Arcana Mace", "chance": "20%", "count": "1" },
-        { "item": "Demon Splinter", "chance": "20%", "count": "1" },
-        { "item": "Dragon Bow", "chance": "20%", "count": "1" },
-        { "item": "Angel Slayer", "chance": "20%", "count": "1" },
-        { "item": "Imperial Staff", "chance": "20%", "count": "1" },
-        {
-          "item": "Sealed Imperial Crusader Shield",
-          "chance": "20%",
-          "count": "1"
-        },
-        { "item": "Basalt Battlehammer", "chance": "17%", "count": "1" },
-        { "item": "Forgotten Blade", "chance": "17%", "count": "1" },
-        { "item": "Saint Spear", "chance": "17%", "count": "1" },
-        { "item": "Dragon Hunter Axe", "chance": "17%", "count": "1" },
-        {
-          "item": "High-Grade Life Stone: level 70",
-          "chance": "16.7%",
-          "count": "2–4"
-        },
-        { "item": "Heaven's Divider", "chance": "16%", "count": "1" },
-        {
-          "item": "Tallum Blade*Dark Legion's Edge",
-          "chance": "16%",
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "18.2734%",
           "count": "1"
         },
         {
-          "item": "Sealed Imperial Crusader Gaiters",
-          "chance": "15%",
+          "item": "Blessed Scroll: Enchant Weapon (S)",
+          "chance": "0.3046%",
           "count": "1"
-        },
-        {
-          "item": "Sealed Imperial Crusader Breastplate",
-          "chance": "15%",
-          "count": "1"
-        },
-        { "item": "Sealed Majestic Robe", "chance": "9%", "count": "1–3" },
-        {
-          "item": "Sealed Majestic Leather Armor",
-          "chance": "8%",
-          "count": "1–3"
-        },
-        {
-          "item": "Sealed Majestic Plate Armor",
-          "chance": "8%",
-          "count": "1–3"
         }
       ]
     },
@@ -11567,75 +12124,77 @@
       "isAggressive": false,
       "race": "Demons",
       "drops": [
-        { "item": "Demon Splinter Blade", "chance": "70.03%", "count": "3–9" },
+        { "item": "Demon Splinter Blade", "chance": "93%", "count": "3–9" },
         {
           "item": "Scroll: Enchant Armor (S)",
-          "chance": "32.99%",
+          "chance": "45%",
           "count": "1"
         },
         {
           "item": "Sealed Major Arcana Robe Part",
-          "chance": "23.68%",
-          "count": "12–36"
+          "chance": "70%",
+          "count": "15–29"
         },
         {
-          "item": "Scroll: Enchant Weapon (S)",
-          "chance": "3.299%",
+          "item": "Sealed Major Arcana Robe",
+          "chance": "7.1428%",
           "count": "1"
         },
-        { "item": "Sealed Major Arcana Robe", "chance": "1.318%", "count": "1" },
-        { "item": "Demon Splinter", "chance": "0.812%", "count": "1" },
-        {
-          "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.5499%",
-          "count": "1"
-        }
+        { "item": "Demon Splinter", "chance": "2.381%", "count": "1" }
       ]
     },
     {
       "id": 29096,
-      "name": "Anais",
+      "name": "Lord of Splendor Anais",
       "title": "Raid Boss",
-      "level": 80,
+      "level": 87,
       "npcType": "RaidBoss",
       "hp": 480890,
       "isAggressive": true,
       "race": "Angels",
-      "description": "Anais - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. A level 80 angel by nature, it attacks without warning. Its lair is— Rune Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Saint Spear Blade, Sealed Imperial Crusader Gaiters Pattern, Scroll: Enchant Armor (S) and other equipment.",
+      "description": "Lord of Splendor Anais - nominal raid boss: a unique, far more formidable relative of the common beasts of its kind, distinguished by its strength and tenacity to the point that it cannot be defeated alone. A level 80 angel by nature, it attacks without warning. Its lair is— Rune Territory. Raid bosses like him are taken down by squads and entire clans: defeating such an enemy earns the clan reputation points. A defeated boss drops valuable loot— Saint Spear Blade, Sealed Imperial Crusader Gaiters Pattern, Scroll: Enchant Armor (S) and other equipment.",
       "features": {
         "mp": 2051,
         "exp": 3608496,
         "sp": 952059
       },
       "drops": [
-        { "item": "Saint Spear Blade", "chance": "72.7%", "count": "3–9" },
+        { "item": "Saint Spear Blade", "chance": "72.6675%", "count": "3–9" },
         {
           "item": "Sealed Imperial Crusader Gaiters Pattern",
-          "chance": "49.1%",
+          "chance": "49.1363%",
           "count": "4–12"
         },
-        { "item": "Scroll: Enchant Armor (S)", "chance": "24.7%", "count": "1" },
-        { "item": "Angel Halo", "chance": "24.7%", "count": "1" },
         {
-          "item": "Sealed Imperial Crusader Breastplate Part",
-          "chance": "20.4%",
-          "count": "8–22"
-        },
-        { "item": "Scroll: Enchant Weapon (S)", "chance": "2.5%", "count": "1" },
-        {
-          "item": "Sealed Imperial Crusader Gaiters",
-          "chance": "1.28%",
+          "item": "Scroll: Enchant Armor (S)",
+          "chance": "24.7447%",
           "count": "1"
         },
-        { "item": "Saint Spear", "chance": "0.813%", "count": "1" },
+        { "item": "Angel Halo", "chance": "24.7447%", "count": "1" },
+        {
+          "item": "Sealed Imperial Crusader Breastplate Part",
+          "chance": "20.3579%",
+          "count": "8–22"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (S)",
+          "chance": "2.4745%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Gaiters",
+          "chance": "1.2803%",
+          "count": "1"
+        },
+        { "item": "Saint Spear", "chance": "0.812%", "count": "1" },
         {
           "item": "Sealed Imperial Crusader Breastplate",
-          "chance": "0.8064%",
+          "chance": "0.8022%",
           "count": "1"
         },
         {
           "item": "Blessed Scroll: Enchant Weapon (S)",
-          "chance": "0.4132%",
+          "chance": "0.4124%",
           "count": "1"
         }
       ]

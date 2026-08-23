@@ -4,9 +4,17 @@ import React, { useRef, useState, useEffect, useMemo } from "react";
 import { Stage, Layer, Image as KonvaImage, Group, Rect } from "react-konva";
 import Konva from "konva";
 import BossMarkerKonva from "./BossMarkerKonva";
+import BossClusterMarkerKonva from "./BossClusterMarkerKonva";
 import { bosses } from "@/lib/boss-data";
 import { MAP_CONFIG, type BossMapPosition } from "@/lib/boss-positions";
+import { BOSS_CLUSTERS } from "@/data/boss-clusters";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
+
+// Bosses that belong to any cluster get folded into a single collapsible
+// marker (see BossClusterMarkerKonva) instead of their own independent one.
+const CLUSTERED_BOSS_IDS = new Set(
+  BOSS_CLUSTERS.flatMap((cluster) => cluster.memberBossIds),
+);
 
 // Helper function to clamp position within boundaries
 // Ensures the map stays visible without black areas
@@ -72,10 +80,25 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const [mapImages, setMapImages] = useState<HTMLImageElement[]>([]);
   const [isDragging, setIsDragging] = useState(false);
   const [bossPositions, setBossPositions] = useState<BossMapPosition[]>([]);
+  const [expandedClusterId, setExpandedClusterId] = useState<string | null>(
+    null,
+  );
   const MAP_BOSSES = useMemo(
     () => deriveMapBosses(bossPositions),
     [bossPositions],
   );
+
+  // A boss selected from elsewhere (e.g. the Raid Bosses list) only renders
+  // on the map once its cluster is expanded — auto-expand it so the marker
+  // is actually visible/selectable, no matter where the selection came from.
+  // Selecting a boss outside any cluster collapses whatever was open.
+  useEffect(() => {
+    if (!selectedBossId) return;
+    const owningCluster = BOSS_CLUSTERS.find((c) =>
+      c.memberBossIds.includes(selectedBossId),
+    );
+    setExpandedClusterId(owningCluster ? owningCluster.id : null);
+  }, [selectedBossId]);
 
   // Use refs for smooth dragging without re-renders
   const positionRef = useRef({ x: 0, y: 0 });
@@ -86,6 +109,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const lastPosRef = useRef({ x: 0, y: 0 });
   const momentumRef = useRef<NodeJS.Timeout | null>(null);
   const stageDimensionsRef = useRef({ width, height });
+  const backgroundRectRef = useRef<Konva.Rect>(null);
 
   // Load boss map positions from the API (not a static import, so newly
   // placed locations show up without a rebuild)
@@ -464,7 +488,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     lastDistanceRef.current = null;
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e?: Konva.KonvaEventObject<MouseEvent>) => {
     // Sync position to state (inertia disabled)
     setPosition({ ...positionRef.current });
     setIsDragging(false);
@@ -482,6 +506,20 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
           const absoluteY = (pos.y - layer.y()) / layer.scaleY();
           placeSelectedBossAt(absoluteX, absoluteY);
         }
+      }
+      return;
+    }
+
+    // A genuine click (not the end of a pan drag) on empty map background
+    // deselects the current boss and collapses any expanded cluster.
+    const pos = stageRef.current?.getPointerPosition();
+    if (pos) {
+      const dx = pos.x - mouseDownScreenPos.current.x;
+      const dy = pos.y - mouseDownScreenPos.current.y;
+      const isClick = Math.hypot(dx, dy) < 5;
+      if (isClick && e?.target === backgroundRectRef.current) {
+        if (expandedClusterId) setExpandedClusterId(null);
+        if (selectedBossId) setSelectedBoss(null, "map");
       }
     }
   };
@@ -516,6 +554,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
       >
         {/* Background rect to catch drag events */}
         <Rect
+          ref={backgroundRectRef}
           x={0}
           y={0}
           width={MAP_CONFIG.totalWidth}
@@ -540,6 +579,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
                   y={row * MAP_CONFIG.tileHeight}
                   width={MAP_CONFIG.tileWidth}
                   height={MAP_CONFIG.tileHeight}
+                  listening={false}
                 />
               );
             }),
@@ -547,17 +587,49 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
 
         {/* Render boss markers */}
         <Group>
-          {MAP_BOSSES.map((boss) => (
-            <BossMarkerKonva
-              key={boss.id}
-              boss={boss}
-              isSelected={selectedBossId === boss.id}
-              onSelect={(id) =>
-                setSelectedBoss(selectedBossId === id ? null : id, "map")
-              }
-              scale={scale}
-            />
-          ))}
+          {MAP_BOSSES.filter((boss) => !CLUSTERED_BOSS_IDS.has(boss.id)).map(
+            (boss) => (
+              <BossMarkerKonva
+                key={boss.id}
+                boss={boss}
+                isSelected={selectedBossId === boss.id}
+                onSelect={(id) => {
+                  setSelectedBoss(selectedBossId === id ? null : id, "map");
+                  setExpandedClusterId(null);
+                }}
+                scale={scale}
+              />
+            ),
+          )}
+
+          {BOSS_CLUSTERS.map((cluster) => {
+            const anchor = MAP_BOSSES.find(
+              (b) => b.id === cluster.anchorBossId,
+            );
+            const members = MAP_BOSSES.filter((b) =>
+              cluster.memberBossIds.includes(b.id),
+            );
+            if (!anchor || members.length === 0) return null;
+            return (
+              <BossClusterMarkerKonva
+                key={cluster.id}
+                members={members}
+                anchorX={anchor.absoluteX}
+                anchorY={anchor.absoluteY}
+                yOffset={cluster.yOffset}
+                expanded={expandedClusterId === cluster.id}
+                onExpand={() => {
+                  setExpandedClusterId(cluster.id);
+                  if (selectedBossId) setSelectedBoss(null, "map");
+                }}
+                onMemberSelect={(id) =>
+                  setSelectedBoss(selectedBossId === id ? null : id, "map")
+                }
+                selectedBossId={selectedBossId}
+                scale={scale}
+              />
+            );
+          })}
         </Group>
       </Layer>
     </Stage>

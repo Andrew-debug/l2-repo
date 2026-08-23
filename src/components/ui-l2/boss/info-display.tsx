@@ -19,7 +19,10 @@ function StatBar({
   return (
     <div className="space-y-0.5">
       <div className="h-3 border border-window-content-border bg-black/40">
-        <div className="h-full" style={{ width: "100%", backgroundColor: color }} />
+        <div
+          className="h-full"
+          style={{ width: "100%", backgroundColor: color }}
+        />
       </div>
       <p className="text-[10px] text-white/50">
         {label}: <span className="text-white/80">{value.toLocaleString()}</span>
@@ -34,7 +37,7 @@ export default function BossInfoDisplay() {
   const boss = selectedBossId ? getBossById(selectedBossId) : undefined;
 
   return (
-    <div className="w-72">
+    <div className="w-50 shrink-0">
       <Header title="NPC Info" canClose />
       <WindowBorder>
         <div className="flex flex-col gap-2 p-2">
@@ -63,7 +66,8 @@ export default function BossInfoDisplay() {
                 onClick={() => setIsPlacingLocation(!isPlacingLocation)}
                 className={cn(
                   "border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5",
-                  isPlacingLocation && "window-item-gradient-active bg-white/5 text-system-text",
+                  isPlacingLocation &&
+                    "window-item-gradient-active bg-white/5 text-system-text",
                 )}
               >
                 {isPlacingLocation ? "Click the map to place…" : "Set Location"}

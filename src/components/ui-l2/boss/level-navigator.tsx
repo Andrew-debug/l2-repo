@@ -22,7 +22,7 @@ export default function BossLevelNavigator() {
   }, [selectedRange]);
 
   return (
-    <div className="w-72">
+    <div className="w-50 shrink-0">
       <Header title="Raid Bosses" canFold canClose />
       <WindowBorder>
         <div className="flex flex-col gap-2 p-2">

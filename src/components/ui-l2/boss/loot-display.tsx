@@ -46,7 +46,7 @@ export function BossLootDisplay() {
   const sortedDrops = boss ? [...boss.drops].sort(compareDrops) : [];
 
   return (
-    <div className="w-80">
+    <div className="w-70 shrink-0">
       <Header title="NPC Drop List" canClose />
       <WindowBorder>
         <div className="flex flex-col gap-2 p-2">
@@ -75,9 +75,7 @@ export function BossLootDisplay() {
                   >
                     <DropIcon item={drop.item} />
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-xs">
-                        {dropLabel(drop.item)}
-                      </p>
+                      <p className="truncate text-xs">{dropLabel(drop.item)}</p>
                       <p className="text-[10px] text-white/40">x{drop.count}</p>
                     </div>
                     <span className="shrink-0 text-[11px] tabular-nums text-system-text">
