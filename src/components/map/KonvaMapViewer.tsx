@@ -9,6 +9,7 @@ import { bosses } from "@/lib/boss-data";
 import { MAP_CONFIG, type BossMapPosition } from "@/lib/boss-positions";
 import { BOSS_CLUSTERS } from "@/data/boss-clusters";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
+import { useBossPositions } from "@/components/providers/BossPositionsProvider";
 
 // Bosses that belong to any cluster get folded into a single collapsible
 // marker (see BossClusterMarkerKonva) instead of their own independent one.
@@ -52,7 +53,6 @@ function deriveMapBosses(positions: BossMapPosition[]) {
         id: boss.id,
         name: boss.name,
         level: boss.level,
-        description: boss.description,
         absoluteX: pos.absoluteX,
         absoluteY: pos.absoluteY,
         killed: pos.killed ?? false,
@@ -69,17 +69,12 @@ interface KonvaMapViewerProps {
 export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const stageRef = useRef<Konva.Stage>(null);
   const layerRef = useRef<Konva.Layer>(null);
-  const {
-    selectedBossId,
-    setSelectedBoss,
-    isPlacingLocation,
-    setIsPlacingLocation,
-  } = useBossSelection();
+  const { selectedBossId, setSelectedBoss } = useBossSelection();
+  const { positions: bossPositions } = useBossPositions();
   const [scale, setScale] = useState(0.5);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [mapImages, setMapImages] = useState<HTMLImageElement[]>([]);
   const [isDragging, setIsDragging] = useState(false);
-  const [bossPositions, setBossPositions] = useState<BossMapPosition[]>([]);
   const [expandedClusterId, setExpandedClusterId] = useState<string | null>(
     null,
   );
@@ -110,15 +105,6 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const momentumRef = useRef<NodeJS.Timeout | null>(null);
   const stageDimensionsRef = useRef({ width, height });
   const backgroundRectRef = useRef<Konva.Rect>(null);
-
-  // Load boss map positions from the API (not a static import, so newly
-  // placed locations show up without a rebuild)
-  useEffect(() => {
-    fetch("/api/boss-position")
-      .then((res) => res.json())
-      .then(setBossPositions)
-      .catch((err) => console.warn("Failed to load boss positions:", err));
-  }, []);
 
   // Update stage dimensions ref when props change
   useEffect(() => {
@@ -278,28 +264,6 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
         }
       }
     }
-  };
-
-  // Saves the click's map-space coordinates as the selected boss's
-  // position. Only fires for an actual click (not the end of a pan drag).
-  const placeSelectedBossAt = (absoluteX: number, absoluteY: number) => {
-    if (!selectedBossId) return;
-    setIsPlacingLocation(false);
-
-    fetch("/api/boss-position", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        bossId: selectedBossId,
-        absoluteX: Math.round(absoluteX),
-        absoluteY: Math.round(absoluteY),
-      }),
-    })
-      .then((res) => res.json())
-      .then((data: { positions?: BossMapPosition[] }) => {
-        if (data.positions) setBossPositions(data.positions);
-      })
-      .catch((err) => console.warn("Failed to save boss position:", err));
   };
 
   const handleMouseMove = (e: Konva.KonvaEventObject<PointerEvent>) => {
@@ -493,23 +457,6 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     setPosition({ ...positionRef.current });
     setIsDragging(false);
 
-    if (isPlacingLocation && selectedBossId) {
-      const stage = stageRef.current;
-      const layer = layerRef.current;
-      const pos = stage?.getPointerPosition();
-      if (stage && layer && pos) {
-        const dx = pos.x - mouseDownScreenPos.current.x;
-        const dy = pos.y - mouseDownScreenPos.current.y;
-        const isClick = Math.hypot(dx, dy) < 5;
-        if (isClick) {
-          const absoluteX = (pos.x - layer.x()) / layer.scaleX();
-          const absoluteY = (pos.y - layer.y()) / layer.scaleY();
-          placeSelectedBossAt(absoluteX, absoluteY);
-        }
-      }
-      return;
-    }
-
     // A genuine click (not the end of a pan drag) on empty map background
     // deselects the current boss and collapses any expanded cluster.
     const pos = stageRef.current?.getPointerPosition();
@@ -538,11 +485,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
       style={{
-        cursor: isPlacingLocation
-          ? "crosshair"
-          : isDragging
-            ? "grabbing"
-            : "grab",
+        cursor: isDragging ? "grabbing" : "grab",
       }}
     >
       <Layer

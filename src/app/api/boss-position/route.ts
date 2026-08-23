@@ -21,28 +21,21 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
-  const { bossId, absoluteX, absoluteY } = body as {
+  const { bossId, killed } = body as {
     bossId?: string;
-    absoluteX?: number;
-    absoluteY?: number;
+    killed?: boolean;
   };
 
-  if (
-    !bossId ||
-    typeof absoluteX !== "number" ||
-    typeof absoluteY !== "number"
-  ) {
+  if (!bossId || typeof killed !== "boolean") {
     return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
   }
 
   const positions = await readPositions();
   const existing = positions.find((p) => p.bossId === bossId);
-  if (existing) {
-    existing.absoluteX = absoluteX;
-    existing.absoluteY = absoluteY;
-  } else {
-    positions.push({ bossId, absoluteX, absoluteY });
+  if (!existing) {
+    return NextResponse.json({ error: "Unknown bossId" }, { status: 404 });
   }
+  existing.killed = killed;
 
   await fs.writeFile(
     DATA_PATH,

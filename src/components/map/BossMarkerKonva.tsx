@@ -8,7 +8,6 @@ export interface MapBoss {
   id: string;
   name: string;
   level: number;
-  description: string;
   absoluteX: number;
   absoluteY: number;
   killed?: boolean;

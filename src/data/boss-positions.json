@@ -134,7 +134,8 @@
   {
     "bossId": "25112",
     "absoluteX": 1241,
-    "absoluteY": 2012
+    "absoluteY": 2012,
+    "killed": false
   },
   {
     "bossId": "25188",

@@ -8,10 +8,6 @@ interface BossSelectionContextType {
   selectedBossId: string | null;
   selectionSource: SelectionSource | null;
   setSelectedBoss: (id: string | null, source: SelectionSource) => void;
-  // Armed via "Set Location" in the info window — while true, the next
-  // click on the map saves that spot as the selected boss's position.
-  isPlacingLocation: boolean;
-  setIsPlacingLocation: (value: boolean) => void;
 }
 
 const BossSelectionContext = createContext<
@@ -22,13 +18,11 @@ export function BossSelectionProvider({ children }: { children: ReactNode }) {
   const [selectedBossId, setSelectedBossId] = useState<string | null>(null);
   const [selectionSource, setSelectionSource] =
     useState<SelectionSource | null>(null);
-  const [isPlacingLocation, setIsPlacingLocation] = useState(false);
 
   const setSelectedBoss = useCallback(
     (id: string | null, source: SelectionSource) => {
       setSelectedBossId(id);
       setSelectionSource(id ? source : null);
-      setIsPlacingLocation(false);
     },
     [],
   );
@@ -39,8 +33,6 @@ export function BossSelectionProvider({ children }: { children: ReactNode }) {
         selectedBossId,
         selectionSource,
         setSelectedBoss,
-        isPlacingLocation,
-        setIsPlacingLocation,
       }}
     >
       {children}

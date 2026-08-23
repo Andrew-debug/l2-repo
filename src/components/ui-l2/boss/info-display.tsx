@@ -4,37 +4,18 @@ import Header from "../header";
 import { WindowBorder } from "../window-l2";
 import { getBossById } from "@/lib/boss-data";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
+import { useBossPositions } from "@/components/providers/BossPositionsProvider";
 import { cn } from "@/lib/utils";
 import { BossPortraitImage } from "./boss-portrait-image";
 
-function StatBar({
-  label,
-  value,
-  color,
-}: {
-  label: string;
-  value: number;
-  color: string;
-}) {
-  return (
-    <div className="space-y-0.5">
-      <div className="h-3 border border-window-content-border bg-black/40">
-        <div
-          className="h-full"
-          style={{ width: "100%", backgroundColor: color }}
-        />
-      </div>
-      <p className="text-[10px] text-white/50">
-        {label}: <span className="text-white/80">{value.toLocaleString()}</span>
-      </p>
-    </div>
-  );
-}
-
 export default function BossInfoDisplay() {
-  const { selectedBossId, isPlacingLocation, setIsPlacingLocation } =
-    useBossSelection();
+  const { selectedBossId } = useBossSelection();
+  const { positions, isKilled, setKilled } = useBossPositions();
   const boss = selectedBossId ? getBossById(selectedBossId) : undefined;
+  const killed = boss ? isKilled(boss.id) : false;
+  const hasMapPosition = boss
+    ? positions.some((p) => p.bossId === boss.id)
+    : false;
 
   return (
     <div className="w-50 shrink-0">
@@ -62,20 +43,6 @@ export default function BossInfoDisplay() {
                 {boss.title} · Lv. {boss.level}
               </p>
 
-              <button
-                onClick={() => setIsPlacingLocation(!isPlacingLocation)}
-                className={cn(
-                  "border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5",
-                  isPlacingLocation &&
-                    "window-item-gradient-active bg-white/5 text-system-text",
-                )}
-              >
-                {isPlacingLocation ? "Click the map to place…" : "Set Location"}
-              </button>
-
-              <StatBar label="HP" value={boss.hp} color="#8a2b2b" />
-              <StatBar label="MP" value={boss.mp} color="#2b5a8a" />
-
               <div className="grid grid-cols-2 gap-x-2 gap-y-1 border border-window-content-border bg-window-content-bg p-2 text-[11px]">
                 <span className="text-white/40">Race</span>
                 <span className="text-right">{boss.race}</span>
@@ -87,12 +54,32 @@ export default function BossInfoDisplay() {
                     </span>
                   </>
                 )}
+                {hasMapPosition && (
+                  <>
+                    <span className="text-white/40">Current State</span>
+                    <span
+                      className={cn(
+                        "text-right",
+                        killed ? "text-[#c25c5c]" : "text-[#7ed957]",
+                      )}
+                    >
+                      {killed ? "Killed" : "Currently visible"}
+                    </span>
+                  </>
+                )}
               </div>
 
-              {boss.description && (
-                <p className="text-[11px] italic leading-snug text-white/50">
-                  {boss.description}
-                </p>
+              {hasMapPosition && (
+                <button
+                  onClick={() => setKilled(boss.id, !killed)}
+                  className={cn(
+                    "border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5",
+                    killed &&
+                      "window-item-gradient-active bg-white/5 text-system-text",
+                  )}
+                >
+                  {killed ? "Mark as Alive" : "Mark as Killed"}
+                </button>
               )}
             </>
           )}

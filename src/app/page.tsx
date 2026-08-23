@@ -10,6 +10,7 @@ import Chat from "@/components/chat/chat";
 import SystemMenu from "@/components/ui-l2/system-menu";
 import BossLevelNavigator from "@/components/ui-l2/boss/level-navigator";
 import { BossSelectionProvider } from "@/components/providers/BossSelectionProvider";
+import { BossPositionsProvider } from "@/components/providers/BossPositionsProvider";
 import { BossLootDisplay } from "@/components/ui-l2/boss/loot-display";
 import BossInfoDisplay from "@/components/ui-l2/boss/info-display";
 async function handleCloseAction() {
@@ -26,14 +27,16 @@ export default function Home() {
 
       <div className="container mx-auto px-4 h-[calc(100dvh-77px-49px)]">
         <BossSelectionProvider>
-          <div className="flex gap-4">
-            <BossLevelNavigator />
-            <MapProvider>
-              <Map />
-            </MapProvider>
-            <BossLootDisplay />
-            <BossInfoDisplay />
-          </div>
+          <BossPositionsProvider>
+            <div className="flex gap-4">
+              <BossLevelNavigator />
+              <MapProvider>
+                <Map />
+              </MapProvider>
+              <BossLootDisplay />
+              <BossInfoDisplay />
+            </div>
+          </BossPositionsProvider>
         </BossSelectionProvider>
       </div>
 
