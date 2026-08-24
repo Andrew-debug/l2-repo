@@ -19,7 +19,4 @@ export interface BossMapPosition {
   bossId: string;
   absoluteX: number;
   absoluteY: number;
-  // Whether this boss has been killed (shows as a grayed-out marker).
-  // Static demo data for now — wire up to real kill tracking later.
-  killed?: boolean;
 }

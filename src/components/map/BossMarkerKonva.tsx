@@ -3,6 +3,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Group, Image as KonvaImage, Text, Rect, Line } from "react-konva";
 import Konva from "konva";
 import { useMarkerIconVariants, useTitleFontFamily } from "./markerIcon";
+import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
+import type { RespawnStatus } from "@/lib/respawn";
 
 export interface MapBoss {
   id: string;
@@ -10,8 +12,19 @@ export interface MapBoss {
   level: number;
   absoluteX: number;
   absoluteY: number;
-  killed?: boolean;
 }
+
+const STATUS_LABEL: Record<RespawnStatus, string> = {
+  dead: "Killed",
+  pending: "Could be up",
+  alive: "Currently visible",
+};
+
+const STATUS_COLOR: Record<RespawnStatus, string> = {
+  dead: "#c25c5c",
+  pending: "#f5c518",
+  alive: "#7ed957",
+};
 
 interface BossMarkerKonvaProps {
   boss: MapBoss;
@@ -30,6 +43,8 @@ export default function BossMarkerKonva({
   const [isHovered, setIsHovered] = useState(false);
   const variants = useMarkerIconVariants();
   const fontFamily = useTitleFontFamily();
+  const { getStatus } = useBossRespawn();
+  const status = getStatus(boss.id);
 
   const highlighted = isHovered || isSelected;
   const showTooltip = highlighted;
@@ -48,13 +63,17 @@ export default function BossMarkerKonva({
   const iconSize = iconScreenSize * inverseScale;
 
   const iconSource = variants
-    ? boss.killed
+    ? status === "dead"
       ? highlighted
         ? variants.grayBright
         : variants.gray
-      : highlighted
-        ? variants.normalBright
-        : variants.normal
+      : status === "pending"
+        ? highlighted
+          ? variants.pendingBright
+          : variants.pending
+        : highlighted
+          ? variants.normalBright
+          : variants.normal
     : null;
 
   // The rendered canvas includes the outline padding, so it draws a bit
@@ -170,10 +189,10 @@ export default function BossMarkerKonva({
           <Text
             x={70}
             y={36}
-            text={boss.killed ? "Killed" : "Currently visible"}
+            text={STATUS_LABEL[status]}
             fontSize={8.5}
             fontFamily={fontFamily}
-            fill={boss.killed ? "#c25c5c" : "#7ed957"}
+            fill={STATUS_COLOR[status]}
           />
         </Group>
       )}

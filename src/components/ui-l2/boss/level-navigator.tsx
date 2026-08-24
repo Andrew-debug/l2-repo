@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
+import { DraggableWindow } from "../draggable-window";
 import { bosses, levelRanges, type LevelRange } from "@/lib/boss-data";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { IconStateButton } from "@/components/ui/icon-state-button";
@@ -22,7 +23,7 @@ export default function BossLevelNavigator() {
   }, [selectedRange]);
 
   return (
-    <div className="w-50 shrink-0">
+    <DraggableWindow className="w-50 shrink-0">
       <Header title="Raid Bosses" canFold canClose />
       <WindowBorder>
         <div className="flex flex-col gap-2 p-2">
@@ -94,6 +95,6 @@ export default function BossLevelNavigator() {
           )}
         </div>
       </WindowBorder>
-    </div>
+    </DraggableWindow>
   );
 }

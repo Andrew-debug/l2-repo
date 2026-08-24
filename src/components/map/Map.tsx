@@ -3,6 +3,7 @@ import Header from "../ui-l2/header";
 import { MapPlaceholder } from "../map-placeholder";
 import { useMapSize } from "../providers/MapProvider";
 import { WindowBorder } from "../ui-l2/window-l2";
+import { DraggableWindow } from "../ui-l2/draggable-window";
 import { IconStateButton } from "../ui/icon-state-button";
 import { cn } from "@/lib/utils";
 
@@ -13,9 +14,9 @@ export default function Map() {
   const isSmall = mapSize === "small";
 
   return (
-    <div
+    <DraggableWindow
       className={cn(
-        "relative flex flex-col max-w-[800px] max-h-[1000px] h-full py-4",
+        "relative flex flex-col max-w-[800px] max-h-[1000px] h-full",
         isSmall ? "w-[276px]" : "w-full aspect-square",
       )}
     >
@@ -95,6 +96,6 @@ export default function Map() {
           </div>
         </WindowBorder>
       </div>
-    </div>
+    </DraggableWindow>
   );
 }

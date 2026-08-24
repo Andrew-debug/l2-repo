@@ -7,14 +7,12 @@
   {
     "bossId": "25001",
     "absoluteX": 390,
-    "absoluteY": 2043,
-    "killed": true
+    "absoluteY": 2043
   },
   {
     "bossId": "29066",
     "absoluteX": 1458,
-    "absoluteY": 2216,
-    "killed": true
+    "absoluteY": 2216
   },
   {
     "bossId": "25375",
@@ -134,8 +132,7 @@
   {
     "bossId": "25112",
     "absoluteX": 1241,
-    "absoluteY": 2012,
-    "killed": false
+    "absoluteY": 2012
   },
   {
     "bossId": "25188",

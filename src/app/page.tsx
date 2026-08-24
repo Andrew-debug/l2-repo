@@ -11,8 +11,11 @@ import SystemMenu from "@/components/ui-l2/system-menu";
 import BossLevelNavigator from "@/components/ui-l2/boss/level-navigator";
 import { BossSelectionProvider } from "@/components/providers/BossSelectionProvider";
 import { BossPositionsProvider } from "@/components/providers/BossPositionsProvider";
+import { BossRespawnProvider } from "@/components/providers/BossRespawnProvider";
 import { BossLootDisplay } from "@/components/ui-l2/boss/loot-display";
 import BossInfoDisplay from "@/components/ui-l2/boss/info-display";
+import UpcomingSpawns from "@/components/ui-l2/boss/upcoming-spawns";
+import RespawnSettings from "@/components/ui-l2/boss/respawn-settings";
 async function handleCloseAction() {
   "use server";
   console.log("This logs in your VSCode terminal, not the browser");
@@ -21,13 +24,13 @@ async function handleCloseAction() {
 
 export default function Home() {
   return (
-    <div className="relative w-full h-dvh">
+    <div className="relative w-full h-dvh overflow-hidden">
       {/* <Header /> */}
       {/* <MainPage /> */}
 
-      <div className="container mx-auto px-4 h-[calc(100dvh-77px-49px)]">
-        <BossSelectionProvider>
-          <BossPositionsProvider>
+      <BossSelectionProvider>
+        <BossPositionsProvider>
+          <BossRespawnProvider>
             <div className="flex gap-4">
               <BossLevelNavigator />
               <MapProvider>
@@ -35,14 +38,16 @@ export default function Home() {
               </MapProvider>
               <BossLootDisplay />
               <BossInfoDisplay />
+              <UpcomingSpawns />
+              <RespawnSettings />
             </div>
-          </BossPositionsProvider>
-        </BossSelectionProvider>
-      </div>
+          </BossRespawnProvider>
+        </BossPositionsProvider>
+      </BossSelectionProvider>
 
       {/* <Chat /> */}
 
-      {/* <SystemMenu /> */}
+      <SystemMenu />
 
       {/* <footer className="border-t border-border bg-card/50 py-4">
         <div className="container mx-auto px-4">

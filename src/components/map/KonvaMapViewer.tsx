@@ -55,7 +55,6 @@ function deriveMapBosses(positions: BossMapPosition[]) {
         level: boss.level,
         absoluteX: pos.absoluteX,
         absoluteY: pos.absoluteY,
-        killed: pos.killed ?? false,
       };
     })
     .filter((b): b is NonNullable<typeof b> => b !== null);

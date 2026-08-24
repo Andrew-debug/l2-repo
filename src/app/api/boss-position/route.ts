@@ -1,47 +1,16 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
 import type { BossMapPosition } from "@/lib/boss-positions";
 
-// Local-only dev convenience: writes straight to a JSON file on disk. Won't
-// work on a read-only filesystem (e.g. most serverless production hosts),
-// which is fine — this is a data-entry tool for populating map positions,
-// not a runtime feature.
+// Local-only dev convenience: reads straight from a JSON file on disk that's
+// hand-edited when adding boss map positions — there's no write path here,
+// this is purely so the client doesn't need a static import (new positions
+// show up without a rebuild).
 const DATA_PATH = path.join(process.cwd(), "src/data/boss-positions.json");
 
-async function readPositions(): Promise<BossMapPosition[]> {
-  const raw = await fs.readFile(DATA_PATH, "utf-8");
-  return JSON.parse(raw);
-}
-
 export async function GET() {
-  const positions = await readPositions();
+  const raw = await fs.readFile(DATA_PATH, "utf-8");
+  const positions = JSON.parse(raw) as BossMapPosition[];
   return NextResponse.json(positions);
-}
-
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const { bossId, killed } = body as {
-    bossId?: string;
-    killed?: boolean;
-  };
-
-  if (!bossId || typeof killed !== "boolean") {
-    return NextResponse.json({ error: "Invalid payload" }, { status: 400 });
-  }
-
-  const positions = await readPositions();
-  const existing = positions.find((p) => p.bossId === bossId);
-  if (!existing) {
-    return NextResponse.json({ error: "Unknown bossId" }, { status: 404 });
-  }
-  existing.killed = killed;
-
-  await fs.writeFile(
-    DATA_PATH,
-    JSON.stringify(positions, null, 2) + "\n",
-    "utf-8",
-  );
-
-  return NextResponse.json({ ok: true, positions });
 }
