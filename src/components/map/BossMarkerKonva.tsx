@@ -2,7 +2,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Group, Image as KonvaImage, Text, Rect, Line } from "react-konva";
 import Konva from "konva";
-import { useMarkerIconVariants, useTitleFontFamily } from "./markerIcon";
+import {
+  useMarkerIconVariants,
+  useTitleFontFamily,
+  MARKER_ICON_OFFSET_X_PX,
+} from "./markerIcon";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import type { RespawnStatus } from "@/lib/respawn";
 
@@ -59,7 +63,7 @@ export default function BossMarkerKonva({
   const inverseScale = 1 / scale;
 
   // Icon size stays constant — only brightness changes on hover/selection
-  const iconScreenSize = 15;
+  const iconScreenSize = 20;
   const iconSize = iconScreenSize * inverseScale;
 
   const iconSource = variants
@@ -75,10 +79,6 @@ export default function BossMarkerKonva({
           ? variants.normalBright
           : variants.normal
     : null;
-
-  // The rendered canvas includes the outline padding, so it draws a bit
-  // larger than the bare glyph size while staying centered on it.
-  const displaySize = iconSize * (variants?.sizeRatio ?? 1);
 
   // Tooltip box, laid out in fixed screen-pixel units (the group itself is
   // scaled by inverseScale so it stays a constant size regardless of zoom).
@@ -110,14 +110,14 @@ export default function BossMarkerKonva({
       }}
       listening={true}
     >
-      {/* Marker icon — the outline is baked into the canvas, no drop shadow needed */}
+      {/* Marker icon */}
       {iconSource && (
         <KonvaImage
           image={iconSource}
-          x={-displaySize / 2}
-          y={-displaySize / 2}
-          width={displaySize}
-          height={displaySize}
+          x={-iconSize / 2 + MARKER_ICON_OFFSET_X_PX * inverseScale}
+          y={-iconSize / 2}
+          width={iconSize}
+          height={iconSize}
         />
       )}
 

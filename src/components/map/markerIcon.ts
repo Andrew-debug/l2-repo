@@ -1,12 +1,23 @@
 import { useEffect, useState } from "react";
 
-export const MARKER_ICON_SRC = "/icons/rb-available1.png";
+// "Spawning" (alive), "respawn" (dead/gray), and "pending" ("could be up")
+// each have their own actual icon artwork, including a dedicated hover
+// ("_Over") variant.
+export const MARKER_ICON_NORMAL_SRC = "/icons/map_raid_spawning_i00.png";
+export const MARKER_ICON_NORMAL_HOVER_SRC =
+  "/icons/map_raid_spawning_i00_Over.png";
+export const MARKER_ICON_DEAD_SRC = "/icons/map_raid_respawn_i00.png";
+export const MARKER_ICON_DEAD_HOVER_SRC =
+  "/icons/map_raid_respawn_i00_Over.png";
+export const MARKER_ICON_PENDING_SRC = "/icons/map_raid_pending_i00.png";
+export const MARKER_ICON_PENDING_HOVER_SRC =
+  "/icons/map_raid_pending_i00_Over.png";
 
-// The source icon is tiny (~19x18) — render outline compositing at a
-// multiple of that so the blur stays smooth once Konva scales it back down.
-const RENDER_SCALE = 4;
-const OUTLINE_PAD = 6; // px, in the upscaled render space
-const OUTLINE_BLUR = 3; // px, in the upscaled render space
+// The new icon artwork isn't centered quite the same as the old one — a
+// constant screen-pixel nudge so markers line up with their actual map
+// position again. Applied as `MARKER_ICON_OFFSET_X_PX * inverseScale` so it
+// stays 1px on screen regardless of zoom.
+export const MARKER_ICON_OFFSET_X_PX = 2;
 
 export interface IconVariants {
   normal: HTMLCanvasElement;
@@ -16,117 +27,65 @@ export interface IconVariants {
   // "Could be up" — respawn window opened but hasn't been confirmed alive.
   pending: HTMLCanvasElement;
   pendingBright: HTMLCanvasElement;
-  sizeRatio: number; // total canvas size / bare icon size, for display sizing
 }
 
-// Renders the icon (optionally grayscaled/brightened/tinted) with a soft
-// blurred black outline behind it, replacing a plain drop shadow with
-// something that actually follows the icon's silhouette.
-export function buildOutlinedVariant(
-  img: HTMLImageElement,
-  {
-    gray = false,
-    brightness = 1,
-    tint,
-    tintAlpha = 0.55,
-  }: {
-    gray?: boolean;
-    brightness?: number;
-    // Color wash applied on top of the icon (e.g. amber for "pending") —
-    // composited with source-atop so it only covers the icon's own pixels,
-    // not the transparent background.
-    tint?: string;
-    tintAlpha?: number;
-  },
-): { canvas: HTMLCanvasElement; sizeRatio: number } {
-  const upW = img.naturalWidth * RENDER_SCALE;
-  const upH = img.naturalHeight * RENDER_SCALE;
-  const totalW = upW + OUTLINE_PAD * 2;
-  const totalH = upH + OUTLINE_PAD * 2;
-
-  // Crisp, color-filtered icon layer
-  const colorCanvas = document.createElement("canvas");
-  colorCanvas.width = upW;
-  colorCanvas.height = upH;
-  const colorCtx = colorCanvas.getContext("2d")!;
-  const filters: string[] = [];
-  if (gray) filters.push("grayscale(1)");
-  if (brightness !== 1) filters.push(`brightness(${brightness})`);
-  colorCtx.filter = filters.length ? filters.join(" ") : "none";
-  colorCtx.drawImage(img, 0, 0, upW, upH);
-  colorCtx.filter = "none";
-
-  if (tint) {
-    colorCtx.globalCompositeOperation = "source-atop";
-    colorCtx.globalAlpha = tintAlpha;
-    colorCtx.fillStyle = tint;
-    colorCtx.fillRect(0, 0, upW, upH);
-    colorCtx.globalCompositeOperation = "source-over";
-    colorCtx.globalAlpha = 1;
-  }
-
-  // Solid black silhouette matching the icon's alpha shape
-  const silhouetteCanvas = document.createElement("canvas");
-  silhouetteCanvas.width = upW;
-  silhouetteCanvas.height = upH;
-  const silhouetteCtx = silhouetteCanvas.getContext("2d")!;
-  silhouetteCtx.drawImage(colorCanvas, 0, 0);
-  silhouetteCtx.globalCompositeOperation = "source-in";
-  silhouetteCtx.fillStyle = "#000";
-  silhouetteCtx.fillRect(0, 0, upW, upH);
-
-  // Compose: blurred silhouette behind, crisp icon on top
+// Renders the icon as-is onto a canvas, for consistent drawing with the
+// other marker helpers (e.g. Konva's <Image> wants a canvas/image source).
+export function buildIconVariant(img: HTMLImageElement): HTMLCanvasElement {
   const canvas = document.createElement("canvas");
-  canvas.width = totalW;
-  canvas.height = totalH;
-  const ctx = canvas.getContext("2d")!;
-  ctx.filter = `blur(${OUTLINE_BLUR}px)`;
-  ctx.drawImage(silhouetteCanvas, OUTLINE_PAD, OUTLINE_PAD);
-  ctx.filter = "none";
-  ctx.drawImage(colorCanvas, OUTLINE_PAD, OUTLINE_PAD);
-
-  return { canvas, sizeRatio: totalW / upW };
+  canvas.width = img.naturalWidth;
+  canvas.height = img.naturalHeight;
+  canvas.getContext("2d")!.drawImage(img, 0, 0);
+  return canvas;
 }
 
-export function useMarkerIconVariants(
-  src: string = MARKER_ICON_SRC,
-): IconVariants | null {
+function loadImage(src: string): Promise<HTMLImageElement> {
+  return new Promise((resolve) => {
+    const img = new window.Image();
+    img.src = src;
+    img.onload = () => resolve(img);
+  });
+}
+
+export function useMarkerIconVariants(): IconVariants | null {
   const [variants, setVariants] = useState<IconVariants | null>(null);
 
   useEffect(() => {
-    const img = new window.Image();
-    img.src = src;
-    img.onload = () => {
-      const normal = buildOutlinedVariant(img, {});
-      const normalBright = buildOutlinedVariant(img, { brightness: 1.2 });
-      const gray = buildOutlinedVariant(img, { gray: true, brightness: 0.7 });
-      const grayBright = buildOutlinedVariant(img, {
-        gray: true,
-        brightness: 0.84,
-      });
-      // Amber wash — matches the app's existing gold accent (#f5c518, used
-      // for level/type text elsewhere) so "could be up" reads as a deliberate
-      // in-between state rather than a random third color.
-      const pending = buildOutlinedVariant(img, {
-        tint: "#f5c518",
-        tintAlpha: 0.55,
-      });
-      const pendingBright = buildOutlinedVariant(img, {
-        tint: "#f5c518",
-        tintAlpha: 0.7,
-        brightness: 1.1,
-      });
-      setVariants({
-        normal: normal.canvas,
-        normalBright: normalBright.canvas,
-        gray: gray.canvas,
-        grayBright: grayBright.canvas,
-        pending: pending.canvas,
-        pendingBright: pendingBright.canvas,
-        sizeRatio: normal.sizeRatio,
-      });
+    let cancelled = false;
+
+    Promise.all([
+      loadImage(MARKER_ICON_NORMAL_SRC),
+      loadImage(MARKER_ICON_NORMAL_HOVER_SRC),
+      loadImage(MARKER_ICON_DEAD_SRC),
+      loadImage(MARKER_ICON_DEAD_HOVER_SRC),
+      loadImage(MARKER_ICON_PENDING_SRC),
+      loadImage(MARKER_ICON_PENDING_HOVER_SRC),
+    ]).then(
+      ([
+        normalImg,
+        normalHoverImg,
+        deadImg,
+        deadHoverImg,
+        pendingImg,
+        pendingHoverImg,
+      ]) => {
+        if (cancelled) return;
+
+        setVariants({
+          normal: buildIconVariant(normalImg),
+          normalBright: buildIconVariant(normalHoverImg),
+          gray: buildIconVariant(deadImg),
+          grayBright: buildIconVariant(deadHoverImg),
+          pending: buildIconVariant(pendingImg),
+          pendingBright: buildIconVariant(pendingHoverImg),
+        });
+      },
+    );
+
+    return () => {
+      cancelled = true;
     };
-  }, [src]);
+  }, []);
 
   return variants;
 }

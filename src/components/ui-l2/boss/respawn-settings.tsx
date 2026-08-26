@@ -2,7 +2,7 @@
 
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
-import { DraggableWindow } from "../draggable-window";
+import { DraggableWindow, DragHandle } from "../draggable-window";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import { RespawnRangePicker } from "./respawn-range-picker";
 
@@ -13,7 +13,9 @@ export default function RespawnSettings() {
 
   return (
     <DraggableWindow className="w-50 shrink-0">
-      <Header title="Respawn Settings" canClose />
+      <DragHandle>
+        <Header title="Respawn Settings" canClose />
+      </DragHandle>
       <WindowBorder>
         <div className="flex flex-col gap-2 p-2">
           <p className="text-[11px] text-white/50">

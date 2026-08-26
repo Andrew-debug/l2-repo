@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Sword } from "lucide-react";
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
-import { DraggableWindow } from "../draggable-window";
+import { DraggableWindow, DragHandle } from "../draggable-window";
 import { getBossById } from "@/lib/boss-data";
 import {
   compareDrops,
@@ -48,7 +48,9 @@ export function BossLootDisplay() {
 
   return (
     <DraggableWindow className="w-70 shrink-0">
-      <Header title="NPC Drop List" canClose />
+      <DragHandle>
+        <Header title="NPC Drop List" canClose />
+      </DragHandle>
       <WindowBorder>
         <div className="flex flex-col gap-2 p-2">
           {!boss && (

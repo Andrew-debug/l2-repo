@@ -2,7 +2,7 @@
 
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
-import { DraggableWindow } from "../draggable-window";
+import { DraggableWindow, DragHandle } from "../draggable-window";
 import { getBossById } from "@/lib/boss-data";
 import { formatDuration } from "@/lib/respawn";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
@@ -57,7 +57,9 @@ export default function UpcomingSpawns() {
 
   return (
     <DraggableWindow className="w-56 shrink-0">
-      <Header title="Upcoming Spawns" canClose />
+      <DragHandle>
+        <Header title="Upcoming Spawns" canClose />
+      </DragHandle>
       <WindowBorder>
         <div className="flex flex-col gap-1 p-2">
           {notificationPermission === "denied" && (

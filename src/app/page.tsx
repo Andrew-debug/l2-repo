@@ -7,7 +7,7 @@ import L2Window from "@/components/ui/l2-window";
 import { Header } from "@/components/header";
 import { HelpCircle, Info, Users } from "lucide-react";
 import Chat from "@/components/chat/chat";
-import SystemMenu from "@/components/ui-l2/system-menu";
+import MenuSection from "@/components/ui-l2/menu-section";
 import BossLevelNavigator from "@/components/ui-l2/boss/level-navigator";
 import { BossSelectionProvider } from "@/components/providers/BossSelectionProvider";
 import { BossPositionsProvider } from "@/components/providers/BossPositionsProvider";
@@ -24,7 +24,7 @@ async function handleCloseAction() {
 
 export default function Home() {
   return (
-    <div className="relative w-full h-dvh overflow-hidden">
+    <div className="relative w-full h-dvh overflow-hidden border border-window-inner-gray">
       {/* <Header /> */}
       {/* <MainPage /> */}
 
@@ -47,7 +47,7 @@ export default function Home() {
 
       {/* <Chat /> */}
 
-      <SystemMenu />
+      <MenuSection />
 
       {/* <footer className="border-t border-border bg-card/50 py-4">
         <div className="container mx-auto px-4">

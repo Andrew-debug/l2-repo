@@ -2,12 +2,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Group, Image as KonvaImage } from "react-konva";
 import Konva from "konva";
-import { useMarkerIconVariants } from "./markerIcon";
+import { useMarkerIconVariants, MARKER_ICON_OFFSET_X_PX } from "./markerIcon";
 import BossMarkerKonva, { type MapBoss } from "./BossMarkerKonva";
 
 const ANIMATION_DURATION_MS = 350;
 // Same size as a normal single boss marker.
-const ANCHOR_ICON_SCREEN_SIZE = 15;
+const ANCHOR_ICON_SCREEN_SIZE = 20;
 // World-space (map) units, NOT screen pixels — scales naturally with zoom
 // just like the map tiles do, so the circle stays visually consistent with
 // the rest of the map instead of holding a constant on-screen size while
@@ -85,7 +85,6 @@ export default function BossClusterMarkerKonva({
       ? variants.normalBright
       : variants.normal
     : null;
-  const displaySize = iconSize * (variants?.sizeRatio ?? 1);
   const radius =
     CIRCLE_RADIUS_BASE +
     Math.max(0, members.length - 3) * CIRCLE_RADIUS_PER_EXTRA_MEMBER;
@@ -112,10 +111,10 @@ export default function BossClusterMarkerKonva({
         {iconSource && (
           <KonvaImage
             image={iconSource}
-            x={-displaySize / 2}
-            y={-displaySize / 2}
-            width={displaySize}
-            height={displaySize}
+            x={-iconSize / 2 + MARKER_ICON_OFFSET_X_PX * inverseScale}
+            y={-iconSize / 2}
+            width={iconSize}
+            height={iconSize}
           />
         )}
       </Group>

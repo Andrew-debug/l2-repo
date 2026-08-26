@@ -6,10 +6,12 @@ function HeaderContent({
   title,
   canFold,
   canClose,
+  onClose,
 }: {
   title: string;
   canFold?: boolean;
   canClose?: boolean;
+  onClose?: () => void;
 }) {
   return (
     <div className="relative flex h-4 drop-shadow-[0_8px_4px_rgba(0,0,0,0.5)] select-none">
@@ -29,7 +31,7 @@ function HeaderContent({
           {(canFold || canClose) && (
             <div className="flex gap-1 ml-auto mr-1.75 mt-0.5">
               {canFold && <HeaderFold />}
-              {canClose && <HeaderClose />}
+              {canClose && <HeaderClose onClick={onClose} />}
             </div>
           )}
         </div>
@@ -42,12 +44,13 @@ function HeaderTitle({ children }: { children: ReactNode }) {
   return <div className="text-[13px]">{children}</div>;
 }
 
-function HeaderClose() {
+function HeaderClose({ onClick }: { onClick?: () => void }) {
   return (
     <IconStateButton
       defaultIcon={"/icons/FrameCloseBtn.png"}
       hoverIcon={"/icons/frameclosebtn_over.png"}
       clickIcon={"/icons/FrameCloseOnBtn.png"}
+      onClick={onClick}
     />
   );
 }

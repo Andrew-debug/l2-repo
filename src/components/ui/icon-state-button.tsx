@@ -8,6 +8,12 @@ interface IconStateButtonProps {
   defaultIcon: string;
   hoverIcon: string;
   clickIcon: string;
+  // Optional frame rendered behind the icon, 1px larger than the button on
+  // every side (e.g. a 34x34 outline for a 32x32 icon) — pass all three or
+  // none, it follows the same hover/click state as the icon itself.
+  outlineDefaultIcon?: string;
+  outlineHoverIcon?: string;
+  outlineClickIcon?: string;
   onClick?: () => void;
   className?: string;
   text?: string;
@@ -21,6 +27,9 @@ export function IconStateButton({
   defaultIcon,
   hoverIcon,
   clickIcon,
+  outlineDefaultIcon,
+  outlineHoverIcon,
+  outlineClickIcon,
   onClick,
   className,
   text,
@@ -64,6 +73,13 @@ export function IconStateButton({
     return defaultIcon;
   };
 
+  const getCurrentOutlineIcon = () => {
+    if (isMouseDown && isHovered) return outlineClickIcon;
+    if (isHovered) return outlineHoverIcon;
+    return outlineDefaultIcon;
+  };
+  const currentOutlineIcon = getCurrentOutlineIcon();
+
   return (
     <button
       onMouseDown={handleMouseDown}
@@ -80,6 +96,20 @@ export function IconStateButton({
         className,
       )}
     >
+      {currentOutlineIcon && (
+        // Plain <img>, not next/image's `fill` — `fill` forces its own
+        // `inset: 0`. Explicit top/left + calc() width/height, not
+        // `-inset-px` — inferring size purely from inset values on all 4
+        // sides rendered asymmetric here (only top/left visible). `max-w-none`
+        // overrides Preflight's `img { max-width: 100% }`, which otherwise
+        // clamps the width right back down to the button's own size.
+        <img
+          src={currentOutlineIcon}
+          alt=""
+          draggable={false}
+          className="pointer-events-none absolute h-[calc(100%+1px)] w-[calc(100%+1px)] max-w-none object-contain z-2"
+        />
+      )}
       <Image
         src={getCurrentIcon()}
         alt=""

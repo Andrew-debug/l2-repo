@@ -3,9 +3,10 @@ import React from "react";
 
 function WindowBorder({
   className,
+  innerClassName,
   children,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<"div"> & { innerClassName?: string }) {
   return (
     <div
       className={cn(
@@ -13,7 +14,12 @@ function WindowBorder({
         className,
       )}
     >
-      <div className="border-l border-r border-b border-window-inner-gray bg-window-bg h-full">
+      <div
+        className={cn(
+          "border-l border-r border-b border-window-inner-gray bg-window-bg h-full",
+          innerClassName,
+        )}
+      >
         {children}
       </div>
     </div>
@@ -21,8 +27,3 @@ function WindowBorder({
 }
 
 export { WindowBorder };
-// <div
-//   data-slot="card-footer"
-//   className={cn("flex items-center px-6 [.border-t]:pt-6", className)}
-//   {...props}
-// />

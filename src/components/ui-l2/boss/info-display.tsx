@@ -2,7 +2,7 @@
 
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
-import { DraggableWindow } from "../draggable-window";
+import { DraggableWindow, DragHandle } from "../draggable-window";
 import { getBossById } from "@/lib/boss-data";
 import { formatDuration } from "@/lib/respawn";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
@@ -40,7 +40,9 @@ export default function BossInfoDisplay() {
 
   return (
     <DraggableWindow className="w-50 shrink-0">
-      <Header title="NPC Info" canClose />
+      <DragHandle>
+        <Header title="NPC Info" canClose />
+      </DragHandle>
       <WindowBorder>
         <div className="flex flex-col gap-2 p-2">
           {!boss && (
