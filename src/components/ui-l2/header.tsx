@@ -8,12 +8,18 @@ function HeaderContent({
   canClose,
   onFold,
   onClose,
+  extra,
 }: {
   title: string;
   canFold?: boolean;
   canClose?: boolean;
   onFold?: () => void;
   onClose?: () => void;
+  // An extra icon button rendered before fold/close, same size, same
+  // stopPropagation-from-drag treatment — e.g. Drop List's grid/list view
+  // toggle. Generic slot rather than a dedicated prop per window-specific
+  // button, since Header itself has no business knowing what "view" means.
+  extra?: ReactNode;
 }) {
   return (
     <div className="relative flex h-4 drop-shadow-[0_8px_4px_rgba(0,0,0,0.5)] select-none">
@@ -30,7 +36,7 @@ function HeaderContent({
       <div className="absolute inset-0">
         <div className="relative flex pl-4.5">
           <HeaderTitle>{title}</HeaderTitle>
-          {(canFold || canClose) && (
+          {(canFold || canClose || extra) && (
             // stopPropagation on mousedown — Header sits inside a
             // DragHandle (see DragHandle's own onMouseDown), so without
             // this, a mousedown here that moves even slightly before
@@ -40,6 +46,7 @@ function HeaderContent({
               className="flex gap-1 ml-auto mr-1.75 mt-0.5"
               onMouseDown={(e) => e.stopPropagation()}
             >
+              {extra}
               {canFold && <HeaderFold onClick={onFold} />}
               {canClose && <HeaderClose onClick={onClose} />}
             </div>

@@ -6,33 +6,47 @@ import { WindowBorder } from "../window-l2";
 import { DraggableWindow, DragHandle } from "../draggable-window";
 import { FoldIcon } from "../fold-icon";
 import { GoldButton } from "../gold-button";
-import { bosses, levelRanges, type LevelRange } from "@/lib/boss-data";
-import { STATUS_DOT_CLASS } from "@/lib/boss-status";
+import { bosses, levelRanges } from "@/lib/boss-data";
+import Image from "next/image";
+import { STATUS_ICON, STATUS_TEXT_CLASS } from "@/lib/boss-status";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import { useRaidBossesPanel } from "@/components/providers/RaidBossesPanelProvider";
+import { useBossLevelFilter } from "@/components/providers/BossLevelFilterProvider";
 import { formatDuration } from "@/lib/respawn";
 import { cn } from "@/lib/utils";
 
 const HOUR_MS = 60 * 60 * 1000;
 
-// Short duration + a 2-3 word phrase for the row's right-aligned column —
-// the duration alone doesn't say which direction it's counting, so each
-// status gets its own phrase rather than reusing the STATUS_LABEL sentence
-// (too long to sit under a number in this narrow a column).
+// The row's right-aligned column: a short, unambiguous headline (primary)
+// plus a caption underneath (secondary). Alive gets a flat "UP" headline —
+// a duration alone doesn't say which direction it's counting, and once a
+// boss is confirmed up, the exact number matters less than the fact of it
+// — with the "how long ago" detail demoted to the caption. Pending/dead
+// keep the countdown as the headline, since there the number *is* the
+// useful part, captioned with which direction it's counting.
 function timerParts(
   status: "alive" | "pending" | "dead",
   killedAt: number | null,
   minAt: number | null,
   maxAt: number | null,
   now: number,
-): { duration: string; phrase: string } {
-  if (killedAt == null) return { duration: "—", phrase: "unknown" };
+): { primary: string; secondary: string } {
+  if (killedAt == null) return { primary: "—", secondary: "unknown" };
   if (status === "alive")
-    return { duration: formatDuration(now - (maxAt ?? now)), phrase: "respawned" };
+    return {
+      primary: "UP",
+      secondary: `${formatDuration(now - (maxAt ?? now))} ago`,
+    };
   if (status === "pending")
-    return { duration: formatDuration((maxAt ?? now) - now), phrase: "window closes" };
-  return { duration: formatDuration((minAt ?? now) - now), phrase: "opens in" };
+    return {
+      primary: formatDuration((maxAt ?? now) - now),
+      secondary: "window closes",
+    };
+  return {
+    primary: formatDuration((minAt ?? now) - now),
+    secondary: "opens in",
+  };
 }
 
 // Flat, always-visible list filtered by level tabs + a name search, sorted
@@ -41,7 +55,10 @@ function timerParts(
 // screen, since the range picker no longer needs its own step once every
 // row already shows level and status at a glance.
 export default function BossLevelNavigator() {
-  const [selectedRange, setSelectedRange] = useState<LevelRange | null>(null);
+  // Shared (not local) — the map dims markers outside selectedRange the
+  // same way it dims markers that don't drop the active item filter (see
+  // BossLevelFilterProvider).
+  const { selectedRange, setSelectedRange } = useBossLevelFilter();
   const [query, setQuery] = useState("");
   const { selectedBossId, setSelectedBoss } = useBossSelection();
   const { getStatus, getKilledAt, globalRange } = useBossRespawn();
@@ -128,7 +145,10 @@ export default function BossLevelNavigator() {
 
   return (
     <DraggableWindow
-      className={cn("w-74 shrink-0", !isOpen && "invisible pointer-events-none")}
+      className={cn(
+        "flex h-full min-h-0 w-74 shrink-0 flex-col",
+        !isOpen && "invisible pointer-events-none",
+      )}
       initialOffset={offset}
       onOffsetChange={setOffset}
     >
@@ -141,41 +161,52 @@ export default function BossLevelNavigator() {
           onClose={() => setIsOpen(false)}
         />
       </DragHandle>
-      <WindowBorder>
-        <div className="flex flex-col gap-2 p-2">
-          <div className="grid grid-cols-4 gap-1">
-            <GoldButton
-              active={selectedRange === null}
-              onClick={() => setSelectedRange(null)}
-              className="text-[11px]"
-            >
-              All
-            </GoldButton>
-            {levelRanges.map((range) => (
+      <div className="min-h-0 flex-1">
+        <WindowBorder>
+          <div className="flex h-full min-h-0 flex-col gap-2 p-2">
+            <div className="grid grid-cols-4 gap-1">
               <GoldButton
-                key={range.label}
-                active={selectedRange?.label === range.label}
-                onClick={() => setSelectedRange(range)}
+                active={selectedRange === null}
+                // Fires on mousedown, not click (mousedown+mouseup), for a
+                // snappier, more immediate feel on what's essentially a
+                // tab strip — button !== 0 guards it against right/middle
+                // click, same as IconStateButton elsewhere.
+                onMouseDown={(e) => {
+                  if (e.button !== 0) return;
+                  setSelectedRange(null);
+                }}
                 className="text-[11px]"
               >
-                {range.label}
+                All
               </GoldButton>
-            ))}
-          </div>
+              {levelRanges.map((range) => (
+                <GoldButton
+                  key={range.label}
+                  active={selectedRange?.label === range.label}
+                  onMouseDown={(e) => {
+                    if (e.button !== 0) return;
+                    setSelectedRange(range);
+                  }}
+                  className="text-[11px]"
+                >
+                  {range.label}
+                </GoldButton>
+              ))}
+            </div>
 
-          <div className="flex items-center gap-1.5 border border-window-content-border bg-window-content-bg px-2 py-1">
-            <span className="text-xs text-white/30">⌕</span>
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Filter by name"
-              className="w-full bg-transparent text-[11px] text-white placeholder:text-white/30 focus:outline-none"
-            />
-          </div>
+            <div className="flex items-center gap-1.5 border border-window-content-border bg-window-content-bg px-2 py-1">
+              <span className="text-xs text-white/30">⌕</span>
+              <input
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Filter by name"
+                className="w-full bg-transparent text-[11px] text-white placeholder:text-white/30 focus:outline-none"
+              />
+            </div>
 
-          <ul className="flex max-h-96 flex-col overflow-y-auto custom-scrollbar pr-1">
+            <ul className="flex min-h-0 flex-1 flex-col overflow-y-auto custom-scrollbar pr-1">
             {rows.map(({ boss, status, killedAt, minAt, maxAt }) => {
-              const { duration, phrase } = timerParts(
+              const { primary, secondary } = timerParts(
                 status,
                 killedAt,
                 minAt,
@@ -183,49 +214,69 @@ export default function BossLevelNavigator() {
                 now,
               );
               return (
-                <li key={boss.id}>
-                  <button
-                    onClick={() =>
-                      setSelectedBoss(
-                        selectedBossId === boss.id ? null : boss.id,
-                        "list",
-                      )
-                    }
-                    className={cn(
-                      "flex w-full items-center gap-2 border-b border-window-content-border px-1.5 py-1.5 text-left transition-colors hover:bg-white/5",
-                      selectedBossId === boss.id && "bg-white/5",
-                    )}
-                  >
-                    <span
+                  <li key={boss.id}>
+                    <button
+                      onClick={() =>
+                        setSelectedBoss(
+                          selectedBossId === boss.id ? null : boss.id,
+                          "list",
+                        )
+                      }
                       className={cn(
-                        "size-1.5 shrink-0 rounded-full",
-                        STATUS_DOT_CLASS[status],
+                        "flex w-full items-center gap-2 border-b border-window-content-border px-1.5 py-1.5 text-left transition-colors hover:bg-white/5",
+                        status === "alive" && "border-l-2 border-l-[#7ed957]",
+                        status === "pending" && "border-l-2 border-l-[#f5c518]",
+                        selectedBossId === boss.id && "bg-white/5",
                       )}
-                    />
-                    <div className="min-w-0 flex-1">
-                      <p className="truncate text-[13px]">{boss.name}</p>
-                      <p className="text-[10px] text-white/40">Lv {boss.level}</p>
-                    </div>
-                    <div className="shrink-0 text-right">
-                      <p className="text-[11px] text-white/70">{duration}</p>
-                      <p className="text-[10px] text-white/40">{phrase}</p>
-                    </div>
-                  </button>
-                </li>
-              );
-            })}
-            {rows.length === 0 && (
-              <p className="py-6 text-center text-xs text-white/40">
-                No bosses match
-              </p>
-            )}
-          </ul>
+                    >
+                      <Image
+                        src={STATUS_ICON[status]}
+                        alt=""
+                        width={18}
+                        height={18}
+                        className={cn("shrink-0", status === "dead" && "opacity-55")}
+                      />
+                      <div className="min-w-0 flex-1">
+                        <p
+                          className={cn(
+                            "truncate text-[13px]",
+                            status !== "dead" && STATUS_TEXT_CLASS[status],
+                          )}
+                        >
+                          {boss.name}
+                        </p>
+                        <p className="text-[10px] text-white/40">Lv {boss.level}</p>
+                      </div>
+                      <div className="shrink-0 text-right">
+                        <p
+                          className={cn(
+                            "text-[11px]",
+                            status !== "dead"
+                              ? STATUS_TEXT_CLASS[status]
+                              : "text-white/70",
+                          )}
+                        >
+                          {primary}
+                        </p>
+                        <p className="text-[10px] text-white/40">{secondary}</p>
+                      </div>
+                    </button>
+                  </li>
+                );
+              })}
+              {rows.length === 0 && (
+                <p className="py-6 text-center text-xs text-white/40">
+                  No bosses match
+                </p>
+              )}
+            </ul>
 
-          <div className="flex items-center justify-between border-t border-window-content-border pt-1.5 text-[10px] text-white/40">
-            <span>{bosses.length} bosses tracked</span>
+            <div className="flex items-center justify-between border-t border-window-content-border pt-1.5 text-[10px] text-white/40">
+              <span>{bosses.length} bosses tracked</span>
+            </div>
           </div>
-        </div>
-      </WindowBorder>
+        </WindowBorder>
+      </div>
     </DraggableWindow>
   );
 }

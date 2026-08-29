@@ -8,6 +8,7 @@ import { DraggableWindow, DragHandle } from "./draggable-window";
 import { IconStateButton } from "../ui/icon-state-button";
 import { useOptionsPanel } from "@/components/providers/OptionsPanelProvider";
 import { useBackgroundDim } from "@/components/providers/BackgroundDimProvider";
+import { useHeaderVisibility } from "@/components/providers/HeaderVisibilityProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import {
   CUSTOM_RESPAWN_ID,
@@ -391,6 +392,7 @@ function DisabledCheckbox({
 export function OptionsWindow() {
   const { isOpen, setIsOpen } = useOptionsPanel();
   const { isBackgroundVisible, setIsBackgroundVisible } = useBackgroundDim();
+  const { isHeaderVisible, setIsHeaderVisible } = useHeaderVisibility();
   const [tab, setTab] = useState<Tab>("game");
   const [transparent, setTransparent] = useState(false);
   // None of these back real functionality (this isn't a game client) —
@@ -482,10 +484,16 @@ export function OptionsWindow() {
                     Display
                   </span>
                   <div className="ml-14 flex w-fit flex-col items-start">
-                    <DisabledCheckbox checked label="Player" />
-                    {/* The one real toggle here — thematically the closest
-                        fit of the six, since the background actually is
-                        boss/monster artwork. */}
+                    {/* Shows/hides PageTitleBanner — the "LINEAGE 2 BOSS
+                        TRACKING" title banner at the top of the page.
+                        Repurposed from the reference's inert "Player" row
+                        since a real per-player visibility filter has no
+                        equivalent here, but a real toggle for this did. */}
+                    <Checkbox
+                      checked={isHeaderVisible}
+                      onChange={setIsHeaderVisible}
+                      label="Header"
+                    />
                     <Checkbox
                       checked={isBackgroundVisible}
                       onChange={setIsBackgroundVisible}

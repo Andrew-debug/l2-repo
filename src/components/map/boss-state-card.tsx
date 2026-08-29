@@ -1,6 +1,8 @@
 import { WindowBorder } from "../ui-l2/window-l2";
 import { IconStateButton } from "../ui/icon-state-button";
+import { STATUS_TEXT_CLASS } from "@/lib/boss-status";
 import type { RespawnStatus } from "@/lib/respawn";
+import { cn } from "@/lib/utils";
 
 interface BossStateCardProps {
   name: string;
@@ -35,12 +37,16 @@ export function BossStateCard({
       <WindowBorder innerClassName="bg-black/95">
         <div className="flex flex-col gap-1 px-2 py-2">
           <div>
-            <h3 className="text-[13px] leading-3">{name}</h3>
+            <h3 className={cn("text-[13px] leading-3", STATUS_TEXT_CLASS[status])}>
+              {name}
+            </h3>
             <p className="mt-0.5 text-[11px] leading-none text-white/50">
               Lv. {level}
             </p>
             {timerLabel && (
-              <p className="mt-1 text-[11px] leading-none">{timerLabel}</p>
+              <p className={cn("mt-1 text-[11px] leading-none", STATUS_TEXT_CLASS[status])}>
+                {timerLabel}
+              </p>
             )}
           </div>
 

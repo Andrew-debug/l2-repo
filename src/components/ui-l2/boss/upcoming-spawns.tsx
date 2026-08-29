@@ -1,13 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
 import { DraggableWindow, DragHandle } from "../draggable-window";
 import { FoldIcon } from "../fold-icon";
 import { getBossById } from "@/lib/boss-data";
 import { formatDuration } from "@/lib/respawn";
-import { STATUS_DOT_CLASS } from "@/lib/boss-status";
+import { STATUS_ICON } from "@/lib/boss-status";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import { useUpcomingSpawnsPanel } from "@/components/providers/UpcomingSpawnsPanelProvider";
@@ -36,10 +37,10 @@ export default function UpcomingSpawns() {
   // switching forms reopens wherever the other form was last dragged to).
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
-  // Alt+N — matches the fold icon's own "Upcoming Spawns(Alt+N)" tooltip
-  // and does the same thing System Menu's Upcoming Spawns row does (see
-  // toggleOpen). `e.code` (not `e.key`) so the physical key is what matters
-  // regardless of what character Alt produces on a given OS/layout.
+  // Alt+N — matches the fold icon's own "Up Next(Alt+N)" tooltip and does
+  // the same thing System Menu's Up Next row does (see toggleOpen).
+  // `e.code` (not `e.key`) so the physical key is what matters regardless
+  // of what character Alt produces on a given OS/layout.
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!e.altKey || e.code !== "KeyN" || e.repeat) return;
@@ -89,7 +90,7 @@ export default function UpcomingSpawns() {
         <DragHandle>
           <FoldIcon
             icon="/icons/mainwndtabicon4.png"
-            label="Upcoming Spawns(Alt+N)"
+            label="Up Next(Alt+N)"
             onUnfold={() => setIsFolded(false)}
           />
         </DragHandle>
@@ -99,132 +100,138 @@ export default function UpcomingSpawns() {
 
   return (
     <DraggableWindow
-      className={cn("w-56 shrink-0", !isOpen && "invisible pointer-events-none")}
+      className={cn(
+        "flex h-full min-h-0 w-80 shrink-0 flex-col",
+        !isOpen && "invisible pointer-events-none",
+      )}
       initialOffset={offset}
       onOffsetChange={setOffset}
     >
       <DragHandle>
         <Header
-          title="Upcoming Spawns"
+          title="Up Next"
           canFold
           canClose
           onFold={() => setIsFolded(true)}
           onClose={() => setIsOpen(false)}
         />
       </DragHandle>
-      <WindowBorder>
-        <div className="flex flex-col gap-1 p-2">
-          {notificationPermission === "denied" && (
-            <p className="border border-window-content-border bg-window-content-bg px-2 py-1 text-[10px] text-white/40">
-              Notifications are blocked in your browser settings.
-            </p>
-          )}
+      <div className="min-h-0 flex-1">
+        <WindowBorder>
+          <div className="flex h-full flex-col gap-1 p-2">
+            {notificationPermission === "denied" && (
+              <p className="border border-window-content-border bg-window-content-bg px-2 py-1 text-[10px] text-white/40">
+                Notifications are blocked in your browser settings.
+              </p>
+            )}
 
-          {notificationPermission === "default" && (
-            <button
-              onClick={requestNotificationPermission}
-              className="border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5"
-            >
-              Enable Notifications
-            </button>
-          )}
+            {notificationPermission === "default" && (
+              <button
+                onClick={requestNotificationPermission}
+                className="border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5"
+              >
+                Enable Notifications
+              </button>
+            )}
 
-          {notificationPermission === "granted" && (
-            <button
-              onClick={() => setNotificationsEnabled(!notificationsEnabled)}
-              className={cn(
-                "border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5",
-                notificationsEnabled &&
-                  "window-item-gradient-active bg-white/5 text-system-text",
-              )}
-            >
-              {notificationsEnabled
-                ? "Notifications On"
-                : "Notifications Off"}
-            </button>
-          )}
+            {notificationPermission === "granted" && (
+              <button
+                onClick={() => setNotificationsEnabled(!notificationsEnabled)}
+                className={cn(
+                  "border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5",
+                  notificationsEnabled &&
+                    "window-item-gradient-active bg-white/5 text-system-text",
+                )}
+              >
+                {notificationsEnabled
+                  ? "Notifications On"
+                  : "Notifications Off"}
+              </button>
+            )}
 
-          {rows.length === 0 && (
-            <p className="py-6 text-center text-xs text-white/40">
-              No bosses being tracked
-            </p>
-          )}
+            {rows.length === 0 && (
+              <p className="py-6 text-center text-xs text-white/40">
+                No bosses being tracked
+              </p>
+            )}
 
-          {rows.length > 0 && (
-            <ul className="flex max-h-96 flex-col gap-1 overflow-y-auto custom-scrollbar pr-1">
-              {rows.map(({ boss, status, minAt, maxAt }) => (
-                <li key={boss.id}>
-                  <button
-                    onClick={() =>
-                      setSelectedBoss(
-                        selectedBossId === boss.id ? null : boss.id,
-                        "list",
-                      )
-                    }
-                    className={cn(
-                      "flex w-full flex-col gap-0.5 border-y border-r px-2 py-1 text-left transition-colors hover:bg-white/5",
-                      status === "alive"
-                        ? "border-window-content-border border-l-2 border-l-[#7ed957] bg-[#7ed957]/10"
-                        : "border-l border-window-content-border bg-window-content-bg",
-                      selectedBossId === boss.id && "bg-white/5",
-                    )}
-                  >
-                    <div className="flex items-center gap-1.5">
-                      <span
-                        className={cn(
-                          "h-1.5 w-1.5 shrink-0 rounded-full",
-                          STATUS_DOT_CLASS[status],
-                        )}
-                      />
-                      <span
-                        className={cn(
-                          "truncate text-[11px]",
-                          status === "alive"
-                            ? "font-bold text-[#7ed957]"
-                            : "text-button-text",
-                        )}
-                      >
-                        {boss.name}
-                      </span>
-                      {status === "alive" && (
-                        <span
-                          role="button"
-                          tabIndex={0}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            markAlive(boss.id);
-                          }}
-                          onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === " ") {
-                              e.stopPropagation();
-                              markAlive(boss.id);
-                            }
-                          }}
-                          className="ml-auto shrink-0 px-1 text-[10px] uppercase text-white/40 hover:text-white/70"
-                        >
-                          Dismiss
-                        </span>
-                      )}
-                    </div>
-                    <span
+            {rows.length > 0 && (
+              <ul className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto custom-scrollbar pr-1">
+                {rows.map(({ boss, status, minAt, maxAt }) => (
+                  <li key={boss.id}>
+                    <button
+                      onClick={() =>
+                        setSelectedBoss(
+                          selectedBossId === boss.id ? null : boss.id,
+                          "list",
+                        )
+                      }
                       className={cn(
-                        "pl-3 text-[10px]",
-                        status === "alive" ? "text-[#7ed957]/80" : "text-white/50",
+                        "flex w-full flex-col gap-0.5 border-y border-r px-2 py-1 text-left transition-colors hover:bg-white/5",
+                        status === "alive"
+                          ? "border-window-content-border border-l-2 border-l-[#7ed957] bg-window-content-bg"
+                          : "border-l border-window-content-border bg-window-content-bg",
+                        selectedBossId === boss.id && "bg-white/5",
                       )}
                     >
-                      {status === "alive" &&
-                        `respawned ${formatDuration(now - maxAt)} ago`}
-                      {status === "pending" &&
-                        `could be up now — confirmed in ${formatDuration(maxAt - now)}`}
-                      {status === "dead" && `opens in ${formatDuration(minAt - now)}`}
-                    </span>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      </WindowBorder>
+                      <div className="flex items-center gap-1.5">
+                        <Image
+                          src={STATUS_ICON[status]}
+                          alt=""
+                          width={16}
+                          height={16}
+                          className={cn("shrink-0", status === "dead" && "opacity-55")}
+                        />
+                        <span
+                          className={cn(
+                            "truncate text-[12px]",
+                            status === "alive"
+                              ? "font-bold text-[#7ed957]"
+                              : "text-button-text",
+                          )}
+                        >
+                          {boss.name}
+                        </span>
+                        {status === "alive" && (
+                          <span
+                            role="button"
+                            tabIndex={0}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              markAlive(boss.id);
+                            }}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.stopPropagation();
+                                markAlive(boss.id);
+                              }
+                            }}
+                            className="ml-auto shrink-0 px-1 text-[10px] uppercase text-white/40 hover:text-white/70"
+                          >
+                            Dismiss
+                          </span>
+                        )}
+                      </div>
+                      <span
+                        className={cn(
+                          "pl-3 text-[10px]",
+                          status === "alive" ? "text-[#7ed957]/80" : "text-white/50",
+                        )}
+                      >
+                        {status === "alive" &&
+                          `respawned ${formatDuration(now - maxAt)} ago`}
+                        {status === "pending" &&
+                          `could be up now — confirmed in ${formatDuration(maxAt - now)}`}
+                        {status === "dead" && `opens in ${formatDuration(minAt - now)}`}
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </WindowBorder>
+      </div>
     </DraggableWindow>
   );
 }

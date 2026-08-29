@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Header from "../ui-l2/header";
 import { MapPlaceholder } from "../map-placeholder";
 import { useMapSize } from "../providers/MapProvider";
@@ -8,9 +9,21 @@ import { DraggableWindow, DragHandle } from "../ui-l2/draggable-window";
 import { FoldIcon, FOLD_ICON_SIZE } from "../ui-l2/fold-icon";
 import { IconStateButton } from "../ui/icon-state-button";
 import { MapSearchBar } from "./map-search-bar";
+import { STATUS_ICON } from "@/lib/boss-status";
 import { cn } from "@/lib/utils";
 
 const BUTTON_CLASS = "w-16 h-4.5 text-[13px]";
+
+// Short, at-a-glance phrasing for this inline hint specifically — distinct
+// from STATUS_LABEL (boss-status.ts), which is worded for the fuller Boss
+// States reference panel (System Menu > Help) rather than a compact toolbar
+// row. Both read from the same STATUS_ICON/status colors, so they can't
+// visually disagree even though the wording differs by context.
+const STATUS_HINT_LABEL: Record<"alive" | "pending" | "dead", string> = {
+  alive: "up now",
+  pending: "window open",
+  dead: "on cooldown",
+};
 
 export default function Map() {
   const {
@@ -59,7 +72,7 @@ export default function Map() {
     // that no longer changes size.
     <div
       className={cn(
-        "relative max-w-[800px] max-h-[1000px] h-full w-full aspect-square",
+        "relative min-h-0 max-w-[800px] max-h-[1000px] h-full w-full aspect-square",
         !isOpen && "invisible pointer-events-none",
       )}
     >
@@ -116,6 +129,43 @@ export default function Map() {
               <div className="flex items-center gap-1.75 pt-1.25 pb-1 pr-0.5 pl-0.5">
                 {searchOpen && (
                   <MapSearchBar onClose={() => setSearchOpen(false)} />
+                )}
+                {/* Standing in for the Find search bar while it's closed —
+                    a quick reminder of what each pin color means, right
+                    where a search would otherwise go. The fuller reference
+                    (System Menu > Help > Boss states) still exists
+                    separately for the complete pin/rail/action breakdown. */}
+                {!searchOpen && !isSmall && (
+                  <div className="flex items-center gap-2.5 text-[13px] text-white/55 h-4.5">
+                    <span className="flex items-center gap-1">
+                      <Image
+                        src={STATUS_ICON.alive}
+                        alt=""
+                        width={18}
+                        height={18}
+                      />
+                      {STATUS_HINT_LABEL.alive}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Image
+                        src={STATUS_ICON.pending}
+                        alt=""
+                        width={18}
+                        height={18}
+                      />
+                      {STATUS_HINT_LABEL.pending}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Image
+                        src={STATUS_ICON.dead}
+                        alt=""
+                        width={18}
+                        height={18}
+                        className="opacity-60"
+                      />
+                      {STATUS_HINT_LABEL.dead}
+                    </span>
+                  </div>
                 )}
                 <div className={cn("flex gap-1.75", !searchOpen && "ml-auto")}>
                   <IconStateButton

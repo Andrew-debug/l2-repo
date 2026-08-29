@@ -17,6 +17,7 @@ import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossPositions } from "@/components/providers/BossPositionsProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import { useBossItemFilter } from "@/components/providers/BossItemFilterProvider";
+import { useBossLevelFilter } from "@/components/providers/BossLevelFilterProvider";
 import { formatDuration } from "@/lib/respawn";
 
 // Bosses that belong to any cluster get folded into a single collapsible
@@ -88,7 +89,12 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     hideBoss,
     unhideBoss,
   } = useBossRespawn();
-  const { activeItem, matchingBossIds, clearItemFilter } = useBossItemFilter();
+  const {
+    activeItem,
+    matchingBossIds: itemMatchingBossIds,
+    clearItemFilter,
+  } = useBossItemFilter();
+  const { matchingBossIds: levelMatchingBossIds } = useBossLevelFilter();
   const [scale, setScale] = useState(0.5);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [mapImages, setMapImages] = useState<HTMLImageElement[]>([]);
@@ -101,6 +107,25 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     () => deriveMapBosses(bossPositions),
     [bossPositions],
   );
+  // Combines the item filter and the Raid Bosses level-range filter into
+  // the one Set the rest of this file already reads as "matchingBossIds"
+  // (dimming, and the cluster solo-member shortcut both key off it) — a
+  // marker only counts as matching while *every* currently active filter
+  // passes, same null-when-nothing-active/empty-when-nothing-matches
+  // convention as each filter's own Set. Keeping both providers' outputs
+  // separate and merging here (rather than, say, having one filter know
+  // about the other) is what lets either filter change independently
+  // without the other's logic needing to care.
+  const matchingBossIds = useMemo(() => {
+    if (!itemMatchingBossIds && !levelMatchingBossIds) return null;
+    const ids = new Set<string>();
+    for (const boss of MAP_BOSSES) {
+      const passesItem = !itemMatchingBossIds || itemMatchingBossIds.has(boss.id);
+      const passesLevel = !levelMatchingBossIds || levelMatchingBossIds.has(boss.id);
+      if (passesItem && passesLevel) ids.add(boss.id);
+    }
+    return ids;
+  }, [itemMatchingBossIds, levelMatchingBossIds, MAP_BOSSES]);
 
   // A boss selected from elsewhere (e.g. the Raid Bosses list) only renders
   // on the map once its cluster is expanded — auto-expand it so the marker

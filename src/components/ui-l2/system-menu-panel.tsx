@@ -100,7 +100,7 @@ function SystemMenuPanel({
       onClick: onOptionsClick,
     },
     {
-      text: "Upcoming Spawns(Alt+N)",
+      text: "Up Next(Alt+N)",
       defaultIcon: "/icons/mainwndtabicon4.png",
       hoverIcon: "/icons/mainwndtabicon4_over.png",
       clickIcon: "/icons/mainwndtabicon4_down.png",

@@ -300,6 +300,28 @@ body {
     opacity: 0.5;
   }
 
+  /* Same dual-background-layer gold-border trick as .gold-button above, but
+     for the page title banner: a near-black fill (not a button's neutral
+     dark-blue-gray) behind a three-stop gold gradient border, since this is
+     a static ornamental frame, not something with its own hover/active
+     states. */
+  .title-banner-frame {
+    background-image:
+      linear-gradient(rgb(26, 30, 35), rgb(12, 15, 19)),
+      linear-gradient(
+        90deg,
+        rgb(115, 89, 41),
+        rgb(189, 174, 132),
+        rgb(115, 89, 41)
+      );
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border: 1px solid transparent;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.1),
+      0 6px 18px rgba(0, 0, 0, 0.75);
+  }
+
   /* Selected tab / preset row: warmer amber fill instead of the plain dark
      one, on top of the same gold border — the game's "this one's picked"
      treatment, distinct from :hover's brightened-but-still-neutral fill. */

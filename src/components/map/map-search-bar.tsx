@@ -93,6 +93,11 @@ export function MapSearchBar({ onClose }: MapSearchBarProps) {
 
   return (
     <div ref={containerRef} className="relative flex-1">
+      {/* h-4.5 matches Find/World info.'s own height (Map.tsx's
+          BUTTON_CLASS) exactly — this sits in the same items-center row as
+          those buttons, and a mismatched height here changed the row's own
+          cross-axis size the instant this mounted, visibly shifting the
+          buttons by the difference (was h-5, 2px taller). */}
       <div className="flex h-4.5 items-center gap-1.5 border border-window-content-border bg-window-content-bg px-1.5">
         <span className="text-xs text-white/30">⌕</span>
         <input
