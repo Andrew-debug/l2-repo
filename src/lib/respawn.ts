@@ -26,8 +26,7 @@ export function computeRespawnStatus(
 
 // "3h 24m" / "18m" / "42s" style duration, for showing how long ago a boss
 // was marked killed or how far into/until a respawn window the clock is.
-// Drops to seconds under a minute — matters for windows set in seconds or
-// minutes (see RespawnRangePicker's unit selector), not just real ones.
+// Drops to seconds under a minute for short elapsed times.
 export function formatDuration(ms: number): string {
   const totalSeconds = Math.max(0, Math.round(ms / 1000));
   if (totalSeconds < 60) return `${totalSeconds}s`;

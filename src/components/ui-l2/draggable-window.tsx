@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useRef,
   useState,
@@ -32,6 +33,12 @@ const MAGNETIC_SNAP_PX = 5;
 // DOM). Module-level on purpose: all windows live in one page, so a plain
 // global counter is simpler than threading a context through every panel.
 let topZIndex = 10;
+
+// Reserved stacking band for `alwaysOnTop` windows (currently just Options)
+// — comfortably above anything the dynamic topZIndex race above could climb
+// to through ordinary clicking/dragging, but below ConfirmDialog's fixed
+// z-999, which must stay above literally everything (see confirm-dialog.tsx).
+const ALWAYS_ON_TOP_Z_INDEX = 500;
 
 function clamp(value: number, min: number, max: number): number {
   return Math.min(Math.max(value, min), max);
@@ -140,6 +147,23 @@ interface DraggableWindowProps {
   // because it lives in this component's own state.
   initialOffset?: { x: number; y: number };
   onOffsetChange?: (offset: { x: number; y: number }) => void;
+  // Centers the window in the viewport the first time it's laid out, by
+  // measuring its own rendered size — for a window that starts closed
+  // (mounted invisibly, per the reserve-layout-space convention) and should
+  // still open in the middle the first time, rather than wherever its own
+  // static position happens to fall. Ignored if initialOffset is given (an
+  // explicit starting position wins), and only ever applied once — dragging
+  // afterward, even while invisible, takes over from there like any other
+  // window.
+  centered?: boolean;
+  // Pins this window's stacking order at ALWAYS_ON_TOP_Z_INDEX instead of
+  // letting it join the normal "most recently clicked wins" race — so it
+  // stays above every regular window even when the user clicks or drags one
+  // of them afterward, not just until the next time this window itself is
+  // touched. Still draggable/clickable itself; it just never needs (or
+  // gets) raised any higher, since nothing but ConfirmDialog's fixed z-999
+  // outranks it.
+  alwaysOnTop?: boolean;
 }
 
 // Holding the mouse down on a <DragHandle> and moving repositions the whole
@@ -159,11 +183,47 @@ export function DraggableWindow({
   className,
   initialOffset,
   onOffsetChange,
+  centered,
+  alwaysOnTop,
 }: DraggableWindowProps) {
   const [offset, setOffsetState] = useState(initialOffset ?? { x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(0);
   const elementRef = useRef<HTMLDivElement>(null);
   const stickyGroup = useContext(StickyGroupContext);
+
+  // Runs once, before paint, so there's no visible flash at the un-centered
+  // static position first. The delta is computed from wherever the element
+  // actually laid out (rect.left/top), not assumed to be 0 — so this works
+  // regardless of the caller's own positioning classes.
+  useLayoutEffect(() => {
+    if (!centered || initialOffset) return;
+    const element = elementRef.current;
+    if (!element) return;
+    const rect = element.getBoundingClientRect();
+    setOffsetState({
+      x: (window.innerWidth - rect.width) / 2 - rect.left,
+      y: (window.innerHeight - rect.height) / 2 - rect.top,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Beyond seeding the initial position, also resync whenever `initialOffset`
+  // changes to a value this instance didn't itself just emit — lets two
+  // DraggableWindows that stay mounted simultaneously share one lifted
+  // offset (e.g. Map's folded icon and its full window) and stay in lockstep
+  // without either ever unmounting. Bails out via the functional update when
+  // the value already matches, so this doesn't fight this window's own drag:
+  // dragging sets `offset` locally and calls onOffsetChange in the same
+  // handler, so by the time the echoed prop comes back down it's already
+  // equal and this is a no-op.
+  useEffect(() => {
+    if (!initialOffset) return;
+    setOffsetState((prev) =>
+      prev.x === initialOffset.x && prev.y === initialOffset.y
+        ? prev
+        : initialOffset,
+    );
+  }, [initialOffset]);
 
   useEffect(() => {
     const element = elementRef.current;
@@ -186,9 +246,10 @@ export function DraggableWindow({
   onOffsetChangeRef.current = onOffsetChange;
 
   const bringToFront = useCallback(() => {
+    if (alwaysOnTop) return; // pinned — see ALWAYS_ON_TOP_Z_INDEX above
     topZIndex += 1;
     setZIndex(topZIndex);
-  }, []);
+  }, [alwaysOnTop]);
 
   const handleDragStart = useCallback((e: React.MouseEvent) => {
     if (e.button !== 0) return; // left click only
@@ -345,7 +406,7 @@ export function DraggableWindow({
           offset.x || offset.y
             ? `translate(${offset.x}px, ${offset.y}px)`
             : undefined,
-        zIndex: zIndex || undefined,
+        zIndex: alwaysOnTop ? ALWAYS_ON_TOP_Z_INDEX : zIndex || undefined,
       }}
       onMouseDownCapture={bringToFront}
     >

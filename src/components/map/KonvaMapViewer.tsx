@@ -4,12 +4,20 @@ import React, { useRef, useState, useEffect, useMemo } from "react";
 import { Stage, Layer, Image as KonvaImage, Group, Rect } from "react-konva";
 import Konva from "konva";
 import BossMarkerKonva from "./BossMarkerKonva";
-import BossClusterMarkerKonva from "./BossClusterMarkerKonva";
+import BossClusterMarkerKonva, {
+  DEFAULT_CLUSTER_Y_OFFSET,
+} from "./BossClusterMarkerKonva";
+import { BossStateCard } from "./boss-state-card";
+import { WindowBorder } from "../ui-l2/window-l2";
+import { ItemHoverTooltip } from "../ui-l2/boss/item-hover-tooltip";
 import { bosses } from "@/lib/boss-data";
 import { MAP_CONFIG, type BossMapPosition } from "@/lib/boss-positions";
 import { BOSS_CLUSTERS } from "@/data/boss-clusters";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossPositions } from "@/components/providers/BossPositionsProvider";
+import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
+import { useBossItemFilter } from "@/components/providers/BossItemFilterProvider";
+import { formatDuration } from "@/lib/respawn";
 
 // Bosses that belong to any cluster get folded into a single collapsible
 // marker (see BossClusterMarkerKonva) instead of their own independent one.
@@ -70,6 +78,17 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const layerRef = useRef<Konva.Layer>(null);
   const { selectedBossId, setSelectedBoss } = useBossSelection();
   const { positions: bossPositions } = useBossPositions();
+  const {
+    getStatus,
+    markKilled,
+    markAlive,
+    getKilledAt,
+    globalRange,
+    isHidden,
+    hideBoss,
+    unhideBoss,
+  } = useBossRespawn();
+  const { activeItem, matchingBossIds, clearItemFilter } = useBossItemFilter();
   const [scale, setScale] = useState(0.5);
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [mapImages, setMapImages] = useState<HTMLImageElement[]>([]);
@@ -77,6 +96,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const [expandedClusterId, setExpandedClusterId] = useState<string | null>(
     null,
   );
+  const [itemChipHovered, setItemChipHovered] = useState(false);
   const MAP_BOSSES = useMemo(
     () => deriveMapBosses(bossPositions),
     [bossPositions],
@@ -104,6 +124,17 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   const momentumRef = useRef<NodeJS.Timeout | null>(null);
   const stageDimensionsRef = useRef({ width, height });
   const backgroundRectRef = useRef<Konva.Rect>(null);
+  // The "pan to selected boss" Konva.Tween below (see the effect that
+  // creates it) keeps writing to the layer's x/y on its own schedule for
+  // its whole duration. A manual interaction (zoom, drag, pinch) also
+  // writes to the same layer x/y directly for smooth, non-state-driven
+  // movement — if the tween is still running when that happens, its very
+  // next tick overwrites the interaction's position with its own
+  // interpolated value, snapping the map back onto the tween's path. Every
+  // interaction entry point interrupts the tween first (see
+  // interruptBossPanTween below) so there's only ever one thing driving the
+  // layer's position at a time.
+  const bossPanTweenRef = useRef<Konva.Tween | null>(null);
 
   // Update stage dimensions ref when props change
   useEffect(() => {
@@ -143,6 +174,9 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     }
   }, []);
 
+  const overlayRef = useRef<HTMLDivElement>(null);
+  const OVERLAY_GAP_PX = 12;
+
   // Smoothly pan/center the map onto whichever boss is selected, whether
   // that selection came from clicking a list row or a marker on the map.
   useEffect(() => {
@@ -174,14 +208,73 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
         positionRef.current = { x: layer.x(), y: layer.y() };
       },
       onFinish: () => {
+        bossPanTweenRef.current = null;
         setPosition({ x: layer.x(), y: layer.y() });
       },
     });
+    bossPanTweenRef.current = tween;
     tween.play();
 
     return () => {
-      tween.destroy();
+      // interruptBossPanTween (or onFinish, above) may have already
+      // destroyed this same tween and nulled the ref — Konva.Tween isn't
+      // safe to destroy() twice, so only do it here if this effect's tween
+      // is still the one currently registered.
+      if (bossPanTweenRef.current === tween) {
+        bossPanTweenRef.current = null;
+        tween.destroy();
+      }
     };
+  }, [selectedBossId, MAP_BOSSES]);
+
+  // Stops the boss-pan tween mid-flight, if one is running, and resyncs
+  // positionRef straight from the layer's actual current position (already
+  // wherever the tween had animated it to) — called at the start of every
+  // manual interaction below so the interaction always wins instead of
+  // fighting the animation. See bossPanTweenRef above for why this is
+  // necessary at all.
+  const interruptBossPanTween = () => {
+    const tween = bossPanTweenRef.current;
+    if (!tween) return;
+    tween.destroy();
+    bossPanTweenRef.current = null;
+    const layer = layerRef.current;
+    if (layer) {
+      positionRef.current = { x: layer.x(), y: layer.y() };
+    }
+  };
+
+  // Keep the selected boss's HTML card glued to its marker the same way the
+  // original Konva-drawn tooltip was — as a child of the map's own
+  // pan/zoom layer, it moved together with the terrain by construction, so
+  // it never visually drifted off the boss as the map panned, and simply
+  // went off-screen if panned far enough away. A plain DOM overlay can't
+  // literally be a child of the Konva transform, so this reproduces the
+  // same effect by re-reading positionRef/scaleRef (the authoritative
+  // pan/zoom values — see the handlers below) every animation frame and
+  // re-anchoring the card at a fixed offset from the marker — no clamping
+  // to the viewport and no side-flipping based on available space, both of
+  // which fought this same goal (one held it against the window edge while
+  // panning, the other jumped it between sides mid-animation).
+  useEffect(() => {
+    if (!selectedBossId) return;
+    const boss = MAP_BOSSES.find((b) => b.id === selectedBossId);
+    if (!boss) return;
+
+    let rafId: number;
+    const sync = () => {
+      const el = overlayRef.current;
+      if (el) {
+        const markerX =
+          positionRef.current.x + boss.absoluteX * scaleRef.current;
+        const markerY =
+          positionRef.current.y + boss.absoluteY * scaleRef.current;
+        el.style.transform = `translate(${markerX + OVERLAY_GAP_PX}px, ${markerY - OVERLAY_GAP_PX}px) translateY(-100%)`;
+      }
+      rafId = requestAnimationFrame(sync);
+    };
+    rafId = requestAnimationFrame(sync);
+    return () => cancelAnimationFrame(rafId);
   }, [selectedBossId, MAP_BOSSES]);
 
   // Handle mouse wheel zoom
@@ -190,6 +283,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     if (isDragging) return;
 
     e.evt.preventDefault();
+    interruptBossPanTween();
 
     const stage = stageRef.current;
     if (!stage || !layerRef.current) return;
@@ -247,6 +341,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
   // Handle pan with mouse drag
   const handleMouseDown = (e: Konva.KonvaEventObject<PointerEvent>) => {
     if (!isDragging) {
+      interruptBossPanTween();
       setIsDragging(true);
       const pos = stageRef.current?.getPointerPosition();
       if (pos) {
@@ -360,6 +455,7 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
 
   const handleTouchStart = (e: Konva.KonvaEventObject<TouchEvent>) => {
     const touches = e.evt.touches;
+    interruptBossPanTween();
     if (touches.length === 1) {
       // Single finger - prepare for panning
       const pos = stageRef.current?.getPointerPosition();
@@ -470,110 +566,239 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     }
   };
 
-  return (
-    <Stage
-      ref={stageRef}
-      width={width}
-      height={height}
-      onWheel={handleWheel}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-      style={{
-        cursor: isDragging ? "grabbing" : "grab",
-      }}
-    >
-      <Layer
-        ref={layerRef}
-        x={position.x}
-        y={position.y}
-        scaleX={scale}
-        scaleY={scale}
-      >
-        {/* Background rect to catch drag events */}
-        <Rect
-          ref={backgroundRectRef}
-          x={0}
-          y={0}
-          width={MAP_CONFIG.totalWidth}
-          height={MAP_CONFIG.totalHeight}
-          fill="transparent"
-          listening={true}
-        />
+  const selectedMapBoss = selectedBossId
+    ? MAP_BOSSES.find((b) => b.id === selectedBossId)
+    : undefined;
 
-        {/* Render map tiles */}
-        {mapImages.length > 0 &&
-          Array.from({ length: MAP_CONFIG.rows }).map((_, row) =>
-            Array.from({ length: MAP_CONFIG.cols }).map((_, col) => {
-              const index = row * MAP_CONFIG.cols + col;
-              const img = mapImages[index];
-              if (!img || !img.complete) return null;
+  // "Respawns in 3h 12m" / "Could be up · closes in 40m" / "Respawned 6m
+  // ago" — null only when the boss has never been marked killed, since
+  // there's nothing to count from.
+  function bossTimerLabel(bossId: string): string | null {
+    const killedAt = getKilledAt(bossId);
+    if (killedAt == null) return null;
+
+    const elapsedMs = Date.now() - killedAt;
+    const minMs = globalRange.minHours * 60 * 60 * 1000;
+    const maxMs = globalRange.maxHours * 60 * 60 * 1000;
+
+    const status = getStatus(bossId);
+    if (status === "dead")
+      return `Respawns in ${formatDuration(minMs - elapsedMs)}`;
+    if (status === "pending")
+      return `Could be up · closes in ${formatDuration(maxMs - elapsedMs)}`;
+    return `Respawned ${formatDuration(elapsedMs - maxMs)} ago`;
+  }
+
+  return (
+    <div style={{ position: "relative", width, height }}>
+      <Stage
+        ref={stageRef}
+        width={width}
+        height={height}
+        onWheel={handleWheel}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{
+          cursor: isDragging ? "grabbing" : "grab",
+        }}
+      >
+        <Layer
+          ref={layerRef}
+          x={position.x}
+          y={position.y}
+          scaleX={scale}
+          scaleY={scale}
+        >
+          {/* Background rect to catch drag events */}
+          <Rect
+            ref={backgroundRectRef}
+            x={0}
+            y={0}
+            width={MAP_CONFIG.totalWidth}
+            height={MAP_CONFIG.totalHeight}
+            fill="transparent"
+            listening={true}
+          />
+
+          {/* Render map tiles */}
+          {mapImages.length > 0 &&
+            Array.from({ length: MAP_CONFIG.rows }).map((_, row) =>
+              Array.from({ length: MAP_CONFIG.cols }).map((_, col) => {
+                const index = row * MAP_CONFIG.cols + col;
+                const img = mapImages[index];
+                if (!img || !img.complete) return null;
+
+                return (
+                  <KonvaImage
+                    key={`tile-${row}-${col}`}
+                    image={img}
+                    x={col * MAP_CONFIG.tileWidth}
+                    y={row * MAP_CONFIG.tileHeight}
+                    width={MAP_CONFIG.tileWidth}
+                    height={MAP_CONFIG.tileHeight}
+                    listening={false}
+                  />
+                );
+              }),
+            )}
+
+          {/* Render boss markers */}
+          <Group>
+            {MAP_BOSSES.filter((boss) => !CLUSTERED_BOSS_IDS.has(boss.id)).map(
+              (boss) => (
+                <BossMarkerKonva
+                  key={boss.id}
+                  boss={boss}
+                  isSelected={selectedBossId === boss.id}
+                  onSelect={(id) => {
+                    setSelectedBoss(selectedBossId === id ? null : id, "map");
+                    setExpandedClusterId(null);
+                  }}
+                  dimmed={
+                    matchingBossIds ? !matchingBossIds.has(boss.id) : false
+                  }
+                  scale={scale}
+                />
+              ),
+            )}
+
+            {BOSS_CLUSTERS.map((cluster) => {
+              const anchor = MAP_BOSSES.find(
+                (b) => b.id === cluster.anchorBossId,
+              );
+              const members = MAP_BOSSES.filter((b) =>
+                cluster.memberBossIds.includes(b.id),
+              );
+              if (!anchor || members.length === 0) return null;
+
+              const matchingMembers = matchingBossIds
+                ? members.filter((b) => matchingBossIds.has(b.id))
+                : members;
+
+              // Filtered down to a single matching boss — expanding a
+              // one-member circle would just make the player click the
+              // cluster open and then click again to reach its only member.
+              // Drop straight to a plain marker, at the spot the collapsed
+              // cluster icon would have sat. (Zero or multiple matches fall
+              // through to the normal cluster below, dimmed rather than
+              // hidden — see BossClusterMarkerKonva's matchingBossIds prop.)
+              if (matchingBossIds && matchingMembers.length === 1) {
+                const solo = matchingMembers[0];
+                const yOffset = cluster.yOffset ?? DEFAULT_CLUSTER_Y_OFFSET;
+                return (
+                  <BossMarkerKonva
+                    key={cluster.id}
+                    boss={{
+                      ...solo,
+                      absoluteX: anchor.absoluteX,
+                      absoluteY: anchor.absoluteY + yOffset,
+                    }}
+                    isSelected={selectedBossId === solo.id}
+                    onSelect={(id) => {
+                      setSelectedBoss(selectedBossId === id ? null : id, "map");
+                      setExpandedClusterId(null);
+                    }}
+                    scale={scale}
+                  />
+                );
+              }
 
               return (
-                <KonvaImage
-                  key={`tile-${row}-${col}`}
-                  image={img}
-                  x={col * MAP_CONFIG.tileWidth}
-                  y={row * MAP_CONFIG.tileHeight}
-                  width={MAP_CONFIG.tileWidth}
-                  height={MAP_CONFIG.tileHeight}
-                  listening={false}
+                <BossClusterMarkerKonva
+                  key={cluster.id}
+                  members={members}
+                  matchingBossIds={matchingBossIds}
+                  anchorX={anchor.absoluteX}
+                  anchorY={anchor.absoluteY}
+                  yOffset={cluster.yOffset}
+                  expanded={expandedClusterId === cluster.id}
+                  onExpand={() => {
+                    setExpandedClusterId(cluster.id);
+                    if (selectedBossId) setSelectedBoss(null, "map");
+                  }}
+                  onMemberSelect={(id) =>
+                    setSelectedBoss(selectedBossId === id ? null : id, "map")
+                  }
+                  selectedBossId={selectedBossId}
+                  scale={scale}
                 />
               );
-            }),
-          )}
+            })}
+          </Group>
+        </Layer>
+      </Stage>
 
-        {/* Render boss markers */}
-        <Group>
-          {MAP_BOSSES.filter((boss) => !CLUSTERED_BOSS_IDS.has(boss.id)).map(
-            (boss) => (
-              <BossMarkerKonva
-                key={boss.id}
-                boss={boss}
-                isSelected={selectedBossId === boss.id}
-                onSelect={(id) => {
-                  setSelectedBoss(selectedBossId === id ? null : id, "map");
-                  setExpandedClusterId(null);
-                }}
-                scale={scale}
-              />
-            ),
-          )}
+      {activeItem && (
+        <div className="absolute left-2 bottom-2 z-10">
+          <WindowBorder innerClassName="bg-black/90">
+            <div className="flex items-center gap-2 px-2 py-1.5 text-[13px] text-white">
+              <span>
+                Showing bosses that drop{"  "}
+                <span
+                  className="relative cursor-default text-system-text underline decoration-dotted underline-offset-2"
+                  onMouseEnter={() => setItemChipHovered(true)}
+                  onMouseLeave={() => setItemChipHovered(false)}
+                >
+                  {activeItem}
+                  {itemChipHovered && (
+                    <ItemHoverTooltip
+                      item={activeItem}
+                      showIcon
+                      className="absolute bottom-full left-1/2 mb-1 -translate-x-1/4"
+                    />
+                  )}
+                </span>
+              </span>
+              <button
+                onClick={clearItemFilter}
+                className="text-white/50 transition-colors hover:text-white"
+                aria-label="Clear item filter"
+              >
+                ✕
+              </button>
+            </div>
+          </WindowBorder>
+        </div>
+      )}
 
-          {BOSS_CLUSTERS.map((cluster) => {
-            const anchor = MAP_BOSSES.find(
-              (b) => b.id === cluster.anchorBossId,
-            );
-            const members = MAP_BOSSES.filter((b) =>
-              cluster.memberBossIds.includes(b.id),
-            );
-            if (!anchor || members.length === 0) return null;
-            return (
-              <BossClusterMarkerKonva
-                key={cluster.id}
-                members={members}
-                anchorX={anchor.absoluteX}
-                anchorY={anchor.absoluteY}
-                yOffset={cluster.yOffset}
-                expanded={expandedClusterId === cluster.id}
-                onExpand={() => {
-                  setExpandedClusterId(cluster.id);
-                  if (selectedBossId) setSelectedBoss(null, "map");
-                }}
-                onMemberSelect={(id) =>
-                  setSelectedBoss(selectedBossId === id ? null : id, "map")
-                }
-                selectedBossId={selectedBossId}
-                scale={scale}
-              />
-            );
-          })}
-        </Group>
-      </Layer>
-    </Stage>
+      {selectedMapBoss && (
+        // Position is written every frame by the tracking effect above, so
+        // this is just a plain top-left anchor for its translate().
+        <div
+          ref={overlayRef}
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            pointerEvents: "none",
+          }}
+        >
+          <div style={{ pointerEvents: "auto" }}>
+            <BossStateCard
+              name={selectedMapBoss.name}
+              level={selectedMapBoss.level}
+              status={getStatus(selectedMapBoss.id)}
+              timerLabel={bossTimerLabel(selectedMapBoss.id)}
+              isHidden={isHidden(selectedMapBoss.id)}
+              onMarkAction={() =>
+                getStatus(selectedMapBoss.id) === "alive"
+                  ? markKilled(selectedMapBoss.id)
+                  : markAlive(selectedMapBoss.id)
+              }
+              onHideAction={() =>
+                isHidden(selectedMapBoss.id)
+                  ? unhideBoss(selectedMapBoss.id)
+                  : hideBoss(selectedMapBoss.id)
+              }
+            />
+          </div>
+        </div>
+      )}
+    </div>
   );
 }

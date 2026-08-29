@@ -115,7 +115,7 @@ export default function CanvasMapViewer() {
           ref={canvasRef}
           width={MAP_CONFIG.totalWidth}
           height={MAP_CONFIG.totalHeight}
-          className="absolute top-0 left-0 block pointer-events-auto"
+          className="absolute top-0.75 -left-2.5 block pointer-events-auto"
         />
 
         {/* The Interactive DOM Layer */}

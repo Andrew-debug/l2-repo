@@ -1,14 +1,13 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { Group, Image as KonvaImage, Text, Rect, Line } from "react-konva";
+import { Group, Image as KonvaImage } from "react-konva";
 import Konva from "konva";
 import {
   useMarkerIconVariants,
-  useTitleFontFamily,
   MARKER_ICON_OFFSET_X_PX,
 } from "./markerIcon";
+import { useKonvaClickGuard } from "./useKonvaClickGuard";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
-import type { RespawnStatus } from "@/lib/respawn";
 
 export interface MapBoss {
   id: string;
@@ -18,43 +17,46 @@ export interface MapBoss {
   absoluteY: number;
 }
 
-const STATUS_LABEL: Record<RespawnStatus, string> = {
-  dead: "Killed",
-  pending: "Could be up",
-  alive: "Currently visible",
-};
-
-const STATUS_COLOR: Record<RespawnStatus, string> = {
-  dead: "#c25c5c",
-  pending: "#f5c518",
-  alive: "#7ed957",
-};
-
 interface BossMarkerKonvaProps {
   boss: MapBoss;
   isSelected: boolean;
   onSelect: (id: string) => void;
   scale: number; // Current zoom scale from stage
+  // True while an active item-drop filter (see BossItemFilterProvider)
+  // doesn't include this boss. Rendered exactly like a user-hidden marker
+  // (dimmed gray, see below) rather than omitted — a boss that doesn't
+  // drop the searched item is still on the map, just deemphasized, so the
+  // player keeps their bearings instead of pins vanishing out from under
+  // them.
+  dimmed?: boolean;
 }
 
+// Just the pin icon — the popup showing name/state/action lives outside the
+// Konva canvas entirely now (see BossStateCard, rendered as a real HTML
+// overlay by KonvaMapViewer for the selected boss), since canvas-drawn text
+// reads small and blurry next to the rest of the app's crisp DOM text.
 export default function BossMarkerKonva({
   boss,
   isSelected,
   onSelect,
   scale,
+  dimmed = false,
 }: BossMarkerKonvaProps) {
   const groupRef = useRef<Konva.Group>(null);
   const [isHovered, setIsHovered] = useState(false);
   const variants = useMarkerIconVariants();
-  const fontFamily = useTitleFontFamily();
-  const { getStatus } = useBossRespawn();
+  const { handleMouseDown, isGenuineClick } = useKonvaClickGuard();
+  const { getStatus, isHidden } = useBossRespawn();
   const status = getStatus(boss.id);
+  // Either reason renders identically — see the dimmed prop's own comment
+  // for why a filter mismatch borrows the hidden treatment instead of
+  // unmounting the marker.
+  const hidden = isHidden(boss.id) || dimmed;
 
   const highlighted = isHovered || isSelected;
-  const showTooltip = highlighted;
 
-  // Keep the selected marker's tooltip above plain, unhighlighted markers —
-  // hover still wins over this via its own moveToTop() on mouse enter.
+  // Keep the selected marker above plain, unhighlighted markers — hover
+  // still wins over this via its own moveToTop() on mouse enter.
   useEffect(() => {
     if (isSelected) groupRef.current?.moveToTop();
   }, [isSelected]);
@@ -66,8 +68,11 @@ export default function BossMarkerKonva({
   const iconScreenSize = 20;
   const iconSize = iconScreenSize * inverseScale;
 
+  // Hidden bosses always render with the dimmed gray icon, no matter their
+  // actual respawn status — hiding is "I don't care about this one," not a
+  // report on whether it's up, so it shouldn't borrow the "dead" color.
   const iconSource = variants
-    ? status === "dead"
+    ? hidden || status === "dead"
       ? highlighted
         ? variants.grayBright
         : variants.gray
@@ -80,12 +85,6 @@ export default function BossMarkerKonva({
           : variants.normal
     : null;
 
-  // Tooltip box, laid out in fixed screen-pixel units (the group itself is
-  // scaled by inverseScale so it stays a constant size regardless of zoom).
-  const boxWidth = 130;
-  const boxHeight = 50;
-  const gap = 4;
-
   return (
     <Group
       ref={groupRef}
@@ -93,15 +92,13 @@ export default function BossMarkerKonva({
       y={boss.absoluteY}
       onMouseEnter={() => {
         setIsHovered(true);
-        // Bring the hovered marker (and its tooltip) above every other
-        // marker, including a selected one whose tooltip may overlap it —
-        // otherwise stacking order depends on array/render order and looks
-        // inconsistent depending on which boss happens to be selected.
         groupRef.current?.moveToTop();
       }}
       onMouseLeave={() => setIsHovered(false)}
+      onMouseDown={handleMouseDown}
       onClick={(e) => {
         e.cancelBubble = true;
+        if (!isGenuineClick(e)) return;
         onSelect(boss.id);
       }}
       onTap={(e) => {
@@ -110,7 +107,6 @@ export default function BossMarkerKonva({
       }}
       listening={true}
     >
-      {/* Marker icon */}
       {iconSource && (
         <KonvaImage
           image={iconSource}
@@ -118,83 +114,8 @@ export default function BossMarkerKonva({
           y={-iconSize / 2}
           width={iconSize}
           height={iconSize}
+          opacity={hidden ? 0.45 : 1}
         />
-      )}
-
-      {/* Tooltip - shown on hover or when selected, anchored to the icon's top-right */}
-      {showTooltip && (
-        <Group
-          x={iconSize / 2 + gap * inverseScale}
-          y={-iconSize / 2 - boxHeight * inverseScale - gap * inverseScale}
-          scaleX={inverseScale}
-          scaleY={inverseScale}
-          onClick={(e) => (e.cancelBubble = true)}
-          onTap={(e) => (e.cancelBubble = true)}
-          listening={isSelected}
-        >
-          {/* Tooltip background box */}
-          <Rect
-            width={boxWidth}
-            height={boxHeight}
-            fill="#100c07"
-            opacity={0.92}
-            stroke="#7c5e2e"
-            strokeWidth={1}
-            cornerRadius={2}
-            shadowColor="#000"
-            shadowBlur={8}
-            shadowOpacity={0.8}
-          />
-
-          {/* Boss name */}
-          <Text
-            x={7}
-            y={5}
-            text={boss.name}
-            fontSize={10}
-            fontFamily={fontFamily}
-            fontStyle="bold"
-            fill="#e3d3a3"
-            width={boxWidth - 14}
-            wrap="none"
-            ellipsis
-          />
-
-          {/* Divider under the name */}
-          <Line
-            points={[7, 18, boxWidth - 7, 18]}
-            stroke="#7c5e2e"
-            strokeWidth={1}
-          />
-
-          {/* Level + type */}
-          <Text
-            x={7}
-            y={22}
-            text={`${boss.level}Lv. Raid Monster`}
-            fontSize={9}
-            fontFamily={fontFamily}
-            fill="#f5c518"
-          />
-
-          {/* Current state */}
-          <Text
-            x={7}
-            y={36}
-            text="Current State : "
-            fontSize={8.5}
-            fontFamily={fontFamily}
-            fill="#c7c7c7"
-          />
-          <Text
-            x={70}
-            y={36}
-            text={STATUS_LABEL[status]}
-            fontSize={8.5}
-            fontFamily={fontFamily}
-            fill={STATUS_COLOR[status]}
-          />
-        </Group>
       )}
     </Group>
   );

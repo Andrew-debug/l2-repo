@@ -86,6 +86,7 @@
   --color-square-border: rgb(57, 56, 57);
   --color-square-bg: rgba(19, 23, 27, 0.9);
   --color-system-text: rgba(176, 153, 121);
+  --color-system-text-dim: rgb(204, 196, 184);
   --color-announcement-text: rgba(128, 251, 255);
   --color-shout-text: rgba(255, 112, 0);
   --color-button-text: rgb(141, 190, 255);
@@ -266,5 +267,68 @@ body {
 
   .custom-scrollbar::-webkit-scrollbar-button:single-button:vertical:increment:active {
     background-image: url("/icons/ScrollBarDownOnBtn.png");
+  }
+
+  /* Gradient-fill CTA with a gold gradient border — same border colors as
+     .custom-scrollbar's thumb (rgb(189,174,132) -> rgb(115,89,41)), the
+     game's own gold bevel. Two background layers clipped to padding-box
+     (the fill) and border-box (the border) respectively, since a plain
+     `border` can't itself be a gradient. */
+  .gold-button {
+    background-image:
+      linear-gradient(rgb(28, 32, 37), rgb(15, 18, 22)),
+      linear-gradient(90deg, rgb(189, 174, 132), rgb(115, 89, 41));
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+    border: 1px solid transparent;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.13),
+      0 1px 2px rgba(0, 0, 0, 0.7);
+  }
+
+  .gold-button:hover:not(:disabled) {
+    background-image:
+      linear-gradient(rgb(38, 43, 50), rgb(22, 26, 31)),
+      linear-gradient(90deg, rgb(219, 204, 158), rgb(146, 113, 52));
+  }
+
+  .gold-button:active:not(:disabled) {
+    box-shadow: inset 0 2px 3px rgba(0, 0, 0, 0.8);
+  }
+
+  .gold-button:disabled {
+    opacity: 0.5;
+  }
+
+  /* Selected tab / preset row: warmer amber fill instead of the plain dark
+     one, on top of the same gold border — the game's "this one's picked"
+     treatment, distinct from :hover's brightened-but-still-neutral fill. */
+  .gold-button-active {
+    background-image:
+      linear-gradient(rgb(46, 38, 24), rgb(28, 23, 15)),
+      linear-gradient(90deg, rgb(189, 174, 132), rgb(115, 89, 41));
+  }
+
+  /* A white wash that fades out over a box — draws the eye back to a modal
+     the player just clicked past, without the instant on/off snap of a
+     plain opacity toggle ("flashbang"). Starts dim on purpose: a peak
+     opacity above ~0.3 reads as a strobe, not a nudge. */
+  @keyframes attention-flash {
+    from {
+      opacity: 0.28;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .attention-flash {
+    background-color: white;
+    /* forwards: hold the last keyframe (opacity: 0) once the animation
+       ends, instead of snapping back to the element's base opacity (1,
+       fully opaque) the instant it finishes. Belt-and-suspenders with the
+       onAnimationEnd unmount in respawn-onboarding.tsx, which removes this
+       element from the DOM entirely at the same moment. */
+    animation: attention-flash 700ms ease-out forwards;
   }
 }

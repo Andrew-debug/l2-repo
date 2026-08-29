@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { cn } from "@/lib/utils";
 
 interface IconStateButtonProps {
@@ -49,11 +49,13 @@ export function IconStateButton({
     };
   }, []);
 
-  const handleMouseDown = () => {
+  const handleMouseDown = (e: MouseEvent) => {
+    if (e.button !== 0) return; // left click only — ignore right/middle click
     setIsMouseDown(true);
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = (e: MouseEvent) => {
+    if (e.button !== 0) return;
     if (isHovered) {
       onClick?.();
     }

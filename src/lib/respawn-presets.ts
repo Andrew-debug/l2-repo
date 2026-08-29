@@ -47,3 +47,29 @@ export function findPresetIdByRange(range: RespawnRange): string | undefined {
       preset.minHours === range.minHours && preset.maxHours === range.maxHours,
   )?.id;
 }
+
+// Strict parsing for the Options window's free-entry respawn time field: a
+// single whole number of hours ("18") or a "min-max" whole-number range
+// ("12-16"). Anything else — decimals, units, stray whitespace inside the
+// numbers, a reversed range — is rejected rather than guessed at, since a
+// silently-misparsed respawn window would throw off every tracked boss.
+export function parseCustomRespawnRange(input: string): RespawnRange | undefined {
+  const trimmed = input.trim();
+
+  const single = /^(\d+)$/.exec(trimmed);
+  if (single) {
+    const hours = Number(single[1]);
+    return hours > 0 ? { minHours: hours, maxHours: hours } : undefined;
+  }
+
+  const range = /^(\d+)-(\d+)$/.exec(trimmed);
+  if (range) {
+    const minHours = Number(range[1]);
+    const maxHours = Number(range[2]);
+    return minHours > 0 && maxHours >= minHours
+      ? { minHours, maxHours }
+      : undefined;
+  }
+
+  return undefined;
+}

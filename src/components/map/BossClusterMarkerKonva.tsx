@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Group, Image as KonvaImage } from "react-konva";
 import Konva from "konva";
 import { useMarkerIconVariants, MARKER_ICON_OFFSET_X_PX } from "./markerIcon";
+import { useKonvaClickGuard } from "./useKonvaClickGuard";
 import BossMarkerKonva, { type MapBoss } from "./BossMarkerKonva";
 
 const ANIMATION_DURATION_MS = 350;
@@ -19,8 +20,11 @@ const CIRCLE_RADIUS_PER_EXTRA_MEMBER = 5;
 // World-space nudge so the whole cluster (collapsed icon and the expanded
 // circle alike) sits relative to the boss's actual map position. Each
 // cluster can override this (see BOSS_CLUSTERS) since the right offset
-// depends on what's around that specific anchor point on the map.
-const DEFAULT_CLUSTER_Y_OFFSET = 20;
+// depends on what's around that specific anchor point on the map. Exported
+// so KonvaMapViewer can place a cluster's lone surviving marker (an item
+// filter down to one matching member) at the same spot the collapsed
+// cluster icon would have sat.
+export const DEFAULT_CLUSTER_Y_OFFSET = 20;
 
 interface BossClusterMarkerKonvaProps {
   members: MapBoss[];
@@ -32,6 +36,12 @@ interface BossClusterMarkerKonvaProps {
   onMemberSelect: (id: string) => void;
   selectedBossId: string | null;
   scale: number;
+  // Active item-drop filter, if any — null/undefined means no filter.
+  // Members outside this set render dimmed (see BossMarkerKonva's `dimmed`
+  // prop), and the collapsed anchor icon itself dims when *none* of the
+  // cluster's members match, so a filtered-out cluster is still visible
+  // (just deemphasized) instead of disappearing.
+  matchingBossIds?: Set<string> | null;
 }
 
 export default function BossClusterMarkerKonva({
@@ -44,9 +54,14 @@ export default function BossClusterMarkerKonva({
   onMemberSelect,
   selectedBossId,
   scale,
+  matchingBossIds,
 }: BossClusterMarkerKonvaProps) {
   const [isHovered, setIsHovered] = useState(false);
   const variants = useMarkerIconVariants();
+  const { handleMouseDown, isGenuineClick } = useKonvaClickGuard();
+  const anchorDimmed = Boolean(
+    matchingBossIds && !members.some((m) => matchingBossIds.has(m.id)),
+  );
 
   // 0 = collapsed (single anchor marker), 1 = fully expanded (circle).
   // Animates toward whichever state `expanded` currently asks for, from
@@ -81,9 +96,13 @@ export default function BossClusterMarkerKonva({
   const inverseScale = 1 / scale;
   const iconSize = ANCHOR_ICON_SCREEN_SIZE * inverseScale;
   const iconSource = variants
-    ? isHovered
-      ? variants.normalBright
-      : variants.normal
+    ? anchorDimmed
+      ? isHovered
+        ? variants.grayBright
+        : variants.gray
+      : isHovered
+        ? variants.normalBright
+        : variants.normal
     : null;
   const radius =
     CIRCLE_RADIUS_BASE +
@@ -95,12 +114,14 @@ export default function BossClusterMarkerKonva({
       <Group
         x={anchorX}
         y={originY}
-        opacity={1 - progress}
+        opacity={(1 - progress) * (anchorDimmed ? 0.45 : 1)}
         listening={!expanded}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
+        onMouseDown={handleMouseDown}
         onClick={(e) => {
           e.cancelBubble = true;
+          if (!isGenuineClick(e)) return;
           onExpand();
         }}
         onTap={(e) => {
@@ -135,6 +156,7 @@ export default function BossClusterMarkerKonva({
               boss={memberBoss}
               isSelected={selectedBossId === member.id}
               onSelect={onMemberSelect}
+              dimmed={matchingBossIds ? !matchingBossIds.has(member.id) : false}
               scale={scale}
             />
           );

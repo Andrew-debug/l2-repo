@@ -6,11 +6,13 @@ function HeaderContent({
   title,
   canFold,
   canClose,
+  onFold,
   onClose,
 }: {
   title: string;
   canFold?: boolean;
   canClose?: boolean;
+  onFold?: () => void;
   onClose?: () => void;
 }) {
   return (
@@ -29,8 +31,16 @@ function HeaderContent({
         <div className="relative flex pl-4.5">
           <HeaderTitle>{title}</HeaderTitle>
           {(canFold || canClose) && (
-            <div className="flex gap-1 ml-auto mr-1.75 mt-0.5">
-              {canFold && <HeaderFold />}
+            // stopPropagation on mousedown — Header sits inside a
+            // DragHandle (see DragHandle's own onMouseDown), so without
+            // this, a mousedown here that moves even slightly before
+            // mouseup drags the whole window instead of just clicking the
+            // button underneath it.
+            <div
+              className="flex gap-1 ml-auto mr-1.75 mt-0.5"
+              onMouseDown={(e) => e.stopPropagation()}
+            >
+              {canFold && <HeaderFold onClick={onFold} />}
               {canClose && <HeaderClose onClick={onClose} />}
             </div>
           )}
@@ -55,12 +65,13 @@ function HeaderClose({ onClick }: { onClick?: () => void }) {
   );
 }
 
-function HeaderFold() {
+function HeaderFold({ onClick }: { onClick?: () => void }) {
   return (
     <IconStateButton
       defaultIcon={"/icons/FrameMiniBtn.png"}
       hoverIcon={"/icons/frameminibtn_over.png"}
       clickIcon={"/icons/FrameMiniOnBtn.png"}
+      onClick={onClick}
     />
   );
 }

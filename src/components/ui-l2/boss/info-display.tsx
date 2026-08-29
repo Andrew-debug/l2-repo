@@ -3,31 +3,23 @@
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
 import { DraggableWindow, DragHandle } from "../draggable-window";
+import { GoldButton } from "../gold-button";
 import { getBossById } from "@/lib/boss-data";
 import { formatDuration } from "@/lib/respawn";
+import { STATUS_LABEL, STATUS_TEXT_CLASS } from "@/lib/boss-status";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossPositions } from "@/components/providers/BossPositionsProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
-import { cn } from "@/lib/utils";
+import { useNpcInfoPanel } from "@/components/providers/NpcInfoPanelProvider";
 import { BossPortraitImage } from "./boss-portrait-image";
-
-const STATUS_LABEL = {
-  dead: "Killed",
-  pending: "Could be up",
-  alive: "Currently visible",
-} as const;
-
-const STATUS_TEXT_CLASS = {
-  dead: "text-[#c25c5c]",
-  pending: "text-[#f5c518]",
-  alive: "text-[#7ed957]",
-} as const;
+import { cn } from "@/lib/utils";
 
 export default function BossInfoDisplay() {
   const { selectedBossId } = useBossSelection();
   const { positions } = useBossPositions();
   const { globalRange, getKilledAt, markKilled, markAlive, getStatus } =
     useBossRespawn();
+  const { isOpen, setIsOpen } = useNpcInfoPanel();
 
   const boss = selectedBossId ? getBossById(selectedBossId) : undefined;
   const hasMapPosition = boss
@@ -39,9 +31,16 @@ export default function BossInfoDisplay() {
   const elapsed = killedAt != null ? Date.now() - killedAt : null;
 
   return (
-    <DraggableWindow className="w-50 shrink-0">
+    // Stays mounted while closed (invisible, not removed) instead of
+    // returning null — this sits in a flex row with Raid Boss Drop
+    // List/Respawn Settings, and unmounting dropped its slot from the row,
+    // shifting its neighbors over. invisible keeps the slot reserved so
+    // closing one window never moves the others.
+    <DraggableWindow
+      className={cn("w-50 shrink-0", !isOpen && "invisible pointer-events-none")}
+    >
       <DragHandle>
-        <Header title="NPC Info" canClose />
+        <Header title="NPC Info" canClose onClose={() => setIsOpen(false)} />
       </DragHandle>
       <WindowBorder>
         <div className="flex flex-col gap-2 p-2">
@@ -59,69 +58,80 @@ export default function BossInfoDisplay() {
                 sizes="288px"
               />
 
-              <h3 className="text-sm font-bold text-system-text">
-                {boss.name}
-              </h3>
-              <p className="text-[11px] text-white/50">
+              <h3 className="text-[13px]">{boss.name}</h3>
+              <p className="text-[13px] text-white/50">
                 {boss.title} · Lv. {boss.level}
               </p>
 
-              <div className="grid grid-cols-2 gap-x-2 gap-y-1 border border-window-content-border bg-window-content-bg p-2 text-[11px]">
-                <span className="text-white/40">Race</span>
-                <span className="text-right">{boss.race}</span>
+              {hasMapPosition && status === "pending" && (
+                <div className="flex items-center gap-2 border border-[#f5c518]/45 bg-[#f5c518]/10 px-2 py-1.5">
+                  <span className="size-2 shrink-0 rounded-full border border-[#f5c518]" />
+                  <div className="flex-1">
+                    <p className="text-xs text-[#f5c518]">Window open</p>
+                    {killedAt != null && elapsed != null && (
+                      <p className="text-[10px] text-white/50">
+                        since {formatDuration(elapsed)} · closes in{" "}
+                        {formatDuration(
+                          globalRange.maxHours * 60 * 60 * 1000 - elapsed,
+                        )}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              <div className="flex flex-col border border-window-content-border bg-window-content-bg px-2 text-[11px]">
+                <div className="flex items-center justify-between border-b border-window-content-border py-1.5">
+                  <span className="text-white/40">Race</span>
+                  <span>{boss.race}</span>
+                </div>
                 {boss.weakness && (
-                  <>
+                  <div className="flex items-center justify-between border-b border-window-content-border py-1.5">
                     <span className="text-white/40">Weakness</span>
-                    <span className="text-right text-system-text">
-                      {boss.weakness}
-                    </span>
-                  </>
+                    <span className="text-system-text">{boss.weakness}</span>
+                  </div>
                 )}
                 {hasMapPosition && (
-                  <>
+                  <div className="flex items-center justify-between border-b border-window-content-border py-1.5">
                     <span className="text-white/40">Current State</span>
-                    <span
-                      className={cn(
-                        "text-right",
-                        STATUS_TEXT_CLASS[status],
-                      )}
-                    >
+                    <span className={STATUS_TEXT_CLASS[status]}>
                       {STATUS_LABEL[status]}
                     </span>
-                    {killedAt != null && elapsed != null && (
-                      <>
-                        <span className="text-white/40">
-                          {status === "dead" ? "Respawns in" : "Killed"}
-                        </span>
-                        <span className="text-right text-white/70">
-                          {status === "dead"
-                            ? formatDuration(
-                                globalRange.minHours * 60 * 60 * 1000 -
-                                  elapsed,
-                              )
-                            : `${formatDuration(elapsed)} ago`}
-                        </span>
-                      </>
-                    )}
-                  </>
+                  </div>
                 )}
+                {hasMapPosition && killedAt != null && elapsed != null && (
+                  <div className="flex items-center justify-between border-b border-window-content-border py-1.5">
+                    <span className="text-white/40">
+                      {status === "dead" ? "Respawns in" : "Killed"}
+                    </span>
+                    <span className="text-white/70">
+                      {status === "dead"
+                        ? formatDuration(
+                            globalRange.minHours * 60 * 60 * 1000 - elapsed,
+                          )
+                        : `${formatDuration(elapsed)} ago`}
+                    </span>
+                  </div>
+                )}
+                <div className="flex items-center justify-between py-1.5">
+                  <span className="text-white/40">Respawn</span>
+                  <span>
+                    {globalRange.minHours} – {globalRange.maxHours} h{" "}
+                    <span className="text-white/30">(server)</span>
+                  </span>
+                </div>
               </div>
 
               {hasMapPosition && (
-                <button
+                <GoldButton
                   onClick={() =>
                     status === "alive"
                       ? markKilled(boss.id)
                       : markAlive(boss.id)
                   }
-                  className={cn(
-                    "border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5",
-                    status !== "alive" &&
-                      "window-item-gradient-active bg-white/5 text-system-text",
-                  )}
                 >
                   {status === "alive" ? "Mark as Killed" : "Mark as Alive"}
-                </button>
+                </GoldButton>
               )}
             </>
           )}

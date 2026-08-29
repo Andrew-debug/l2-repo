@@ -12,10 +12,20 @@ import BossLevelNavigator from "@/components/ui-l2/boss/level-navigator";
 import { BossSelectionProvider } from "@/components/providers/BossSelectionProvider";
 import { BossPositionsProvider } from "@/components/providers/BossPositionsProvider";
 import { BossRespawnProvider } from "@/components/providers/BossRespawnProvider";
+import { BossItemFilterProvider } from "@/components/providers/BossItemFilterProvider";
+import { RaidBossesPanelProvider } from "@/components/providers/RaidBossesPanelProvider";
+import { DropListPanelProvider } from "@/components/providers/DropListPanelProvider";
+import { UpcomingSpawnsPanelProvider } from "@/components/providers/UpcomingSpawnsPanelProvider";
+import { NpcInfoPanelProvider } from "@/components/providers/NpcInfoPanelProvider";
+import { BackgroundDimProvider } from "@/components/providers/BackgroundDimProvider";
+import { Background } from "@/components/background";
+import { OptionsPanelProvider } from "@/components/providers/OptionsPanelProvider";
+import { OptionsWindow } from "@/components/ui-l2/options-window";
 import { BossLootDisplay } from "@/components/ui-l2/boss/loot-display";
 import BossInfoDisplay from "@/components/ui-l2/boss/info-display";
 import UpcomingSpawns from "@/components/ui-l2/boss/upcoming-spawns";
-import RespawnSettings from "@/components/ui-l2/boss/respawn-settings";
+import { RespawnOnboarding } from "@/components/ui-l2/boss/respawn-onboarding";
+import { RespawnChip } from "@/components/ui-l2/boss/respawn-chip";
 async function handleCloseAction() {
   "use server";
   console.log("This logs in your VSCode terminal, not the browser");
@@ -24,32 +34,51 @@ async function handleCloseAction() {
 
 export default function Home() {
   return (
-    <div className="relative w-full h-dvh overflow-hidden border border-window-inner-gray">
-      {/* <Header /> */}
-      {/* <MainPage /> */}
+    <BackgroundDimProvider>
+      <div className="relative w-full h-dvh overflow-hidden border border-window-inner-gray">
+        <Background />
 
-      <BossSelectionProvider>
-        <BossPositionsProvider>
-          <BossRespawnProvider>
-            <div className="flex gap-4">
-              <BossLevelNavigator />
-              <MapProvider>
-                <Map />
-              </MapProvider>
-              <BossLootDisplay />
-              <BossInfoDisplay />
-              <UpcomingSpawns />
-              <RespawnSettings />
-            </div>
-          </BossRespawnProvider>
-        </BossPositionsProvider>
-      </BossSelectionProvider>
+        {/* <Header /> */}
+        {/* <MainPage /> */}
 
-      {/* <Chat /> */}
+        <BossRespawnProvider>
+          <OptionsPanelProvider>
+            <OptionsWindow />
 
-      <MenuSection />
+            <MapProvider>
+              <RaidBossesPanelProvider>
+                <DropListPanelProvider>
+                  <UpcomingSpawnsPanelProvider>
+                    <NpcInfoPanelProvider>
+                      <BossSelectionProvider>
+                        <BossPositionsProvider>
+                          <BossItemFilterProvider>
+                            <div className="flex gap-4">
+                              <BossLevelNavigator />
+                              <Map />
+                              <BossLootDisplay />
+                              <BossInfoDisplay />
+                              <UpcomingSpawns />
+                            </div>
 
-      {/* <footer className="border-t border-border bg-card/50 py-4">
+                            <RespawnOnboarding />
+                            <RespawnChip />
+                          </BossItemFilterProvider>
+                        </BossPositionsProvider>
+                      </BossSelectionProvider>
+
+                      {/* <Chat /> */}
+
+                      <MenuSection />
+                    </NpcInfoPanelProvider>
+                  </UpcomingSpawnsPanelProvider>
+                </DropListPanelProvider>
+              </RaidBossesPanelProvider>
+            </MapProvider>
+          </OptionsPanelProvider>
+        </BossRespawnProvider>
+
+        {/* <footer className="border-t border-border bg-card/50 py-4">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
@@ -82,7 +111,8 @@ export default function Home() {
         </div>
       </footer> */}
 
-      {/* <L2Window /> */}
-    </div>
+        {/* <L2Window /> */}
+      </div>
+    </BackgroundDimProvider>
   );
 }

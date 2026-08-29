@@ -1,21 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
 import { DraggableWindow, DragHandle } from "../draggable-window";
+import { FoldIcon } from "../fold-icon";
 import { getBossById } from "@/lib/boss-data";
 import { formatDuration } from "@/lib/respawn";
+import { STATUS_DOT_CLASS } from "@/lib/boss-status";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
+import { useUpcomingSpawnsPanel } from "@/components/providers/UpcomingSpawnsPanelProvider";
 import { cn } from "@/lib/utils";
 
 const HOUR_MS = 60 * 60 * 1000;
-
-const STATUS_DOT_CLASS = {
-  alive: "bg-[#7ed957]",
-  dead: "bg-[#c25c5c]",
-  pending: "bg-[#f5c518]",
-} as const;
 
 export default function UpcomingSpawns() {
   const { selectedBossId, setSelectedBoss } = useBossSelection();
@@ -30,6 +28,27 @@ export default function UpcomingSpawns() {
     notificationPermission,
     requestNotificationPermission,
   } = useBossRespawn();
+  const { isOpen, setIsOpen, isFolded, setIsFolded, toggleOpen } =
+    useUpcomingSpawnsPanel();
+  // Shared across the folded-icon and full-window forms below — see
+  // BossLevelNavigator for the same pattern (each form mounts only while
+  // active; DraggableWindow reads initialOffset fresh at every mount, so
+  // switching forms reopens wherever the other form was last dragged to).
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+
+  // Alt+N — matches the fold icon's own "Upcoming Spawns(Alt+N)" tooltip
+  // and does the same thing System Menu's Upcoming Spawns row does (see
+  // toggleOpen). `e.code` (not `e.key`) so the physical key is what matters
+  // regardless of what character Alt produces on a given OS/layout.
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!e.altKey || e.code !== "KeyN" || e.repeat) return;
+      e.preventDefault();
+      toggleOpen();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [toggleOpen]);
 
   const now = Date.now();
 
@@ -55,10 +74,43 @@ export default function UpcomingSpawns() {
     .filter((r): r is NonNullable<typeof r> => r !== null)
     .sort((a, b) => a.sortGroup - b.sortGroup || a.sortAt - b.sortAt);
 
+  // Stays mounted while closed (invisible, not removed) instead of
+  // returning null — this sits in the main flex row alongside Map/Drop
+  // List/NPC Info/Raid Bosses, and unmounting dropped its slot from the
+  // row, shifting its neighbors over. invisible keeps the slot reserved so
+  // closing one window never moves the others.
+  if (isFolded) {
+    return (
+      <DraggableWindow
+        className={cn("size-7.5", !isOpen && "invisible pointer-events-none")}
+        initialOffset={offset}
+        onOffsetChange={setOffset}
+      >
+        <DragHandle>
+          <FoldIcon
+            icon="/icons/mainwndtabicon4.png"
+            label="Upcoming Spawns(Alt+N)"
+            onUnfold={() => setIsFolded(false)}
+          />
+        </DragHandle>
+      </DraggableWindow>
+    );
+  }
+
   return (
-    <DraggableWindow className="w-56 shrink-0">
+    <DraggableWindow
+      className={cn("w-56 shrink-0", !isOpen && "invisible pointer-events-none")}
+      initialOffset={offset}
+      onOffsetChange={setOffset}
+    >
       <DragHandle>
-        <Header title="Upcoming Spawns" canClose />
+        <Header
+          title="Upcoming Spawns"
+          canFold
+          canClose
+          onFold={() => setIsFolded(true)}
+          onClose={() => setIsOpen(false)}
+        />
       </DragHandle>
       <WindowBorder>
         <div className="flex flex-col gap-1 p-2">
@@ -110,10 +162,10 @@ export default function UpcomingSpawns() {
                       )
                     }
                     className={cn(
-                      "flex w-full flex-col gap-0.5 border px-2 py-1 text-left transition-colors hover:bg-white/5",
+                      "flex w-full flex-col gap-0.5 border-y border-r px-2 py-1 text-left transition-colors hover:bg-white/5",
                       status === "alive"
-                        ? "border-[#7ed957]/60 bg-[#7ed957]/10"
-                        : "border-window-content-border bg-window-content-bg",
+                        ? "border-window-content-border border-l-2 border-l-[#7ed957] bg-[#7ed957]/10"
+                        : "border-l border-window-content-border bg-window-content-bg",
                       selectedBossId === boss.id && "bg-white/5",
                     )}
                   >
