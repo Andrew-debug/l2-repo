@@ -1,17 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect } from "react";
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
 import { DraggableWindow, DragHandle } from "../draggable-window";
 import { FoldIcon } from "../fold-icon";
 import { getBossById } from "@/lib/boss-data";
 import { formatDuration } from "@/lib/respawn";
-import { STATUS_ICON } from "@/lib/boss-status";
+import { STATUS_DOT_CLASS } from "@/lib/boss-status";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import { useUpcomingSpawnsPanel } from "@/components/providers/UpcomingSpawnsPanelProvider";
+import { usePersistedOffset } from "@/hooks/use-persisted-offset";
 import { cn } from "@/lib/utils";
 
 const HOUR_MS = 60 * 60 * 1000;
@@ -24,10 +24,8 @@ export default function UpcomingSpawns() {
     getKilledAt,
     globalRange,
     markAlive,
-    notificationsEnabled,
-    setNotificationsEnabled,
-    notificationPermission,
-    requestNotificationPermission,
+    soundEnabled,
+    setSoundEnabled,
   } = useBossRespawn();
   const { isOpen, setIsOpen, isFolded, setIsFolded, toggleOpen } =
     useUpcomingSpawnsPanel();
@@ -35,7 +33,10 @@ export default function UpcomingSpawns() {
   // BossLevelNavigator for the same pattern (each form mounts only while
   // active; DraggableWindow reads initialOffset fresh at every mount, so
   // switching forms reopens wherever the other form was last dragged to).
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  // Persisted to localStorage so a reload reopens it wherever it was last
+  // dropped. isHydrated gates visibility below until that persisted value
+  // has actually loaded — see usePersistedOffset for why.
+  const [offset, setOffset, isOffsetHydrated] = usePersistedOffset("up-next");
 
   // Alt+N — matches the fold icon's own "Up Next(Alt+N)" tooltip and does
   // the same thing System Menu's Up Next row does (see toggleOpen).
@@ -64,11 +65,13 @@ export default function UpcomingSpawns() {
       const maxAt = killedAt + globalRange.maxHours * HOUR_MS;
       // Bosses that already respawned sort first and stay put — a
       // notification is easy to miss, so this is the lasting "go get it"
-      // record until someone dismisses it. Newest respawn on top. Pending
-      // bosses are next (ranked by how soon they're guaranteed alive — last
-      // call to check), then dead ones (ranked by how soon they open up).
+      // record until someone dismisses it. Longest-respawned (oldest
+      // maxAt, most overdue to be dealt with) on top. Pending bosses are
+      // next (ranked by how soon they're guaranteed alive — last call to
+      // check), then dead ones (ranked by how soon they open up).
       const sortGroup = status === "alive" ? 0 : status === "pending" ? 1 : 2;
-      const sortAt = status === "alive" ? -maxAt : status === "pending" ? maxAt : minAt;
+      const sortAt =
+        status === "alive" ? maxAt : status === "pending" ? maxAt : minAt;
 
       return { boss, status, minAt, maxAt, sortGroup, sortAt };
     })
@@ -83,7 +86,11 @@ export default function UpcomingSpawns() {
   if (isFolded) {
     return (
       <DraggableWindow
-        className={cn("size-7.5", !isOpen && "invisible pointer-events-none")}
+        id="up-next"
+        className={cn(
+          "relative size-7.5",
+          (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
+        )}
         initialOffset={offset}
         onOffsetChange={setOffset}
       >
@@ -100,9 +107,10 @@ export default function UpcomingSpawns() {
 
   return (
     <DraggableWindow
+      id="up-next"
       className={cn(
-        "flex h-full min-h-0 w-80 shrink-0 flex-col",
-        !isOpen && "invisible pointer-events-none",
+        "relative flex h-full min-h-0 w-80 shrink-0 flex-col",
+        (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
       )}
       initialOffset={offset}
       onOffsetChange={setOffset}
@@ -119,35 +127,16 @@ export default function UpcomingSpawns() {
       <div className="min-h-0 flex-1">
         <WindowBorder>
           <div className="flex h-full flex-col gap-1 p-2">
-            {notificationPermission === "denied" && (
-              <p className="border border-window-content-border bg-window-content-bg px-2 py-1 text-[10px] text-white/40">
-                Notifications are blocked in your browser settings.
-              </p>
-            )}
-
-            {notificationPermission === "default" && (
-              <button
-                onClick={requestNotificationPermission}
-                className="border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5"
-              >
-                Enable Notifications
-              </button>
-            )}
-
-            {notificationPermission === "granted" && (
-              <button
-                onClick={() => setNotificationsEnabled(!notificationsEnabled)}
-                className={cn(
-                  "border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5",
-                  notificationsEnabled &&
-                    "window-item-gradient-active bg-white/5 text-system-text",
-                )}
-              >
-                {notificationsEnabled
-                  ? "Notifications On"
-                  : "Notifications Off"}
-              </button>
-            )}
+            <button
+              onClick={() => setSoundEnabled(!soundEnabled)}
+              className={cn(
+                "border border-window-content-border bg-window-content-bg px-2 py-1 text-[11px] uppercase tracking-wide transition-colors hover:bg-white/5",
+                soundEnabled &&
+                  "window-item-gradient-active bg-white/5 text-system-text",
+              )}
+            >
+              {soundEnabled ? "Alert Sound On" : "Alert Sound Off"}
+            </button>
 
             {rows.length === 0 && (
               <p className="py-6 text-center text-xs text-white/40">
@@ -167,27 +156,30 @@ export default function UpcomingSpawns() {
                         )
                       }
                       className={cn(
-                        "flex w-full flex-col gap-0.5 border-y border-r px-2 py-1 text-left transition-colors hover:bg-white/5",
-                        status === "alive"
-                          ? "border-window-content-border border-l-2 border-l-[#7ed957] bg-window-content-bg"
-                          : "border-l border-window-content-border bg-window-content-bg",
-                        selectedBossId === boss.id && "bg-white/5",
+                        "flex w-full flex-col gap-0.5 border px-2 py-1.5 text-left transition-colors",
+                        status === "alive" &&
+                          "border-window-content-border border-l-2 border-l-[#7ed957] bg-[#7ed957]/12 hover:bg-[#7ed957]/20",
+                        status === "pending" &&
+                          "border-[#f5c518]/40 bg-[#f5c518]/7 hover:bg-[#f5c518]/14",
+                        status === "dead" &&
+                          "border-window-content-border bg-[#c25c5c]/6 hover:bg-[#c25c5c]/12",
+                        selectedBossId === boss.id &&
+                          "window-item-gradient-active",
                       )}
                     >
                       <div className="flex items-center gap-1.5">
-                        <Image
-                          src={STATUS_ICON[status]}
-                          alt=""
-                          width={16}
-                          height={16}
-                          className={cn("shrink-0", status === "dead" && "opacity-55")}
+                        <span
+                          className={cn(
+                            "size-1.5 shrink-0 rounded-full",
+                            STATUS_DOT_CLASS[status],
+                          )}
                         />
                         <span
                           className={cn(
-                            "truncate text-[12px]",
-                            status === "alive"
-                              ? "font-bold text-[#7ed957]"
-                              : "text-button-text",
+                            "truncate text-[13px]",
+                            status === "alive" && "text-[#7ed957]",
+                            status === "pending" && "text-[#f5c518]",
+                            status === "dead" && "text-button-text",
                           )}
                         >
                           {boss.name}
@@ -206,23 +198,36 @@ export default function UpcomingSpawns() {
                                 markAlive(boss.id);
                               }
                             }}
-                            className="ml-auto shrink-0 px-1 text-[10px] uppercase text-white/40 hover:text-white/70"
+                            className="ml-auto shrink-0 px-1 text-[13px] uppercase text-white/40 hover:text-white/70"
                           >
                             Dismiss
+                          </span>
+                        )}
+                        {status === "pending" && (
+                          <span className="ml-auto shrink-0 text-[13px] text-[#f5c518]">
+                            {formatDuration(maxAt - now)}
+                          </span>
+                        )}
+                        {status === "dead" && (
+                          <span className="ml-auto shrink-0 text-[13px] text-white/70">
+                            {formatDuration(minAt - now)}
                           </span>
                         )}
                       </div>
                       <span
                         className={cn(
-                          "pl-3 text-[10px]",
-                          status === "alive" ? "text-[#7ed957]/80" : "text-white/50",
+                          "pl-3 text-[13px]",
+                          status === "alive" && "text-[#7ed957]/85",
+                          status === "pending" && "text-white/50",
+                          status === "dead" && "text-white/45",
                         )}
                       >
                         {status === "alive" &&
-                          `respawned ${formatDuration(now - maxAt)} ago`}
+                          `respawned ${formatDuration(now - maxAt)} ago · Lv ${boss.level}`}
                         {status === "pending" &&
-                          `could be up now — confirmed in ${formatDuration(maxAt - now)}`}
-                        {status === "dead" && `opens in ${formatDuration(minAt - now)}`}
+                          `could be up now — window closes in ${formatDuration(maxAt - now)}`}
+                        {status === "dead" &&
+                          `opens in ${formatDuration(minAt - now)} · Lv ${boss.level}`}
                       </span>
                     </button>
                   </li>

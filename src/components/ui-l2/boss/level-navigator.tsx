@@ -14,6 +14,7 @@ import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import { useRaidBossesPanel } from "@/components/providers/RaidBossesPanelProvider";
 import { useBossLevelFilter } from "@/components/providers/BossLevelFilterProvider";
 import { formatDuration } from "@/lib/respawn";
+import { usePersistedOffset } from "@/hooks/use-persisted-offset";
 import { cn } from "@/lib/utils";
 
 const HOUR_MS = 60 * 60 * 1000;
@@ -32,7 +33,7 @@ function timerParts(
   maxAt: number | null,
   now: number,
 ): { primary: string; secondary: string } {
-  if (killedAt == null) return { primary: "—", secondary: "unknown" };
+  if (killedAt == null) return { primary: "", secondary: "" };
   if (status === "alive")
     return {
       primary: "UP",
@@ -61,7 +62,7 @@ export default function BossLevelNavigator() {
   const { selectedRange, setSelectedRange } = useBossLevelFilter();
   const [query, setQuery] = useState("");
   const { selectedBossId, setSelectedBoss } = useBossSelection();
-  const { getStatus, getKilledAt, globalRange } = useBossRespawn();
+  const { getStatus, getKilledAt, globalRange, isHidden } = useBossRespawn();
   const { isOpen, setIsOpen, isFolded, setIsFolded, toggleOpen } =
     useRaidBossesPanel();
   // Shared across the folded-icon and full-window forms below — each is a
@@ -69,8 +70,13 @@ export default function BossLevelNavigator() {
   // (unlike Map's fold, nothing expensive lives underneath this panel, so
   // there's no need to keep both mounted simultaneously), and DraggableWindow
   // reads initialOffset fresh at every mount, so switching forms reopens
-  // wherever the other form was last dragged to.
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  // wherever the other form was last dragged to. Persisted to localStorage
+  // so a reload reopens it wherever it was last dropped, same as the other
+  // windows. isHydrated gates visibility below until that persisted value
+  // has actually loaded — see usePersistedOffset for why that's needed on
+  // top of the layout-effect timing.
+  const [offset, setOffset, isOffsetHydrated] =
+    usePersistedOffset("raid-bosses");
 
   // Alt+I — matches the fold icon's own "Raid Bosses(Alt+I)" tooltip and
   // does the same thing MenuSection's raid-bosses toolbar button does (see
@@ -101,16 +107,36 @@ export default function BossLevelNavigator() {
       .map((boss) => {
         const status = getStatus(boss.id);
         const killedAt = getKilledAt(boss.id);
-        const minAt = killedAt != null ? killedAt + globalRange.minHours * HOUR_MS : null;
-        const maxAt = killedAt != null ? killedAt + globalRange.maxHours * HOUR_MS : null;
-        const sortGroup = status === "alive" ? 0 : status === "pending" ? 1 : 2;
+        const minAt =
+          killedAt != null ? killedAt + globalRange.minHours * HOUR_MS : null;
+        const maxAt =
+          killedAt != null ? killedAt + globalRange.maxHours * HOUR_MS : null;
+        const hidden = isHidden(boss.id);
+        const sortGroup = hidden
+          ? 4 // dismissed as "not interested" — absolutely last
+          : status === "alive"
+            ? killedAt == null
+              ? 2 // never tracked — after pending, before dead
+              : 0 // confirmed up
+            : status === "pending"
+              ? 1
+              : 3; // dead
         const sortAt =
           status === "alive"
             ? -(maxAt ?? 0)
             : status === "pending"
               ? (maxAt ?? Infinity)
               : (minAt ?? Infinity);
-        return { boss, status, killedAt, minAt, maxAt, sortGroup, sortAt };
+        return {
+          boss,
+          status,
+          killedAt,
+          minAt,
+          maxAt,
+          hidden,
+          sortGroup,
+          sortAt,
+        };
       })
       .sort(
         (a, b) =>
@@ -118,7 +144,17 @@ export default function BossLevelNavigator() {
           a.sortAt - b.sortAt ||
           a.boss.level - b.boss.level,
       );
-  }, [selectedRange, query, getStatus, getKilledAt, globalRange]);
+  }, [selectedRange, query, getStatus, getKilledAt, globalRange, isHidden]);
+
+  // The soonest-to-open dead boss (first "dead" row once alive/pending sort
+  // ahead of it) reads as "up next" — a quieter highlight than alive/
+  // pending, but still lifted off the rest of the on-cooldown pack,
+  // matching the mockup's single full-opacity/gold-left-border cooldown row.
+  // Hidden bosses are excluded — they're dismissed and sorted last, so they
+  // shouldn't steal the "up next" highlight from a real dead boss.
+  const firstDeadIndex = rows.findIndex(
+    (r) => r.status === "dead" && !r.hidden,
+  );
 
   // Stays mounted while closed (invisible, not removed) instead of
   // returning null — this sits in the main flex row alongside Map/Drop
@@ -128,7 +164,11 @@ export default function BossLevelNavigator() {
   if (isFolded) {
     return (
       <DraggableWindow
-        className={cn("size-7.5", !isOpen && "invisible pointer-events-none")}
+        id="raid-bosses"
+        className={cn(
+          "relative size-7.5",
+          (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
+        )}
         initialOffset={offset}
         onOffsetChange={setOffset}
       >
@@ -145,9 +185,10 @@ export default function BossLevelNavigator() {
 
   return (
     <DraggableWindow
+      id="raid-bosses"
       className={cn(
-        "flex h-full min-h-0 w-74 shrink-0 flex-col",
-        !isOpen && "invisible pointer-events-none",
+        "relative flex h-full min-h-0 w-74 shrink-0 flex-col",
+        (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
       )}
       initialOffset={offset}
       onOffsetChange={setOffset}
@@ -205,65 +246,84 @@ export default function BossLevelNavigator() {
             </div>
 
             <ul className="flex min-h-0 flex-1 flex-col overflow-y-auto custom-scrollbar pr-1">
-            {rows.map(({ boss, status, killedAt, minAt, maxAt }) => {
-              const { primary, secondary } = timerParts(
-                status,
-                killedAt,
-                minAt,
-                maxAt,
-                now,
-              );
-              return (
-                  <li key={boss.id}>
-                    <button
-                      onClick={() =>
-                        setSelectedBoss(
-                          selectedBossId === boss.id ? null : boss.id,
-                          "list",
-                        )
-                      }
-                      className={cn(
-                        "flex w-full items-center gap-2 border-b border-window-content-border px-1.5 py-1.5 text-left transition-colors hover:bg-white/5",
-                        status === "alive" && "border-l-2 border-l-[#7ed957]",
-                        status === "pending" && "border-l-2 border-l-[#f5c518]",
-                        selectedBossId === boss.id && "bg-white/5",
-                      )}
-                    >
-                      <Image
-                        src={STATUS_ICON[status]}
-                        alt=""
-                        width={18}
-                        height={18}
-                        className={cn("shrink-0", status === "dead" && "opacity-55")}
-                      />
-                      <div className="min-w-0 flex-1">
-                        <p
+              {rows.map(
+                ({ boss, status, killedAt, minAt, maxAt, hidden }, index) => {
+                  const { primary, secondary } = timerParts(
+                    status,
+                    killedAt,
+                    minAt,
+                    maxAt,
+                    now,
+                  );
+                  const isNextDead =
+                    status === "dead" && index === firstDeadIndex;
+                  return (
+                    <li key={boss.id}>
+                      <button
+                        onClick={() =>
+                          setSelectedBoss(
+                            selectedBossId === boss.id ? null : boss.id,
+                            "list",
+                          )
+                        }
+                        className={cn(
+                          "flex w-full items-center gap-2 border-b border-window-content-border px-1.5 py-1.5 text-left transition-colors hover:bg-white/10",
+                          selectedBossId === boss.id && "bg-white/5",
+                          hidden && "opacity-45",
+                        )}
+                      >
+                        <Image
+                          src={hidden ? STATUS_ICON.dead : STATUS_ICON[status]}
+                          alt=""
+                          width={18}
+                          height={18}
                           className={cn(
-                            "truncate text-[13px]",
-                            status !== "dead" && STATUS_TEXT_CLASS[status],
+                            "shrink-0",
+                            !hidden &&
+                              status === "dead" &&
+                              !isNextDead &&
+                              "opacity-55",
                           )}
-                        >
-                          {boss.name}
-                        </p>
-                        <p className="text-[10px] text-white/40">Lv {boss.level}</p>
-                      </div>
-                      <div className="shrink-0 text-right">
-                        <p
-                          className={cn(
-                            "text-[11px]",
-                            status !== "dead"
-                              ? STATUS_TEXT_CLASS[status]
-                              : "text-white/70",
-                          )}
-                        >
-                          {primary}
-                        </p>
-                        <p className="text-[10px] text-white/40">{secondary}</p>
-                      </div>
-                    </button>
-                  </li>
-                );
-              })}
+                        />
+                        <div className="min-w-0 flex-1 leading-tight">
+                          <p
+                            className={cn(
+                              "truncate text-[13px]",
+                              killedAt == null
+                                ? "text-white"
+                                : status !== "dead" &&
+                                    STATUS_TEXT_CLASS[status],
+                              isNextDead && "text-[#e8dcc0]",
+                            )}
+                          >
+                            {boss.name}
+                          </p>
+                          <p className="text-[13px] text-white/40">
+                            Lv {boss.level}
+                          </p>
+                        </div>
+                        <div className="shrink-0 text-right">
+                          <p
+                            className={cn(
+                              "text-[11px]",
+                              status !== "dead"
+                                ? STATUS_TEXT_CLASS[status]
+                                : isNextDead
+                                  ? "text-white/80"
+                                  : "text-white/70",
+                            )}
+                          >
+                            {primary}
+                          </p>
+                          <p className="text-[13px] text-white/40">
+                            {secondary}
+                          </p>
+                        </div>
+                      </button>
+                    </li>
+                  );
+                },
+              )}
               {rows.length === 0 && (
                 <p className="py-6 text-center text-xs text-white/40">
                   No bosses match

@@ -20,6 +20,8 @@ import { useUpcomingSpawnsPanel } from "@/components/providers/UpcomingSpawnsPan
 import { useNpcInfoPanel } from "@/components/providers/NpcInfoPanelProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import { useBackgroundDim } from "@/components/providers/BackgroundDimProvider";
+import { usePersistedOffset } from "@/hooks/use-persisted-offset";
+import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 import { cn } from "@/lib/utils";
 import { DOCK_CONTENT_WIDTH } from "./dock-layout";
 
@@ -135,7 +137,11 @@ function ToolbarTooltip({
 // but a StickyWindowGroup keeps them from being dragged through one another
 // — same resist-then-breakaway feel as the viewport edge.
 export default function MenuSection() {
-  const [isPanelOpen, setIsPanelOpen] = useState(false);
+  // Persisted to localStorage so a reload reopens the System Menu panel if
+  // it was left open, same as the other windows' open/position/fold state.
+  const [isPanelOpen, setIsPanelOpen] = usePersistedBoolean(
+    "l2-system-menu-open",
+  );
   const [isLegendOpen, setIsLegendOpen] = useState(false);
   const [showRestartConfirm, setShowRestartConfirm] = useState(false);
   const { setIsOpen: setMapOpen, toggleMapOpen } = useMapSize();
@@ -160,7 +166,9 @@ export default function MenuSection() {
   const { setIsDimmed } = useBackgroundDim();
   // Lifted out of SystemMenuPanel since it unmounts on close — kept here,
   // in the always-mounted parent, so it survives to the next open.
-  const [panelOffset, setPanelOffset] = useState({ x: 0, y: 0 });
+  // Persisted to localStorage so a reload reopens it wherever it was last
+  // dropped.
+  const [panelOffset, setPanelOffset] = usePersistedOffset("system-menu");
 
   // Alt+X — matches the hammer icon's own "System Menu(Alt+X)" tooltip and
   // does the same thing clicking it does. `e.code` (not `e.key`) so the

@@ -90,7 +90,12 @@
       "Bash(node verify-card6.mjs)",
       "Bash(node verify-toggle.mjs)",
       "Bash(node verify-grade.mjs)",
-      "Bash(cd d:/projects/l2-repo && git ls-files BOSS_DATA.json; ls -la /d/projects/l2-repo-test-worktree/BOSS_DATA.json 2>&1)"
+      "Bash(cd d:/projects/l2-repo && git ls-files BOSS_DATA.json; ls -la /d/projects/l2-repo-test-worktree/BOSS_DATA.json 2>&1)",
+      "Bash(cp \"/c/Users/1solo/Desktop/favicon_io/favicon.ico\" \"src/app/favicon.ico\")",
+      "Bash(cp \"/c/Users/1solo/Desktop/favicon_io/favicon-16x16.png\" \"public/favicon-16x16.png\")",
+      "Bash(cp \"/c/Users/1solo/Desktop/favicon_io/favicon-32x32.png\" \"public/favicon-32x32.png\")",
+      "Bash(cp \"/c/Users/1solo/Desktop/favicon_io/apple-touch-icon.png\" \"public/apple-icon.png\")",
+      "Bash(cp \"/c/Users/1solo/Desktop/favicon_io/android-chrome-192x192.png\" \"public/android-chrome-192x192.png\")"
     ],
     "additionalDirectories": [
       "D:\\projects\\IconsHelios\\icon",

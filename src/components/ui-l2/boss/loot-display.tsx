@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Header from "../header";
@@ -14,11 +14,22 @@ import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useDropListPanel } from "@/components/providers/DropListPanelProvider";
 import { DropIcon, GRADE_ICON, dropLabel, gradeForDisplay } from "./drop-icon";
 import { ItemHoverTooltip } from "./item-hover-tooltip";
+import { usePersistedOffset } from "@/hooks/use-persisted-offset";
+import { usePersistedView } from "@/hooks/use-persisted-view";
 import { cn } from "@/lib/utils";
+
+const GRID_COLUMNS = 6;
+const VIEW_OPTIONS = ["grid", "list"] as const;
 
 export function BossLootDisplay() {
   const { selectedBossId } = useBossSelection();
-  const [view, setView] = useState<"grid" | "list">("grid");
+  // Persisted to localStorage so a reload keeps whichever view (grid/list)
+  // was last chosen.
+  const [view, setView] = usePersistedView(
+    "l2-drop-list-view",
+    "grid",
+    VIEW_OPTIONS,
+  );
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   // The grid view scrolls (overflow-y-auto) once a boss has enough drops —
   // a tooltip positioned via CSS (absolute, relative to the hovered
@@ -36,16 +47,92 @@ export function BossLootDisplay() {
   // BossLevelNavigator for the same pattern (each form mounts only while
   // active; DraggableWindow reads initialOffset fresh at every mount, so
   // switching forms reopens wherever the other form was last dragged to).
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  // Persisted to localStorage so a reload reopens it wherever it was last
+  // dropped. isHydrated gates visibility below until that persisted value
+  // has actually loaded — see usePersistedOffset for why.
+  const [offset, setOffset, isOffsetHydrated] = usePersistedOffset("drop-list");
 
   const boss = selectedBossId ? getBossById(selectedBossId) : undefined;
   const sortedDrops = boss ? [...boss.drops].sort(compareDrops) : [];
+  // Pads the last row out to a full 6 columns with blank cells — a boss
+  // with, say, 3 drops still shows a 6-wide row instead of 3 cells and a
+  // ragged edge.
+  const lastRowPad =
+    sortedDrops.length % GRID_COLUMNS === 0
+      ? 0
+      : GRID_COLUMNS - (sortedDrops.length % GRID_COLUMNS);
+  // Additional full blank rows below that, out to the bottom of whatever
+  // height this window actually rendered at — the window's height comes
+  // from the row's viewport-derived calc() in main-content-row.tsx, so it's
+  // genuinely different per monitor/window size, not just content. Measured
+  // via ResizeObserver (not a one-off read) so resizing the browser window
+  // keeps it filled instead of leaving a stale gap.
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [extraRowCount, setExtraRowCount] = useState(0);
+  const emptyCellCount = lastRowPad + extraRowCount * GRID_COLUMNS;
 
   // A stale index from the previous boss could otherwise point at the
   // wrong drop (or nothing) the instant the selection changes.
   useEffect(() => {
     setHoveredIndex(null);
   }, [selectedBossId]);
+
+  // useLayoutEffect, not useEffect: this has to settle *before* the browser
+  // paints. Switching bosses changes sortedDrops.length but not the
+  // container's own pixel size, so ResizeObserver's callback (async, fires
+  // on the next frame) wouldn't fire at all here — extraRowCount would stay
+  // stale from the previous boss for one frame, mismatched against the new
+  // item count, which either overflows the box (flashing a real, working
+  // scrollbar) or leaves a gap. The synchronous recompute below runs on
+  // every boss switch too (sortedDrops.length is a dependency), closing
+  // that gap; the ResizeObserver on top only has to handle the window
+  // actually resizing later, once this effect isn't rerunning anyway.
+  useLayoutEffect(() => {
+    if (view !== "grid" || sortedDrops.length === 0) {
+      setExtraRowCount(0);
+      return;
+    }
+    const el = gridRef.current;
+    if (!el) return;
+
+    const recompute = () => {
+      const style = getComputedStyle(el);
+      const paddingX =
+        parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+      const paddingY =
+        parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+      const columnGap = parseFloat(style.columnGap) || 0;
+      const rowGap = parseFloat(style.rowGap) || 0;
+
+      const contentWidth = el.clientWidth - paddingX;
+      const contentHeight = el.clientHeight - paddingY;
+      if (contentWidth <= 0 || contentHeight <= 0) return;
+
+      const cellSize =
+        (contentWidth - columnGap * (GRID_COLUMNS - 1)) / GRID_COLUMNS;
+      const rowHeight = cellSize + rowGap;
+      if (rowHeight <= 0) return;
+
+      // Rows already occupied by real drops plus the last-row padding
+      // above — extra rows only need to fill what's left below that.
+      const usedRows = Math.ceil(sortedDrops.length / GRID_COLUMNS);
+      const usedHeight =
+        usedRows * cellSize + Math.max(0, usedRows - 1) * rowGap;
+      const remaining = contentHeight - usedHeight;
+      // Floor, not round/ceil — a filler row that overshoots the visible
+      // area would itself trigger the scrollbar this is meant to avoid
+      // needing.
+      const extraRows =
+        remaining > 0 ? Math.floor((remaining + rowGap) / rowHeight) : 0;
+
+      setExtraRowCount(extraRows);
+    };
+
+    recompute();
+    const observer = new ResizeObserver(recompute);
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [view, sortedDrops.length]);
 
   // Alt+V — matches the fold icon's own "Raid Boss Drop List(Alt+V)"
   // tooltip and does the same thing MenuSection's drop-list toolbar button
@@ -70,7 +157,11 @@ export function BossLootDisplay() {
   if (isFolded) {
     return (
       <DraggableWindow
-        className={cn("size-7.5", !isOpen && "invisible pointer-events-none")}
+        id="drop-list"
+        className={cn(
+          "relative size-7.5",
+          (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
+        )}
         initialOffset={offset}
         onOffsetChange={setOffset}
       >
@@ -87,9 +178,10 @@ export function BossLootDisplay() {
 
   return (
     <DraggableWindow
+      id="drop-list"
       className={cn(
-        "flex h-full min-h-0 w-80 shrink-0 flex-col",
-        !isOpen && "invisible pointer-events-none",
+        "relative flex h-full min-h-0 w-80 shrink-0 flex-col",
+        (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
       )}
       initialOffset={offset}
       onOffsetChange={setOffset}
@@ -154,7 +246,10 @@ export function BossLootDisplay() {
                 )}
 
                 {sortedDrops.length > 0 && view === "grid" && (
-                  <div className="grid min-h-0 flex-1 auto-rows-min grid-cols-6 content-start gap-1 overflow-y-auto custom-scrollbar border border-window-content-border bg-window-content-bg p-1.5 pr-3">
+                  <div
+                    ref={gridRef}
+                    className="grid min-h-0 flex-1 auto-rows-min grid-cols-6 content-start gap-1 overflow-y-scroll custom-scrollbar border border-window-content-border bg-window-content-bg p-1.5 pr-3"
+                  >
                     {sortedDrops.map((drop, index) => {
                       const grade = gradeForDisplay(drop.item);
                       return (
@@ -162,14 +257,18 @@ export function BossLootDisplay() {
                           key={`${drop.item}-${index}`}
                           onMouseEnter={(e) => {
                             setHoveredIndex(index);
-                            setHoveredRect(e.currentTarget.getBoundingClientRect());
+                            setHoveredRect(
+                              e.currentTarget.getBoundingClientRect(),
+                            );
                           }}
                           onMouseLeave={() =>
                             setHoveredIndex((i) => (i === index ? null : i))
                           }
                           onFocus={(e) => {
                             setHoveredIndex(index);
-                            setHoveredRect(e.currentTarget.getBoundingClientRect());
+                            setHoveredRect(
+                              e.currentTarget.getBoundingClientRect(),
+                            );
                           }}
                           onBlur={() =>
                             setHoveredIndex((i) => (i === index ? null : i))
@@ -199,6 +298,13 @@ export function BossLootDisplay() {
                         </button>
                       );
                     })}
+                    {Array.from({ length: emptyCellCount }).map((_, i) => (
+                      <div
+                        key={`empty-${i}`}
+                        aria-hidden
+                        className="aspect-square border border-window-content-border bg-black/40"
+                      />
+                    ))}
                   </div>
                 )}
 

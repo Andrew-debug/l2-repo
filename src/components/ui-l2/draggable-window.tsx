@@ -34,6 +34,55 @@ const MAGNETIC_SNAP_PX = 5;
 // global counter is simpler than threading a context through every panel.
 let topZIndex = 10;
 
+// Persists the front-to-back stacking order across reloads, for windows
+// that opt in via the `id` prop — back-to-front, so the last entry is
+// topmost. Kept as one shared array (not a zIndex number per window) since
+// only the *relative* order matters; storing raw zIndex values would drift
+// from topZIndex's own numbering the moment either side changed
+// independently.
+const STACK_ORDER_STORAGE_KEY = "l2-window-stack-order";
+// Fired by clearPersistedStackOrder so every mounted id-bearing
+// DraggableWindow drops back to zIndex 0 immediately — same live-reset
+// approach as usePersistedOffset's OFFSETS_RESET_EVENT, for the same
+// reason (no page reload, no central store of z-indexes to update
+// directly).
+const STACK_ORDER_RESET_EVENT = "l2-window-stack-order-reset";
+
+function readStackOrder(): string[] {
+  try {
+    const raw = window.localStorage.getItem(STACK_ORDER_STORAGE_KEY);
+    return raw ? (JSON.parse(raw) as string[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+// Moves `id` to the top of the persisted order (adding it if new) and
+// writes the result back — called every time a window with an id is
+// brought to front, so the order always reflects "most recently focused
+// last."
+function bumpStackOrder(id: string) {
+  try {
+    const next = readStackOrder().filter((existing) => existing !== id);
+    next.push(id);
+    window.localStorage.setItem(STACK_ORDER_STORAGE_KEY, JSON.stringify(next));
+  } catch {
+    // Private browsing / quota exceeded — order just won't survive reload.
+  }
+}
+
+// Clears the persisted stacking order — used by Options' "Initialize"
+// (positions/stacking only) and the System Menu's "Restart" (full reset).
+export function clearPersistedStackOrder() {
+  try {
+    window.localStorage.removeItem(STACK_ORDER_STORAGE_KEY);
+  } catch {
+    // Non-fatal — see bumpStackOrder.
+  }
+  topZIndex = 10; // back to the module's original starting value
+  window.dispatchEvent(new Event(STACK_ORDER_RESET_EVENT));
+}
+
 // Reserved stacking band for `alwaysOnTop` windows (currently just Options)
 // — comfortably above anything the dynamic topZIndex race above could climb
 // to through ordinary clicking/dragging, but below ConfirmDialog's fixed
@@ -164,6 +213,11 @@ interface DraggableWindowProps {
   // gets) raised any higher, since nothing but ConfirmDialog's fixed z-999
   // outranks it.
   alwaysOnTop?: boolean;
+  // Stable identity for persisting this window's place in the front-to-back
+  // stacking order across reloads (see bumpStackOrder/readStackOrder above).
+  // Omit for windows where stacking order doesn't matter or shouldn't
+  // persist (alwaysOnTop windows, one-off dialogs).
+  id?: string;
 }
 
 // Holding the mouse down on a <DragHandle> and moving repositions the whole
@@ -185,11 +239,38 @@ export function DraggableWindow({
   onOffsetChange,
   centered,
   alwaysOnTop,
+  id,
 }: DraggableWindowProps) {
   const [offset, setOffsetState] = useState(initialOffset ?? { x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(0);
   const elementRef = useRef<HTMLDivElement>(null);
   const stickyGroup = useContext(StickyGroupContext);
+
+  // Restores this window's place in the persisted stacking order on mount.
+  // z-index (unlike dragged position) doesn't get the same
+  // invisible-until-hydrated treatment usePersistedOffset uses for the
+  // SSR-vs-client mismatch: two windows would have to both sit at their
+  // (also-still-settling) default positions AND actually overlap for a
+  // wrong z-index to be visible for that one frame, which is a much
+  // narrower window than position's guaranteed-visible jump.
+  useLayoutEffect(() => {
+    if (!id) return;
+    const order = readStackOrder();
+    const index = order.indexOf(id);
+    // Seed the shared counter above every restored index so the next fresh
+    // bringToFront (topZIndex += 1) can't collide with a restored value.
+    topZIndex = Math.max(topZIndex, order.length + 10);
+    if (index !== -1) setZIndex(index + 1);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (!id) return;
+    const handleReset = () => setZIndex(0);
+    window.addEventListener(STACK_ORDER_RESET_EVENT, handleReset);
+    return () =>
+      window.removeEventListener(STACK_ORDER_RESET_EVENT, handleReset);
+  }, [id]);
 
   // Runs once, before paint, so there's no visible flash at the un-centered
   // static position first. The delta is computed from wherever the element
@@ -216,7 +297,13 @@ export function DraggableWindow({
   // dragging sets `offset` locally and calls onOffsetChange in the same
   // handler, so by the time the echoed prop comes back down it's already
   // equal and this is a no-op.
-  useEffect(() => {
+  // useLayoutEffect, not useEffect: a caller correcting its own initialOffset
+  // right after mount (e.g. usePersistedOffset hydrating from localStorage in
+  // its own layout effect) needs that correction to land here before the
+  // browser's next paint — a plain effect runs after paint, which meant this
+  // still visibly rendered at the stale value for one frame even once the
+  // caller itself was already fixed.
+  useLayoutEffect(() => {
     if (!initialOffset) return;
     setOffsetState((prev) =>
       prev.x === initialOffset.x && prev.y === initialOffset.y
@@ -249,7 +336,8 @@ export function DraggableWindow({
     if (alwaysOnTop) return; // pinned — see ALWAYS_ON_TOP_Z_INDEX above
     topZIndex += 1;
     setZIndex(topZIndex);
-  }, [alwaysOnTop]);
+    if (id) bumpStackOrder(id);
+  }, [alwaysOnTop, id]);
 
   const handleDragStart = useCallback((e: React.MouseEvent) => {
     if (e.button !== 0) return; // left click only

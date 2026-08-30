@@ -15,13 +15,38 @@ import {
   type RespawnRange,
   type RespawnStatus,
 } from "@/lib/respawn";
-import { DEFAULT_RESPAWN_PRESET_ID, getPresetRange } from "@/lib/respawn-presets";
-import { getBossById } from "@/lib/boss-data";
+import {
+  DEFAULT_RESPAWN_PRESET_ID,
+  getPresetRange,
+} from "@/lib/respawn-presets";
+import { clearAllPersistedOffsets } from "@/hooks/use-persisted-offset";
+import { clearPersistedStackOrder } from "@/components/ui-l2/draggable-window";
+import { unfoldAllPersistedWindows } from "@/hooks/use-persisted-fold-state";
 
 const RECORDS_STORAGE_KEY = "l2-boss-respawn-tracking";
 const GLOBAL_RANGE_STORAGE_KEY = "l2-boss-respawn-default-range";
-const NOTIFICATIONS_ENABLED_STORAGE_KEY = "l2-boss-respawn-notifications";
+const SOUND_ENABLED_STORAGE_KEY = "l2-boss-respawn-sound";
+const SOUND_VOLUME_STORAGE_KEY = "l2-boss-respawn-sound-volume";
 const HIDDEN_STORAGE_KEY = "l2-boss-hidden";
+// The Options > Audio tab's volume slider is 5 discrete steps (0-4), not a
+// continuous 0-100 range — matches the reference client's own stepped
+// sliders, and there's no real mixer behind this to need finer control.
+// Exported so the slider component itself doesn't hardcode the step count
+// a second time.
+export const VOLUME_STEPS = 5;
+const DEFAULT_VOLUME_STEP = VOLUME_STEPS - 1;
+// The raw step-to-volume mapping (step / (VOLUME_STEPS - 1)) topped out at
+// 1.0 — the source clip itself is loud enough that even the slider's lowest
+// non-mute step was still too loud. Scaling every step down by half (so the
+// slider's own max only ever reaches 50% real volume) fixes that without
+// changing the slider's own 5-step feel.
+const MAX_VOLUME_SCALE = 0.3;
+// PoE Trade-style alert: plays whenever a tracked boss's status changes,
+// and — while the tab is in the background — badges the document title
+// with an unread count until the player switches back. No browser
+// Notification API/permission involved, so there's nothing to request or
+// get denied.
+const NOTIFICATION_SOUND_SRC = "/sounds/la2-questitem-get.mp3";
 // How often derived statuses (dead/pending/alive) get recomputed — status is
 // purely a function of wall-clock time, so nothing else triggers a refresh.
 const TICK_INTERVAL_MS = 1_000;
@@ -68,11 +93,28 @@ function readHasCustomRange(): boolean {
   }
 }
 
-function readNotificationsEnabled(): boolean {
+// Defaults to on — an audible alert is the whole point of this feature, so
+// unlike the old browser-permission-gated version, there's no "ask first"
+// step; the player mutes it themselves if they don't want it.
+function readSoundEnabled(): boolean {
   try {
-    return window.localStorage.getItem(NOTIFICATIONS_ENABLED_STORAGE_KEY) === "1";
+    const raw = window.localStorage.getItem(SOUND_ENABLED_STORAGE_KEY);
+    return raw == null ? true : raw === "1";
   } catch {
-    return false;
+    return true;
+  }
+}
+
+function readSoundVolume(): number {
+  try {
+    const raw = window.localStorage.getItem(SOUND_VOLUME_STORAGE_KEY);
+    if (raw == null) return DEFAULT_VOLUME_STEP;
+    const parsed = Number(raw);
+    return Number.isInteger(parsed) && parsed >= 0 && parsed < VOLUME_STEPS
+      ? parsed
+      : DEFAULT_VOLUME_STEP;
+  } catch {
+    return DEFAULT_VOLUME_STEP;
   }
 }
 
@@ -88,15 +130,6 @@ function readHidden(): Record<string, true> {
   } catch {
     return {};
   }
-}
-
-// "unsupported" covers SSR (no `Notification` global) and browsers that
-// never implemented the API — both get treated as "can't notify" the
-// same way rather than as a special error case.
-export type NotificationPermissionState = NotificationPermission | "unsupported";
-
-function readNotificationPermission(): NotificationPermissionState {
-  return typeof Notification === "undefined" ? "unsupported" : Notification.permission;
 }
 
 interface BossRespawnContextType {
@@ -120,15 +153,17 @@ interface BossRespawnContextType {
   // asking about respawn timing before there's a single timer to apply it
   // to.
   hasEverMarkedKilled: boolean;
-  // App-level opt-in, separate from the browser's own permission grant —
-  // lets the user mute notifications without revoking OS-level permission.
-  notificationsEnabled: boolean;
-  setNotificationsEnabled: (enabled: boolean) => void;
-  notificationPermission: NotificationPermissionState;
-  // Must be called from a user gesture (browsers reject requestPermission()
-  // otherwise); also flips notificationsEnabled on once permission is
-  // granted, so "enable notifications" is a single click.
-  requestNotificationPermission: () => void;
+  // Mutes the respawn-alert sound (see the status-transition effect below)
+  // — the badge-the-title-while-hidden half of the alert always runs
+  // regardless, since it's silent by definition.
+  soundEnabled: boolean;
+  setSoundEnabled: (enabled: boolean) => void;
+  // 0..VOLUME_STEPS-1 (5 discrete steps) — the Options > Audio tab's
+  // Notification Vol. slider. Applied to the alert audio element's own
+  // `volume` before each play(), independent of soundEnabled (mute skips
+  // playing entirely; this just scales it while unmuted).
+  soundVolume: number;
+  setSoundVolume: (step: number) => void;
   // Marks the range as configured without necessarily changing its value —
   // for the onboarding strip's "Skip" (keep the fallback, just stop asking).
   dismissRespawnOnboarding: () => void;
@@ -137,11 +172,10 @@ interface BossRespawnContextType {
   isHidden: (bossId: string) => boolean;
   hideBoss: (bossId: string) => void;
   unhideBoss: (bossId: string) => void;
-  // Wipes every tracked kill, hidden boss, custom respawn range, and
-  // notification preference, then reloads — the System Menu's Restart
-  // button. A full reload rather than resetting each piece of in-memory
-  // state by hand, so it can't drift out of sync with whatever this
-  // provider adds later.
+  // Wipes every tracked kill, hidden boss, custom respawn range, window
+  // position/stacking/folding, and alert-sound preference — the System
+  // Menu's Restart button. Resets in place (no page reload): each piece of
+  // state is set back to its own fresh-load default directly.
   resetAll: () => void;
 }
 
@@ -156,12 +190,31 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     useState<RespawnRange>(FALLBACK_RANGE);
   const [hasCustomRange, setHasCustomRange] = useState(false);
   const [now, setNow] = useState(() => Date.now());
-  const [notificationsEnabled, setNotificationsEnabledState] = useState(false);
-  const [notificationPermission, setNotificationPermission] =
-    useState<NotificationPermissionState>("unsupported");
+  const [soundEnabled, setSoundEnabledState] = useState(true);
+  const [soundVolume, setSoundVolumeState] = useState(DEFAULT_VOLUME_STEP);
   // Last status seen per boss, purely to detect transitions for
   // notifications — not persisted, and never drives rendering itself.
   const prevStatusRef = useRef<Map<string, RespawnStatus>>(new Map());
+  // Created once and reused rather than `new Audio()` per alert — playing
+  // the same element again just restarts it (see the effect below, which
+  // rewinds currentTime first so back-to-back alerts don't get swallowed by
+  // an in-progress play()).
+  const alertAudioRef = useRef<HTMLAudioElement | null>(null);
+  // Set once, the first time the title actually needs badging — restoring
+  // to this (rather than some hardcoded string) means whatever the page's
+  // real title is stays correct even if that ever changes.
+  const originalTitleRef = useRef<string | null>(null);
+  const unreadCountRef = useRef(0);
+  // The one <link rel="icon"> this app actually controls (see the mount
+  // effect below, which consolidates down to a single element) and the
+  // plain, unbadged source image drawn onto it — kept separate so every
+  // badge redraw starts from a clean copy instead of compounding onto
+  // whatever the canvas already had.
+  const faviconLinkRef = useRef<HTMLLinkElement | null>(null);
+  const baseFaviconImageRef = useRef<HTMLImageElement | null>(null);
+  // The previous badge's object URL — revoked once the next one replaces
+  // it (blob URLs otherwise leak for the life of the tab).
+  const faviconBlobUrlRef = useRef<string | null>(null);
 
   // Hydrate from localStorage after mount (avoids SSR/client mismatch).
   useEffect(() => {
@@ -169,9 +222,103 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     setHidden(readHidden());
     setGlobalRangeState(readGlobalRange());
     setHasCustomRange(readHasCustomRange());
-    setNotificationsEnabledState(readNotificationsEnabled());
-    setNotificationPermission(readNotificationPermission());
+    setSoundEnabledState(readSoundEnabled());
+    setSoundVolumeState(readSoundVolume());
   }, []);
+
+  // Created once — playing it again later just rewinds and restarts (see
+  // the status-transition effect below).
+  useEffect(() => {
+    alertAudioRef.current = new Audio(NOTIFICATION_SOUND_SRC);
+  }, []);
+
+  // Redraws the favicon from a clean base image every call (never onto
+  // whatever the canvas already had) — a plain circle-and-number badge in
+  // the bottom-right corner, cleared entirely once `count` is back to 0.
+  // Sweeps and removes *every* icon-ish link before adding the new one —
+  // not just the one this code was tracking — self-healing against strays
+  // that reappear from outside this code (confirmed via logging: Next Fast
+  // Refresh re-injected the layout's static icon links mid-session, so the
+  // one-time mount cleanup below wasn't enough — the tracked link kept
+  // getting updated correctly, but the browser was showing one of the
+  // untouched originals sitting alongside it). Also replaces the <link>
+  // element itself rather than mutating href in place, and uses a blob:
+  // object URL rather than a data: URI, both extra precautions against
+  // browsers that don't repaint on a plain attribute/URI-scheme change.
+  const renderFaviconBadge = useCallback((count: number) => {
+    const base = baseFaviconImageRef.current;
+    if (!base) return;
+
+    const size = 32;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    ctx.drawImage(base, 0, 0, size, size);
+
+    if (count > 0) {
+      const radius = size * 0.38;
+      const cx = size - radius;
+      const cy = size - radius;
+
+      ctx.beginPath();
+      ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      ctx.fillStyle = "#e03131";
+      ctx.fill();
+
+      ctx.fillStyle = "#fff";
+      ctx.font = `bold ${Math.round(radius * 1.5)}px sans-serif`;
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.fillText(count > 9 ? "9+" : String(count), cx, cy + 1);
+    }
+
+    canvas.toBlob((blob) => {
+      if (!blob) return;
+      const url = URL.createObjectURL(blob);
+
+      document
+        .querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]')
+        .forEach((el) => el.remove());
+
+      const newLink = document.createElement("link");
+      newLink.rel = "icon";
+      newLink.type = "image/png";
+      newLink.sizes = "32x32";
+      newLink.href = url;
+      document.head.appendChild(newLink);
+      faviconLinkRef.current = newLink;
+
+      if (faviconBlobUrlRef.current)
+        URL.revokeObjectURL(faviconBlobUrlRef.current);
+      faviconBlobUrlRef.current = url;
+    }, "image/png");
+  }, []);
+
+  // Takes over the tab's favicon so the badge above can be drawn onto it.
+  // The page otherwise ships several favicon-ish links at once — Next's own
+  // favicon.ico file-convention link (sizes="48x48"), this app's metadata
+  // icon, and a legacy shortcut-icon link — and browsers don't agree on
+  // which one wins when several exist; removing all of them and installing
+  // exactly one <link rel="icon"> this code owns makes that unambiguous.
+  // (An earlier version of this kept the *first* existing link instead of
+  // removing everything — which happened to be the low-priority "shortcut
+  // icon" one, not the one browsers were actually displaying, so updating
+  // it did nothing visible.)
+  useEffect(() => {
+    document
+      .querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]')
+      .forEach((el) => el.remove());
+
+    const img = new Image();
+    img.src = "/favicon-32x32.png";
+    img.onload = () => {
+      baseFaviconImageRef.current = img;
+      renderFaviconBadge(unreadCountRef.current);
+    };
+  }, [renderFaviconBadge]);
 
   useEffect(() => {
     const id = setInterval(() => setNow(Date.now()), TICK_INTERVAL_MS);
@@ -279,13 +426,23 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     [records],
   );
 
-  const setNotificationsEnabled = useCallback((enabled: boolean) => {
-    setNotificationsEnabledState(enabled);
+  const setSoundEnabled = useCallback((enabled: boolean) => {
+    setSoundEnabledState(enabled);
     try {
       window.localStorage.setItem(
-        NOTIFICATIONS_ENABLED_STORAGE_KEY,
+        SOUND_ENABLED_STORAGE_KEY,
         enabled ? "1" : "0",
       );
+    } catch {
+      // Non-fatal — see persistRecords.
+    }
+  }, []);
+
+  const setSoundVolume = useCallback((step: number) => {
+    const clamped = Math.min(VOLUME_STEPS - 1, Math.max(0, step));
+    setSoundVolumeState(clamped);
+    try {
+      window.localStorage.setItem(SOUND_VOLUME_STORAGE_KEY, String(clamped));
     } catch {
       // Non-fatal — see persistRecords.
     }
@@ -295,54 +452,50 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     try {
       window.localStorage.removeItem(RECORDS_STORAGE_KEY);
       window.localStorage.removeItem(GLOBAL_RANGE_STORAGE_KEY);
-      window.localStorage.removeItem(NOTIFICATIONS_ENABLED_STORAGE_KEY);
+      window.localStorage.removeItem(SOUND_ENABLED_STORAGE_KEY);
+      window.localStorage.removeItem(SOUND_VOLUME_STORAGE_KEY);
       window.localStorage.removeItem(HIDDEN_STORAGE_KEY);
     } catch {
       // Non-fatal — see persistRecords.
     }
-    window.location.reload();
-  }, []);
+    // Everything, not just boss-tracking data — a "reset all" that left
+    // dragged window positions/stacking/folding behind wouldn't actually be
+    // "all." All three dispatch a live-reset event so mounted windows snap
+    // back immediately — no page reload needed, same as the state resets
+    // below.
+    clearAllPersistedOffsets();
+    clearPersistedStackOrder();
+    unfoldAllPersistedWindows();
+    setRecords({});
+    setHidden({});
+    setGlobalRangeState(FALLBACK_RANGE);
+    setHasCustomRange(false);
+    setSoundEnabledState(true);
+    setSoundVolumeState(DEFAULT_VOLUME_STEP);
+    // A reset shouldn't leave a stale unread badge from before it ran.
+    unreadCountRef.current = 0;
+    if (originalTitleRef.current != null) {
+      document.title = originalTitleRef.current;
+    }
+    renderFaviconBadge(0);
+  }, [renderFaviconBadge]);
 
-  const requestNotificationPermission = useCallback(() => {
-    if (typeof Notification === "undefined") return;
-    Notification.requestPermission().then((permission) => {
-      setNotificationPermission(permission);
-      if (permission === "granted") setNotificationsEnabled(true);
-    });
-  }, [setNotificationsEnabled]);
-
-  // Fires a browser notification the moment a tracked boss's status
-  // changes — not on first sight of a boss (that would spam a notification
-  // for every kill already in progress when the tab loads), only on
-  // transitions observed while the app is open and ticking.
+  // Plays the alert sound and, if the tab is currently in the background,
+  // bumps the title badge — the moment a tracked boss's status changes.
+  // Not on first sight of a boss (that would fire for every kill already
+  // in progress when the tab loads), only on transitions observed while
+  // the app is open and ticking.
   useEffect(() => {
-    const canNotify =
-      notificationsEnabled &&
-      notificationPermission === "granted" &&
-      typeof Notification !== "undefined";
-
     const seen = new Set<string>();
+    let transitions = 0;
     for (const bossId of trackedBossIds) {
       seen.add(bossId);
       const status = getStatus(bossId);
       const prev = prevStatusRef.current.get(bossId);
       prevStatusRef.current.set(bossId, status);
 
-      if (prev === undefined || prev === status || !canNotify) continue;
-
-      const boss = getBossById(bossId);
-      const name = boss?.name ?? "A boss";
-      if (status === "pending") {
-        new Notification(`${name} could be up`, {
-          body: "Its respawn window just opened.",
-          tag: `boss-respawn-${bossId}`,
-        });
-      } else if (status === "alive") {
-        new Notification(`${name} should be back`, {
-          body: "Its respawn window closed — treat it as up.",
-          tag: `boss-respawn-${bossId}`,
-        });
-      }
+      if (prev === undefined || prev === status) continue;
+      if (status === "pending" || status === "alive") transitions += 1;
     }
 
     // Drop bosses no longer tracked (e.g. cleared via "Mark as Alive") so a
@@ -350,7 +503,57 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     for (const bossId of prevStatusRef.current.keys()) {
       if (!seen.has(bossId)) prevStatusRef.current.delete(bossId);
     }
-  }, [trackedBossIds, getStatus, notificationsEnabled, notificationPermission]);
+
+    if (transitions === 0) return;
+
+    if (soundEnabled) {
+      const audio = alertAudioRef.current;
+      if (audio) {
+        audio.volume = (soundVolume / (VOLUME_STEPS - 1)) * MAX_VOLUME_SCALE;
+        audio.currentTime = 0;
+        audio.play().catch(() => {
+          // Autoplay blocked (no user gesture on the page yet) — silent,
+          // same as any other environment where the sound just can't play.
+        });
+      }
+    }
+
+    if (document.hidden) {
+      if (originalTitleRef.current == null) {
+        originalTitleRef.current = document.title;
+      }
+      unreadCountRef.current += transitions;
+      document.title = `(${unreadCountRef.current}) ${originalTitleRef.current}`;
+      renderFaviconBadge(unreadCountRef.current);
+    }
+  }, [
+    trackedBossIds,
+    getStatus,
+    soundEnabled,
+    soundVolume,
+    renderFaviconBadge,
+  ]);
+
+  // Clears the unread badge the moment the player actually comes back to
+  // this tab — visibilitychange covers switching tabs/minimizing, focus
+  // covers alt-tabbing back on some browsers that don't fire the former
+  // reliably for window-level (not tab-level) switches.
+  useEffect(() => {
+    const clearBadge = () => {
+      if (document.hidden) return;
+      unreadCountRef.current = 0;
+      if (originalTitleRef.current != null) {
+        document.title = originalTitleRef.current;
+      }
+      renderFaviconBadge(0);
+    };
+    document.addEventListener("visibilitychange", clearBadge);
+    window.addEventListener("focus", clearBadge);
+    return () => {
+      document.removeEventListener("visibilitychange", clearBadge);
+      window.removeEventListener("focus", clearBadge);
+    };
+  }, [renderFaviconBadge]);
 
   return (
     <BossRespawnContext.Provider
@@ -365,10 +568,10 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
         getStatus,
         trackedBossIds,
         hasEverMarkedKilled,
-        notificationsEnabled,
-        setNotificationsEnabled,
-        notificationPermission,
-        requestNotificationPermission,
+        soundEnabled,
+        setSoundEnabled,
+        soundVolume,
+        setSoundVolume,
         isHidden,
         hideBoss,
         unhideBoss,
@@ -383,9 +586,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
 export function useBossRespawn(): BossRespawnContextType {
   const context = useContext(BossRespawnContext);
   if (context === undefined) {
-    throw new Error(
-      "useBossRespawn must be used within a BossRespawnProvider",
-    );
+    throw new Error("useBossRespawn must be used within a BossRespawnProvider");
   }
   return context;
 }

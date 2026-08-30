@@ -28,23 +28,18 @@ export const metadata: Metadata = {
   title: "L2 Boss Tracker - Lineage 2 Raid Boss Map",
   description:
     "Track and locate Lineage 2 raid bosses, filter by level and item drops",
+  // A single real icon entry (not the light/dark/svg trio this used to
+  // reference — none of those files actually existed, so browsers were
+  // silently falling back to src/app/favicon.ico the whole time) — also
+  // matters for BossRespawnProvider's favicon badge, which needs exactly
+  // one <link rel="icon"> it can take over and redraw, not several for the
+  // browser to arbitrate between.
   icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
+    icon: "/favicon-32x32.png",
+    shortcut: "/favicon.ico",
     apple: "/apple-icon.png",
   },
+  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({

@@ -72,9 +72,17 @@ function deriveMapBosses(positions: BossMapPosition[]) {
 interface KonvaMapViewerProps {
   width: number;
   height: number;
+  // Fires once every map tile has finished loading (success or error) — the
+  // placeholder wrapper uses this to know when to drop its own loading
+  // overlay, since before that the map itself is just an empty stage.
+  onReady?: () => void;
 }
 
-export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
+export default function KonvaMapViewer({
+  width,
+  height,
+  onReady,
+}: KonvaMapViewerProps) {
   const stageRef = useRef<Konva.Stage>(null);
   const layerRef = useRef<Konva.Layer>(null);
   const { selectedBossId, setSelectedBoss } = useBossSelection();
@@ -120,8 +128,10 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
     if (!itemMatchingBossIds && !levelMatchingBossIds) return null;
     const ids = new Set<string>();
     for (const boss of MAP_BOSSES) {
-      const passesItem = !itemMatchingBossIds || itemMatchingBossIds.has(boss.id);
-      const passesLevel = !levelMatchingBossIds || levelMatchingBossIds.has(boss.id);
+      const passesItem =
+        !itemMatchingBossIds || itemMatchingBossIds.has(boss.id);
+      const passesLevel =
+        !levelMatchingBossIds || levelMatchingBossIds.has(boss.id);
       if (passesItem && passesLevel) ids.add(boss.id);
     }
     return ids;
@@ -198,6 +208,16 @@ export default function KonvaMapViewer({ width, height }: KonvaMapViewerProps) {
       }
     }
   }, []);
+
+  // Only reacts to mapImages itself (not onReady's identity, which changes
+  // every time the parent re-renders) — onReady is expected to be
+  // idempotent (e.g. setState(true)), so firing it more than once is
+  // harmless, but there's no reason to re-run this just because the parent
+  // passed a fresh inline callback.
+  useEffect(() => {
+    if (mapImages.length > 0) onReady?.();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mapImages]);
 
   const overlayRef = useRef<HTMLDivElement>(null);
   const OVERLAY_GAP_PX = 12;

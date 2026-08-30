@@ -5,30 +5,35 @@ import { WindowBorder } from "../window-l2";
 import { DraggableWindow, DragHandle } from "../draggable-window";
 import { GoldButton } from "../gold-button";
 import { getBossById } from "@/lib/boss-data";
-import { formatDuration } from "@/lib/respawn";
-import { STATUS_LABEL, STATUS_TEXT_CLASS } from "@/lib/boss-status";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossPositions } from "@/components/providers/BossPositionsProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import { useNpcInfoPanel } from "@/components/providers/NpcInfoPanelProvider";
 import { BossPortraitImage } from "./boss-portrait-image";
+import { usePersistedOffset } from "@/hooks/use-persisted-offset";
 import { cn } from "@/lib/utils";
 
 export default function BossInfoDisplay() {
   const { selectedBossId } = useBossSelection();
   const { positions } = useBossPositions();
-  const { globalRange, getKilledAt, markKilled, markAlive, getStatus } =
+  const { getStatus, markKilled, markAlive, isHidden, hideBoss, unhideBoss } =
     useBossRespawn();
   const { isOpen, setIsOpen } = useNpcInfoPanel();
+  // Persisted to localStorage so a reload reopens it wherever it was last
+  // dropped, same as the other windows. isHydrated gates visibility below
+  // until that persisted value has actually loaded — see
+  // usePersistedOffset for why.
+  const [offset, setOffset, isOffsetHydrated] = usePersistedOffset("npc-info");
 
   const boss = selectedBossId ? getBossById(selectedBossId) : undefined;
+  // Mark/Hide only make sense for a boss actually placed on the map — one
+  // without a position has nowhere for that state to be reflected.
   const hasMapPosition = boss
     ? positions.some((p) => p.bossId === boss.id)
     : false;
 
   const status = boss ? getStatus(boss.id) : "alive";
-  const killedAt = boss ? getKilledAt(boss.id) : null;
-  const elapsed = killedAt != null ? Date.now() - killedAt : null;
+  const hidden = boss ? isHidden(boss.id) : false;
 
   return (
     // Stays mounted while closed (invisible, not removed) instead of
@@ -37,17 +42,29 @@ export default function BossInfoDisplay() {
     // shifting its neighbors over. invisible keeps the slot reserved so
     // closing one window never moves the others.
     <DraggableWindow
+      id="npc-info"
       className={cn(
-        "flex h-full min-h-0 w-80 shrink-0 flex-col",
-        !isOpen && "invisible pointer-events-none",
+        "relative flex h-full min-h-0 w-80 shrink-0 flex-col",
+        (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
       )}
+      initialOffset={offset}
+      onOffsetChange={setOffset}
     >
       <DragHandle>
-        <Header title="NPC Info" canClose onClose={() => setIsOpen(false)} />
+        <Header title="Raid Boss" canClose onClose={() => setIsOpen(false)} />
       </DragHandle>
       <div className="min-h-0 flex-1">
         <WindowBorder>
-          <div className="flex h-full flex-col gap-2 overflow-y-auto custom-scrollbar p-2 pr-3">
+          {/* Name/level and the buttons are fixed — always visible without
+              scrolling, since they're the actually-actionable part of this
+              card. The portrait is the one thing that can genuinely be
+              taller than the window has room for (it's a fixed aspect-ratio
+              image, not something that should ever get cropped/pushed past
+              the border), so it's last, in its own overflow-y-auto region
+              that only scrolls if it doesn't fully fit — same
+              custom-scrollbar + pr-1 treatment as Raid Boss Drop List's
+              list view. */}
+          <div className="flex h-full min-h-0 flex-col gap-2 p-2">
             {!boss && (
               <p className="py-6 text-center text-xs text-white/40">
                 Select a boss to see its info
@@ -56,87 +73,56 @@ export default function BossInfoDisplay() {
 
             {boss && (
               <>
-                <BossPortraitImage
-                  boss={boss}
-                  className="aspect-4/3 w-full shrink-0 border border-window-content-border"
-                  sizes="288px"
-                />
-
-                <h3 className="text-[13px]">{boss.name}</h3>
-                <p className="text-[13px] text-white/50">
-                  {boss.title} · Lv. {boss.level}
-                </p>
-
-                {hasMapPosition && status === "pending" && (
-                  <div className="flex items-center gap-2 border border-[#f5c518]/45 bg-[#f5c518]/10 px-2 py-1.5">
-                    <span className="size-2 shrink-0 rounded-full border border-[#f5c518]" />
-                    <div className="flex-1">
-                      <p className="text-xs text-[#f5c518]">Window open</p>
-                      {killedAt != null && elapsed != null && (
-                        <p className="text-[10px] text-white/50">
-                          since {formatDuration(elapsed)} · closes in{" "}
-                          {formatDuration(
-                            globalRange.maxHours * 60 * 60 * 1000 - elapsed,
-                          )}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex flex-col border border-window-content-border bg-window-content-bg px-2 text-[11px]">
-                  <div className="flex items-center justify-between border-b border-window-content-border py-1.5">
-                    <span className="text-white/40">Race</span>
-                    <span>{boss.race}</span>
-                  </div>
-                  {boss.weakness && (
-                    <div className="flex items-center justify-between border-b border-window-content-border py-1.5">
-                      <span className="text-white/40">Weakness</span>
-                      <span className="text-system-text">{boss.weakness}</span>
-                    </div>
+                {/* One block, one left accent bar for both lines — same
+                    per-status treatment as Up Next's rows (upcoming-spawns.tsx),
+                    not a separate bar per line. */}
+                <div
+                  className={cn(
+                    "flex shrink-0 flex-col gap-0.5 border px-2 py-1.5",
+                    status === "alive" &&
+                      "border-window-content-border border-l-2 border-l-[#7ed957] bg-[#7ed957]/12",
+                    status === "pending" &&
+                      "border-[#f5c518]/40 bg-[#f5c518]/7",
+                    status === "dead" &&
+                      "border-window-content-border bg-[#c25c5c]/6",
                   )}
-                  {hasMapPosition && (
-                    <div className="flex items-center justify-between border-b border-window-content-border py-1.5">
-                      <span className="text-white/40">Current State</span>
-                      <span className={STATUS_TEXT_CLASS[status]}>
-                        {STATUS_LABEL[status]}
-                      </span>
-                    </div>
-                  )}
-                  {hasMapPosition && killedAt != null && elapsed != null && (
-                    <div className="flex items-center justify-between border-b border-window-content-border py-1.5">
-                      <span className="text-white/40">
-                        {status === "dead" ? "Respawns in" : "Killed"}
-                      </span>
-                      <span className="text-white/70">
-                        {status === "dead"
-                          ? formatDuration(
-                              globalRange.minHours * 60 * 60 * 1000 - elapsed,
-                            )
-                          : `${formatDuration(elapsed)} ago`}
-                      </span>
-                    </div>
-                  )}
-                  <div className="flex items-center justify-between py-1.5">
-                    <span className="text-white/40">Respawn</span>
-                    <span>
-                      {globalRange.minHours} – {globalRange.maxHours} h{" "}
-                      <span className="text-white/30">(server)</span>
-                    </span>
-                  </div>
+                >
+                  <span className="text-[13px]">{boss.name}</span>
+                  <span className="text-[13px] text-white/50">
+                    Lv {boss.level}
+                  </span>
                 </div>
 
                 {hasMapPosition && (
-                  <GoldButton
-                    onClick={() =>
-                      status === "alive"
-                        ? markKilled(boss.id)
-                        : markAlive(boss.id)
-                    }
-                  >
-                    {status === "alive" ? "Mark as Killed" : "Mark as Alive"}
-                  </GoldButton>
+                  <div className="flex shrink-0 gap-1.5">
+                    <GoldButton
+                      className="flex-1"
+                      onClick={() =>
+                        status === "alive"
+                          ? markKilled(boss.id)
+                          : markAlive(boss.id)
+                      }
+                    >
+                      {status === "alive" ? "Mark as Killed" : "Mark as Alive"}
+                    </GoldButton>
+                    <GoldButton
+                      className="flex-1"
+                      onClick={() =>
+                        hidden ? unhideBoss(boss.id) : hideBoss(boss.id)
+                      }
+                    >
+                      {hidden ? "Unhide" : "Hide on Map"}
+                    </GoldButton>
+                  </div>
                 )}
+
+                <div className="flex min-h-0 flex-1 flex-col overflow-y-auto custom-scrollbar pr-1">
+                  <BossPortraitImage
+                    boss={boss}
+                    className="aspect-4/3 w-full shrink-0 border border-window-content-border"
+                    sizes="288px"
+                  />
+                </div>
               </>
             )}
           </div>

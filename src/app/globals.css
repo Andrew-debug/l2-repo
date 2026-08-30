@@ -142,6 +142,14 @@
   cursor: url("../../public/default-cursor.cur"), auto;
 }
 
+/* Options > Game Cursor unchecked — falls back to the plain web cursor.
+   `.default-cursor *` (a class + universal selector) outranks the bare `*`
+   above regardless of source order, so toggling this class on <html> is
+   enough to override it without `!important`. */
+.default-cursor * {
+  cursor: auto;
+}
+
 body {
   /* fs-tahoma-8px.otf: pixel-aligned at 8px (or clean multiples) per its
      own internal font name — a vector trace of the client's bitmap font. */

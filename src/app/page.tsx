@@ -2,7 +2,6 @@ import { MapPlaceholder } from "@/components/map-placeholder";
 import { MapProvider } from "@/components/providers/MapProvider";
 import { IconStateButton } from "@/components/ui/icon-state-button";
 import { L2Icon } from "@/components/ui/l2-icon";
-import L2Window from "@/components/ui/l2-window";
 import { Header } from "@/components/header";
 import { HelpCircle, Info, Users } from "lucide-react";
 import Chat from "@/components/chat/chat";
@@ -109,8 +108,6 @@ export default function Home() {
           </div>
         </div>
       </footer> */}
-
-          {/* <L2Window /> */}
         </div>
       </HeaderVisibilityProvider>
     </BackgroundDimProvider>

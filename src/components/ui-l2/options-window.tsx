@@ -9,7 +9,10 @@ import { IconStateButton } from "../ui/icon-state-button";
 import { useOptionsPanel } from "@/components/providers/OptionsPanelProvider";
 import { useBackgroundDim } from "@/components/providers/BackgroundDimProvider";
 import { useHeaderVisibility } from "@/components/providers/HeaderVisibilityProvider";
-import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
+import {
+  useBossRespawn,
+  VOLUME_STEPS,
+} from "@/components/providers/BossRespawnProvider";
 import {
   CUSTOM_RESPAWN_ID,
   findPresetIdByRange,
@@ -17,6 +20,9 @@ import {
   parseCustomRespawnRange,
 } from "@/lib/respawn-presets";
 import type { RespawnRange } from "@/lib/respawn";
+import { clearAllPersistedOffsets } from "@/hooks/use-persisted-offset";
+import { clearPersistedStackOrder } from "./draggable-window";
+import { unfoldAllPersistedWindows } from "@/hooks/use-persisted-fold-state";
 import { cn } from "@/lib/utils";
 
 type Tab = "video" | "audio" | "game";
@@ -44,8 +50,8 @@ function TabButton({
   // normal_tab: unselected. normal_tab_on: the active tab. normal_tab_on_over:
   // hover — for a tab you could switch *to*, not the one you're already on
   // (active wins over hovered: nothing to preview-highlight about clicking
-  // the tab you're already looking at). Disabled tabs (Video/Audio — no
-  // settings behind them) never track hover at all either.
+  // the tab you're already looking at). The disabled tab (Video — no
+  // settings behind it) never tracks hover at all either.
   const src = disabled
     ? "/icons/petinterface_tab2.png"
     : active
@@ -258,7 +264,7 @@ function BossRespawnTimeSelect() {
             ref={inputRef}
             value={customText}
             onChange={(e) => handleCustomChange(e.target.value)}
-            placeholder="e.g. 6 or 12-16"
+            placeholder="e.g. 6 or 12-16 (or 5m TEMP)"
             className={cn(
               "h-full w-full bg-transparent pr-4 text-[13px] leading-3.5 text-white placeholder:text-white/30 focus:outline-none",
               customInvalid && "text-red-400",
@@ -384,11 +390,116 @@ function DisabledCheckbox({
   );
 }
 
-// The game's Options dialog — Video/Audio tabs are along for the look only
-// (no settings to back them, this app has nothing to configure there); Game
-// only keeps Interface/Initialize/Transparent from the reference, since
-// everything else on that tab (language, display filters, tracking, party
-// loot, ...) has no equivalent here either.
+// The reference client's volume sliders are a row of discrete blocks (5
+// here — see VOLUME_STEPS), not a continuous drag-anywhere bar — no game
+// art exists for the real thing, so this reproduces the look with plain
+// divs: filled blocks (0..value) in the same gold used for the scrollbar
+// thumb/gold-button elsewhere, unfilled ones dim. Click a block to jump the
+// value straight to it, same as clicking a spot on the reference slider.
+function StepSlider({
+  value,
+  onChange,
+  disabled,
+  className,
+}: {
+  value: number;
+  onChange?: (step: number) => void;
+  disabled?: boolean;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "flex h-3 w-24 gap-px border border-window-content-border bg-black/40 p-px",
+        className,
+      )}
+    >
+      {Array.from({ length: VOLUME_STEPS }).map((_, step) => (
+        <button
+          key={step}
+          type="button"
+          disabled={disabled}
+          onClick={() => onChange?.(step)}
+          aria-label={`Level ${step + 1}`}
+          className={cn(
+            "flex-1",
+            step <= value ? "bg-[#bdae84]" : "bg-white/10",
+            !disabled && step > value && "hover:bg-white/20",
+            !disabled && step <= value && "hover:bg-[#d8c9a0]",
+            disabled && "cursor-default",
+          )}
+        />
+      ))}
+    </div>
+  );
+}
+
+// Decorative row to match — same shape as the real Notification Vol.
+// slider below, just inert (no state, nothing plays SFX/music/voice in
+// this app). Kept visually present so the tab doesn't look broken/empty
+// next to the one real control.
+function DisabledStepSlider({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn(
+        "flex h-3 w-24 gap-px border border-window-content-border bg-black/40 p-px opacity-50",
+        className,
+      )}
+    >
+      {Array.from({ length: VOLUME_STEPS }).map((_, step) => (
+        <div key={step} className="flex-1 bg-white/10" />
+      ))}
+    </div>
+  );
+}
+
+function AudioTabContent() {
+  const { soundEnabled, setSoundEnabled, soundVolume, setSoundVolume } =
+    useBossRespawn();
+
+  return (
+    <div className="mx-1.5 mt-1 flex flex-col gap-1.5 bg-window-bg px-3 py-2">
+      <div className="flex items-center justify-between">
+        <span className="text-[13px] text-white/50">SFX Vol.</span>
+        <DisabledStepSlider />
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="text-[13px] text-white/50">Music Vol.</span>
+        <DisabledStepSlider />
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="text-[13px] text-white/50">System Voice</span>
+        <DisabledStepSlider />
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="text-[13px] text-white/50">Tutorial Voice</span>
+        <DisabledStepSlider />
+      </div>
+      <div className="flex items-center justify-between">
+        <span className="text-[13px] text-white">Notification Vol.</span>
+        <StepSlider
+          value={soundVolume}
+          onChange={setSoundVolume}
+          disabled={!soundEnabled}
+        />
+      </div>
+      <Checkbox
+        checked={!soundEnabled}
+        onChange={(muted) => setSoundEnabled(!muted)}
+        label="Mute all sounds"
+        className="mt-1"
+      />
+    </div>
+  );
+}
+
+// The game's Options dialog — Video is along for the look only (no settings
+// to back it, this app has nothing to configure there); Audio backs one
+// real control (Notification Vol./Mute, wired to BossRespawnProvider's
+// alert sound — see AudioTabContent), the rest is decorative to match the
+// reference's layout. Game only keeps Interface/Initialize/Transparent from
+// the reference, since everything else on that tab (language, display
+// filters, tracking, party loot, ...) has no equivalent here either.
 export function OptionsWindow() {
   const { isOpen, setIsOpen } = useOptionsPanel();
   const { isBackgroundVisible, setIsBackgroundVisible } = useBackgroundDim();
@@ -399,13 +510,21 @@ export function OptionsWindow() {
   // local, inert toggles purely so the window doesn't read as broken when
   // clicked, matching the reference's checked/unchecked starting state.
   const [showRegion, setShowRegion] = useState(true);
-  const [graphicCursor, setGraphicCursor] = useState(true);
+  // Unlike the other checkboxes on this tab, this one is real: it toggles
+  // the game-style cursor (globals.css's default `* { cursor: url(...) }`
+  // rule) on and off for the whole page, falling back to the plain web
+  // cursor when unchecked.
+  const [gameCursor, setGameCursor] = useState(true);
   const [arrow3d, setArrow3d] = useState(true);
   const [enterChat, setEnterChat] = useState(true);
   const [autoCode, setAutoCode] = useState(true);
   const [tracking, setTracking] = useState(true);
   const [declineDuels, setDeclineDuels] = useState(false);
   const [hideDropped, setHideDropped] = useState(false);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("default-cursor", !gameCursor);
+  }, [gameCursor]);
 
   return (
     <DraggableWindow
@@ -439,7 +558,7 @@ export function OptionsWindow() {
               key={t.id}
               label={t.label}
               active={tab === t.id}
-              disabled={t.id !== "game"}
+              disabled={t.id === "video"}
               onClick={() => setTab(t.id)}
             />
           ))}
@@ -454,7 +573,7 @@ export function OptionsWindow() {
           />
 
           <div className="relative m-1 min-h-24">
-            {tab === "game" ? (
+            {tab === "game" && (
               <>
                 <div className="flex items-center bg-window-bg mx-1.5 mt-1 pl-3 pt-1 gap-2">
                   <span className="text-[13px] text-white">Interface</span>
@@ -465,6 +584,18 @@ export function OptionsWindow() {
                       clickIcon="/icons/smallbutton2_down.png"
                       className="h-4.25 w-16 text-[13px]"
                       text="Initialize"
+                      // Resets window layout only — dragged positions,
+                      // stacking order, and folded state — not boss-tracking
+                      // data. That's "Restart" in the System Menu
+                      // (BossRespawnProvider's resetAll), a separate, more
+                      // destructive action. All three dispatch a live-reset
+                      // event, so mounted windows snap back immediately — no
+                      // page reload.
+                      onClick={() => {
+                        clearAllPersistedOffsets();
+                        clearPersistedStackOrder();
+                        unfoldAllPersistedWindows();
+                      }}
                     />
                     <Checkbox
                       checked={transparent}
@@ -522,9 +653,9 @@ export function OptionsWindow() {
                   />
                   <DisabledCheckbox checked={false} label="Disable Game Tips" />
                   <Checkbox
-                    checked={graphicCursor}
-                    onChange={setGraphicCursor}
-                    label="Graphic Cursor"
+                    checked={gameCursor}
+                    onChange={setGameCursor}
+                    label="Game Cursor"
                   />
                   <Checkbox
                     checked={arrow3d}
@@ -597,7 +728,11 @@ export function OptionsWindow() {
                   />
                 </div>
               </>
-            ) : (
+            )}
+
+            {tab === "audio" && <AudioTabContent />}
+
+            {tab === "video" && (
               <p className="py-6 text-center text-[13px] text-white/40">
                 Nothing to configure here.
               </p>

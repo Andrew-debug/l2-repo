@@ -56,6 +56,23 @@ export function findPresetIdByRange(range: RespawnRange): string | undefined {
 export function parseCustomRespawnRange(input: string): RespawnRange | undefined {
   const trimmed = input.trim();
 
+  // TEMP TESTING HACK — remove when done: lets "5m" / "5m-10m" be entered
+  // so respawn windows can be tested in minutes instead of waiting hours.
+  const singleMin = /^(\d+)m$/.exec(trimmed);
+  if (singleMin) {
+    const hours = Number(singleMin[1]) / 60;
+    return hours > 0 ? { minHours: hours, maxHours: hours } : undefined;
+  }
+  const rangeMin = /^(\d+)m-(\d+)m$/.exec(trimmed);
+  if (rangeMin) {
+    const minHours = Number(rangeMin[1]) / 60;
+    const maxHours = Number(rangeMin[2]) / 60;
+    return minHours > 0 && maxHours >= minHours
+      ? { minHours, maxHours }
+      : undefined;
+  }
+  // END TEMP TESTING HACK
+
   const single = /^(\d+)$/.exec(trimmed);
   if (single) {
     const hours = Number(single[1]);

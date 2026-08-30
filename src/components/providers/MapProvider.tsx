@@ -1,8 +1,11 @@
 "use client";
 
 import React, { createContext, useContext, useState, ReactNode } from "react";
+import { usePersistedFoldState } from "@/hooks/use-persisted-fold-state";
+import { usePersistedView } from "@/hooks/use-persisted-view";
 
 export type MapSize = "large" | "small";
+const MAP_SIZE_OPTIONS = ["large", "small"] as const;
 
 interface MapContextType {
   mapSize: MapSize;
@@ -38,9 +41,15 @@ export function MapProvider({ children }: MapProviderProps) {
   // MapPlaceholder) — keep in sync with Map.tsx's small-mode window width
   // (currently 276px) minus WindowBorder's 4px of nested borders.
   const minimizeSize = 272;
-  const [mapSize, setMapSize] = useState<MapSize>(defaultSize);
+  // Persisted to localStorage so a reload keeps whichever size (large/
+  // small) was last chosen.
+  const [mapSize, setMapSize] = usePersistedView(
+    "l2-map-size",
+    defaultSize,
+    MAP_SIZE_OPTIONS,
+  );
   const [isOpen, setIsOpen] = useState(true);
-  const [isFolded, setIsFolded] = useState(false);
+  const [isFolded, setIsFolded] = usePersistedFoldState("map");
 
   const toggleMapOpen = () => {
     if (isOpen && !isFolded) {

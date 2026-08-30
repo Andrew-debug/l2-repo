@@ -50,7 +50,7 @@ interface SystemMenuPanelProps {
   onUpcomingSpawnsClick: () => void;
   onNpcInfoClick: () => void;
   // Opens a confirm dialog; wipes tracked data (kills, hidden bosses,
-  // respawn range, notification prefs) if confirmed — see
+  // respawn range, alert-sound pref) if confirmed — see
   // BossRespawnProvider.resetAll.
   onRestartClick: () => void;
   // Closes every open window and clears the background dim — see
@@ -92,13 +92,7 @@ function SystemMenuPanel({
       clickIcon: "/icons/systemicon3_down.png",
       onClick: onHelpClick,
     },
-    {
-      text: "Options",
-      defaultIcon: "/icons/systemicon5.png",
-      hoverIcon: "/icons/systemicon5_over.png",
-      clickIcon: "/icons/systemicon5_down.png",
-      onClick: onOptionsClick,
-    },
+
     {
       text: "Up Next(Alt+N)",
       defaultIcon: "/icons/mainwndtabicon4.png",
@@ -112,6 +106,13 @@ function SystemMenuPanel({
       hoverIcon: "/icons/mainwndtabicon1_over.png",
       clickIcon: "/icons/mainwndtabicon1_down.png",
       onClick: onNpcInfoClick,
+    },
+    {
+      text: "Options",
+      defaultIcon: "/icons/systemicon5.png",
+      hoverIcon: "/icons/systemicon5_over.png",
+      clickIcon: "/icons/systemicon5_down.png",
+      onClick: onOptionsClick,
     },
     {
       text: "Restart",
@@ -131,6 +132,7 @@ function SystemMenuPanel({
 
   return (
     <DraggableWindow
+      id="system-menu"
       className="absolute bottom-12 right-0 w-38.5"
       initialOffset={offset}
       onOffsetChange={onOffsetChange}

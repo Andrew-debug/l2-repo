@@ -10,6 +10,7 @@ import { FoldIcon, FOLD_ICON_SIZE } from "../ui-l2/fold-icon";
 import { IconStateButton } from "../ui/icon-state-button";
 import { MapSearchBar } from "./map-search-bar";
 import { STATUS_ICON } from "@/lib/boss-status";
+import { usePersistedOffset } from "@/hooks/use-persisted-offset";
 import { cn } from "@/lib/utils";
 
 const BUTTON_CLASS = "w-16 h-4.5 text-[13px]";
@@ -44,7 +45,10 @@ export default function Map() {
   // same trick SystemMenuPanel uses to survive its own unmount, except
   // here both forms stay mounted (see the invisible/pointer-events-none
   // toggling below) so folding never touches the Konva map underneath.
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  // Persisted to localStorage so a reload reopens it wherever it was last
+  // dropped. isHydrated gates visibility below until that persisted value
+  // has actually loaded — see usePersistedOffset for why.
+  const [offset, setOffset, isOffsetHydrated] = usePersistedOffset("map");
 
   // Alt+M — matches the fold icon's own "Map (Alt+M)" tooltip and does the
   // same thing MenuSection's map toolbar button does (see toggleMapOpen).
@@ -77,10 +81,11 @@ export default function Map() {
       )}
     >
       <DraggableWindow
+        id="map"
         className={cn(
           FOLD_ICON_SIZE,
           "absolute top-0 left-0",
-          !isFolded && "invisible pointer-events-none",
+          (!isFolded || !isOffsetHydrated) && "invisible pointer-events-none",
         )}
         initialOffset={offset}
         onOffsetChange={setOffset}
@@ -95,6 +100,7 @@ export default function Map() {
       </DraggableWindow>
 
       <DraggableWindow
+        id="map"
         className={cn(
           "absolute top-0 left-0 flex flex-col",
           // The window's own real size — independent of the wrapper above,
@@ -108,7 +114,7 @@ export default function Map() {
           // 0×0 and never tears down the Konva stage underneath.
           // Unmounting reloaded all ~60 map tile images and reset
           // pan/zoom/selection every time.
-          isFolded && "invisible pointer-events-none",
+          (isFolded || !isOffsetHydrated) && "invisible pointer-events-none",
         )}
         initialOffset={offset}
         onOffsetChange={setOffset}

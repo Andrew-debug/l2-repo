@@ -1,6 +1,11 @@
 import Image from "next/image";
 import { Sword } from "lucide-react";
-import { getItemCategory, getItemGrade, getItemIcon, type ItemGrade } from "@/lib/item-icons";
+import {
+  getItemCategory,
+  getItemGrade,
+  getItemIcon,
+  type ItemGrade,
+} from "@/lib/item-icons";
 import { cn } from "@/lib/utils";
 
 export const GRADE_ICON: Record<Exclude<ItemGrade, "none">, string> = {
@@ -33,7 +38,13 @@ export function dropLabel(item: string): string {
   return item.replace(/\(([SABCD])\)\s*$/, "(Grade $1)");
 }
 
-export function DropIcon({ item, className }: { item: string; className?: string }) {
+export function DropIcon({
+  item,
+  className,
+}: {
+  item: string;
+  className?: string;
+}) {
   const src = getItemIcon(item);
   return (
     <div
