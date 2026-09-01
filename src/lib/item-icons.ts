@@ -17,13 +17,13 @@ export const itemIcons: Record<string, string> = {
   "Cursed Tunic": "/items-icons/armour/D/armor_t14_u_i00.png",
   "Cursed Stockings": "/items-icons/armour/D/armor_t14_l_i00.png",
   "Bagh-Nakh": "/items-icons/weapon/D/weapon_baghnakh_i00.png",
-  "Scroll: Enchant Weapon (D)":
+  "Scroll: Enchant Weapon (Grade D)":
     "/items-icons/scrolls/D/etc_scroll_of_enchant_weapon_i01.png",
-  "Scroll: Enchant Armor (D)":
+  "Scroll: Enchant Armor (Grade D)":
     "/items-icons/scrolls/D/etc_scroll_of_enchant_armor_i01.png",
-  "Blessed Scroll: Enchant Weapon (D)":
+  "Blessed Scroll: Enchant Weapon (Grade D)":
     "/items-icons/scrolls/D/etc_blessed_scrl_of_ench_wp_d_i01.png",
-  "Blessed Scroll: Enchant Armor (D)":
+  "Blessed Scroll: Enchant Armor (Grade D)":
     "/items-icons/scrolls/D/etc_blessed_scrl_of_ench_am_d_i01.png",
   "Blessed Scroll of Resurrection for Pets":
     "/items-icons/scrolls/etc_scroll_of_resurrection_pet_i01.png",
@@ -244,9 +244,9 @@ export const itemIcons: Record<string, string> = {
   "Elven Long Sword": "/items-icons/weapon/D/weapon_elven_long_sword_i00.png",
   "Claymore Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Elven Long Sword Blade": "/items-icons/craft/etc_sword_body_i00.png",
-  "Blessed Scroll: Enchant Weapon (C)":
+  "Blessed Scroll: Enchant Weapon (Grade C)":
     "/items-icons/scrolls/C/etc_blessed_scrl_of_ench_wp_c_i02.png",
-  "Blessed Scroll: Enchant Armor (C)":
+  "Blessed Scroll: Enchant Armor (Grade C)":
     "/items-icons/scrolls/C/etc_blessed_scrl_of_ench_am_c_i02.png",
   "Mithril Gloves": "/items-icons/armour/D/armor_t46_g_i00.png",
   "Ogre Power Gauntlets": "/items-icons/armour/D/armor_t45_g_i00.png",
@@ -262,9 +262,9 @@ export const itemIcons: Record<string, string> = {
   "Sage's Worn Gloves Lining": "/items-icons/craft/etc_leather_gray_i00.png",
   Glaive: "/items-icons/weapon/D/weapon_glaive_i00.png",
   "Glaive Edge": "/items-icons/craft/etc_sword_body_i00.png",
-  "Scroll: Enchant Weapon (C)":
+  "Scroll: Enchant Weapon (Grade C)":
     "/items-icons/scrolls/C/etc_scroll_of_enchant_weapon_i02.png",
-  "Scroll: Enchant Armor (C)":
+  "Scroll: Enchant Armor (Grade C)":
     "/items-icons/scrolls/C/etc_scroll_of_enchant_armor_i02.png",
   "Omen Beast's Eye Earring":
     "/items-icons/accessary/accessary_onyxbeastseye_earing_i00.png",
@@ -379,8 +379,8 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/craft/etc_pouch_brown_i00.png",
   "Chain Gloves Design": "/items-icons/craft/etc_pouch_brown_i00.png",
   "Karmian Gloves Fabric": "/items-icons/craft/etc_leather_gray_i00.png",
-  "Dragon Heart: C-Grade": "/items-icons/consumable/raid/etc_raid_b_i02.png",
-  "Dragon Heart: B-Grade": "/items-icons/consumable/raid/etc_raid_b_i01.png",
+  "Dragon's Heart: C-Grade": "/items-icons/consumable/raid/etc_raid_b_i02.png",
+  "Dragon's Heart: B-Grade": "/items-icons/consumable/raid/etc_raid_b_i01.png",
   "Dragon Heart: A-Grade": "/items-icons/consumable/raid/etc_raid_b_i00.png",
   "False Nucleus of Life: C-Grade":
     "/items-icons/consumable/raid/etc_raid_d_i02.png",
@@ -389,7 +389,7 @@ export const itemIcons: Record<string, string> = {
   "False Nucleus of Life: A-Grade":
     "/items-icons/consumable/raid/etc_raid_d_i00.png",
   "Earth Egg: C-Grade": "/items-icons/consumable/raid/etc_raid_c_i02.png",
-  "Earth Egg: A-Grade": "/items-icons/consumable/raid/etc_raid_c_i00.png",
+  "Egg of Earth: A-Grade": "/items-icons/consumable/raid/etc_raid_c_i00.png",
   "Destruction Tombstone": "/items-icons/consumable/raid/etc_raid_f_i00.png",
   Chakram: "/items-icons/weapon/C/weapon_chakram_i00.png",
   "Chakram Edge": "/items-icons/craft/etc_sword_body_i00.png",
@@ -403,9 +403,9 @@ export const itemIcons: Record<string, string> = {
   "Aquastone Necklace Chain": "/items-icons/craft/etc_jewel_box_i00.png",
   "Skull of the Dead C-Grade":
     "/items-icons/consumable/raid/etc_raid_a_i02.png",
-  "Skull of the Dead B-Grade":
+  "Skull of the Dead: B-Grade":
     "/items-icons/consumable/raid/etc_raid_a_i01.png",
-  "Skull of the Dead A-Grade":
+  "Skull of the Dead: A-Grade":
     "/items-icons/consumable/raid/etc_raid_a_i00.png",
   "Angelic Essence: C-Grade": "/items-icons/consumable/raid/etc_raid_e_i02.png",
   "Angel's Soul: B-Grade": "/items-icons/consumable/raid/etc_raid_e_i01.png",
@@ -462,7 +462,7 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/consumable/dyes/etc_men_hena_i02.png",
   "Tower Shield": "/items-icons/armour/C/shield_tower_shield_i00.png",
   "Composite Shield": "/items-icons/armour/C/shield_composite_shield_i00.png",
-  "Composite Helmet": "/items-icons/armour/D/armor_leather_helmet_i00.png",
+  "Composite Helmet": "/items-icons/armour/C/armor_leather_helmet_i00.png",
   "Shining Circlet": "/items-icons/armour/C/armor_circlet_i00.png",
   "Tower Shield Fragment": "/items-icons/craft/etc_plate_glay_i00.png",
   "Composite Shield Fragment": "/items-icons/craft/etc_plate_silver_i00.png",
@@ -638,7 +638,7 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/consumable/dyes/etc_int_hena_i02.png",
   "Greater Dye of MEN <Men+4 Int-4>":
     "/items-icons/consumable/dyes/etc_men_hena_i02.png",
-  "Blessed Scroll: Enchant Weapon (B)":
+  "Blessed Scroll: Enchant Weapon (Grade B)":
     "/items-icons/scrolls/B/etc_blessed_scrl_of_ench_wp_b_i03.png",
   "Earth Egg: B-Grade": "/items-icons/consumable/raid/etc_raid_c_i01.png",
   "Adamantite Earring":
@@ -662,14 +662,15 @@ export const itemIcons: Record<string, string> = {
   "Avadon Leather Armor Lining": "/items-icons/craft/etc_leather_gray_i00.png",
   "Great Axe": "/items-icons/weapon/B/weapon_great_axe_i00.png",
   "Great Axe Head": "/items-icons/craft/etc_squares_gray_i00.png",
-  "Zubei's Boots": "/items-icons/armour/B/armor_t64_b_i02.png",
-  "Avadon Boots": "/items-icons/armour/B/armor_t66_b_i02.png",
-  "Zubei's Gauntlets": "/items-icons/armour/B/armor_t64_g_i02.png",
-  "Avadon Gloves": "/items-icons/armour/B/armor_t66_g_i02.png",
-  "Zubei's Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
-  "Avadon Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
-  "Zubei's Gauntlets Part": "/items-icons/craft/etc_plate_silver_i00.png",
-  "Avadon Gloves Part": "/items-icons/craft/etc_plate_silver_i00.png",
+  "Sealed Zubei's Boots": "/items-icons/armour/B/armor_t64_b_i02.png",
+  "Sealed Avadon Boots": "/items-icons/armour/B/armor_t66_b_i02.png",
+  "Sealed Zubei's Gauntlets": "/items-icons/armour/B/armor_t64_g_i02.png",
+  "Sealed Avadon Gloves": "/items-icons/armour/B/armor_t66_g_i02.png",
+  "Sealed Zubei's Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Sealed Avadon Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Sealed Zubei's Gauntlets Part":
+    "/items-icons/craft/etc_plate_silver_i00.png",
+  "Sealed Avadon Gloves Part": "/items-icons/craft/etc_plate_silver_i00.png",
   "Dark Elven Long Bow":
     "/items-icons/weapon/B/weapon_dark_elven_long_bow_i00.png",
   "Dark Elven Longbow Shaft": "/items-icons/craft/etc_branch_gold_i00.png",
@@ -709,7 +710,7 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/consumable/dyes/etc_str_hena_i02.png",
   "Greater Dye of CON <Con+4 Str-4>":
     "/items-icons/consumable/dyes/etc_con_hena_i02.png",
-  "Scroll: Enchant Weapon (B)":
+  "Scroll: Enchant Weapon (Grade B)":
     "/items-icons/scrolls/B/etc_scroll_of_enchant_weapon_i03.png",
   "Spell Breaker": "/items-icons/weapon/B/weapon_spell_breaker_i00.png",
   "Spell Breaker Head": "/items-icons/craft/etc_squares_gray_i00.png",
@@ -721,9 +722,9 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/consumable/dyes/etc_dex_hena_i02.png",
   "Greater Dye of DEX <Dex+4 Con-4>":
     "/items-icons/consumable/dyes/etc_dex_hena_i02.png",
-  "Scroll: Enchant Armor (B)":
+  "Scroll: Enchant Armor (Grade B)":
     "/items-icons/scrolls/B/etc_scroll_of_enchant_armor_i03.png",
-  "Blessed Scroll: Enchant Armor (B)":
+  "Blessed Scroll: Enchant Armor (Grade B)":
     "/items-icons/scrolls/B/etc_blessed_scrl_of_ench_am_b_i03.png",
   "Greater Dye of MEN <Men+4 Wit-4>":
     "/items-icons/consumable/dyes/etc_men_hena_i02.png",
@@ -764,9 +765,9 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/craft/etc_letter_red_i00.png",
   "Carnage Bow": "/items-icons/weapon/A/weapon_carnium_bow_i00.png",
   "Carnage Bow Stave": "/items-icons/craft/etc_branch_gold_i00.png",
-  "Blessed Scroll: Enchant Armor (A)":
+  "Blessed Scroll: Enchant Armor (Grade A)":
     "/items-icons/scrolls/A/etc_blessed_scrl_of_ench_am_a_i04.png",
-  "Scroll: Enchant Weapon (A)":
+  "Scroll: Enchant Weapon (Grade A)":
     "/items-icons/scrolls/A/etc_scroll_of_enchant_weapon_i04.png",
   "Sealed Dark Crystal Helmet": "/items-icons/armour/A/armor_helmet_i02.png",
   "Sealed Tallum Helmet": "/items-icons/armour/A/armor_helmet_i02.png",
@@ -781,9 +782,9 @@ export const itemIcons: Record<string, string> = {
   "Elemental Sword": "/items-icons/weapon/A/weapon_elemental_sword_i00.png",
   "Tallum Blade Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Elemental Sword Edge": "/items-icons/craft/etc_sword_body_i00.png",
-  "Scroll: Enchant Armor (A)":
+  "Scroll: Enchant Armor (Grade A)":
     "/items-icons/scrolls/A/etc_scroll_of_enchant_armor_i04.png",
-  "Blessed Scroll: Enchant Weapon (A)":
+  "Blessed Scroll: Enchant Weapon (Grade A)":
     "/items-icons/scrolls/A/etc_blessed_scrl_of_ench_wp_a_i04.png",
   "Sealed Dark Crystal Gloves": "/items-icons/armour/A/armor_t74_g_i02.png",
   "Sealed Dark Crystal Boots": "/items-icons/armour/A/armor_t74_b_i02.png",
@@ -841,14 +842,15 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/craft/etc_crystal_ball_green_i00.png",
   "Sealed Phoenix Earring Gemstone": "/items-icons/craft/etc_gem_blue_i00.png",
   "Sealed Phoenix Ring Gemstone": "/items-icons/craft/etc_gem_blue_i00.png",
-  "Boots of Doom": "/items-icons/armour/B/armor_t71_b_i02.png",
-  "Blue Wolf Boots": "/items-icons/armour/B/armor_t68_b_i02.png",
-  "Doom Gloves": "/items-icons/armour/B/armor_t71_g_i02.png",
-  "Blue Wolf Gloves": "/items-icons/armour/B/armor_t68_g_i02.png",
+  "Sealed Boots of Doom": "/items-icons/armour/B/armor_t71_b_i02.png",
+  "Sealed Blue Wolf Boots": "/items-icons/armour/B/armor_t68_b_i02.png",
+  "Sealed Doom Gloves": "/items-icons/armour/B/armor_t71_g_i02.png",
+  "Sealed Blue Wolf Gloves": "/items-icons/armour/B/armor_t68_g_i02.png",
   "Doom Boots Part": "/items-icons/craft/etc_plate_silver_i00.png",
-  "Blue Wolf Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
-  "Doom Gloves Part": "/items-icons/craft/etc_plate_silver_i00.png",
-  "Blue Wolf Gloves Fabric": "/items-icons/craft/etc_leather_gray_i00.png",
+  "Sealed Blue Wolf Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Sealed Doom Gloves Part": "/items-icons/craft/etc_plate_silver_i00.png",
+  "Sealed Blue Wolf Gloves Fabric":
+    "/items-icons/craft/etc_leather_gray_i00.png",
   "Blood Tornado": "/items-icons/weapon/A/weapon_blood_tornado_i00.png",
   "Blood Tornado Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Sealed Dark Crystal Breastplate":
@@ -884,9 +886,9 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/craft/etc_letter_red_i00.png",
   "Dragon Grinder": "/items-icons/weapon/A/weapon_dragon_grinder_i00.png",
   "Dragon Grinder Edge": "/items-icons/craft/etc_sword_body_i00.png",
-  "Blessed Scroll: Enchant Weapon (S)":
+  "Blessed Scroll: Enchant Weapon (Grade S)":
     "/items-icons/scrolls/S/etc_blessed_scrl_of_ench_wp_s_i05.png",
-  "Blessed Scroll: Enchant Armor (S)":
+  "Blessed Scroll: Enchant Armor (Grade S)":
     "/items-icons/scrolls/S/etc_blessed_scrl_of_ench_am_s_i05.png",
   "Sealed Nightmare Robe": "/items-icons/armour/A/armor_t82_ul_i02.png",
   "Sealed Majestic Robe": "/items-icons/armour/A/armor_t85_ul_i02.png",
@@ -894,9 +896,9 @@ export const itemIcons: Record<string, string> = {
   "Sealed Majestic Robe Fabric": "/items-icons/craft/etc_leather_gray_i00.png",
   "Soul Bow": "/items-icons/weapon/A/weapon_soul_bow_i00.png",
   "Soul Bow Stave": "/items-icons/craft/etc_branch_gold_i00.png",
-  "Scroll: Enchant Weapon (S)":
+  "Scroll: Enchant Weapon (Grade S)":
     "/items-icons/scrolls/S/etc_scroll_of_enchant_weapon_i05.png",
-  "Scroll: Enchant Armor (S)":
+  "Scroll: Enchant Armor (Grade S)":
     "/items-icons/scrolls/S/etc_scroll_of_enchant_armor_i05.png",
   "Sealed Majestic Necklace":
     "/items-icons/accessary/A/accessary_inferno_necklace_i02.png",
@@ -967,7 +969,7 @@ export const itemIcons: Record<string, string> = {
   "Forgotten Blade": "/items-icons/weapon/S/weapon_forgotten_blade_i00.png",
   "Heaven's Divider": "/items-icons/weapon/S/weapon_heavens_divider_i00.png",
   "Forgotten Blade Edge": "/items-icons/craft/etc_sword_body_i00.png",
-  "Heaven's Divider Edge": "/items-icons/craft/etc_sword_body_i00.png",
+  "Heavens Divider Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Sealed Major Arcana Robe": "/items-icons/armour/S/armor_t90_ul_i02.png",
   "Sealed Major Arcana Robe Part":
     "/items-icons/craft/etc_plate_silver_i00.png",

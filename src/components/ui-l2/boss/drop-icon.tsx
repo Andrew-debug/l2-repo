@@ -26,18 +26,6 @@ export function gradeForDisplay(item: string): ItemGrade {
   return getItemGrade(item);
 }
 
-// Equipment's grade is shown as an icon badge instead (see gradeForDisplay/
-// GRADE_ICON above). Everything else can still bake a bare grade letter
-// straight into its own name (e.g. "Scroll: Enchant Weapon (D)") — expanded
-// to "(Grade D)" here, wherever an item's name is displayed as text, so it
-// doesn't read as an unexplained abbreviation next to the name.
-export function dropLabel(item: string): string {
-  const category = getItemCategory(item);
-  if (category === "weapon" || category === "armor" || category === "accessory")
-    return item;
-  return item.replace(/\(([SABCD])\)\s*$/, "(Grade $1)");
-}
-
 export function DropIcon({
   item,
   className,

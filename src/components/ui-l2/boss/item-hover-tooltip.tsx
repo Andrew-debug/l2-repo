@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DropIcon, GRADE_ICON, dropLabel, gradeForDisplay } from "./drop-icon";
+import { DropIcon, GRADE_ICON, gradeForDisplay } from "./drop-icon";
 import { WindowBorder } from "../window-l2";
 import { cn } from "@/lib/utils";
 
@@ -35,7 +35,7 @@ export function ItemHoverTooltip({
       <div className="flex items-center gap-1 px-1 text-[13px] whitespace-nowrap text-white border order-window-inner-gray">
         {showIcon && <DropIcon item={item} className="size-6" />}
         <span className="flex items-center gap-0.5">
-          <span>{dropLabel(item)}</span>
+          <span>{item}</span>
           {grade !== "none" && (
             <span className="relative size-3.25 shrink-0 mt-0.5">
               <Image

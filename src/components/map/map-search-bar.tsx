@@ -9,7 +9,6 @@ import { useBossItemFilter } from "@/components/providers/BossItemFilterProvider
 import {
   DropIcon,
   GRADE_ICON,
-  dropLabel,
   gradeForDisplay,
 } from "@/components/ui-l2/boss/drop-icon";
 import { BossStatusSquare } from "@/components/ui-l2/boss/status-square";
@@ -155,7 +154,7 @@ export function MapSearchBar({ onClose }: MapSearchBarProps) {
                 >
                   <DropIcon item={item} className="size-8.5" />
                   <p className="flex min-w-0 flex-1 items-center gap-1 truncate text-[13px] text-white">
-                    <span className="truncate">{dropLabel(item)}</span>
+                    <span className="truncate">{item}</span>
                     {grade !== "none" && (
                       <span className="relative size-3.25 shrink-0">
                         <Image

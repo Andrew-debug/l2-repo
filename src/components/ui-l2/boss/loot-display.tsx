@@ -12,7 +12,7 @@ import { getBossById } from "@/lib/boss-data";
 import { compareDrops } from "@/lib/item-icons";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useDropListPanel } from "@/components/providers/DropListPanelProvider";
-import { DropIcon, GRADE_ICON, dropLabel, gradeForDisplay } from "./drop-icon";
+import { DropIcon, GRADE_ICON, gradeForDisplay } from "./drop-icon";
 import { ItemHoverTooltip } from "./item-hover-tooltip";
 import { usePersistedOffset } from "@/hooks/use-persisted-offset";
 import { usePersistedView } from "@/hooks/use-persisted-view";
@@ -341,7 +341,7 @@ export function BossLootDisplay() {
                           <div className="min-w-0 flex-1">
                             <p className="flex items-center gap-0.5 text-xs">
                               <span className="min-w-0 truncate">
-                                {dropLabel(drop.item)}
+                                {drop.item}
                               </span>
                               {grade !== "none" && (
                                 <span className="relative size-3.25 mt-0.5 shrink-0">
