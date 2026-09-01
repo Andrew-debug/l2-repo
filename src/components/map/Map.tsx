@@ -176,6 +176,7 @@ export default function Map() {
                     hoverIcon="/icons/smallbutton1_over.png"
                     clickIcon="/icons/smallbutton1_down.png"
                     className="w-10 h-4.5 text-[13px]"
+                    sizes="40px"
                     text="Find"
                     onClick={() => setSearchOpen(true)}
                   />
@@ -184,6 +185,7 @@ export default function Map() {
                     hoverIcon="/icons/smallbutton2_over.png"
                     clickIcon="/icons/smallbutton2_down.png"
                     className="w-16 h-4.5 text-[13px]"
+                    sizes="64px"
                     text="World info."
                   />
                 </div>
@@ -204,6 +206,7 @@ export default function Map() {
                   hoverIcon="/icons/smallbutton2_over.png"
                   clickIcon="/icons/smallbutton2_down.png"
                   className={BUTTON_CLASS}
+                  sizes="64px"
                   text="Current Loc."
                 />
                 <IconStateButton
@@ -211,6 +214,7 @@ export default function Map() {
                   hoverIcon="/icons/smallbutton2_over.png"
                   clickIcon="/icons/smallbutton2_down.png"
                   className={BUTTON_CLASS}
+                  sizes="64px"
                   text="Party Member"
                 />
                 <IconStateButton
@@ -218,6 +222,7 @@ export default function Map() {
                   hoverIcon="/icons/smallbutton2_over.png"
                   clickIcon="/icons/smallbutton2_down.png"
                   className={BUTTON_CLASS}
+                  sizes="64px"
                   text="Target Loc."
                 />
                 {isSmall ? (
@@ -226,6 +231,7 @@ export default function Map() {
                     hoverIcon="/icons/smallbutton2_over.png"
                     clickIcon="/icons/smallbutton2_down.png"
                     className={BUTTON_CLASS}
+                    sizes="64px"
                     text="Enlarge map"
                     onClick={() => setMapSize("large")}
                   />
@@ -235,6 +241,7 @@ export default function Map() {
                     hoverIcon="/icons/smallbutton2_over.png"
                     clickIcon="/icons/smallbutton2_down.png"
                     className={BUTTON_CLASS}
+                    sizes="64px"
                     text="Minimize"
                     onClick={() => setMapSize("small")}
                   />

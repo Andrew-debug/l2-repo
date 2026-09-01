@@ -188,7 +188,8 @@ export function Background() {
                 src={`/bosses/epic/${name}/${name}.webp`}
                 alt={name}
                 fill
-                className="object-cover"
+                sizes="12.5vw"
+                className="aspect-square object-cover"
                 style={{ objectPosition: `${x}% center` }}
                 priority
               />

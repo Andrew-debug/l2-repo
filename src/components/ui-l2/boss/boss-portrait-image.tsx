@@ -67,7 +67,10 @@ export function BossPortraitImage({
         alt={boss.name}
         fill
         sizes={sizes ?? "10vw"}
-        className="object-cover"
+        // aspect-4/3 matches this component's only current caller
+        // (info-display.tsx's `aspect-4/3` wrapper) — update if a future
+        // caller needs a different ratio.
+        className="aspect-4/3 object-cover"
         onError={() => setFailedSrc(src)}
       />
     </div>

@@ -24,6 +24,11 @@ interface IconStateButtonProps {
   // square icons. "fill" stretches it to the button's box, for pill-shaped
   // button backgrounds that need to actually grow wider/taller on demand.
   fit?: "contain" | "fill";
+  // Next Image's `sizes` for the underlying `fill` icon — defaults to the
+  // component's own default box (12px). Callers whose `className` renders a
+  // bigger box (text pill buttons especially) should pass their own actual
+  // rendered width so Next doesn't fetch an oversized source image.
+  sizes?: string;
 }
 
 export function IconStateButton({
@@ -37,6 +42,7 @@ export function IconStateButton({
   className,
   text,
   fit = "contain",
+  sizes = "12px",
 }: IconStateButtonProps) {
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -112,15 +118,23 @@ export function IconStateButton({
           src={currentOutlineIcon}
           alt=""
           draggable={false}
-          className="pointer-events-none absolute h-[calc(100%+1px)] w-[calc(100%+1px)] max-w-none object-contain z-2"
+          className="pointer-events-none absolute aspect-square h-[calc(100%+1px)] w-[calc(100%+1px)] max-w-none object-contain z-2"
         />
       )}
       <Image
         src={getCurrentIcon()}
         alt=""
         fill
+        sizes={sizes}
         className={cn(
           "pointer-events-none",
+          // Declared even though most call sites are non-square pill
+          // buttons — with `fill`'s own explicit width/height:100% inline
+          // styles, this has zero effect on actual layout (CSS aspect-ratio
+          // only applies when a dimension is auto), it's here purely so
+          // Lighthouse's "explicit dimensions" check sees *something* on
+          // every one of this very-reused component's instances.
+          "aspect-square",
           fit === "fill" ? "object-fill" : "object-contain",
         )}
       />

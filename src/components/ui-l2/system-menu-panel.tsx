@@ -33,6 +33,7 @@ const MenuRow = ({
         hoverIcon={hoverIcon}
         clickIcon={clickIcon}
         className="size-8 select-none"
+        sizes="32px"
         onClick={onClick}
       />
       {text}

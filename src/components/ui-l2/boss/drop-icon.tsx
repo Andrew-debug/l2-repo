@@ -47,7 +47,7 @@ export function DropIcon({
           alt={item}
           fill
           sizes="36px"
-          className="object-contain p-0.5"
+          className="aspect-square object-contain p-0.5"
         />
       ) : (
         <Sword className="size-4 text-white/15" />

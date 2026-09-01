@@ -29,7 +29,11 @@ function HeaderContent({
           fill
           src="/icons/FrameBackMid.png"
           alt=""
-          className="object-fill z-0"
+          // Shared across every window's title bar (widths from ~220px to
+          // 320px) — sized to the widest, a harmless overestimate for
+          // narrower windows on these tiny chrome PNGs.
+          sizes="320px"
+          className="aspect-square object-fill z-0"
         />
       </div>
       <Image width={13} height={16} src="/icons/FrameBackRight.png" alt="" />

@@ -42,6 +42,7 @@ export default function UpcomingSpawns() {
     testAlertSound,
     isAlertButtonVisible,
     setIsAlertButtonVisible,
+    hideSetTimePrompt,
     hasCustomRange,
   } = useBossRespawn();
   const { requestFocusRespawnTime } = useOptionsPanel();
@@ -181,7 +182,8 @@ export default function UpcomingSpawns() {
                     src="/icons/onscrmsg_pattern01_1.png"
                     alt=""
                     fill
-                    className="object-contain"
+                    sizes="320px"
+                    className="aspect-square object-contain"
                   />
                 </div>
                 <IconStateButton
@@ -189,13 +191,15 @@ export default function UpcomingSpawns() {
                   hoverIcon="/icons/smallbutton2_over.png"
                   clickIcon="/icons/smallbutton2_down.png"
                   className="h-4.5 w-16 text-[13px]"
+                  sizes="64px"
                   text={
                     <span>
                       Alert:{" "}
                       <span
-                        className={
-                          soundEnabled ? "text-[#7ed957]" : "text-[#c25c5c]"
-                        }
+                        className={cn(
+                          "ml-px",
+                          soundEnabled ? "text-[#7ed957]" : "text-[#c25c5c]",
+                        )}
                       >
                         {soundEnabled ? "on" : "off"}
                       </span>
@@ -211,13 +215,14 @@ export default function UpcomingSpawns() {
                     src="/icons/onscrmsg_pattern01_2.png"
                     alt=""
                     fill
-                    className="object-contain"
+                    sizes="320px"
+                    className="aspect-square object-contain"
                   />
                 </div>
               </div>
             )}
 
-            {!hasCustomRange && (
+            {!hasCustomRange && !hideSetTimePrompt && (
               <div className="title-banner-frame flex items-center justify-between gap-2 px-2.5 py-1.5">
                 <span className="text-[13px] text-system-text">
                   Boss respawn timer is not set
@@ -227,6 +232,7 @@ export default function UpcomingSpawns() {
                   hoverIcon="/icons/smallbutton2_over.png"
                   clickIcon="/icons/smallbutton2_down.png"
                   className="h-4.5 w-16 shrink-0 text-[13px]"
+                  sizes="64px"
                   text="Set Time"
                   onClick={requestFocusRespawnTime}
                 />
@@ -367,7 +373,8 @@ export default function UpcomingSpawns() {
                             defaultIcon="/icons/shortcut_rotate.png"
                             hoverIcon="/icons/shortcut_rotate_over.png"
                             clickIcon="/icons/shortcut_rotate_down.png"
-                            className="w-3.5 3.5"
+                            className="w-3.5 h-3.5"
+                            sizes="14px"
                             onClick={() => markKilled(boss.id)}
                           />
                           {/* Dismiss — stops tracking without re-killing. */}
@@ -375,7 +382,8 @@ export default function UpcomingSpawns() {
                             defaultIcon="/icons/FrameCloseBtn.png"
                             hoverIcon="/icons/frameclosebtn_over.png"
                             clickIcon="/icons/FrameCloseOnBtn.png"
-                            className="w-3.5 3.5"
+                            className="w-3.5 h-3.5"
+                            sizes="14px"
                             onClick={() => markAlive(boss.id)}
                           />
                         </span>

@@ -32,7 +32,7 @@ export function BossStatusSquare({
         alt={hidden ? "hidden" : status}
         fill
         sizes="20px"
-        className="object-contain p-0.5"
+        className="aspect-square object-contain p-0.5"
         style={{ opacity: hidden ? 0.45 : 1 }}
       />
     </div>

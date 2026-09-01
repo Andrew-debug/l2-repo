@@ -42,7 +42,13 @@ export function TabButton({
         disabled ? "cursor-default opacity-60" : "cursor-pointer",
       )}
     >
-      <Image src={src} alt="" fill className="object-fill" />
+      <Image
+        src={src}
+        alt=""
+        fill
+        sizes="80px"
+        className="aspect-square object-fill"
+      />
       <span className="relative text-[13px] text-system-text-dim bottom-0.5">
         {label}
       </span>

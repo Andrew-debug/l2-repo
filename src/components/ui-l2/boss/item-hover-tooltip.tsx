@@ -43,7 +43,7 @@ export function ItemHoverTooltip({
                 alt={grade}
                 fill
                 sizes="13px"
-                className="object-contain"
+                className="aspect-square object-contain"
               />
             </span>
           )}

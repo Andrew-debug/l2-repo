@@ -55,7 +55,13 @@ export function FoldIcon({ icon, label, onUnfold, className }: FoldIconProps) {
           if (!draggedRef.current) onUnfold();
         }}
       >
-        <Image src={icon} alt={label} fill className="object-contain" />
+        <Image
+          src={icon}
+          alt={label}
+          fill
+          sizes="30px"
+          className="aspect-square object-contain"
+        />
       </button>
       {hovered && (
         <div className="pointer-events-none absolute top-full left-0 z-20 bg-window-inner-gray text-[13px] whitespace-nowrap text-white leading-3">

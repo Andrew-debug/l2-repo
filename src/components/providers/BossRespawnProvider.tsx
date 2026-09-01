@@ -28,6 +28,7 @@ const GLOBAL_RANGE_STORAGE_KEY = "l2-boss-respawn-default-range";
 const SOUND_ENABLED_STORAGE_KEY = "l2-boss-respawn-sound";
 const SOUND_VOLUME_STORAGE_KEY = "l2-boss-respawn-sound-volume";
 const ALERT_BUTTON_VISIBLE_STORAGE_KEY = "l2-boss-respawn-alert-button-visible";
+const HIDE_SET_TIME_PROMPT_STORAGE_KEY = "l2-boss-hide-set-time-prompt";
 const HIDDEN_STORAGE_KEY = "l2-boss-hidden";
 // The Options > Audio tab's volume slider is 6 discrete steps (0-5), not a
 // continuous 0-100 range — matches the reference client's own stepped
@@ -134,6 +135,18 @@ function readAlertButtonVisible(): boolean {
   }
 }
 
+// Defaults to off — the "Boss respawn timer is not set" prompt shows by
+// default, same as before this setting existed. The player opts in to
+// hiding it via Options' "Hide 'Set Time'" checkbox.
+function readHideSetTimePrompt(): boolean {
+  try {
+    const raw = window.localStorage.getItem(HIDE_SET_TIME_PROMPT_STORAGE_KEY);
+    return raw == null ? false : raw === "1";
+  } catch {
+    return false;
+  }
+}
+
 // Asks for the native browser notification permission the first time the
 // player turns the alert sound on — piggybacking on that click as the real
 // user gesture the prompt needs to fire at all. Purely cosmetic: nothing in
@@ -211,6 +224,12 @@ interface BossRespawnContextType {
   // it back later from Options' "Notification Button" checkbox.
   isAlertButtonVisible: boolean;
   setIsAlertButtonVisible: (visible: boolean) => void;
+  // Options > Game tab's "Hide 'Set Time'" checkbox — suppresses Up Next's
+  // "Boss respawn timer is not set" prompt (only relevant while
+  // hasCustomRange is false to begin with). Defaults to false, so the
+  // prompt shows unless the player explicitly opts to hide it.
+  hideSetTimePrompt: boolean;
+  setHideSetTimePrompt: (hide: boolean) => void;
   // Bosses dismissed as "not interested" — still tracked/clickable as
   // normal, just rendered dimmed/gray on the map instead of by status.
   isHidden: (bossId: string) => boolean;
@@ -237,6 +256,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
   const [soundEnabled, setSoundEnabledState] = useState(false);
   const [soundVolume, setSoundVolumeState] = useState(DEFAULT_VOLUME_STEP);
   const [isAlertButtonVisible, setIsAlertButtonVisibleState] = useState(true);
+  const [hideSetTimePrompt, setHideSetTimePromptState] = useState(false);
   // Last status seen per boss, purely to detect transitions for
   // notifications — not persisted, and never drives rendering itself.
   const prevStatusRef = useRef<Map<string, RespawnStatus>>(new Map());
@@ -270,6 +290,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     setSoundEnabledState(readSoundEnabled());
     setSoundVolumeState(readSoundVolume());
     setIsAlertButtonVisibleState(readAlertButtonVisible());
+    setHideSetTimePromptState(readHideSetTimePrompt());
   }, []);
 
   // Created once — playing it again later just rewinds and restarts (see
@@ -511,6 +532,18 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  const setHideSetTimePrompt = useCallback((hide: boolean) => {
+    setHideSetTimePromptState(hide);
+    try {
+      window.localStorage.setItem(
+        HIDE_SET_TIME_PROMPT_STORAGE_KEY,
+        hide ? "1" : "0",
+      );
+    } catch {
+      // Non-fatal — see persistRecords.
+    }
+  }, []);
+
   const resetAll = useCallback(() => {
     try {
       window.localStorage.removeItem(RECORDS_STORAGE_KEY);
@@ -518,6 +551,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
       window.localStorage.removeItem(SOUND_ENABLED_STORAGE_KEY);
       window.localStorage.removeItem(SOUND_VOLUME_STORAGE_KEY);
       window.localStorage.removeItem(ALERT_BUTTON_VISIBLE_STORAGE_KEY);
+      window.localStorage.removeItem(HIDE_SET_TIME_PROMPT_STORAGE_KEY);
       window.localStorage.removeItem(HIDDEN_STORAGE_KEY);
     } catch {
       // Non-fatal — see persistRecords.
@@ -537,6 +571,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     setSoundEnabledState(false);
     setSoundVolumeState(DEFAULT_VOLUME_STEP);
     setIsAlertButtonVisibleState(true);
+    setHideSetTimePromptState(false);
     // A reset shouldn't leave a stale unread badge from before it ran.
     unreadCountRef.current = 0;
     if (originalTitleRef.current != null) {
@@ -628,6 +663,8 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
         testAlertSound,
         isAlertButtonVisible,
         setIsAlertButtonVisible,
+        hideSetTimePrompt,
+        setHideSetTimePrompt,
         isHidden,
         hideBoss,
         unhideBoss,

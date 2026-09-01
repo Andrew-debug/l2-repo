@@ -104,10 +104,13 @@ export function MapSearchBar({ onClose }: MapSearchBarProps) {
           hoverIcon="/icons/search_button_over.png"
           clickIcon="/icons/search_button_down.png"
           className="w-2.75 h-3.25 shrink-0"
+          sizes="14px"
           onClick={() => inputRef.current?.focus()}
         />
         <input
           ref={inputRef}
+          id="map-search"
+          name="mapSearch"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => {
@@ -162,7 +165,7 @@ export function MapSearchBar({ onClose }: MapSearchBarProps) {
                           alt={grade}
                           fill
                           sizes="13px"
-                          className="object-contain"
+                          className="aspect-square object-contain"
                         />
                       </span>
                     )}

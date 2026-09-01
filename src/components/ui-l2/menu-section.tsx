@@ -44,6 +44,10 @@ function SideHandle() {
         height={6}
         src="/icons/smallbar1.png"
         alt=""
+        // w-2.5 h-1.5 (10x6px) overrides Tailwind Preflight's
+        // `img { height: auto }`, which would otherwise re-derive height
+        // from the source PNG's native (non-matching) aspect ratio.
+        className="w-2.5 h-1.5"
       />
       <div className="relative w-full flex-1">
         <Image
@@ -51,7 +55,8 @@ function SideHandle() {
           fill
           src="/icons/smallbar2.png"
           alt=""
-          className="object-fill"
+          sizes="10px"
+          className="aspect-square object-fill"
         />
       </div>
       <Image
@@ -60,6 +65,7 @@ function SideHandle() {
         height={6}
         src="/icons/smallbar3.png"
         alt=""
+        className="w-2.5 h-1.5"
       />
     </div>
   );
@@ -327,6 +333,7 @@ export default function MenuSection() {
                   <IconStateButton
                     {...item}
                     className="size-7.5 select-none"
+                    sizes="30px"
                     onClick={
                       key === "hammer"
                         ? () => setIsPanelOpen((v) => !v)

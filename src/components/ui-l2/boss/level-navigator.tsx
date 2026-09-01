@@ -213,12 +213,15 @@ export default function BossLevelNavigator() {
                 src="/icons/siege_back1.png"
                 alt=""
                 fill
-                className="object-fill z-0"
+                sizes="296px"
+                className="aspect-square object-fill z-0"
               />
               <Image
                 fill
                 src="/icons/ssq_lvlback1.png"
-                alt="absolute top-0 left-0"
+                alt=""
+                sizes="296px"
+                className="aspect-square object-fill"
               />
               <TabButton
                 label="All"
@@ -241,10 +244,13 @@ export default function BossLevelNavigator() {
                 hoverIcon="/icons/search_button_over.png"
                 clickIcon="/icons/search_button_down.png"
                 className="w-2.75 h-3.25 shrink-0"
+                sizes="14px"
                 onClick={() => filterInputRef.current?.focus()}
               />
               <input
                 ref={filterInputRef}
+                id="raid-boss-filter"
+                name="raidBossFilter"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Filter by name"

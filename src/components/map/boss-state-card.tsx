@@ -63,6 +63,7 @@ export function BossStateCard({
               hoverIcon="/icons/smallbutton2_over.png"
               clickIcon="/icons/smallbutton2_down.png"
               className="w-16 h-4.5 text-[13px]"
+              sizes="64px"
               text={status === "alive" ? "Mark Killed" : "Mark Alive"}
               onClick={onMarkAction}
             />

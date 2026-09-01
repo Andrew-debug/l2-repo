@@ -41,6 +41,7 @@ export function ConfirmDialog({
                 hoverIcon="/icons/smallbutton2_over.png"
                 clickIcon="/icons/smallbutton2_down.png"
                 className="w-16 h-4.5 text-[13px]"
+                sizes="64px"
                 text="Confirm"
                 onClick={onConfirm}
               />
@@ -49,6 +50,7 @@ export function ConfirmDialog({
                 hoverIcon="/icons/smallbutton2_over.png"
                 clickIcon="/icons/smallbutton2_down.png"
                 className="w-16 h-4.5 text-[13px]"
+                sizes="64px"
                 text="Cancel"
                 onClick={onCancel}
               />

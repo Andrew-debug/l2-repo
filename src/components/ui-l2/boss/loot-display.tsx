@@ -290,7 +290,7 @@ export function BossLootDisplay() {
                                 alt={grade}
                                 fill
                                 sizes="13px"
-                                className="object-contain"
+                                className="aspect-square object-contain"
                               />
                             </span>
                           )}
@@ -350,7 +350,7 @@ export function BossLootDisplay() {
                                     alt={grade}
                                     fill
                                     sizes="13px"
-                                    className="object-contain"
+                                    className="aspect-square object-contain"
                                   />
                                 </span>
                               )}

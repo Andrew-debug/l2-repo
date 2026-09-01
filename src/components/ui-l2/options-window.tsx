@@ -87,7 +87,13 @@ function Dropdown({
       >
         {selected}
         <span className="pointer-events-none absolute right-0.5 size-2.5">
-          <Image src={arrowSrc} alt="" fill className="object-contain" />
+          <Image
+            src={arrowSrc}
+            alt=""
+            fill
+            sizes="10px"
+            className="aspect-square object-contain"
+          />
         </span>
       </button>
       {open && (
@@ -253,6 +259,8 @@ function BossRespawnTimeSelect({
         {selection === CUSTOM_RESPAWN_ID ? (
           <input
             ref={inputRef}
+            id="custom-respawn-time"
+            name="customRespawnTime"
             value={customText}
             onChange={(e) => handleCustomChange(e.target.value)}
             onBlur={() => setShowGuideGlow(false)}
@@ -281,7 +289,13 @@ function BossRespawnTimeSelect({
           onMouseUp={() => setPressed(false)}
           className="absolute right-0.5 size-2.5"
         >
-          <Image src={arrowSrc} alt="" fill className="object-contain" />
+          <Image
+            src={arrowSrc}
+            alt=""
+            fill
+            sizes="10px"
+            className="aspect-square object-contain"
+          />
         </button>
       </div>
       {open && (
@@ -337,7 +351,8 @@ function Checkbox({
           src={checked ? "/icons/CheckBox_checked.png" : "/icons/CheckBox.png"}
           alt=""
           fill
-          className="object-contain"
+          sizes="10px"
+          className="aspect-square object-contain"
         />
       </span>
       <span className="leading-3.5">{label}</span>
@@ -374,7 +389,8 @@ function DisabledCheckbox({
           }
           alt=""
           fill
-          className="object-contain"
+          sizes="10px"
+          className="aspect-square object-contain"
         />
       </span>
       <span className="leading-3.5">{label}</span>
@@ -484,6 +500,12 @@ function Slider({
         width={SLIDER_TRACK_WIDTH}
         height={SLIDER_TRACK_HEIGHT}
         className="pointer-events-none absolute top-1/2 left-0 -translate-y-1/2"
+        // Explicit pixel size, not just the width/height props above —
+        // Tailwind Preflight's `img { height: auto }` would otherwise win
+        // and re-derive height from the source PNG's native aspect ratio
+        // (this is a deliberately non-native-ratio downscale, see comment
+        // above SLIDER_TRACK_WIDTH).
+        style={{ width: SLIDER_TRACK_WIDTH, height: SLIDER_TRACK_HEIGHT }}
       />
       {Array.from({ length: VOLUME_STEPS }).map((_, step) => (
         <Image
@@ -493,7 +515,11 @@ function Slider({
           width={SLIDER_MARK_WIDTH}
           height={SLIDER_MARK_HEIGHT}
           className="pointer-events-none absolute top-1/2 -translate-y-1/2"
-          style={{ left: sliderMarkLeft(step) }}
+          style={{
+            left: sliderMarkLeft(step),
+            width: SLIDER_MARK_WIDTH,
+            height: SLIDER_MARK_HEIGHT,
+          }}
         />
       ))}
       <Image
@@ -502,7 +528,11 @@ function Slider({
         width={SLIDER_CURSOR_WIDTH}
         height={SLIDER_CURSOR_HEIGHT}
         className="pointer-events-none absolute top-1/2 -translate-y-1/2"
-        style={{ left: sliderCursorLeft(value) }}
+        style={{
+          left: sliderCursorLeft(value),
+          width: SLIDER_CURSOR_WIDTH,
+          height: SLIDER_CURSOR_HEIGHT,
+        }}
       />
     </div>
   );
@@ -597,6 +627,8 @@ export function OptionsWindow() {
   const {
     isAlertButtonVisible,
     setIsAlertButtonVisible,
+    hideSetTimePrompt,
+    setHideSetTimePrompt,
     soundEnabled,
     setSoundEnabled,
     soundVolume,
@@ -617,7 +649,6 @@ export function OptionsWindow() {
   // matching every window's actual out-of-the-box look.
   const [transparent, setTransparent] = useState(true);
   const [gameCursor, setGameCursor] = useState(true);
-  const [arrow3d, setArrow3d] = useState(true);
   const [tracking, setTracking] = useState(true);
   const [declineDuels, setDeclineDuels] = useState(false);
   const [hideDropped, setHideDropped] = useState(false);
@@ -631,7 +662,6 @@ export function OptionsWindow() {
     () => ({
       transparent,
       gameCursor,
-      arrow3d,
       enterChat,
       tracking,
       declineDuels,
@@ -641,6 +671,7 @@ export function OptionsWindow() {
       isDimmed,
       isBackgroundInteractive,
       isAlertButtonVisible,
+      hideSetTimePrompt,
       soundEnabled,
       soundVolume,
       globalRange,
@@ -648,7 +679,6 @@ export function OptionsWindow() {
     [
       transparent,
       gameCursor,
-      arrow3d,
       enterChat,
       tracking,
       declineDuels,
@@ -658,6 +688,7 @@ export function OptionsWindow() {
       isDimmed,
       isBackgroundInteractive,
       isAlertButtonVisible,
+      hideSetTimePrompt,
       soundEnabled,
       soundVolume,
       globalRange,
@@ -687,7 +718,6 @@ export function OptionsWindow() {
   const applyDraft = () => {
     setTransparent(draft.transparent);
     setGameCursor(draft.gameCursor);
-    setArrow3d(draft.arrow3d);
     setEnterChat(draft.enterChat);
     setTracking(draft.tracking);
     setDeclineDuels(draft.declineDuels);
@@ -697,6 +727,7 @@ export function OptionsWindow() {
     setIsDimmed(draft.isDimmed);
     setIsBackgroundInteractive(draft.isBackgroundInteractive);
     setIsAlertButtonVisible(draft.isAlertButtonVisible);
+    setHideSetTimePrompt(draft.hideSetTimePrompt);
     setSoundEnabled(draft.soundEnabled);
     setSoundVolume(draft.soundVolume);
     setGlobalRange(draft.globalRange);
@@ -746,7 +777,8 @@ export function OptionsWindow() {
             src="/icons/siege_back1.png"
             alt=""
             fill
-            className="object-fill z-0"
+            sizes="220px"
+            className="aspect-square object-fill z-0"
           />
           <Image
             src="/icons/ssq_back.png"
@@ -771,7 +803,8 @@ export function OptionsWindow() {
             src="/icons/siege_back31.png"
             alt=""
             fill
-            className="object-fill"
+            sizes="220px"
+            className="aspect-square object-fill"
           />
 
           <div className="relative m-1 flex min-h-24 flex-col">
@@ -797,6 +830,7 @@ export function OptionsWindow() {
                       hoverIcon="/icons/smallbutton2_over.png"
                       clickIcon="/icons/smallbutton2_down.png"
                       className="h-4.25 w-16 text-[13px]"
+                      sizes="64px"
                       text="Initialize"
                       // Resets window layout only — dragged positions,
                       // stacking order, and folded state — not boss-tracking
@@ -874,10 +908,14 @@ export function OptionsWindow() {
                     onChange={(v) => updateDraft("gameCursor", v)}
                     label="Game Cursor"
                   />
+                  {/* Repurposed from the reference's inert "3D Arrow" —
+                      unchecked by default (the "Boss respawn timer is not
+                      set" prompt shows, same as before this setting
+                      existed); checking it hides that prompt from Up Next. */}
                   <Checkbox
-                    checked={draft.arrow3d}
-                    onChange={(v) => updateDraft("arrow3d", v)}
-                    label="3D Arrow"
+                    checked={draft.hideSetTimePrompt}
+                    onChange={(v) => updateDraft("hideSetTimePrompt", v)}
+                    label="Hide 'Set Time'"
                   />
                 </div>
 
@@ -977,6 +1015,7 @@ export function OptionsWindow() {
                 hoverIcon="/icons/smallbutton2_over.png"
                 clickIcon="/icons/smallbutton2_down.png"
                 className={FOOTER_BUTTON_CLASS}
+                sizes="72px"
                 text="OK"
                 onClick={handleOk}
               />
@@ -985,6 +1024,7 @@ export function OptionsWindow() {
                 hoverIcon="/icons/smallbutton2_over.png"
                 clickIcon="/icons/smallbutton2_down.png"
                 className={FOOTER_BUTTON_CLASS}
+                sizes="72px"
                 text="Cancel"
                 onClick={handleCancel}
               />
@@ -993,6 +1033,7 @@ export function OptionsWindow() {
                 hoverIcon="/icons/smallbutton2_over.png"
                 clickIcon="/icons/smallbutton2_down.png"
                 className={FOOTER_BUTTON_CLASS}
+                sizes="72px"
                 text="Apply"
                 onClick={handleApply}
               />
