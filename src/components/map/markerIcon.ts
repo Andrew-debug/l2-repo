@@ -12,6 +12,13 @@ export const MARKER_ICON_DEAD_HOVER_SRC =
 export const MARKER_ICON_PENDING_SRC = "/icons/map_raid_pending_i00.png";
 export const MARKER_ICON_PENDING_HOVER_SRC =
   "/icons/map_raid_pending_i00_Over.png";
+// Epic bosses (Queen Ant, Baium, Core, ...) get this distinct "engaged"
+// icon in place of the normal spawning one while alive — dead/pending
+// still fall back to the shared respawn/pending art, since there's no
+// epic-specific artwork for those states.
+export const MARKER_ICON_EPIC_SRC = "/icons/map_raid_engaged_i00.png";
+export const MARKER_ICON_EPIC_HOVER_SRC =
+  "/icons/map_raid_engaged_i00_Over.png";
 
 // The new icon artwork isn't centered quite the same as the old one — a
 // constant screen-pixel nudge so markers line up with their actual map
@@ -27,6 +34,9 @@ export interface IconVariants {
   // "Could be up" — respawn window opened but hasn't been confirmed alive.
   pending: HTMLCanvasElement;
   pendingBright: HTMLCanvasElement;
+  // Epic-boss-only "engaged" icon, used instead of normal/normalBright.
+  epic: HTMLCanvasElement;
+  epicBright: HTMLCanvasElement;
 }
 
 // Renders the icon as-is onto a canvas, for consistent drawing with the
@@ -60,6 +70,8 @@ export function useMarkerIconVariants(): IconVariants | null {
       loadImage(MARKER_ICON_DEAD_HOVER_SRC),
       loadImage(MARKER_ICON_PENDING_SRC),
       loadImage(MARKER_ICON_PENDING_HOVER_SRC),
+      loadImage(MARKER_ICON_EPIC_SRC),
+      loadImage(MARKER_ICON_EPIC_HOVER_SRC),
     ]).then(
       ([
         normalImg,
@@ -68,6 +80,8 @@ export function useMarkerIconVariants(): IconVariants | null {
         deadHoverImg,
         pendingImg,
         pendingHoverImg,
+        epicImg,
+        epicHoverImg,
       ]) => {
         if (cancelled) return;
 
@@ -78,6 +92,8 @@ export function useMarkerIconVariants(): IconVariants | null {
           grayBright: buildIconVariant(deadHoverImg),
           pending: buildIconVariant(pendingImg),
           pendingBright: buildIconVariant(pendingHoverImg),
+          epic: buildIconVariant(epicImg),
+          epicBright: buildIconVariant(epicHoverImg),
         });
       },
     );

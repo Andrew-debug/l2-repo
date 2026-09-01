@@ -15,6 +15,9 @@ export interface MapBoss {
   level: number;
   absoluteX: number;
   absoluteY: number;
+  // True for the 8 world bosses — swaps the alive-state icon for the
+  // "engaged" marker art (see markerIcon.ts) instead of the normal one.
+  isEpic?: boolean;
 }
 
 interface BossMarkerKonvaProps {
@@ -80,9 +83,13 @@ export default function BossMarkerKonva({
         ? highlighted
           ? variants.pendingBright
           : variants.pending
-        : highlighted
-          ? variants.normalBright
-          : variants.normal
+        : boss.isEpic
+          ? highlighted
+            ? variants.epicBright
+            : variants.epic
+          : highlighted
+            ? variants.normalBright
+            : variants.normal
     : null;
 
   return (

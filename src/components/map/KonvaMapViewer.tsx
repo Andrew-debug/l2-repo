@@ -26,6 +26,50 @@ const CLUSTERED_BOSS_IDS = new Set(
   BOSS_CLUSTERS.flatMap((cluster) => cluster.memberBossIds),
 );
 
+// centerBossId markers (e.g. Baium in "toi") only ever render inside their
+// cluster's own render block below, gated on that cluster being expanded —
+// excluded here so they don't also render unconditionally as a plain
+// independent marker.
+const CENTER_BOSS_IDS = new Set(
+  BOSS_CLUSTERS.map((cluster) => cluster.centerBossId).filter(
+    (id): id is string => id != null,
+  ),
+);
+
+// These bosses' map positions sit close enough to the right edge of the
+// map (or otherwise tend to get cut off) that the state card's default
+// growing-right-of-the-marker placement runs off-screen or over the edge —
+// so their card grows to the left of the marker instead. Hand-picked, not
+// derived from actual screen-edge proximity, since that would need to
+// account for pan/zoom too.
+const LEFT_SIDE_CARD_BOSS_IDS = new Set([
+  "29028", // Valakas
+  "25319", // Ember
+  "25429", // Mammon Collector Talos
+  "25349", // Shadow of Halisha (81) (MA)
+  "25339", // Shadow of Halisha (81) (DS)
+  "25346", // Shadow of Halisha (81) (IC)
+  "25342", // Shadow of Halisha (81) (DB)
+  "29047", // Frintezza / Scarlet van Halisha
+  "25290", // Daimon the White-Eyed
+  "25233", // Spirit of Andras, the Betrayer
+  "25282", // Death Lord Shax
+  "25106", // Ghost of the Well Lidia
+  "25286", // Anakim
+  "25283", // Lilith
+  "25266", // Bloody Empress Decarbia
+  "25252", // Palibati Queen Themis
+  "25162", // Giant Marpanak
+  "25244", // Last Lesser Giant Olkuth
+  "25140", // Hekaton Prime
+  "29068", // Antharas
+  "25179", // Guardian of the Statue of Giant Karum
+  "25470", // Last Titan Utenus
+  "25467", // Gorgolos
+  "25475", // Ghost Knight Kabed
+  "25035", // Shilen's Messenger Cabrio
+]);
+
 // Helper function to clamp position within boundaries
 // Ensures the map stays visible without black areas
 const clampPosition = (
@@ -64,6 +108,7 @@ function deriveMapBosses(positions: BossMapPosition[]) {
         level: boss.level,
         absoluteX: pos.absoluteX,
         absoluteY: pos.absoluteY,
+        isEpic: boss.npcType === "EpicBoss",
       };
     })
     .filter((b): b is NonNullable<typeof b> => b !== null);
@@ -143,8 +188,10 @@ export default function KonvaMapViewer({
   // Selecting a boss outside any cluster collapses whatever was open.
   useEffect(() => {
     if (!selectedBossId) return;
-    const owningCluster = BOSS_CLUSTERS.find((c) =>
-      c.memberBossIds.includes(selectedBossId),
+    const owningCluster = BOSS_CLUSTERS.find(
+      (c) =>
+        c.memberBossIds.includes(selectedBossId) ||
+        c.centerBossId === selectedBossId,
     );
     setExpandedClusterId(owningCluster ? owningCluster.id : null);
   }, [selectedBossId]);
@@ -300,11 +347,15 @@ export default function KonvaMapViewer({
   // re-anchoring the card at a fixed offset from the marker — no clamping
   // to the viewport and no side-flipping based on available space, both of
   // which fought this same goal (one held it against the window edge while
-  // panning, the other jumped it between sides mid-animation).
+  // panning, the other jumped it between sides mid-animation). The one
+  // exception is LEFT_SIDE_CARD_BOSS_IDS, a fixed per-boss override (not
+  // computed from position) for bosses whose card would otherwise tend to
+  // run off the right edge.
   useEffect(() => {
     if (!selectedBossId) return;
     const boss = MAP_BOSSES.find((b) => b.id === selectedBossId);
     if (!boss) return;
+    const leftSide = LEFT_SIDE_CARD_BOSS_IDS.has(selectedBossId);
 
     let rafId: number;
     const sync = () => {
@@ -314,7 +365,9 @@ export default function KonvaMapViewer({
           positionRef.current.x + boss.absoluteX * scaleRef.current;
         const markerY =
           positionRef.current.y + boss.absoluteY * scaleRef.current;
-        el.style.transform = `translate(${markerX + OVERLAY_GAP_PX}px, ${markerY - OVERLAY_GAP_PX}px) translateY(-100%)`;
+        el.style.transform = leftSide
+          ? `translate(${markerX - OVERLAY_GAP_PX}px, ${markerY - OVERLAY_GAP_PX}px) translate(-100%, -100%)`
+          : `translate(${markerX + OVERLAY_GAP_PX}px, ${markerY - OVERLAY_GAP_PX}px) translateY(-100%)`;
       }
       rafId = requestAnimationFrame(sync);
     };
@@ -694,23 +747,25 @@ export default function KonvaMapViewer({
 
           {/* Render boss markers */}
           <Group>
-            {MAP_BOSSES.filter((boss) => !CLUSTERED_BOSS_IDS.has(boss.id)).map(
-              (boss) => (
-                <BossMarkerKonva
-                  key={boss.id}
-                  boss={boss}
-                  isSelected={selectedBossId === boss.id}
-                  onSelect={(id) => {
-                    setSelectedBoss(selectedBossId === id ? null : id, "map");
-                    setExpandedClusterId(null);
-                  }}
-                  dimmed={
-                    matchingBossIds ? !matchingBossIds.has(boss.id) : false
-                  }
-                  scale={scale}
-                />
-              ),
-            )}
+            {MAP_BOSSES.filter(
+              (boss) =>
+                !CLUSTERED_BOSS_IDS.has(boss.id) &&
+                !CENTER_BOSS_IDS.has(boss.id),
+            ).map((boss) => (
+              <BossMarkerKonva
+                key={boss.id}
+                boss={boss}
+                isSelected={selectedBossId === boss.id}
+                onSelect={(id) => {
+                  setSelectedBoss(selectedBossId === id ? null : id, "map");
+                  setExpandedClusterId(null);
+                }}
+                dimmed={
+                  matchingBossIds ? !matchingBossIds.has(boss.id) : false
+                }
+                scale={scale}
+              />
+            ))}
 
             {BOSS_CLUSTERS.map((cluster) => {
               const anchor = MAP_BOSSES.find(
@@ -753,25 +808,50 @@ export default function KonvaMapViewer({
                 );
               }
 
+              const isExpanded = expandedClusterId === cluster.id;
+              const centerBoss = cluster.centerBossId
+                ? MAP_BOSSES.find((b) => b.id === cluster.centerBossId)
+                : undefined;
+
               return (
-                <BossClusterMarkerKonva
-                  key={cluster.id}
-                  members={members}
-                  matchingBossIds={matchingBossIds}
-                  anchorX={anchor.absoluteX}
-                  anchorY={anchor.absoluteY}
-                  yOffset={cluster.yOffset}
-                  expanded={expandedClusterId === cluster.id}
-                  onExpand={() => {
-                    setExpandedClusterId(cluster.id);
-                    if (selectedBossId) setSelectedBoss(null, "map");
-                  }}
-                  onMemberSelect={(id) =>
-                    setSelectedBoss(selectedBossId === id ? null : id, "map")
-                  }
-                  selectedBossId={selectedBossId}
-                  scale={scale}
-                />
+                <React.Fragment key={cluster.id}>
+                  <BossClusterMarkerKonva
+                    members={members}
+                    matchingBossIds={matchingBossIds}
+                    anchorX={anchor.absoluteX}
+                    anchorY={anchor.absoluteY}
+                    yOffset={cluster.yOffset}
+                    radius={cluster.radius}
+                    expanded={isExpanded}
+                    onExpand={() => {
+                      setExpandedClusterId(cluster.id);
+                      if (selectedBossId) setSelectedBoss(null, "map");
+                    }}
+                    onMemberSelect={(id) =>
+                      setSelectedBoss(selectedBossId === id ? null : id, "map")
+                    }
+                    selectedBossId={selectedBossId}
+                    scale={scale}
+                  />
+                  {/* Only mounted while expanded — the collapsed state
+                      shows just the cluster's own status icon, never this
+                      boss's, so there's no z-order/occlusion to get wrong. */}
+                  {isExpanded && centerBoss && (
+                    <BossMarkerKonva
+                      boss={centerBoss}
+                      isSelected={selectedBossId === centerBoss.id}
+                      onSelect={(id) =>
+                        setSelectedBoss(selectedBossId === id ? null : id, "map")
+                      }
+                      dimmed={
+                        matchingBossIds
+                          ? !matchingBossIds.has(centerBoss.id)
+                          : false
+                      }
+                      scale={scale}
+                    />
+                  )}
+                </React.Fragment>
               );
             })}
           </Group>
@@ -829,16 +909,10 @@ export default function KonvaMapViewer({
               level={selectedMapBoss.level}
               status={getStatus(selectedMapBoss.id)}
               timerLabel={bossTimerLabel(selectedMapBoss.id)}
-              isHidden={isHidden(selectedMapBoss.id)}
               onMarkAction={() =>
                 getStatus(selectedMapBoss.id) === "alive"
                   ? markKilled(selectedMapBoss.id)
                   : markAlive(selectedMapBoss.id)
-              }
-              onHideAction={() =>
-                isHidden(selectedMapBoss.id)
-                  ? unhideBoss(selectedMapBoss.id)
-                  : hideBoss(selectedMapBoss.id)
               }
             />
           </div>

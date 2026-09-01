@@ -218,6 +218,13 @@ interface DraggableWindowProps {
   // Omit for windows where stacking order doesn't matter or shouldn't
   // persist (alwaysOnTop windows, one-off dialogs).
   id?: string;
+  // For windows that unmount on close (e.g. SystemMenuPanel) instead of
+  // staying mounted and toggling invisible like most others — without this,
+  // remounting just restores whatever stacking position was persisted from
+  // last time, which can still be buried under a window raised since. This
+  // makes mounting behave like a fresh click: jump straight to the front
+  // and bump the persisted order, instead of restoring the old position.
+  raiseOnMount?: boolean;
 }
 
 // Holding the mouse down on a <DragHandle> and moving repositions the whole
@@ -240,6 +247,7 @@ export function DraggableWindow({
   centered,
   alwaysOnTop,
   id,
+  raiseOnMount,
 }: DraggableWindowProps) {
   const [offset, setOffsetState] = useState(initialOffset ?? { x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(0);
@@ -255,6 +263,12 @@ export function DraggableWindow({
   // narrower window than position's guaranteed-visible jump.
   useLayoutEffect(() => {
     if (!id) return;
+    if (raiseOnMount) {
+      topZIndex += 1;
+      setZIndex(topZIndex);
+      bumpStackOrder(id);
+      return;
+    }
     const order = readStackOrder();
     const index = order.indexOf(id);
     // Seed the shared counter above every restored index so the next fresh
@@ -488,7 +502,17 @@ export function DraggableWindow({
   return (
     <div
       ref={elementRef}
-      className={className}
+      // Baseline pointer-events-auto, overridable by the caller's own
+      // conditional pointer-events-none (e.g. `!isOpen && "invisible
+      // pointer-events-none"`) via cn()'s tailwind-merge — every window
+      // needs this explicit value, not just the inherited default, once an
+      // ancestor (MainContentRow) sets pointer-events-none on itself so
+      // clicks over a *closed* window's empty slot fall through to the
+      // epic-boss background art beneath instead of being swallowed by that
+      // ancestor. Without this, setting pointer-events-none up there would
+      // make every window — even open ones — silently unclickable, since
+      // pointer-events inherits.
+      className={cn("pointer-events-auto", className)}
       style={{
         transform:
           offset.x || offset.y

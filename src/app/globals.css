@@ -74,11 +74,23 @@
   --sidebar-ring: oklch(0.75 0.15 85);
 }
 
+/* --color-window-bg lives in its own plain @theme block (not the `inline`
+   one below) on purpose: `inline` tells Tailwind to bake the *resolved
+   literal value* straight into every utility that uses it (`.bg-window-bg
+   { background-color: #00000080 }`), which reads fine at build time but
+   can never be overridden at runtime — including by .opaque-windows below,
+   which needs exactly that. A plain @theme block instead compiles to
+   `background-color: var(--color-window-bg)`, an actual reference, so
+   redefining the variable anywhere in the cascade (e.g. on .opaque-windows)
+   reaches every element using bg-window-bg immediately. */
+@theme {
+  --color-window-bg: rgba(0, 0, 0, 0.5);
+}
+
 @theme inline {
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
   --font-marcellus: var(--font-marcellus), "Marcellus", sans-serif;
   --font-fs-tahoma-8px: var(--font-fs-tahoma-8px), Tahoma, sans-serif;
-  --color-window-bg: rgba(0, 0, 0, 0.5);
   --color-window-inner-gray: rgb(81, 84, 88);
   --color-window-content-border: rgb(37, 44, 52);
   --color-window-content-bg: rgb(19, 23, 27);
@@ -150,6 +162,19 @@
   cursor: auto;
 }
 
+/* Options > Transparent unchecked — every window (WindowBorder's inner
+   panel, via the bg-window-bg utility) reads its chrome background from
+   this one custom property, so overriding it here on <html> reaches all of
+   them at once, same trick as .default-cursor above. Solid, not another
+   translucent value — the whole point is an opaque alternative to the
+   default rgba(0,0,0,0.5).
+   Four candidates under review — exactly one active, the rest commented
+   out. Uncomment a different one (and comment out the active line) to
+   try it; delete the rest once one's picked. */
+.opaque-windows {
+  --color-window-bg: rgb(10, 12, 15);
+}
+
 body {
   /* fs-tahoma-8px.otf: pixel-aligned at 8px (or clean multiples) per its
      own internal font name — a vector trace of the client's bitmap font. */
@@ -179,6 +204,14 @@ body {
     );
 
     border-image-slice: 1;
+  }
+
+  /* Reserves the scrollbar's track width up front, whether or not the
+     content actually overflows — without this, a list sitting right at its
+     threshold visibly grows/shrinks (rows widen, text reflows) every time
+     content crosses that line and the scrollbar pops in or out. */
+  .custom-scrollbar {
+    scrollbar-gutter: stable;
   }
 
   .custom-scrollbar::-webkit-scrollbar {
@@ -339,26 +372,68 @@ body {
       linear-gradient(90deg, rgb(189, 174, 132), rgb(115, 89, 41));
   }
 
-  /* A white wash that fades out over a box — draws the eye back to a modal
-     the player just clicked past, without the instant on/off snap of a
-     plain opacity toggle ("flashbang"). Starts dim on purpose: a peak
-     opacity above ~0.3 reads as a strobe, not a nudge. */
-  @keyframes attention-flash {
-    from {
-      opacity: 0.28;
+  /* Pulsating white glow around the respawn-time input — guides the player
+     to it right after they're sent to Options > Game via the "Set Time"
+     prompt in Up Next (see BossRespawnTimeSelect's showGuideGlow). */
+  @keyframes respawn-input-glow {
+    0%,
+    100% {
+      box-shadow:
+        0 0 4px 1px rgba(255, 255, 255, 0.35),
+        0 0 0 1px rgba(255, 255, 255, 0.5);
     }
-    to {
-      opacity: 0;
+    50% {
+      box-shadow:
+        0 0 10px 3px rgba(255, 255, 255, 0.9),
+        0 0 0 1px rgba(255, 255, 255, 0.95);
     }
   }
 
-  .attention-flash {
-    background-color: white;
-    /* forwards: hold the last keyframe (opacity: 0) once the animation
-       ends, instead of snapping back to the element's base opacity (1,
-       fully opaque) the instant it finishes. Belt-and-suspenders with the
-       onAnimationEnd unmount in respawn-onboarding.tsx, which removes this
-       element from the DOM entirely at the same moment. */
-    animation: attention-flash 700ms ease-out forwards;
+  .respawn-input-glow {
+    animation: respawn-input-glow 1.2s ease-in-out infinite;
+  }
+
+  /* Item-slot styling for the drop list's grid cells: four gold L-shaped
+     corner ticks (each an eight-layer background trick — a 5x1 horizontal
+     segment + a 1x5 vertical segment per corner) over a dark radial-gradient
+     fill, matching the reference client's inventory/loot grid slots. */
+  .drop-slot {
+    border: 1px solid #000;
+    box-shadow:
+      inset 1px 1px 0 rgba(0, 0, 0, 0.85),
+      inset -1px -1px 0 rgba(255, 255, 255, 0.07),
+      0 0 0 1px rgba(129, 116, 80, 0.3);
+    background-image:
+      linear-gradient(#8d7c50, #8d7c50), linear-gradient(#8d7c50, #8d7c50),
+      linear-gradient(#8d7c50, #8d7c50), linear-gradient(#8d7c50, #8d7c50),
+      linear-gradient(#8d7c50, #8d7c50), linear-gradient(#8d7c50, #8d7c50),
+      linear-gradient(#8d7c50, #8d7c50), linear-gradient(#8d7c50, #8d7c50),
+      radial-gradient(130% 130% at 30% 0%, #171c22 0%, #07090b 100%);
+    background-size:
+      5px 2px,
+      2px 5px,
+      5px 1px,
+      1px 5px,
+      5px 1px,
+      1px 5px,
+      5px 1px,
+      1px 5px,
+      100% 100%;
+    /* Each edge-offset pair needs an explicit leading keyword ("left 2px
+       top 2px", not "2px 2px") — the offset-first shorthand form parses
+       fine in some tools but is invalid per the CSS spec, and an invalid
+       value anywhere in this comma list drops the *entire* property back
+       to its 0% 0% default, silently erasing every corner tick at once. */
+    /* background-position:
+      left 2px top 2px,
+      left 2px top 2px,
+      right 2px top 2px,
+      right 2px top 2px,
+      left 2px bottom 2px,
+      left 2px bottom 2px,
+      right 2px bottom 2px,
+      right 2px bottom 2px,
+      center; */
+    background-repeat: no-repeat;
   }
 }

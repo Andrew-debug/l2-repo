@@ -6,6 +6,7 @@
       "title": "Raid Boss",
       "level": 23,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=qICufOhqky4",
       "hp": 40330,
       "isAggressive": false,
       "race": "Humanoids",
@@ -52,6 +53,7 @@
       "title": "Raid Boss",
       "level": 30,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=e5Q6a2b6PZs",
       "hp": 70742,
       "isAggressive": false,
       "race": "Humanoids",
@@ -97,6 +99,7 @@
       "title": "Raid Boss",
       "level": 42,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Dq1FhVYN0TQ",
       "hp": 139295,
       "isAggressive": false,
       "race": "Insects",
@@ -156,6 +159,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Hjo5TXxl0uM",
       "hp": 262380,
       "isAggressive": false,
       "race": "Spirits",
@@ -212,6 +216,7 @@
       "title": "Raid Boss",
       "level": 50,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Bczt8ghkPvc",
       "hp": 213145,
       "isAggressive": false,
       "race": "Undead",
@@ -273,6 +278,7 @@
       "title": "Raid Boss",
       "level": 60,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=xEHc_WQqvuo",
       "hp": 307125,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -330,6 +336,7 @@
       "title": "Raid Boss",
       "level": 25,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=UQGR6ZuRTzk",
       "hp": 86633,
       "isAggressive": false,
       "race": "Fairies",
@@ -374,6 +381,7 @@
       "title": "Raid Boss",
       "level": 34,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=tWC1SqSTI9g",
       "hp": 65792,
       "isAggressive": false,
       "race": "Humanoids",
@@ -413,6 +421,7 @@
       "title": "Raid Boss",
       "level": 34,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=juL09t0AxSs",
       "hp": 87403,
       "isAggressive": false,
       "race": "Humanoids",
@@ -442,6 +451,7 @@
       "title": "Raid Boss",
       "level": 49,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=vChzqIg-rvk",
       "hp": 148076,
       "isAggressive": false,
       "race": "Humanoids",
@@ -506,6 +516,7 @@
       "title": "Raid Boss",
       "level": 53,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=h1YR4DPdItE",
       "hp": 242937,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -574,6 +585,7 @@
       "title": "Raid Boss",
       "level": 58,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=QFEYwiCXehQ",
       "hp": 290050,
       "isAggressive": false,
       "race": "Demons",
@@ -634,6 +646,7 @@
       "title": "Raid Boss",
       "level": 70,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Td_ukIjNG6k",
       "hp": 373386,
       "isAggressive": false,
       "race": "Demons",
@@ -716,6 +729,7 @@
       "title": "Raid Boss",
       "level": 28,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=DDZHfnjpHwM",
       "hp": 48984,
       "isAggressive": false,
       "race": "Demons",
@@ -753,6 +767,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=iiVx3VJ34Zw",
       "hp": 69450,
       "isAggressive": false,
       "race": "Humanoids",
@@ -822,6 +837,7 @@
       "title": "Raid Boss",
       "level": 47,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=de4hPWUqNsk",
       "hp": 134366,
       "isAggressive": false,
       "race": "Undead",
@@ -911,6 +927,7 @@
       "title": "Raid Boss",
       "level": 49,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=4EzlyoKdmCM",
       "hp": 148076,
       "isAggressive": false,
       "race": "Undead",
@@ -995,6 +1012,7 @@
       "title": "Raid Boss",
       "level": 51,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=ZAZ588iFB0Y",
       "hp": 324093,
       "isAggressive": false,
       "race": "Undead",
@@ -1060,6 +1078,7 @@
       "title": "Raid Boss",
       "level": 65,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=UTjujPO2OCk",
       "hp": 344101,
       "isAggressive": false,
       "race": "Demons",
@@ -1103,7 +1122,7 @@
         },
         { "item": "Bloody Orchid", "chance": "3.066%", "count": "1" },
         {
-          "item": "Sealed Dark Crystal breastplate",
+          "item": "Sealed Dark Crystal Breastplate",
           "chance": "2.697%",
           "count": "1"
         },
@@ -1125,6 +1144,7 @@
       "title": "Raid Boss",
       "level": 75,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=gfeR2z2rNJc",
       "hp": 397437,
       "isAggressive": false,
       "race": "Demons",
@@ -1220,6 +1240,7 @@
       "title": "Raid Boss",
       "level": 45,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=nCat-2zAj1I",
       "hp": 121183,
       "isAggressive": false,
       "race": "Beasts",
@@ -1276,6 +1297,7 @@
       "title": "Raid Boss",
       "level": 24,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Cz50F_PKI2Q",
       "hp": 41751,
       "isAggressive": false,
       "race": "Demons",
@@ -1314,6 +1336,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Sahdft_kebQ",
       "hp": 138899,
       "isAggressive": false,
       "race": "Humanoids",
@@ -1353,6 +1376,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=hqIdQq-At_0",
       "hp": 91937,
       "isAggressive": false,
       "race": "Humanoids",
@@ -1435,6 +1459,7 @@
       "title": "Raid Boss",
       "level": 52,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=KwEJmxe1tRk",
       "hp": 233042,
       "isAggressive": false,
       "race": "Humanoids",
@@ -1499,6 +1524,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=cVHu1rrgeQ0",
       "hp": 189660,
       "isAggressive": false,
       "race": "Spirits",
@@ -1562,6 +1588,7 @@
       "title": "Raid Boss",
       "level": 69,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=4u6f8MGV0E4",
       "hp": 368046,
       "isAggressive": false,
       "race": "Demons",
@@ -1620,6 +1647,7 @@
       "title": "Raid Boss",
       "level": 25,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=HcKvaLJmKeM",
       "hp": 43316,
       "isAggressive": false,
       "race": "Animals",
@@ -1652,6 +1680,7 @@
       "title": "Raid Boss",
       "level": 30,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=SGAdUz38x2o",
       "hp": 70742,
       "isAggressive": false,
       "race": "Humanoids",
@@ -1694,6 +1723,7 @@
       "title": "Raid Boss",
       "level": 39,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=tOmWzJCzmzk",
       "hp": 86871,
       "isAggressive": false,
       "race": "Spirits",
@@ -1743,6 +1773,7 @@
       "title": "Raid Boss",
       "level": 44,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=w6PCy_raFoI",
       "hp": 156185,
       "isAggressive": false,
       "race": "Humanoids",
@@ -1800,6 +1831,7 @@
       "title": "Raid Boss",
       "level": 43,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=2co0Au3qhhw",
       "hp": 295134,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -1844,6 +1876,7 @@
       "title": "Raid Boss",
       "level": 59,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=M4Fs6AqaHzU",
       "hp": 215208,
       "isAggressive": false,
       "race": "Animals",
@@ -1916,6 +1949,7 @@
       "title": "Raid Boss",
       "level": 70,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=gaDGLR64Rl8",
       "hp": 373386,
       "isAggressive": false,
       "race": "Humanoids",
@@ -1983,6 +2017,7 @@
       "title": "Raid Boss",
       "level": 29,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=OdK5NAaFeak",
       "hp": 51236,
       "isAggressive": false,
       "race": "Undead",
@@ -2025,6 +2060,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=5Bg_SnI_L7g",
       "hp": 138899,
       "isAggressive": false,
       "race": "Animals",
@@ -2072,6 +2108,7 @@
       "title": "Raid Boss",
       "level": 44,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=MWDFAPWp-gg",
       "hp": 114864,
       "isAggressive": false,
       "race": "Plants",
@@ -2153,6 +2190,7 @@
       "title": "Raid Boss",
       "level": 45,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=YVIlMi8PIXM",
       "hp": 242366,
       "isAggressive": false,
       "race": "Giants",
@@ -2212,6 +2250,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=OYykjvdlMCc",
       "hp": 189660,
       "isAggressive": false,
       "race": "Humanoids",
@@ -2266,6 +2305,7 @@
       "title": "Raid Boss",
       "level": 60,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=-ip_W8WxaFw",
       "hp": 221100,
       "isAggressive": false,
       "race": "Demons",
@@ -2336,6 +2376,7 @@
       "title": "Raid Boss",
       "level": 74,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=9146aVcNXE4",
       "hp": 392896,
       "isAggressive": false,
       "race": "Demons",
@@ -2397,6 +2438,7 @@
       "title": "Raid Boss",
       "level": 30,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=R3a9gKYXhHI",
       "hp": 53690,
       "isAggressive": false,
       "race": "Beasts",
@@ -2434,6 +2476,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=w5ZhKWbiEac",
       "hp": 123885,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -2542,6 +2585,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=4MAHJEEkmmM",
       "hp": 138899,
       "isAggressive": false,
       "race": "Undead",
@@ -2595,6 +2639,7 @@
       "title": "Raid Boss",
       "level": 50,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=oH0uGlEZ2es",
       "hp": 213145,
       "isAggressive": false,
       "race": "Fairies",
@@ -2667,6 +2712,7 @@
       "title": "Raid Boss",
       "level": 56,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=YAD0Wvre3gE",
       "hp": 196307,
       "isAggressive": false,
       "race": "Humanoids",
@@ -2721,6 +2767,7 @@
       "title": "Raid Boss",
       "level": 65,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=jXRa2G9dazA",
       "hp": 688201,
       "isAggressive": false,
       "race": "Beasts",
@@ -2781,6 +2828,7 @@
       "title": "Raid Boss",
       "level": 79,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=J1zKRM0T6Rg",
       "hp": 829807,
       "isAggressive": false,
       "race": "Giants",
@@ -2869,6 +2917,7 @@
       "title": "Raid Boss",
       "level": 24,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Jw-zILVEOGw",
       "hp": 83502,
       "isAggressive": false,
       "race": "Humanoids",
@@ -2905,6 +2954,7 @@
       "title": "Raid Boss",
       "level": 33,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=KCImTD2wNAc",
       "hp": 62398,
       "isAggressive": false,
       "race": "Humanoids",
@@ -2966,6 +3016,7 @@
       "title": "Raid Boss",
       "level": 50,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=x5Uvv23If9Y",
       "hp": 155046,
       "isAggressive": false,
       "race": "Humanoids",
@@ -3028,6 +3079,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=YBV1YPK-vpk",
       "hp": 91937,
       "isAggressive": false,
       "race": "Humanoids",
@@ -3088,6 +3140,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Ksax19X02Ng",
       "hp": 189660,
       "isAggressive": false,
       "race": "Demons",
@@ -3154,6 +3207,7 @@
       "title": "Raid Boss",
       "level": 65,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=3mZhkBnXq0k",
       "hp": 344101,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -3207,6 +3261,7 @@
       "title": "Raid Boss",
       "level": 78,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=3TWQYJtFjZ0",
       "hp": 410601,
       "isAggressive": false,
       "race": "Angels",
@@ -3256,6 +3311,7 @@
       "title": "Raid Boss",
       "level": 21,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=fuH8tAzg_-E",
       "hp": 37886,
       "isAggressive": false,
       "race": "Beasts",
@@ -3295,6 +3351,7 @@
       "title": "Raid Boss",
       "level": 25,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=RJsJD0ginFw",
       "hp": 43316,
       "isAggressive": false,
       "race": "Undead",
@@ -3327,6 +3384,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=8lvk9GAPQKY",
       "hp": 69450,
       "isAggressive": false,
       "race": "Demons",
@@ -3373,6 +3431,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=aQ5CCfHjG6I",
       "hp": 123885,
       "isAggressive": false,
       "race": "Humanoids",
@@ -3427,6 +3486,7 @@
       "title": "Raid Boss",
       "level": 48,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Jpg880KIvu0",
       "hp": 386887,
       "isAggressive": false,
       "race": "Giants",
@@ -3497,6 +3557,7 @@
       "title": "Raid Boss",
       "level": 54,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=2pIXssvI1zg",
       "hp": 182881,
       "isAggressive": false,
       "race": "Spirits",
@@ -3567,6 +3628,7 @@
       "title": "Raid Boss",
       "level": 60,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=5WhwMtMaBXc",
       "hp": 614249,
       "isAggressive": false,
       "race": "Giants",
@@ -3631,6 +3693,7 @@
       "title": "Raid Boss",
       "level": 70,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=_njZQxGzxyg",
       "hp": 746772,
       "isAggressive": false,
       "race": "Dragons",
@@ -3705,6 +3768,7 @@
       "title": "Raid Boss",
       "level": 25,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=GzQf4wElzcM",
       "hp": 56644,
       "isAggressive": false,
       "race": "Undead",
@@ -3740,6 +3804,7 @@
       "title": "Raid Boss",
       "level": 30,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=tVUUZByhMLU",
       "hp": 141484,
       "isAggressive": false,
       "race": "Humanoids",
@@ -3852,6 +3917,7 @@
       "title": "Raid Boss",
       "level": 38,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=7xB8tewa8pU",
       "hp": 82089,
       "isAggressive": false,
       "race": "Humanoids",
@@ -3897,6 +3963,7 @@
       "title": "Raid Boss",
       "level": 45,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=_RnTLUNtSb8",
       "hp": 121183,
       "isAggressive": false,
       "race": "Beasts",
@@ -3949,6 +4016,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=TCksMtiv8Qo",
       "hp": 189660,
       "isAggressive": false,
       "race": "Demons",
@@ -4017,6 +4085,7 @@
       "title": "Raid Boss",
       "level": 60,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=BZ_t8815ob4",
       "hp": 221100,
       "isAggressive": false,
       "race": "Giants",
@@ -4075,6 +4144,7 @@
       "title": "Raid Boss",
       "level": 59,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=22jiohdhsjQ",
       "hp": 215208,
       "isAggressive": false,
       "race": "Demons",
@@ -4139,6 +4209,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=u2tS3OFiJzU",
       "hp": 69450,
       "isAggressive": false,
       "race": "Humanoids",
@@ -4201,6 +4272,7 @@
       "title": "Raid Boss",
       "level": 30,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=3y3OyQFuEKk",
       "hp": 107380,
       "isAggressive": false,
       "race": "Beasts",
@@ -4267,6 +4339,7 @@
       "title": "Raid Boss",
       "level": 34,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=22bBA7K2D4o",
       "hp": 65792,
       "isAggressive": false,
       "race": "Spirits",
@@ -4299,6 +4372,7 @@
       "title": "Raid Boss",
       "level": 43,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=SegNkazLFkc",
       "hp": 108760,
       "isAggressive": false,
       "race": "Humanoids",
@@ -4332,6 +4406,7 @@
       "title": "Raid Boss",
       "level": 70,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=UNstrgTEx2w",
       "hp": 746772,
       "isAggressive": false,
       "race": "Dragons",
@@ -4399,6 +4474,7 @@
       "title": "Raid Boss",
       "level": 72,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=FqpEwjClots",
       "hp": 383460,
       "isAggressive": false,
       "race": "Humanoids",
@@ -4458,6 +4534,7 @@
       "title": "Raid Boss",
       "level": 74,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=--4wamMprRI",
       "hp": 392896,
       "isAggressive": false,
       "race": "Humanoids",
@@ -4528,6 +4605,7 @@
       "title": "Raid Boss",
       "level": 76,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=7weCqqgd5ug",
       "hp": 401887,
       "isAggressive": false,
       "race": "Angels",
@@ -4602,6 +4680,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=qn7QGoDL3GM",
       "hp": 91937,
       "isAggressive": false,
       "race": "Beasts",
@@ -4692,6 +4771,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=O3KtCI27tNY",
       "hp": 91937,
       "isAggressive": false,
       "race": "Giants",
@@ -4739,6 +4819,7 @@
       "title": "Raid Boss",
       "level": 50,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=zOYNb3RFQ_A",
       "hp": 155046,
       "isAggressive": false,
       "race": "Beasts",
@@ -4799,6 +4880,7 @@
       "title": "Raid Boss",
       "level": 73,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=XrU5c1GBfS0",
       "hp": 388245,
       "isAggressive": false,
       "race": "Undead",
@@ -4865,6 +4947,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=24N1zb2IVw4",
       "hp": 69450,
       "isAggressive": false,
       "race": "Demons",
@@ -4941,6 +5024,7 @@
       "title": "Raid Boss",
       "level": 62,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=8wrk4VrQBnA",
       "hp": 322915,
       "isAggressive": false,
       "race": "Humanoids",
@@ -4998,6 +5082,7 @@
       "title": "Raid Boss",
       "level": 75,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=z17xcsTxTT4",
       "hp": 794875,
       "isAggressive": false,
       "race": "Dragons",
@@ -5072,6 +5157,7 @@
       "title": "Raid Boss",
       "level": 57,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=z9MMK8RJM5U",
       "hp": 202794,
       "isAggressive": false,
       "race": "Humanoids",
@@ -5122,6 +5208,7 @@
       "title": "Raid Boss",
       "level": 69,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=vS8Py3nrJAs",
       "hp": 528013,
       "isAggressive": false,
       "race": "Undead",
@@ -5182,6 +5269,7 @@
       "title": "Raid Boss",
       "level": 60,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Xn5Pv04f6TM",
       "hp": 442200,
       "isAggressive": false,
       "race": "Dragons",
@@ -5251,6 +5339,7 @@
       "title": "Raid Boss",
       "level": 72,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=gnHxGoFCcFw",
       "hp": 383460,
       "isAggressive": false,
       "race": "Humanoids",
@@ -5337,6 +5426,7 @@
       "title": "Raid Boss",
       "level": 59,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=FXgplMdARnU",
       "hp": 215208,
       "isAggressive": false,
       "race": "Dragons",
@@ -5402,6 +5492,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=RitxOPyx54g",
       "hp": 262380,
       "isAggressive": false,
       "race": "Humanoids",
@@ -5468,6 +5559,7 @@
       "title": "Raid Boss",
       "level": 75,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=CVUWJVJfoho",
       "hp": 794875,
       "isAggressive": false,
       "race": "Giants",
@@ -5513,6 +5605,7 @@
       "title": "Raid Boss",
       "level": 78,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=y1yftYmCUf8",
       "hp": 410601,
       "isAggressive": false,
       "race": "Giants",
@@ -5558,6 +5651,7 @@
       "title": "Raid Boss",
       "level": 72,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=yQPzn3CnWRI",
       "hp": 766920,
       "isAggressive": false,
       "race": "Demons",
@@ -5622,6 +5716,7 @@
       "title": "Raid Boss",
       "level": 75,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=4azI7-OVnS8",
       "hp": 397437,
       "isAggressive": false,
       "race": "Plants",
@@ -5671,6 +5766,7 @@
       "title": "Raid Boss",
       "level": 70,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=if8T8RpjDQA",
       "hp": 373386,
       "isAggressive": false,
       "race": "Beasts",
@@ -5719,6 +5815,7 @@
       "title": "Raid Boss",
       "level": 65,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=gYY_cf51hKQ",
       "hp": 688201,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -5785,6 +5882,7 @@
       "title": "Raid Boss",
       "level": 60,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=n-idJy-TEcg",
       "hp": 221100,
       "isAggressive": false,
       "race": "Humanoids",
@@ -5855,6 +5953,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=qCcMdwbInvo",
       "hp": 524760,
       "isAggressive": false,
       "race": "Giants",
@@ -5909,6 +6008,7 @@
       "title": "Raid Boss",
       "level": 45,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=dEeoYRFxf6k",
       "hp": 165120,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -6004,6 +6104,7 @@
       "title": "Raid Boss",
       "level": 67,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=n0InWQHCadI",
       "hp": 356634,
       "isAggressive": false,
       "race": "Beasts",
@@ -6072,6 +6173,7 @@
       "title": "Raid Boss",
       "level": 75,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Em3GlAASk2I",
       "hp": 397437,
       "isAggressive": false,
       "race": "Demons",
@@ -6117,6 +6219,7 @@
       "title": "Raid Boss",
       "level": 70,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=8iJKRubIuHU",
       "hp": 373386,
       "isAggressive": false,
       "race": "Giants",
@@ -6181,6 +6284,7 @@
       "title": "Raid Boss",
       "level": 28,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=ot6JxPxdYjo",
       "hp": 97968,
       "isAggressive": false,
       "race": "Humanoids",
@@ -6222,6 +6326,7 @@
       "title": "Raid Boss",
       "level": 50,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=4GIgY7gDtCo",
       "hp": 213145,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -6282,6 +6387,7 @@
       "title": "Raid Boss",
       "level": 75,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Ur5SH8IiGMI",
       "hp": 794875,
       "isAggressive": false,
       "race": "Undead",
@@ -6349,6 +6455,7 @@
       "title": "Raid Boss",
       "level": 50,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=ZHlOwkFFLzY",
       "hp": 213145,
       "isAggressive": false,
       "race": "Demons",
@@ -6413,6 +6520,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=DZUrJF_oHWU",
       "hp": 524760,
       "isAggressive": false,
       "race": "Angels",
@@ -6467,6 +6575,7 @@
       "title": "Raid Boss",
       "level": 70,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=XrDyzboPXWE",
       "hp": 746772,
       "isAggressive": false,
       "race": "Demons",
@@ -6540,6 +6649,7 @@
       "title": "Raid Boss",
       "level": 75,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=1IYYml0di_I",
       "hp": 794875,
       "isAggressive": false,
       "race": "Undead",
@@ -6654,6 +6764,7 @@
       "title": "Raid Boss",
       "level": 80,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=TyWNSONQfd8",
       "hp": 688717,
       "isAggressive": false,
       "race": "Demons",
@@ -6696,6 +6807,7 @@
       "title": "Raid Boss",
       "level": 80,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=TyWNSONQfd8",
       "hp": 688717,
       "isAggressive": false,
       "race": "Angels",
@@ -6755,6 +6867,7 @@
       "title": "Raid Boss",
       "level": 78,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=fOz4PNVD90Y",
       "hp": 977229,
       "isAggressive": false,
       "race": "Construct",
@@ -6805,6 +6918,7 @@
       "title": "Raid Boss",
       "level": 78,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=5krfoIgrf_k",
       "hp": 977229,
       "isAggressive": false,
       "race": "Fairies",
@@ -6867,6 +6981,7 @@
       "title": "Raid Boss",
       "level": 74,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=83MA2tpxv40",
       "hp": 392896,
       "isAggressive": false,
       "race": "Giants",
@@ -6928,6 +7043,7 @@
       "title": "Raid Boss",
       "level": 80,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=KubNRIlQznc",
       "hp": 714778,
       "isAggressive": false,
       "race": "Humanoids",
@@ -6971,6 +7087,7 @@
       "title": "Raid Boss",
       "level": 84,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=ohbX-cMlU88",
       "hp": 325022,
       "isAggressive": false,
       "race": "Humanoids",
@@ -7005,6 +7122,7 @@
       "title": "Raid Boss",
       "level": 87,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=imMjhzBqLIY",
       "hp": 689061,
       "isAggressive": false,
       "race": "Animals",
@@ -7070,6 +7188,7 @@
       "title": "Raid Boss",
       "level": 87,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=BCfasrLGFWg",
       "hp": 240490,
       "isAggressive": false,
       "race": "Spirits",
@@ -7161,6 +7280,7 @@
       "title": "Raid Boss",
       "level": 80,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=tFcffLec2xE",
       "hp": 714778,
       "isAggressive": false,
       "race": "Humanoids",
@@ -7213,6 +7333,7 @@
       "title": "Raid Boss",
       "level": 84,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=KbW0nRUG_fc",
       "hp": 325022,
       "isAggressive": false,
       "race": "Humanoids",
@@ -7278,6 +7399,7 @@
       "title": "Raid Boss",
       "level": 87,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=xHOb1t3egM0",
       "hp": 689061,
       "isAggressive": false,
       "race": "Humanoids",
@@ -7365,6 +7487,7 @@
       "title": "Raid Boss",
       "level": 87,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=rFqq-0SfOOY",
       "hp": 534922,
       "isAggressive": false,
       "race": "Spirits",
@@ -7405,6 +7528,7 @@
       "title": "Raid Boss",
       "level": 85,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=o8Tj9BcOATQ",
       "hp": 462603,
       "isAggressive": false,
       "race": "Dragons",
@@ -7513,6 +7637,7 @@
       "title": "Raid Boss",
       "level": 66,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=pLblpx1H_aY",
       "hp": 350517,
       "isAggressive": false,
       "race": "Demons",
@@ -7574,6 +7699,7 @@
       "title": "Raid Boss",
       "level": 70,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=iEO4OjWzrFw",
       "hp": 373386,
       "isAggressive": false,
       "race": "Angels",
@@ -7655,6 +7781,7 @@
       "title": "Raid Boss",
       "level": 71,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=2dJzd6qGc1g",
       "hp": 378516,
       "isAggressive": false,
       "race": "Demons",
@@ -8241,6 +8368,7 @@
       "title": "Raid Boss",
       "level": 30,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=TGjvdtT3i0k",
       "hp": 53690,
       "isAggressive": false,
       "race": "Beasts",
@@ -8297,6 +8425,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=lSFjt57mZsc",
       "hp": 69450,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -8364,6 +8493,7 @@
       "title": "Raid Boss",
       "level": 21,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=F8oiUSHoH8s",
       "hp": 37886,
       "isAggressive": false,
       "race": "Humanoids",
@@ -8400,6 +8530,7 @@
       "title": "Raid Boss",
       "level": 26,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Jf4L3u7T2DE",
       "hp": 45036,
       "isAggressive": false,
       "race": "Insects",
@@ -8433,6 +8564,7 @@
       "title": "Raid Boss",
       "level": 23,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=BcHYY6jTFNg",
       "hp": 40330,
       "isAggressive": false,
       "race": "Humanoids",
@@ -8484,6 +8616,7 @@
       "title": "Raid Boss",
       "level": 26,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=rMm4d-6-gxI",
       "hp": 90072,
       "isAggressive": false,
       "race": "Humanoids",
@@ -8511,6 +8644,7 @@
       "title": "Raid Boss",
       "level": 23,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=KY2dx9_Ya0o",
       "hp": 40330,
       "isAggressive": false,
       "race": "Humanoids",
@@ -8548,6 +8682,7 @@
       "title": "Raid Boss",
       "level": 25,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=HuFLeEn4qP8",
       "hp": 43316,
       "isAggressive": false,
       "race": "Undead",
@@ -8588,6 +8723,7 @@
       "title": "Raid Boss",
       "level": 20,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=X7NB13IcKXw",
       "hp": 73694,
       "isAggressive": false,
       "features": {
@@ -8627,6 +8763,7 @@
       "title": "Raid Boss",
       "level": 21,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=fDsmeYRK7aY",
       "hp": 37886,
       "isAggressive": false,
       "race": "Demons",
@@ -8663,6 +8800,7 @@
       "title": "Raid Boss",
       "level": 20,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=QJWQ61y36dM",
       "hp": 36847,
       "isAggressive": false,
       "race": "Undead",
@@ -8702,6 +8840,7 @@
       "title": "Raid Boss",
       "level": 20,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=4jsKEA01-II",
       "hp": 36847,
       "isAggressive": false,
       "features": {
@@ -8738,6 +8877,7 @@
       "title": "Raid Boss",
       "level": 21,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=XoEgrtNYcnw",
       "hp": 37886,
       "isAggressive": false,
       "race": "Demons",
@@ -8774,6 +8914,7 @@
       "title": "Raid Boss",
       "level": 34,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Pd_Y541J4gY",
       "hp": 65792,
       "isAggressive": false,
       "race": "Undead",
@@ -8822,6 +8963,7 @@
       "title": "Raid Boss",
       "level": 36,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=TbeaygtkwSw",
       "hp": 73381,
       "isAggressive": false,
       "race": "Demons",
@@ -8883,6 +9025,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=ZBq1RFC_QXk",
       "hp": 69450,
       "isAggressive": false,
       "race": "Humanoids",
@@ -8914,6 +9057,7 @@
       "title": "Raid Boss",
       "level": 33,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=uxEqsuiGlUc",
       "hp": 124796,
       "isAggressive": false,
       "race": "Humanoids",
@@ -9037,6 +9181,7 @@
       "title": "Raid Boss",
       "level": 38,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=abr_tKYeTC4",
       "hp": 164178,
       "isAggressive": false,
       "race": "Giants",
@@ -9078,6 +9223,7 @@
       "title": "Raid Boss",
       "level": 45,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=6Wny6TErZpg",
       "hp": 121183,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -9164,6 +9310,7 @@
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=AwfAz303rj0",
       "hp": 69450,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -9199,6 +9346,7 @@
       "title": "Raid Boss",
       "level": 32,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=n5ccdZ2eoqM",
       "hp": 59258,
       "isAggressive": false,
       "race": "Humanoids",
@@ -9234,6 +9382,7 @@
       "title": "Raid Boss",
       "level": 33,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=9l0Uost4rh0",
       "hp": 62398,
       "isAggressive": false,
       "race": "Undead",
@@ -9284,6 +9433,7 @@
       "title": "Raid Boss",
       "level": 60,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=CG3qFGBi_Eg",
       "hp": 221100,
       "isAggressive": false,
       "race": "Undead",
@@ -9355,6 +9505,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=FpalnCFYkZA",
       "hp": 91937,
       "isAggressive": false,
       "race": "Humanoids",
@@ -9469,6 +9620,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=2BU2CQd10wg",
       "hp": 91937,
       "isAggressive": false,
       "race": "Dragons",
@@ -9506,6 +9658,7 @@
       "title": "Raid Boss",
       "level": 44,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=F1aI3SaRGMM",
       "hp": 114864,
       "isAggressive": false,
       "race": "Undead",
@@ -9595,6 +9748,7 @@
       "title": "Raid Boss",
       "level": 48,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=YFGWqVSYMug",
       "hp": 141171,
       "isAggressive": false,
       "race": "Insects",
@@ -9645,6 +9799,7 @@
       "title": "Raid Boss",
       "level": 61,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=mfMKm2748KE",
       "hp": 226767,
       "isAggressive": false,
       "race": "Fairies",
@@ -9711,6 +9866,7 @@
       "title": "Raid Boss",
       "level": 25,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=fuZijo0cIjo",
       "hp": 43316,
       "isAggressive": false,
       "race": "Humanoids",
@@ -9738,6 +9894,7 @@
       "title": "Raid Boss",
       "level": 25,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=PDuTzZFWr10",
       "hp": 43316,
       "isAggressive": false,
       "race": "Demons",
@@ -9784,6 +9941,7 @@
       "title": "Raid Boss",
       "level": 44,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=uGmG5HfCbmk",
       "hp": 114864,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -9890,6 +10048,7 @@
       "title": "Raid Boss",
       "level": 45,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=tiPFHFWHl-0",
       "hp": 242366,
       "isAggressive": false,
       "race": "Humanoids",
@@ -9938,6 +10097,7 @@
       "title": "Raid Boss",
       "level": 44,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=yByQ5PlNL9A",
       "hp": 114864,
       "isAggressive": false,
       "race": "Humanoids",
@@ -9986,6 +10146,7 @@
       "title": "Raid Boss",
       "level": 45,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=tgleiWh9_hQ",
       "hp": 121183,
       "isAggressive": false,
       "race": "Dragons",
@@ -10046,6 +10207,7 @@
       "title": "Raid Boss",
       "level": 65,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=pQl1U6GKgRA",
       "hp": 247116,
       "isAggressive": false,
       "race": "Undead",
@@ -10092,7 +10254,7 @@
         },
         { "item": "Carnage Bow", "chance": "1.749%", "count": "1" },
         {
-          "item": "Sealed Dark Crystal breastplate",
+          "item": "Sealed Dark Crystal Breastplate",
           "chance": "1.538%",
           "count": "1"
         },
@@ -10114,6 +10276,7 @@
       "title": "Raid Boss",
       "level": 71,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=1Yxk3JWvPKk",
       "hp": 271409,
       "isAggressive": false,
       "race": "Demons",
@@ -10182,6 +10345,7 @@
       "title": "Raid Boss",
       "level": 79,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=OZ7l8NbpPRE",
       "hp": 414903,
       "isAggressive": false,
       "race": "Angels",
@@ -10287,6 +10451,7 @@
       "title": "Raid Boss",
       "level": 70,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=ji1UDVHP1OE",
       "hp": 373386,
       "isAggressive": false,
       "race": "Dragons",
@@ -10349,6 +10514,7 @@
       "title": "Raid Boss",
       "level": 49,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=3CyJAqamlVI",
       "hp": 148076,
       "isAggressive": false,
       "race": "Fairies",
@@ -10402,6 +10568,7 @@
       "title": "Raid Boss",
       "level": 51,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=LWynxd9sjs8",
       "hp": 162046,
       "isAggressive": false,
       "race": "Undead",
@@ -10473,6 +10640,7 @@
       "title": "Raid Boss",
       "level": 56,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=ZHWl7JzUX4s",
       "hp": 196307,
       "isAggressive": false,
       "race": "Beasts",
@@ -10521,6 +10689,7 @@
       "title": "Raid Boss",
       "level": 64,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=JjkWbbG1oDw",
       "hp": 242375,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -10589,6 +10758,7 @@
       "title": "Raid Boss",
       "level": 66,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=AfIOE-f-uGs",
       "hp": 251638,
       "isAggressive": false,
       "race": "Giants",
@@ -10662,6 +10832,7 @@
       "title": "Raid Boss",
       "level": 52,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=GvHUzayxRec",
       "hp": 169042,
       "isAggressive": false,
       "race": "Humanoids",
@@ -10725,6 +10896,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=DKCcyNMLI6s",
       "hp": 189660,
       "isAggressive": false,
       "race": "Undead",
@@ -10795,6 +10967,7 @@
       "title": "Raid Boss",
       "level": 65,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=3o0g29DKYlg",
       "hp": 247116,
       "isAggressive": false,
       "race": "Beasts",
@@ -10845,6 +11018,7 @@
       "title": "Raid Boss",
       "level": 53,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Qz0qSmIxhKU",
       "hp": 175998,
       "isAggressive": false,
       "race": "Demons",
@@ -10905,6 +11079,7 @@
       "title": "Raid Boss",
       "level": 50,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=fFP4-FsCs7Y",
       "hp": 155046,
       "isAggressive": false,
       "race": "Undead",
@@ -10972,6 +11147,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=3ORrqkVFVWc",
       "hp": 91937,
       "isAggressive": false,
       "race": "Fairies",
@@ -11080,6 +11256,7 @@
       "title": "Raid Boss",
       "level": 40,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=u6vjPltPedw",
       "hp": 91937,
       "isAggressive": false,
       "race": "Beasts",
@@ -11121,6 +11298,7 @@
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=erlcjpXWcLk",
       "hp": 189660,
       "isAggressive": false,
       "race": "Spirits",
@@ -11189,6 +11367,7 @@
       "title": "Raid Boss",
       "level": 52,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=w0T04dB-dUs",
       "hp": 169042,
       "isAggressive": false,
       "race": "Insects",
@@ -11250,6 +11429,7 @@
       "title": "Raid Boss",
       "level": 45,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=-yvTh-IAy70",
       "hp": 121183,
       "isAggressive": false,
       "race": "Humanoids",
@@ -11312,6 +11492,7 @@
       "title": "Raid Boss",
       "level": 30,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=jXiRx3_UgrQ",
       "hp": 53690,
       "isAggressive": false,
       "race": "Humanoids",
@@ -11374,6 +11555,7 @@
       "title": "Raid Boss",
       "level": 39,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=YLN1x3CZBsw",
       "hp": 86871,
       "isAggressive": false,
       "race": "Undead",
@@ -11475,6 +11657,7 @@
       "title": "Raid Boss",
       "level": 37,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Me6rR9JLty0",
       "hp": 77593,
       "isAggressive": true,
       "race": "Humanoids",
@@ -11520,6 +11703,7 @@
       "title": "Raid Boss",
       "level": 53,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=DDNsRpB4UPQ",
       "hp": 175998,
       "isAggressive": false,
       "race": "Humanoids",
@@ -11654,6 +11838,7 @@
       "title": "Raid Boss",
       "level": 80,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=5HR1z2laetM",
       "hp": 300327,
       "isAggressive": false,
       "race": "Humanoids",
@@ -11726,6 +11911,7 @@
       "title": "Raid Boss",
       "level": 73,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=Om7Ksg2QD8I",
       "hp": 776490,
       "isAggressive": false,
       "race": "Construct",
@@ -11750,6 +11936,7 @@
       "title": "Raid Boss",
       "level": 76,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=2SLyVFbcHcg",
       "hp": 401887,
       "isAggressive": false,
       "race": "Magical creatures",
@@ -11807,6 +11994,7 @@
       "title": "Raid Boss",
       "level": 86,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=WctZkO4PliM",
       "hp": 675863,
       "isAggressive": false,
       "race": "Humanoids",
@@ -12120,6 +12308,7 @@
       "title": "Knight of Destruction",
       "level": 87,
       "npcType": "RaidBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=L2vbsLmoN_g",
       "hp": 961781,
       "isAggressive": false,
       "race": "Demons",
@@ -12196,6 +12385,2153 @@
           "item": "Blessed Scroll: Enchant Weapon (S)",
           "chance": "0.4124%",
           "count": "1"
+        }
+      ]
+    },
+    {
+      "id": 29001,
+      "name": "Queen Ant",
+      "title": "Epic Boss",
+      "level": 40,
+      "npcType": "EpicBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=T-uy86crHU4",
+      "hp": 229898,
+      "isAggressive": true,
+      "race": "Insects",
+      "description": "Queen Ant - an Epic Boss: ruler of the Ant Nest and vastly more powerful than an ordinary raid boss, requiring a well-organized raid party to bring down. By nature, it is a level 40 bug and attacks on sight. Its lair is The Ant Nest, Wasteland. Defeating an Epic Boss like her earns significant clan reputation and yields some of the finest equipment available at this level.",
+      "features": {
+        "mp": 667,
+        "exp": 2179536,
+        "sp": 140740
+      },
+      "drops": [
+        {
+          "item": "Claymore",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Bonebreaker",
+          "chance": "5.5%",
+          "count": "1"
+        },
+        {
+          "item": "Ghost Staff",
+          "chance": "5.5%",
+          "count": "1"
+        },
+        {
+          "item": "Staff of Life",
+          "chance": "5.5%",
+          "count": "1"
+        },
+        {
+          "item": "Mithril Dagger",
+          "chance": "5.5%",
+          "count": "1"
+        },
+        {
+          "item": "Scallop Jamadhr",
+          "chance": "5%",
+          "count": "1"
+        },
+        {
+          "item": "Light Crossbow",
+          "chance": "5.5%",
+          "count": "1"
+        },
+        {
+          "item": "Glaive",
+          "chance": "5.5%",
+          "count": "1"
+        },
+        {
+          "item": "Half Plate Armor",
+          "chance": "37.5%",
+          "count": "1–2"
+        },
+        {
+          "item": "Plate Gaiters",
+          "chance": "37.5%",
+          "count": "1–2"
+        },
+        {
+          "item": "Salamander Skin Mail",
+          "chance": "42.5%",
+          "count": "1–2"
+        },
+        {
+          "item": "Sage's Rag",
+          "chance": "42.5%",
+          "count": "1–2"
+        },
+        {
+          "item": "Ogre Power Gauntlets",
+          "chance": "20%",
+          "count": "1–3"
+        },
+        {
+          "item": "Square Shield",
+          "chance": "20%",
+          "count": "1–3"
+        },
+        {
+          "item": "Omen Beast's Eye Earring",
+          "chance": "35%",
+          "count": "1–2"
+        },
+        {
+          "item": "Mithril Ring",
+          "chance": "35%",
+          "count": "1–2"
+        },
+        {
+          "item": "Necklace of Darkness",
+          "chance": "30%",
+          "count": "1–2"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (D)",
+          "chance": "20%",
+          "count": "1–3"
+        },
+        {
+          "item": "Assault Boots",
+          "chance": "20%",
+          "count": "1–3"
+        },
+        {
+          "item": "Plate Helmet",
+          "chance": "20%",
+          "count": "1–3"
+        },
+        {
+          "item": "Elven Long Sword",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Ring of Queen Ant",
+          "chance": "30%",
+          "count": "1"
+        }
+      ]
+    },
+    {
+      "id": 29014,
+      "name": "Orfen",
+      "title": "Epic Boss",
+      "level": 50,
+      "npcType": "EpicBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=2ljAOxDcxX4",
+      "hp": 622493,
+      "isAggressive": true,
+      "race": "Fairies",
+      "description": "Orfen - an Epic Boss: a serpentine fairy queen dwelling in the Sea of Spores, vastly more powerful than an ordinary raid boss and requiring a well-organized raid party to bring down. By nature, it is a level 50 fairy and attacks on sight. Its lair is the Sea of Spores. Defeating an Epic Boss like her earns significant clan reputation and yields some of the finest equipment available at this level.",
+      "features": {
+        "mp": 3793,
+        "exp": 2041407,
+        "sp": 153786
+      },
+      "drops": [
+        {
+          "item": "Composite Armor",
+          "chance": "10%",
+          "count": "1"
+        },
+        {
+          "item": "Composite Boots",
+          "chance": "10%",
+          "count": "1–2"
+        },
+        {
+          "item": "Sword of Delusion",
+          "chance": "4.2%",
+          "count": "1"
+        },
+        {
+          "item": "Tower Shield",
+          "chance": "10%",
+          "count": "1–2"
+        },
+        {
+          "item": "Sword of Whispering Death",
+          "chance": "3.5%",
+          "count": "1"
+        },
+        {
+          "item": "War Axe",
+          "chance": "4.2%",
+          "count": "1"
+        },
+        {
+          "item": "Pa'agrian Hammer",
+          "chance": "3.5%",
+          "count": "1"
+        },
+        {
+          "item": "Club of Nature",
+          "chance": "3.5%",
+          "count": "1"
+        },
+        {
+          "item": "Grace Dagger",
+          "chance": "4.2%",
+          "count": "1"
+        },
+        {
+          "item": "Fisted Blade",
+          "chance": "3.5%",
+          "count": "1"
+        },
+        {
+          "item": "Akat Long Bow",
+          "chance": "4.2%",
+          "count": "1"
+        },
+        {
+          "item": "Widow Maker",
+          "chance": "4.2%",
+          "count": "1"
+        },
+        {
+          "item": "Theca Leather Armor",
+          "chance": "10%",
+          "count": "1"
+        },
+        {
+          "item": "Theca Leather Gaiters",
+          "chance": "10%",
+          "count": "1"
+        },
+        {
+          "item": "Demon's Tunic",
+          "chance": "10%",
+          "count": "1"
+        },
+        {
+          "item": "Demon's Stockings",
+          "chance": "10%",
+          "count": "1"
+        },
+        {
+          "item": "Composite Helmet",
+          "chance": "10%",
+          "count": "1–2"
+        },
+        {
+          "item": "Mithril Gauntlets",
+          "chance": "10%",
+          "count": "1–2"
+        },
+        {
+          "item": "Earring of Binding",
+          "chance": "35%",
+          "count": "1–2"
+        },
+        {
+          "item": "Ring of Ages",
+          "chance": "35%",
+          "count": "1–2"
+        },
+        {
+          "item": "Necklace of Mermaid",
+          "chance": "30%",
+          "count": "1–2"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (C)",
+          "chance": "10%",
+          "count": "1–2"
+        },
+        {
+          "item": "Earring of Orfen",
+          "chance": "30%",
+          "count": "1"
+        },
+        {
+          "item": "High-Grade Life Stone: level 49",
+          "chance": "10%",
+          "count": "4"
+        },
+        {
+          "item": "High-Grade Life Stone: level 52",
+          "chance": "40%",
+          "count": "2–4"
+        },
+        {
+          "item": "Top-Grade Life Stone: level 52",
+          "chance": "20%",
+          "count": "1–2"
+        }
+      ]
+    },
+    {
+      "id": 29022,
+      "name": "Zaken",
+      "title": "Epic Boss",
+      "level": 60,
+      "npcType": "EpicBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=XQ4lOvsnWeo",
+      "hp": 858518,
+      "isAggressive": true,
+      "race": "Undead",
+      "description": "Zaken - an Epic Boss: an undead pirate captain haunting Devil's Isle, vastly more powerful than an ordinary raid boss and requiring a well-organized raid party to bring down. By nature, it is a level 60 undead and attacks on sight. Its lair is Devil's Isle. Defeating an Epic Boss like him earns significant clan reputation and yields some of the finest equipment available at this level.",
+      "features": {
+        "mp": 399600,
+        "exp": 4879746,
+        "sp": 423589
+      },
+      "drops": [
+        {
+          "item": "Great Sword",
+          "chance": "1%",
+          "count": "1"
+        },
+        {
+          "item": "Heavy War Axe",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Sprite's Staff",
+          "chance": "1.3%",
+          "count": "1"
+        },
+        {
+          "item": "Samurai Longsword",
+          "chance": "4.8%",
+          "count": "1"
+        },
+        {
+          "item": "Keshanberk",
+          "chance": "0.8%",
+          "count": "1"
+        },
+        {
+          "item": "Sword of Valhalla",
+          "chance": "0.8%",
+          "count": "1"
+        },
+        {
+          "item": "Deadman's Staff",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Ghoul's Staff",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Demon's Staff",
+          "chance": "1.5%",
+          "count": "1"
+        },
+        {
+          "item": "Crystal Dagger",
+          "chance": "4.8%",
+          "count": "1"
+        },
+        {
+          "item": "Kris",
+          "chance": "0.8%",
+          "count": "1"
+        },
+        {
+          "item": "Hell Knife",
+          "chance": "0.8%",
+          "count": "1"
+        },
+        {
+          "item": "Great Pata",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Arthro Nail",
+          "chance": "1%",
+          "count": "1"
+        },
+        {
+          "item": "Dark Elven Long Bow",
+          "chance": "1.3%",
+          "count": "1"
+        },
+        {
+          "item": "Eminence Bow",
+          "chance": "3.9%",
+          "count": "1"
+        },
+        {
+          "item": "Orcish Poleaxe",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Great Axe",
+          "chance": "1%",
+          "count": "1"
+        },
+        {
+          "item": "Zubei's Breastplate",
+          "chance": "5%",
+          "count": "1"
+        },
+        {
+          "item": "Zubei's Gaiters",
+          "chance": "5%",
+          "count": "1"
+        },
+        {
+          "item": "Zubei's Helmet",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Zubei's Boots",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Avadon Boots",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Zubei's Gauntlets",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Zubei's Shield",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Avadon Shield",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (B)",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Avadon Breastplate",
+          "chance": "5%",
+          "count": "1"
+        },
+        {
+          "item": "Avadon Gaiters",
+          "chance": "5%",
+          "count": "1"
+        },
+        {
+          "item": "Zubei's Leather Shirt",
+          "chance": "5%",
+          "count": "1"
+        },
+        {
+          "item": "Zubei's Leather Gaiters",
+          "chance": "5%",
+          "count": "1"
+        },
+        {
+          "item": "Avadon Leather Armor",
+          "chance": "10%",
+          "count": "1"
+        },
+        {
+          "item": "Tunic of Zubei",
+          "chance": "5%",
+          "count": "1"
+        },
+        {
+          "item": "Stockings of Zubei",
+          "chance": "5%",
+          "count": "1"
+        },
+        {
+          "item": "Avadon Robe",
+          "chance": "10%",
+          "count": "1"
+        },
+        {
+          "item": "Avadon Circlet",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Avadon Gloves",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Yaksa Mace",
+          "chance": "3.6%",
+          "count": "1"
+        },
+        {
+          "item": "Berserker Blade",
+          "chance": "3%",
+          "count": "1"
+        },
+        {
+          "item": "Earring of Zaken",
+          "chance": "100%",
+          "count": "1"
+        },
+        {
+          "item": "High-Grade Life Stone: level 58",
+          "chance": "32%",
+          "count": "3–4"
+        },
+        {
+          "item": "High-Grade Life Stone: level 61",
+          "chance": "44%",
+          "count": "2–3"
+        },
+        {
+          "item": "Top-Grade Life Stone: level 58",
+          "chance": "8%",
+          "count": "2"
+        },
+        {
+          "item": "Top-Grade Life Stone: level 61",
+          "chance": "8%",
+          "count": "1–2"
+        },
+        {
+          "item": "Pirate Hat",
+          "chance": "8%",
+          "count": "1"
+        }
+      ]
+    },
+    {
+      "id": 29020,
+      "name": "Baium",
+      "title": "Epic Boss",
+      "level": 75,
+      "npcType": "EpicBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=de0-r4S5Lno",
+      "hp": 4068372,
+      "isAggressive": true,
+      "race": "Undead",
+      "description": "Baium - an Epic Boss: an ancient dragon knight bound in undeath, sealed away in a chamber beneath the Ivory Tower and vastly more powerful than an ordinary raid boss, requiring a well-organized raid party to bring down. By nature, it is a level 75 undead and attacks on sight. Its lair lies beneath the Ivory Tower. Defeating an Epic Boss like him earns significant clan reputation and yields some of the finest equipment available at this level.",
+      "features": {
+        "mp": 39960,
+        "exp": 10253400,
+        "sp": 1081544
+      },
+      "drops": [
+        {
+          "item": "Tallum Blade",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Halberd",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Elemental Sword",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Dasparion's Staff",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Bloody Orchid",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Blood Tornado",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Carnage Bow",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Meteor Shower",
+          "chance": "6%",
+          "count": "1"
+        },
+        {
+          "item": "Forgotten Blade",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Basalt Battlehammer",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Imperial Staff",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Angel Slayer",
+          "chance": "0.9%",
+          "count": "1"
+        },
+        {
+          "item": "Dragon Hunter Axe",
+          "chance": "0.9%",
+          "count": "1"
+        },
+        {
+          "item": "Saint Spear",
+          "chance": "0.9%",
+          "count": "1"
+        },
+        {
+          "item": "Demon Splinter",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Heaven's Divider",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Arcana Mace",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Tallum Blade*Dark Legion's Edge",
+          "chance": "0.9%",
+          "count": "1"
+        },
+        {
+          "item": "Ring of Baium",
+          "chance": "100%",
+          "count": "1"
+        },
+        {
+          "item": "Draconic Bow",
+          "chance": "1.2%",
+          "count": "1"
+        },
+        {
+          "item": "Ancient Book - Divine Inspiration (Manuscript)",
+          "chance": "80%",
+          "count": "5–15"
+        },
+        {
+          "item": "High-Grade Life Stone: level 70",
+          "chance": "40%",
+          "count": "1–2"
+        },
+        {
+          "item": "High-Grade Life Stone: level 76",
+          "chance": "35.5%",
+          "count": "1–2"
+        },
+        {
+          "item": "Top-Grade Life Stone: level 70",
+          "chance": "4.8387%",
+          "count": "1"
+        },
+        {
+          "item": "Top-Grade Life Stone: level 76",
+          "chance": "1.6129%",
+          "count": "1"
+        }
+      ]
+    },
+    {
+      "id": 29028,
+      "name": "Valakas",
+      "title": "Epic Boss",
+      "level": 85,
+      "npcType": "EpicBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=SXHtxW-s7iI",
+      "hp": 17850000,
+      "isAggressive": true,
+      "race": "Dragons",
+      "description": "Valakas - an Epic Boss: the Fire Dragon King, a colossal ancient dragon sealed away in the Wasteland and vastly more powerful than an ordinary raid boss, requiring a well-organized raid party to bring down. By nature, it is a level 85 dragon and attacks on sight. Its lair lies within the Wasteland. Defeating an Epic Boss like him earns significant clan reputation and yields some of the finest equipment available at this level.",
+      "features": {
+        "mp": 3996000,
+        "exp": 284286180,
+        "sp": 27215400
+      },
+      "drops": [
+        {
+          "item": "Tallum Blade",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Dragon Slayer",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Halberd",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Elemental Sword",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Sword of Miracles",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Elysian",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Dasparion's Staff",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Branch of The Mother Tree",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Bloody Orchid",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Soul Separator",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Blood Tornado",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Dragon Grinder",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Carnage Bow",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Soul Bow",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Tallum Glaive",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (A)",
+          "chance": "100%",
+          "count": "1–19"
+        },
+        {
+          "item": "Blessed Scroll of Escape",
+          "chance": "100%",
+          "count": "1–59"
+        },
+        {
+          "item": "Dark Legion's Edge",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Meteor Shower",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Blessed Scroll of Resurrection",
+          "chance": "100%",
+          "count": "1–39"
+        },
+        {
+          "item": "Sealed Dark Crystal Breastplate",
+          "chance": "50%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Gaiters",
+          "chance": "35%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Helmet",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Gloves",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Boots",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Shield",
+          "chance": "40%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Plate Armor",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Helmet",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Gloves",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Boots",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Leather Armor",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Leggings",
+          "chance": "35%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Leather Armor",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Tunic",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Stockings",
+          "chance": "30%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Robe",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Armor of Nightmare",
+          "chance": "35%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Helm of Nightmare",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Gauntlets of Nightmare",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Boots of Nightmare",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Shield of Nightmare",
+          "chance": "40%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Plate Armor",
+          "chance": "8%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Circlet",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Gauntlets",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Boots",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Leather Armor of Nightmare",
+          "chance": "35%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Leather Armor",
+          "chance": "8%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Nightmare Robe",
+          "chance": "30%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Robe",
+          "chance": "9%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Phoenix Necklace",
+          "chance": "30%",
+          "count": "1–5"
+        },
+        {
+          "item": "Sealed Phoenix Earring",
+          "chance": "35%",
+          "count": "1–5"
+        },
+        {
+          "item": "Sealed Phoenix Ring",
+          "chance": "35%",
+          "count": "1–5"
+        },
+        {
+          "item": "Sealed Majestic Necklace",
+          "chance": "30%",
+          "count": "1–5"
+        },
+        {
+          "item": "Sealed Majestic Earring",
+          "chance": "35%",
+          "count": "1–5"
+        },
+        {
+          "item": "Sealed Majestic Ring",
+          "chance": "35%",
+          "count": "1–5"
+        },
+        {
+          "item": "Forgotten Blade",
+          "chance": "17%",
+          "count": "1"
+        },
+        {
+          "item": "Basalt Battlehammer",
+          "chance": "17%",
+          "count": "1"
+        },
+        {
+          "item": "Imperial Staff",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Angel Slayer",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Dragon Hunter Axe",
+          "chance": "17%",
+          "count": "1"
+        },
+        {
+          "item": "Saint Spear",
+          "chance": "17%",
+          "count": "1"
+        },
+        {
+          "item": "Demon Splinter",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Heaven's Divider",
+          "chance": "16%",
+          "count": "1"
+        },
+        {
+          "item": "Arcana Mace",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Tallum Blade*Dark Legion's Edge",
+          "chance": "16%",
+          "count": "1"
+        },
+        {
+          "item": "Necklace of Valakas",
+          "chance": "100%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Breastplate",
+          "chance": "15%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Gaiters",
+          "chance": "15%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Gauntlet",
+          "chance": "34%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Boots",
+          "chance": "34%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Shield",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Helmet",
+          "chance": "34%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Armor",
+          "chance": "35%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Glove",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Boots",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Helmet",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Robe",
+          "chance": "35%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Glove",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Boots",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Circlet",
+          "chance": "35%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Earring",
+          "chance": "35%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Ring",
+          "chance": "35%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Necklace",
+          "chance": "30%",
+          "count": "1"
+        },
+        {
+          "item": "Draconic Bow",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Ancient Book - Divine Inspiration (Manuscript)",
+          "chance": "100%",
+          "count": "12–19"
+        }
+      ]
+    },
+    {
+      "id": 29068,
+      "name": "Antharas",
+      "title": "Epic Boss",
+      "level": 79,
+      "npcType": "EpicBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=tQlUStT2YOM",
+      "hp": 17850000,
+      "isAggressive": true,
+      "race": "Dragons",
+      "description": "Antharas - an Epic Boss: the Earth Dragon King, a colossal ancient dragon sealed away within Antharas' Lair and vastly more powerful than an ordinary raid boss, requiring a well-organized raid party to bring down. By nature, it is a level 79 dragon and attacks on sight. Its lair lies northeast of Giran Castle. Defeating an Epic Boss like him earns significant clan reputation and yields some of the finest equipment available at this level.",
+      "features": {
+        "mp": 3996000,
+        "exp": 446624670,
+        "sp": 49497740
+      },
+      "drops": [
+        {
+          "item": "Tallum Blade",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Dragon Slayer",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Halberd",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Elemental Sword",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Sword of Miracles",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Elysian",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Dasparion's Staff",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Branch of The Mother Tree",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Bloody Orchid",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Soul Separator",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Blood Tornado",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Dragon Grinder",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Carnage Bow",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Soul Bow",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Tallum Glaive",
+          "chance": "20%",
+          "count": "1–2"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (A)",
+          "chance": "100%",
+          "count": "1–19"
+        },
+        {
+          "item": "Blessed Scroll of Escape",
+          "chance": "100%",
+          "count": "1–59"
+        },
+        {
+          "item": "Dark Legion's Edge",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Meteor Shower",
+          "chance": "25%",
+          "count": "1–2"
+        },
+        {
+          "item": "Blessed Scroll of Resurrection",
+          "chance": "100%",
+          "count": "1–39"
+        },
+        {
+          "item": "Sealed Dark Crystal Breastplate",
+          "chance": "50%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Gaiters",
+          "chance": "35%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Helmet",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Gloves",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Boots",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Shield",
+          "chance": "40%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Plate Armor",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Helmet",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Gloves",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Boots",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Leather Armor",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Leggings",
+          "chance": "35%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Leather Armor",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Tunic",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Tallum Stockings",
+          "chance": "30%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Dark Crystal Robe",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Armor of Nightmare",
+          "chance": "35%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Helm of Nightmare",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Gauntlets of Nightmare",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Boots of Nightmare",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Shield of Nightmare",
+          "chance": "40%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Plate Armor",
+          "chance": "8%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Circlet",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Gauntlets",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Boots",
+          "chance": "25%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Leather Armor of Nightmare",
+          "chance": "35%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Leather Armor",
+          "chance": "8%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Nightmare Robe",
+          "chance": "30%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Majestic Robe",
+          "chance": "9%",
+          "count": "1–3"
+        },
+        {
+          "item": "Sealed Phoenix Necklace",
+          "chance": "30%",
+          "count": "1–5"
+        },
+        {
+          "item": "Sealed Phoenix Earring",
+          "chance": "35%",
+          "count": "1–5"
+        },
+        {
+          "item": "Sealed Phoenix Ring",
+          "chance": "35%",
+          "count": "1–5"
+        },
+        {
+          "item": "Sealed Majestic Ring",
+          "chance": "35%",
+          "count": "1–5"
+        },
+        {
+          "item": "Forgotten Blade",
+          "chance": "17%",
+          "count": "1"
+        },
+        {
+          "item": "Basalt Battlehammer",
+          "chance": "17%",
+          "count": "1"
+        },
+        {
+          "item": "Imperial Staff",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Angel Slayer",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Dragon Hunter Axe",
+          "chance": "17%",
+          "count": "1"
+        },
+        {
+          "item": "Saint Spear",
+          "chance": "17%",
+          "count": "1"
+        },
+        {
+          "item": "Demon Splinter",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Heaven's Divider",
+          "chance": "16%",
+          "count": "1"
+        },
+        {
+          "item": "Arcana Mace",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Tallum Blade*Dark Legion's Edge",
+          "chance": "16%",
+          "count": "1"
+        },
+        {
+          "item": "Earring of Antharas",
+          "chance": "100%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Breastplate",
+          "chance": "15%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Gaiters",
+          "chance": "15%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Gauntlet",
+          "chance": "34%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Boots",
+          "chance": "34%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Shield",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Helmet",
+          "chance": "34%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Armor",
+          "chance": "35%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Glove",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Boots",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Helmet",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Robe",
+          "chance": "35%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Glove",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Boots",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Circlet",
+          "chance": "33%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Earring",
+          "chance": "35%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Ring",
+          "chance": "35%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Necklace",
+          "chance": "30%",
+          "count": "1"
+        },
+        {
+          "item": "Draconic Bow",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Ancient Book - Divine Inspiration (Manuscript)",
+          "chance": "100%",
+          "count": "12–29"
+        },
+        {
+          "item": "High-Grade Life Stone: level 70",
+          "chance": "16.6666%",
+          "count": "2–4"
+        },
+        {
+          "item": "High-Grade Life Stone: level 76",
+          "chance": "54%",
+          "count": "3–4"
+        }
+      ]
+    },
+    {
+      "id": 29006,
+      "name": "Core",
+      "title": "Epic Boss",
+      "level": 50,
+      "npcType": "EpicBoss",
+      "routeVideoUrl": "https://www.youtube.com/watch?v=--gCGsBkRHw",
+      "hp": 622493,
+      "isAggressive": true,
+      "race": "Construct",
+      "description": "Core - an Epic Boss: an ancient magical construct dwelling within Cruma Tower, vastly more powerful than an ordinary raid boss and requiring a well-organized raid party to bring down. By nature, it is a level 50 construct and attacks on sight. Its lair lies within Cruma Tower, Cruma Marshlands. Defeating an Epic Boss like it earns significant clan reputation and yields some of the finest equipment available at this level.",
+      "features": {
+        "mp": 3793,
+        "exp": 2041407,
+        "sp": 153786
+      },
+      "drops": [
+        {
+          "item": "Composite Armor",
+          "chance": "12%",
+          "count": "1"
+        },
+        {
+          "item": "Caliburs",
+          "chance": "4.8%",
+          "count": "1"
+        },
+        {
+          "item": "Homunkulus's Sword",
+          "chance": "4%",
+          "count": "1"
+        },
+        {
+          "item": "Composite Shield",
+          "chance": "14%",
+          "count": "1"
+        },
+        {
+          "item": "War Axe",
+          "chance": "4.8%",
+          "count": "1"
+        },
+        {
+          "item": "Nirvana Axe",
+          "chance": "4%",
+          "count": "1"
+        },
+        {
+          "item": "Sage's Staff",
+          "chance": "4%",
+          "count": "1"
+        },
+        {
+          "item": "Dark Screamer",
+          "chance": "4.8%",
+          "count": "1"
+        },
+        {
+          "item": "Fisted Blade",
+          "chance": "4%",
+          "count": "1"
+        },
+        {
+          "item": "Akat Long Bow",
+          "chance": "4.8%",
+          "count": "1"
+        },
+        {
+          "item": "Scorpion",
+          "chance": "4.8%",
+          "count": "1"
+        },
+        {
+          "item": "Theca Leather Armor",
+          "chance": "12%",
+          "count": "1"
+        },
+        {
+          "item": "Theca Leather Gaiters",
+          "chance": "12%",
+          "count": "1"
+        },
+        {
+          "item": "Demon's Tunic",
+          "chance": "12%",
+          "count": "1"
+        },
+        {
+          "item": "Demon's Stockings",
+          "chance": "12%",
+          "count": "1"
+        },
+        {
+          "item": "Composite Helmet",
+          "chance": "14%",
+          "count": "1"
+        },
+        {
+          "item": "Scroll: Enchant Weapon (Grade C)",
+          "chance": "14%",
+          "count": "1"
+        },
+        {
+          "item": "Demon's Boots",
+          "chance": "14%",
+          "count": "1"
+        },
+        {
+          "item": "Demon's Gloves",
+          "chance": "14%",
+          "count": "1"
+        },
+        {
+          "item": "Ring of Core",
+          "chance": "30%",
+          "count": "1"
+        },
+        {
+          "item": "High-Grade Life Stone: level 49",
+          "chance": "20%",
+          "count": "3–4"
+        },
+        {
+          "item": "High-Grade Life Stone: level 52",
+          "chance": "50%",
+          "count": "3"
+        },
+        {
+          "item": "Top-Grade Life Stone: level 49",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Top-Grade Life Stone: level 52",
+          "chance": "33.3333%",
+          "count": "1"
+        }
+      ]
+    },
+    {
+      "id": 29047,
+      "name": "Frintezza",
+      "title": "Epic Boss (Scarlet van Halisha)",
+      "synonyms": ["Scarlet van Halisha"],
+      "level": 85,
+      "npcType": "EpicBoss",
+      "hp": 2748900,
+      "isAggressive": true,
+      "race": "Demons",
+      "description": "Frintezza - an Epic Boss: a legendary vampire sealed within the Imperial Tomb, vastly more powerful than an ordinary raid boss and requiring a well-organized raid party to bring down. Frintezza never fights directly — instead she sends her servant Scarlet van Halisha into the arena to battle intruders in her place, which is the boss most players actually see and fight. By nature, it is a level 85 demon and attacks on sight. Its lair lies within the Imperial Tomb. Defeating an Epic Boss like her earns significant clan reputation and yields some of the finest equipment available at this level.",
+      "features": {
+        "mp": 46620,
+        "exp": 111550350,
+        "sp": 9525390
+      },
+      "drops": [
+        {
+          "item": "Tallum Blade",
+          "chance": "8.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Dragon Slayer",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Halberd",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Elemental Sword",
+          "chance": "16.6667%",
+          "count": "1"
+        },
+        {
+          "item": "Sword of Miracles",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Elysian",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Dasparion's Staff",
+          "chance": "6.25%",
+          "count": "1"
+        },
+        {
+          "item": "Branch of The Mother Tree",
+          "chance": "6.25%",
+          "count": "1"
+        },
+        {
+          "item": "Bloody Orchid",
+          "chance": "6.25%",
+          "count": "1"
+        },
+        {
+          "item": "Soul Separator",
+          "chance": "2.1276%",
+          "count": "1"
+        },
+        {
+          "item": "Blood Tornado",
+          "chance": "6.25%",
+          "count": "1"
+        },
+        {
+          "item": "Dragon Grinder",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Carnage Bow",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Soul Bow",
+          "chance": "8.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Tallum Glaive",
+          "chance": "2.1276%",
+          "count": "1"
+        },
+        {
+          "item": "Blessed Scroll of Escape",
+          "chance": "100%",
+          "count": "1–30"
+        },
+        {
+          "item": "Dark Legion's Edge",
+          "chance": "6.25%",
+          "count": "1"
+        },
+        {
+          "item": "Meteor Shower",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Blessed Scroll of Resurrection",
+          "chance": "100%",
+          "count": "1–10"
+        },
+        {
+          "item": "Sealed Dark Crystal Breastplate",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Dark Crystal Gaiters",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Dark Crystal Helmet",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Dark Crystal Gloves",
+          "chance": "8.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Dark Crystal Boots",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Dark Crystal Shield",
+          "chance": "25%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tallum Plate Armor",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tallum Helmet",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tallum Gloves",
+          "chance": "8.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tallum Boots",
+          "chance": "8.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Dark Crystal Leather Armor",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Dark Crystal Leggings",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tallum Leather Armor",
+          "chance": "6.25%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tallum Tunic",
+          "chance": "33.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tallum Stockings",
+          "chance": "25%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Dark Crystal Robe",
+          "chance": "16.6667%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Armor of Nightmare",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Helm of Nightmare",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Gauntlets of Nightmare",
+          "chance": "8.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Boots of Nightmare",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Shield of Nightmare",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Plate Armor",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Circlet",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Gauntlets",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Boots",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Leather Armor of Nightmare",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Leather Armor",
+          "chance": "6.25%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Nightmare Robe",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Robe",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Phoenix Necklace",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Phoenix Earring",
+          "chance": "8.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Phoenix Ring",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Necklace",
+          "chance": "25%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Majestic Earring",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Forgotten Blade",
+          "chance": "2.1276%",
+          "count": "1"
+        },
+        {
+          "item": "Basalt Battlehammer",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Imperial Staff",
+          "chance": "2.1276%",
+          "count": "1"
+        },
+        {
+          "item": "Angel Slayer",
+          "chance": "2.1276%",
+          "count": "1"
+        },
+        {
+          "item": "Dragon Hunter Axe",
+          "chance": "6.25%",
+          "count": "1"
+        },
+        {
+          "item": "Saint Spear",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Demon Splinter",
+          "chance": "2.1276%",
+          "count": "1"
+        },
+        {
+          "item": "Heaven's Divider",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Arcana Mace",
+          "chance": "2.1276%",
+          "count": "1"
+        },
+        {
+          "item": "Tallum Blade*Dark Legion's Edge",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Breastplate",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Gaiters",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Gauntlet",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Boots",
+          "chance": "8.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Shield",
+          "chance": "2.1276%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Imperial Crusader Helmet",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Armor",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Glove",
+          "chance": "8.3333%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Boots",
+          "chance": "11.1111%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Draconic Leather Helmet",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Robe",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Glove",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Boots",
+          "chance": "14.2857%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Major Arcana Circlet",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Earring",
+          "chance": "20%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Ring",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Sealed Tateossian Necklace",
+          "chance": "12.5%",
+          "count": "1"
+        },
+        {
+          "item": "Draconic Bow",
+          "chance": "4.3478%",
+          "count": "1"
+        },
+        {
+          "item": "Necklace of Frintezza",
+          "chance": "100%",
+          "count": "1"
+        },
+        {
+          "item": "Ancient Book - Divine Inspiration (Manuscript)",
+          "chance": "100%",
+          "count": "6–25"
+        },
+        {
+          "item": "High-Grade Life Stone: level 70",
+          "chance": "50%",
+          "count": "2–4"
+        },
+        {
+          "item": "High-Grade Life Stone: level 76",
+          "chance": "33.3333%",
+          "count": "2–4"
+        },
+        {
+          "item": "Top-Grade Life Stone: level 70",
+          "chance": "12.5%",
+          "count": "1–2"
+        },
+        {
+          "item": "Top-Grade Life Stone: level 76",
+          "chance": "11.1111%",
+          "count": "1–2"
         }
       ]
     }

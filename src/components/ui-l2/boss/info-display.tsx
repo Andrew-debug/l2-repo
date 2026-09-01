@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
 import { DraggableWindow, DragHandle } from "../draggable-window";
@@ -55,15 +56,11 @@ export default function BossInfoDisplay() {
       </DragHandle>
       <div className="min-h-0 flex-1">
         <WindowBorder>
-          {/* Name/level and the buttons are fixed — always visible without
-              scrolling, since they're the actually-actionable part of this
-              card. The portrait is the one thing that can genuinely be
-              taller than the window has room for (it's a fixed aspect-ratio
-              image, not something that should ever get cropped/pushed past
-              the border), so it's last, in its own overflow-y-auto region
-              that only scrolls if it doesn't fully fit — same
-              custom-scrollbar + pr-1 treatment as Raid Boss Drop List's
-              list view. */}
+          {/* Name/level, the buttons, and the portrait all live in one
+              scrollable region — overflow-y-scroll (not auto) so the
+              custom-scrollbar track/thumb stay visible even when the
+              content fits, same treatment as Up Next's list
+              (upcoming-spawns.tsx) and Raid Boss Drop List's grid view. */}
           <div className="flex h-full min-h-0 flex-col gap-2 p-2">
             {!boss && (
               <p className="py-6 text-center text-xs text-white/40">
@@ -72,7 +69,7 @@ export default function BossInfoDisplay() {
             )}
 
             {boss && (
-              <>
+              <div className="flex min-h-0 flex-1 flex-col gap-2 overflow-y-scroll custom-scrollbar pr-1">
                 {/* One block, one left accent bar for both lines — same
                     per-status treatment as Up Next's rows (upcoming-spawns.tsx),
                     not a separate bar per line. */}
@@ -116,14 +113,33 @@ export default function BossInfoDisplay() {
                   </div>
                 )}
 
-                <div className="flex min-h-0 flex-1 flex-col overflow-y-auto custom-scrollbar pr-1">
-                  <BossPortraitImage
-                    boss={boss}
-                    className="aspect-4/3 w-full shrink-0 border border-window-content-border"
-                    sizes="288px"
-                  />
-                </div>
-              </>
+                <BossPortraitImage
+                  boss={boss}
+                  className="aspect-4/3 w-full shrink-0 border border-window-content-border"
+                  sizes="288px"
+                />
+
+                {/* Only rendered once a real "Road to <boss>" video has
+                    actually been found for this boss (see boss-data.ts'
+                    routeVideoUrl) — no dead "#" placeholder link. */}
+                {boss.routeVideoUrl && (
+                  <a
+                    href={boss.routeVideoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="gold-button flex shrink-0 items-center justify-center gap-2 px-2 py-1 text-[13px] text-button-text transition-colors hover:text-[#bcd9ff]"
+                  >
+                    <Image
+                      src="/icons/yt_icon_digital.png"
+                      alt=""
+                      width={824}
+                      height={580}
+                      className="h-3 w-auto"
+                    />
+                    Route video - how to reach
+                  </a>
+                )}
+              </div>
             )}
           </div>
         </WindowBorder>

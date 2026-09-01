@@ -13,6 +13,7 @@ import {
   gradeForDisplay,
 } from "@/components/ui-l2/boss/drop-icon";
 import { BossStatusSquare } from "@/components/ui-l2/boss/status-square";
+import { IconStateButton } from "@/components/ui/icon-state-button";
 import { cn } from "@/lib/utils";
 
 const MIN_QUERY_LENGTH = 2;
@@ -99,7 +100,13 @@ export function MapSearchBar({ onClose }: MapSearchBarProps) {
           cross-axis size the instant this mounted, visibly shifting the
           buttons by the difference (was h-5, 2px taller). */}
       <div className="flex h-4.5 items-center gap-1.5 border border-window-content-border bg-window-content-bg px-1.5">
-        <span className="text-xs text-white/30">⌕</span>
+        <IconStateButton
+          defaultIcon="/icons/search_button.png"
+          hoverIcon="/icons/search_button_over.png"
+          clickIcon="/icons/search_button_down.png"
+          className="w-2.75 h-3.25 shrink-0"
+          onClick={() => inputRef.current?.focus()}
+        />
         <input
           ref={inputRef}
           value={query}

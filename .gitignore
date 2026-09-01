@@ -42,3 +42,7 @@ next-env.d.ts
 
 # boss video clips
 *.mkv
+
+
+MISSING_BOSS_SCREENSHOTS.txt
+SCREENSHOT_BOSS_DROPS.json

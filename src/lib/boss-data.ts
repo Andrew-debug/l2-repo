@@ -17,6 +17,15 @@ export interface Boss {
   description: string;
   drops: LootDrop[];
   weakness?: string;
+  // "EpicBoss" for the 8 world bosses (Queen Ant, Baium, Core, Orfen,
+  // Frintezza, Antharas, Valakas, Zaken) — everything else is "RaidBoss".
+  // Drives the special map-marker treatment in BossMarkerKonva.
+  npcType: string;
+  // A "Road to <boss>" video from the "Lineage II database best pvp"
+  // YouTube channel, when one was actually found for this boss — undefined
+  // (not a placeholder link) for bosses the channel never covered. Drives
+  // the "Route video - how to reach" button in BossInfoDisplay.
+  routeVideoUrl?: string;
 }
 
 export const bosses: Boss[] = bossDataJson.data.map((b) => ({
@@ -30,6 +39,8 @@ export const bosses: Boss[] = bossDataJson.data.map((b) => ({
   description: b.description ?? "",
   drops: b.drops ?? [],
   weakness: b.weakness,
+  npcType: b.npcType ?? "RaidBoss",
+  routeVideoUrl: b.routeVideoUrl,
 }));
 
 export interface LevelRange {

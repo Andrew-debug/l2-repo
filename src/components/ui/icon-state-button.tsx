@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface IconStateButtonProps {
@@ -16,7 +16,10 @@ interface IconStateButtonProps {
   outlineClickIcon?: string;
   onClick?: () => void;
   className?: string;
-  text?: string;
+  // ReactNode, not just string — lets a caller color part of the label
+  // (e.g. a status word) differently from the rest, like Up Next's
+  // "Alert: <on/off>" button.
+  text?: ReactNode;
   // "contain" (default) preserves the icon's aspect ratio — right for
   // square icons. "fill" stretches it to the button's box, for pill-shaped
   // button backgrounds that need to actually grow wider/taller on demand.

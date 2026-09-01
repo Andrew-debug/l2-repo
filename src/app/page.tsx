@@ -17,13 +17,13 @@ import { UpcomingSpawnsPanelProvider } from "@/components/providers/UpcomingSpaw
 import { NpcInfoPanelProvider } from "@/components/providers/NpcInfoPanelProvider";
 import { BackgroundDimProvider } from "@/components/providers/BackgroundDimProvider";
 import { HeaderVisibilityProvider } from "@/components/providers/HeaderVisibilityProvider";
+import { EnterChatProvider } from "@/components/providers/EnterChatProvider";
 import { Background } from "@/components/background";
 import { PageTitleBanner } from "@/components/ui-l2/page-title-banner";
 import { EpicBossStatusRail } from "@/components/ui-l2/epic-boss-status-rail";
 import { MainContentRow } from "@/components/ui-l2/main-content-row";
 import { OptionsPanelProvider } from "@/components/providers/OptionsPanelProvider";
 import { OptionsWindow } from "@/components/ui-l2/options-window";
-import { RespawnOnboarding } from "@/components/ui-l2/boss/respawn-onboarding";
 import { RespawnChip } from "@/components/ui-l2/boss/respawn-chip";
 async function handleCloseAction() {
   "use server";
@@ -33,50 +33,50 @@ async function handleCloseAction() {
 
 export default function Home() {
   return (
-    <BackgroundDimProvider>
-      <HeaderVisibilityProvider>
-        <div className="relative w-full h-dvh overflow-hidden border border-window-inner-gray">
-          <Background />
-          <EpicBossStatusRail />
-          <PageTitleBanner />
+    <EnterChatProvider>
+      <BackgroundDimProvider>
+        <HeaderVisibilityProvider>
+          <div className="relative w-full h-dvh overflow-hidden border border-window-inner-gray">
+            <BossRespawnProvider>
+              <Background />
+              <EpicBossStatusRail />
+              <PageTitleBanner />
 
-          {/* <Header /> */}
-          {/* <MainPage /> */}
+              {/* <Header /> */}
+              {/* <MainPage /> */}
 
-          <BossRespawnProvider>
-            <OptionsPanelProvider>
-              <OptionsWindow />
+              <OptionsPanelProvider>
+                <OptionsWindow />
 
-              <MapProvider>
-                <RaidBossesPanelProvider>
-                  <DropListPanelProvider>
-                    <UpcomingSpawnsPanelProvider>
-                      <NpcInfoPanelProvider>
-                        <BossSelectionProvider>
-                          <BossPositionsProvider>
-                            <BossItemFilterProvider>
-                              <BossLevelFilterProvider>
-                                <MainContentRow />
+                <MapProvider>
+                  <RaidBossesPanelProvider>
+                    <DropListPanelProvider>
+                      <UpcomingSpawnsPanelProvider>
+                        <NpcInfoPanelProvider>
+                          <BossSelectionProvider>
+                            <BossPositionsProvider>
+                              <BossItemFilterProvider>
+                                <BossLevelFilterProvider>
+                                  <MainContentRow />
 
-                                <RespawnOnboarding />
-                                <RespawnChip />
-                              </BossLevelFilterProvider>
-                            </BossItemFilterProvider>
-                          </BossPositionsProvider>
-                        </BossSelectionProvider>
+                                  <RespawnChip />
 
-                        {/* <Chat /> */}
+                                  {/* <Chat /> */}
 
-                        <MenuSection />
-                      </NpcInfoPanelProvider>
-                    </UpcomingSpawnsPanelProvider>
-                  </DropListPanelProvider>
-                </RaidBossesPanelProvider>
-              </MapProvider>
-            </OptionsPanelProvider>
-          </BossRespawnProvider>
+                                  <MenuSection />
+                                </BossLevelFilterProvider>
+                              </BossItemFilterProvider>
+                            </BossPositionsProvider>
+                          </BossSelectionProvider>
+                        </NpcInfoPanelProvider>
+                      </UpcomingSpawnsPanelProvider>
+                    </DropListPanelProvider>
+                  </RaidBossesPanelProvider>
+                </MapProvider>
+              </OptionsPanelProvider>
+            </BossRespawnProvider>
 
-          {/* <footer className="border-t border-border bg-card/50 py-4">
+            {/* <footer className="border-t border-border bg-card/50 py-4">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
@@ -108,8 +108,9 @@ export default function Home() {
           </div>
         </div>
       </footer> */}
-        </div>
-      </HeaderVisibilityProvider>
-    </BackgroundDimProvider>
+          </div>
+        </HeaderVisibilityProvider>
+      </BackgroundDimProvider>
+    </EnterChatProvider>
   );
 }

@@ -1,20 +1,24 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import Header from "../header";
 import { WindowBorder } from "../window-l2";
 import { DraggableWindow, DragHandle } from "../draggable-window";
 import { FoldIcon } from "../fold-icon";
-import { GoldButton } from "../gold-button";
+import { TabButton } from "../tab-button";
+import { IconStateButton } from "../../ui/icon-state-button";
 import { bosses, levelRanges } from "@/lib/boss-data";
 import Image from "next/image";
 import { STATUS_ICON, STATUS_TEXT_CLASS } from "@/lib/boss-status";
+import { MARKER_ICON_EPIC_SRC } from "@/components/map/markerIcon";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
 import { useRaidBossesPanel } from "@/components/providers/RaidBossesPanelProvider";
 import { useBossLevelFilter } from "@/components/providers/BossLevelFilterProvider";
 import { formatDuration } from "@/lib/respawn";
 import { usePersistedOffset } from "@/hooks/use-persisted-offset";
+import { useAppShortcut, formatShortcutLabel } from "@/hooks/use-app-shortcut";
+import { useEnterChat } from "@/components/providers/EnterChatProvider";
 import { cn } from "@/lib/utils";
 
 const HOUR_MS = 60 * 60 * 1000;
@@ -61,6 +65,7 @@ export default function BossLevelNavigator() {
   // BossLevelFilterProvider).
   const { selectedRange, setSelectedRange } = useBossLevelFilter();
   const [query, setQuery] = useState("");
+  const filterInputRef = useRef<HTMLInputElement>(null);
   const { selectedBossId, setSelectedBoss } = useBossSelection();
   const { getStatus, getKilledAt, globalRange, isHidden } = useBossRespawn();
   const { isOpen, setIsOpen, isFolded, setIsFolded, toggleOpen } =
@@ -77,20 +82,18 @@ export default function BossLevelNavigator() {
   // top of the layout-effect timing.
   const [offset, setOffset, isOffsetHydrated] =
     usePersistedOffset("raid-bosses");
+  const { enterChat } = useEnterChat();
+  const raidBossesShortcutLabel = formatShortcutLabel(
+    "Raid Bosses",
+    "I",
+    enterChat,
+  );
 
-  // Alt+I — matches the fold icon's own "Raid Bosses(Alt+I)" tooltip and
-  // does the same thing MenuSection's raid-bosses toolbar button does (see
-  // toggleOpen). `e.code` (not `e.key`) so the physical key is what matters
-  // regardless of what character Alt produces on a given OS/layout.
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!e.altKey || e.code !== "KeyI" || e.repeat) return;
-      e.preventDefault();
-      toggleOpen();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [toggleOpen]);
+  // Matches the fold icon's own tooltip below and does the same thing
+  // MenuSection's raid-bosses toolbar button does (see toggleOpen). See
+  // useAppShortcut for the Alt-vs-bare-key branching (Options > Game tab's
+  // "Enter Chat" checkbox).
+  useAppShortcut("KeyI", toggleOpen);
 
   const now = Date.now();
 
@@ -175,7 +178,7 @@ export default function BossLevelNavigator() {
         <DragHandle>
           <FoldIcon
             icon="/icons/menuicon1.png"
-            label="Raid Bosses(Alt+I)"
+            label={raidBossesShortcutLabel}
             onUnfold={() => setIsFolded(false)}
           />
         </DragHandle>
@@ -204,48 +207,52 @@ export default function BossLevelNavigator() {
       </DragHandle>
       <div className="min-h-0 flex-1">
         <WindowBorder>
-          <div className="flex h-full min-h-0 flex-col gap-2 p-2">
-            <div className="grid grid-cols-4 gap-1">
-              <GoldButton
+          <div className="flex h-full min-h-0 flex-col">
+            <div className="relative grid grid-cols-4 px-2.5 pt-0.75">
+              <Image
+                src="/icons/siege_back1.png"
+                alt=""
+                fill
+                className="object-fill z-0"
+              />
+              <Image
+                fill
+                src="/icons/ssq_lvlback1.png"
+                alt="absolute top-0 left-0"
+              />
+              <TabButton
+                label="All"
                 active={selectedRange === null}
-                // Fires on mousedown, not click (mousedown+mouseup), for a
-                // snappier, more immediate feel on what's essentially a
-                // tab strip — button !== 0 guards it against right/middle
-                // click, same as IconStateButton elsewhere.
-                onMouseDown={(e) => {
-                  if (e.button !== 0) return;
-                  setSelectedRange(null);
-                }}
-                className="text-[11px]"
-              >
-                All
-              </GoldButton>
+                onClick={() => setSelectedRange(null)}
+              />
               {levelRanges.map((range) => (
-                <GoldButton
+                <TabButton
                   key={range.label}
+                  label={range.label}
                   active={selectedRange?.label === range.label}
-                  onMouseDown={(e) => {
-                    if (e.button !== 0) return;
-                    setSelectedRange(range);
-                  }}
-                  className="text-[11px]"
-                >
-                  {range.label}
-                </GoldButton>
+                  onClick={() => setSelectedRange(range)}
+                />
               ))}
             </div>
 
             <div className="flex items-center gap-1.5 border border-window-content-border bg-window-content-bg px-2 py-1">
-              <span className="text-xs text-white/30">⌕</span>
+              <IconStateButton
+                defaultIcon="/icons/search_button.png"
+                hoverIcon="/icons/search_button_over.png"
+                clickIcon="/icons/search_button_down.png"
+                className="w-2.75 h-3.25 shrink-0"
+                onClick={() => filterInputRef.current?.focus()}
+              />
               <input
+                ref={filterInputRef}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Filter by name"
-                className="w-full bg-transparent text-[11px] text-white placeholder:text-white/30 focus:outline-none"
+                className="w-full bg-transparent text-[13px] text-white placeholder:text-white/30 focus:outline-none"
               />
             </div>
 
-            <ul className="flex min-h-0 flex-1 flex-col overflow-y-auto custom-scrollbar pr-1">
+            <ul className="flex min-h-0 flex-1 flex-col overflow-y-scroll custom-scrollbar">
               {rows.map(
                 ({ boss, status, killedAt, minAt, maxAt, hidden }, index) => {
                   const { primary, secondary } = timerParts(
@@ -273,7 +280,14 @@ export default function BossLevelNavigator() {
                         )}
                       >
                         <Image
-                          src={hidden ? STATUS_ICON.dead : STATUS_ICON[status]}
+                          src={
+                            hidden
+                              ? STATUS_ICON.dead
+                              : status === "alive" &&
+                                  boss.npcType === "EpicBoss"
+                                ? MARKER_ICON_EPIC_SRC
+                                : STATUS_ICON[status]
+                          }
                           alt=""
                           width={18}
                           height={18}
@@ -330,10 +344,6 @@ export default function BossLevelNavigator() {
                 </p>
               )}
             </ul>
-
-            <div className="flex items-center justify-between border-t border-window-content-border pt-1.5 text-[10px] text-white/40">
-              <span>{bosses.length} bosses tracked</span>
-            </div>
           </div>
         </WindowBorder>
       </div>

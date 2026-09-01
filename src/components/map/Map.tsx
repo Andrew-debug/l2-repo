@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Header from "../ui-l2/header";
 import { MapPlaceholder } from "../map-placeholder";
@@ -11,6 +11,8 @@ import { IconStateButton } from "../ui/icon-state-button";
 import { MapSearchBar } from "./map-search-bar";
 import { STATUS_ICON } from "@/lib/boss-status";
 import { usePersistedOffset } from "@/hooks/use-persisted-offset";
+import { useAppShortcut, formatShortcutLabel } from "@/hooks/use-app-shortcut";
+import { useEnterChat } from "@/components/providers/EnterChatProvider";
 import { cn } from "@/lib/utils";
 
 const BUTTON_CLASS = "w-16 h-4.5 text-[13px]";
@@ -49,20 +51,15 @@ export default function Map() {
   // dropped. isHydrated gates visibility below until that persisted value
   // has actually loaded — see usePersistedOffset for why.
   const [offset, setOffset, isOffsetHydrated] = usePersistedOffset("map");
+  const { enterChat } = useEnterChat();
+  const mapShortcutLabel = formatShortcutLabel("Map ", "M", enterChat);
 
-  // Alt+M — matches the fold icon's own "Map (Alt+M)" tooltip and does the
-  // same thing MenuSection's map toolbar button does (see toggleMapOpen).
-  // `e.code` (not `e.key`) since Alt+M produces "µ" on Mac keyboards — the
-  // physical key stays "KeyM" either way.
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!e.altKey || e.code !== "KeyM" || e.repeat) return;
-      e.preventDefault();
-      toggleMapOpen();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [toggleMapOpen]);
+  // Matches the fold icon's own tooltip below and does the same thing
+  // MenuSection's map toolbar button does (see toggleMapOpen). `e.code`
+  // (not `e.key`) since Alt+M produces "µ" on Mac keyboards — the physical
+  // key stays "KeyM" either way. See useAppShortcut for the Alt-vs-bare-key
+  // branching (Options > Game tab's "Enter Chat" checkbox).
+  useAppShortcut("KeyM", toggleMapOpen);
 
   return (
     // Always sized as if large (isSmall never changes this box) — Map sits
@@ -76,7 +73,7 @@ export default function Map() {
     // that no longer changes size.
     <div
       className={cn(
-        "relative min-h-0 max-w-[800px] max-h-[1000px] h-full w-full aspect-square",
+        "pointer-events-auto relative min-h-0 max-w-[800px] max-h-[1000px] h-full w-full aspect-square",
         !isOpen && "invisible pointer-events-none",
       )}
     >
@@ -93,7 +90,7 @@ export default function Map() {
         <DragHandle>
           <FoldIcon
             icon="/icons/menuicon3.png"
-            label="Map (Alt+M)"
+            label={mapShortcutLabel}
             onUnfold={() => setIsFolded(false)}
           />
         </DragHandle>

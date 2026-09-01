@@ -10,9 +10,7 @@ interface BossStateCardProps {
   status: RespawnStatus;
   // null when the boss has never been marked killed — nothing to count.
   timerLabel: string | null;
-  isHidden: boolean;
   onMarkAction: () => void;
-  onHideAction: () => void;
 }
 
 // A boss marker's popup, rendered as real HTML/CSS (not drawn on the Konva
@@ -25,9 +23,7 @@ export function BossStateCard({
   level,
   status,
   timerLabel,
-  isHidden,
   onMarkAction,
-  onHideAction,
 }: BossStateCardProps) {
   return (
     <div className="w-38">
@@ -37,14 +33,21 @@ export function BossStateCard({
       <WindowBorder innerClassName="bg-black/95">
         <div className="flex flex-col gap-1 px-2 py-2">
           <div>
-            <h3 className={cn("text-[13px] leading-3", STATUS_TEXT_CLASS[status])}>
+            <h3
+              className={cn("text-[13px] leading-3", STATUS_TEXT_CLASS[status])}
+            >
               {name}
             </h3>
             <p className="mt-0.5 text-[11px] leading-none text-white/50">
               Lv. {level}
             </p>
             {timerLabel && (
-              <p className={cn("mt-1 text-[11px] leading-none", STATUS_TEXT_CLASS[status])}>
+              <p
+                className={cn(
+                  "mt-1 text-[11px] leading-none",
+                  STATUS_TEXT_CLASS[status],
+                )}
+              >
                 {timerLabel}
               </p>
             )}
@@ -60,16 +63,8 @@ export function BossStateCard({
               hoverIcon="/icons/smallbutton2_over.png"
               clickIcon="/icons/smallbutton2_down.png"
               className="w-16 h-4.5 text-[13px]"
-              text={status === "alive" ? "Killed" : "Alive"}
+              text={status === "alive" ? "Mark Killed" : "Mark Alive"}
               onClick={onMarkAction}
-            />
-            <IconStateButton
-              defaultIcon="/icons/smallbutton2.png"
-              hoverIcon="/icons/smallbutton2_over.png"
-              clickIcon="/icons/smallbutton2_down.png"
-              className="w-16 h-4.5 text-[13px]"
-              text={isHidden ? "Unhide" : "Hide"}
-              onClick={onHideAction}
             />
           </div>
         </div>

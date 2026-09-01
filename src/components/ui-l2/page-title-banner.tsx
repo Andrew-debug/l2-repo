@@ -1,40 +1,102 @@
 "use client";
 
 import { useHeaderVisibility } from "@/components/providers/HeaderVisibilityProvider";
+import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
+import { bosses } from "@/lib/boss-data";
 
-// Purely decorative framing at the top of the page — gold side tabs, a
-// gradient-bordered frame (see .title-banner-frame in globals.css), and the
-// game's serif display font for the title. Toggled from Options' Display
-// section (the "Header" checkbox) — MainWindowsRow reads the same flag to
-// reclaim/give back the reserved top space, so hiding this never leaves a
-// dead gap or an overlap.
+// Full-width top bar — gold pennant shape (wide sides, a taller notch over
+// the centered title) clipped out of a two-layer gradient (gold outer,
+// near-black inner), plus real tracked-boss counts on either side of the
+// title. Toggled from Options' Display section (the "Header" checkbox) —
+// MainWindowsRow reads the same flag to reclaim/give back the reserved top
+// space, so hiding this never leaves a dead gap or an overlap.
+const OUTER_CLIP =
+  "polygon(0 0, 100% 0, 100% 42px, 62% 42px, 60% 80px, 40% 80px, 38% 42px, 0 42px)";
+const INNER_CLIP =
+  "polygon(1px 1px, calc(100% - 1px) 1px, calc(100% - 1px) 41px, calc(62% - 1px) 41px, calc(60% - 1px) 79px, calc(40% + 1px) 79px, calc(38% + 1px) 41px, 1px 41px)";
+
 export function PageTitleBanner() {
   const { isHeaderVisible } = useHeaderVisibility();
+  const { trackedBossIds, getStatus } = useBossRespawn();
   if (!isHeaderVisible) return null;
 
+  const upNowCount = trackedBossIds.filter(
+    (id) => getStatus(id) === "alive",
+  ).length;
+  const inWindowCount = trackedBossIds.filter(
+    (id) => getStatus(id) === "pending",
+  ).length;
+
   return (
-    <div className="absolute top-3.5 left-1/2 w-144 -translate-x-1/2">
-      <div className="relative">
-        <div className="absolute top-1/2 left-[-7px] h-6.5 w-1.75 -translate-y-1/2 bg-gradient-to-b from-[#bdae84] to-[#735929] shadow-[0_1px_2px_rgba(0,0,0,0.8)]" />
-        <div className="absolute top-1/2 right-[-7px] h-6.5 w-1.75 -translate-y-1/2 bg-gradient-to-b from-[#bdae84] to-[#735929] shadow-[0_1px_2px_rgba(0,0,0,0.8)]" />
-        <div className="title-banner-frame p-1.25">
-          <div className="border border-[#bdae84]/32 px-4.5 pt-2.25 pb-2 text-center">
-            <div
-              className="font-marcellus text-[27px] tracking-[0.15em] text-[#e8dcc0]"
-              style={{
-                textShadow: "0 0 14px rgba(189,174,132,0.35), 1px 1px 0 #000",
-              }}
-            >
-              LINEAGE 2 BOSS TRACKING
-            </div>
-            <div className="mt-1.5 flex items-center justify-center gap-2.5">
-              <div className="h-px w-14 bg-gradient-to-r from-[#bdae84]/0 to-[#bdae84]/70" />
-              <span className="text-[11px] tracking-[0.28em] text-system-text">
-                l2bosstracking.com
-              </span>
-              <div className="h-px w-14 bg-gradient-to-r from-[#bdae84]/70 to-[#bdae84]/0" />
-            </div>
-          </div>
+    // pointer-events-none — purely decorative (no interactive descendants),
+    // so it shouldn't block clicks on the epic-boss background art it sits
+    // over (see Background's return-to-game panels).
+    <div className="pointer-events-none absolute top-0 right-0 left-0 h-20">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(90deg, #735929 0%, #bdae84 50%, #735929 100%)",
+          clipPath: OUTER_CLIP,
+          filter: "drop-shadow(0 3px 6px rgba(0,0,0,0.9))",
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(to bottom, #1c2127 0%, #0c0f13 62%, #05070a 100%)",
+          clipPath: INNER_CLIP,
+        }}
+      />
+      <div
+        className="absolute top-10.25 right-0 left-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, rgba(189,174,132,0) 0%, rgba(189,174,132,0.55) 20%, rgba(189,174,132,0.1) 38%, rgba(189,174,132,0) 50%, rgba(189,174,132,0.1) 62%, rgba(189,174,132,0.55) 80%, rgba(189,174,132,0) 100%)",
+        }}
+      />
+
+      <div className="absolute top-0 left-0 box-border flex h-10.5 w-[38%] items-center gap-3.5 pl-5.5">
+        <span className="text-[11px] tracking-[0.3em] text-system-text">
+          CHRONICLE: INTERLUDE
+        </span>
+        <span className="size-1 rotate-45 bg-[#8d7c50]" />
+        <span className="text-[11px] tracking-[0.12em] text-white/42">
+          {bosses.length} BOSSES TRACKED
+        </span>
+      </div>
+
+      <div className="absolute top-0 right-0 box-border flex h-10.5 w-[38%] items-center justify-end gap-3.5 pr-5.5">
+        <span className="flex items-center gap-1.25 text-[11px] tracking-[0.12em] text-[#7ed957]">
+          <span className="size-1.5 rounded-full bg-[#7ed957] shadow-[0_0_6px_#7ed957]" />
+          {upNowCount} UP NOW
+        </span>
+        <span className="flex items-center gap-1.25 text-[11px] tracking-[0.12em] text-[#f5c518]">
+          <span className="size-1.5 rounded-full bg-[#f5c518] shadow-[0_0_6px_#f5c518]" />
+          {inWindowCount} IN WINDOW
+        </span>
+        <span className="size-1 rotate-45 bg-[#8d7c50]" />
+        <span className="text-[11px] tracking-[0.22em] text-system-text">
+          l2bosstracker.com
+        </span>
+      </div>
+
+      <div className="absolute top-1/2 left-1/2 w-[22%] -translate-x-1/2 -translate-y-1/2  text-center">
+        <div
+          className="font-marcellus text-[25px] leading-[1.05] tracking-[0.17em] text-[#e8dcc0]"
+          style={{
+            textShadow: "0 0 14px rgba(189,174,132,0.4), 1px 1px 0 #000",
+          }}
+        >
+          LINEAGE 2
+        </div>
+        <div className="mt-0.75 flex items-center justify-center gap-2">
+          <div className="h-px w-8.5 bg-linear-to-r from-[#bdae84]/0 to-[#bdae84]/70" />
+          <span className="font-marcellus text-[14px] tracking-[0.26em] text-system-text">
+            BOSS TRACKER
+          </span>
+          <div className="h-px w-8.5 bg-linear-to-r from-[#bdae84]/70 to-[#bdae84]/0" />
         </div>
       </div>
     </div>

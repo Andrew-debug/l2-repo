@@ -19,9 +19,14 @@ import { useOptionsPanel } from "@/components/providers/OptionsPanelProvider";
 import { useUpcomingSpawnsPanel } from "@/components/providers/UpcomingSpawnsPanelProvider";
 import { useNpcInfoPanel } from "@/components/providers/NpcInfoPanelProvider";
 import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
+import { useBossSelection } from "@/components/providers/BossSelectionProvider";
+import { useBossItemFilter } from "@/components/providers/BossItemFilterProvider";
+import { useBossLevelFilter } from "@/components/providers/BossLevelFilterProvider";
 import { useBackgroundDim } from "@/components/providers/BackgroundDimProvider";
 import { usePersistedOffset } from "@/hooks/use-persisted-offset";
 import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
+import { useAppShortcut, formatShortcutLabel } from "@/hooks/use-app-shortcut";
+import { useEnterChat } from "@/components/providers/EnterChatProvider";
 import { cn } from "@/lib/utils";
 import { DOCK_CONTENT_WIDTH } from "./dock-layout";
 
@@ -66,40 +71,45 @@ const OUTLINE_ICONS = {
   outlineClickIcon: "/icons/basic_outline1_down.png",
 };
 
-const toolbarItems = [
-  {
-    key: "raid-bosses",
-    tooltip: "Raid Bosses(Alt+I)",
-    defaultIcon: "/icons/menuicon1.png",
-    hoverIcon: "/icons/menuicon1_down.png",
-    clickIcon: "/icons/menubutton1_down.png",
-    ...OUTLINE_ICONS,
-  },
-  {
-    key: "drop-list",
-    tooltip: "Raid Boss Drop List(Alt+V)",
-    defaultIcon: "/icons/menuicon2.png",
-    hoverIcon: "/icons/menuicon2_over.png",
-    clickIcon: "/icons/menuicon2_down.png",
-    ...OUTLINE_ICONS,
-  },
-  {
-    key: "map",
-    tooltip: "Map (Alt+M)",
-    defaultIcon: "/icons/menuicon3.png",
-    hoverIcon: "/icons/menuicon3_over.png",
-    clickIcon: "/icons/menuicon3_down.png",
-    ...OUTLINE_ICONS,
-  },
-  {
-    key: "hammer",
-    tooltip: "System Menu(Alt+X)",
-    defaultIcon: "/icons/menuicon4.png",
-    hoverIcon: "/icons/menuicon4_over.png",
-    clickIcon: "/icons/menuicon4_down.png",
-    ...OUTLINE_ICONS,
-  },
-];
+// Tooltip strings depend on Options > Game tab's "Enter Chat" checkbox (see
+// useAppShortcut), so this is a function of that flag rather than a plain
+// module-level constant.
+function getToolbarItems(enterChat: boolean) {
+  return [
+    {
+      key: "raid-bosses",
+      tooltip: formatShortcutLabel("Raid Bosses", "I", enterChat),
+      defaultIcon: "/icons/menuicon1.png",
+      hoverIcon: "/icons/menuicon1_down.png",
+      clickIcon: "/icons/menubutton1_down.png",
+      ...OUTLINE_ICONS,
+    },
+    {
+      key: "drop-list",
+      tooltip: formatShortcutLabel("Raid Boss Drop List", "V", enterChat),
+      defaultIcon: "/icons/menuicon2.png",
+      hoverIcon: "/icons/menuicon2_over.png",
+      clickIcon: "/icons/menuicon2_down.png",
+      ...OUTLINE_ICONS,
+    },
+    {
+      key: "map",
+      tooltip: formatShortcutLabel("Map ", "M", enterChat),
+      defaultIcon: "/icons/menuicon3.png",
+      hoverIcon: "/icons/menuicon3_over.png",
+      clickIcon: "/icons/menuicon3_down.png",
+      ...OUTLINE_ICONS,
+    },
+    {
+      key: "hammer",
+      tooltip: formatShortcutLabel("System Menu", "X", enterChat),
+      defaultIcon: "/icons/menuicon4.png",
+      hoverIcon: "/icons/menuicon4_over.png",
+      clickIcon: "/icons/menuicon4_down.png",
+      ...OUTLINE_ICONS,
+    },
+  ];
+}
 
 // Anchored to each icon's right edge, growing left — the dock itself sits
 // flush against the screen's bottom-right corner (see the DraggableWindow
@@ -144,64 +154,96 @@ export default function MenuSection() {
   );
   const [isLegendOpen, setIsLegendOpen] = useState(false);
   const [showRestartConfirm, setShowRestartConfirm] = useState(false);
-  const { setIsOpen: setMapOpen, toggleMapOpen } = useMapSize();
-  const { setIsOpen: setRaidBossesOpen, toggleOpen: toggleRaidBossesOpen } =
-    useRaidBossesPanel();
-  const { setIsOpen: setDropListOpen, toggleOpen: toggleDropListOpen } =
-    useDropListPanel();
+  const { isOpen: isMapOpen, setIsOpen: setMapOpen, toggleMapOpen } =
+    useMapSize();
+  const {
+    isOpen: isRaidBossesOpen,
+    setIsOpen: setRaidBossesOpen,
+    toggleOpen: toggleRaidBossesOpen,
+  } = useRaidBossesPanel();
+  const {
+    isOpen: isDropListOpen,
+    setIsOpen: setDropListOpen,
+    toggleOpen: toggleDropListOpen,
+  } = useDropListPanel();
   const { setIsOpen: setOptionsOpen, toggleOpen: toggleOptionsOpen } =
     useOptionsPanel();
   const {
+    isOpen: isUpcomingSpawnsOpen,
     setIsOpen: setUpcomingSpawnsOpen,
     toggleOpen: toggleUpcomingSpawnsOpen,
   } = useUpcomingSpawnsPanel();
-  const { setIsOpen: setNpcInfoOpen, toggleOpen: toggleNpcInfoOpen } =
-    useNpcInfoPanel();
   const {
-    resetAll,
-    hasCustomRange,
-    hasEverMarkedKilled,
-    dismissRespawnOnboarding,
-  } = useBossRespawn();
-  const { setIsDimmed } = useBackgroundDim();
+    isOpen: isNpcInfoOpen,
+    setIsOpen: setNpcInfoOpen,
+    toggleOpen: toggleNpcInfoOpen,
+  } = useNpcInfoPanel();
+  const { resetAll } = useBossRespawn();
+  const { setSelectedBoss } = useBossSelection();
+  const { clearItemFilter } = useBossItemFilter();
+  const { setSelectedRange } = useBossLevelFilter();
+  const {
+    setIsDimmed,
+    exitedWindowSnapshot,
+    setExitedWindowSnapshot,
+    returnToGameBossId,
+    setReturnToGameBossId,
+  } = useBackgroundDim();
   // Lifted out of SystemMenuPanel since it unmounts on close — kept here,
   // in the always-mounted parent, so it survives to the next open.
   // Persisted to localStorage so a reload reopens it wherever it was last
   // dropped.
   const [panelOffset, setPanelOffset] = usePersistedOffset("system-menu");
+  const { enterChat } = useEnterChat();
+  const toolbarItems = getToolbarItems(enterChat);
 
-  // Alt+X — matches the hammer icon's own "System Menu(Alt+X)" tooltip and
-  // does the same thing clicking it does. `e.code` (not `e.key`) so the
-  // physical key is what matters regardless of what character Alt produces
-  // on a given OS/layout.
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!e.altKey || e.code !== "KeyX" || e.repeat) return;
-      e.preventDefault();
-      setIsPanelOpen((v) => !v);
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  // Matches the hammer icon's own tooltip (toolbarItems above) and does the
+  // same thing clicking it does. See useAppShortcut for the Alt-vs-bare-key
+  // branching (Options > Game tab's "Enter Chat" checkbox).
+  useAppShortcut("KeyX", () => setIsPanelOpen((v) => !v));
 
-  // Destructive — wipes every tracked kill, hidden boss, and preference,
-  // then reloads (see BossRespawnProvider.resetAll). Confirmed first since
-  // there's no undo.
+  // Destructive — wipes every tracked kill, hidden boss, and preference
+  // (see BossRespawnProvider.resetAll), plus every other piece of UI state
+  // that isn't that provider's concern: the current boss selection (list or
+  // map), the active item/level filters, and every window's open/closed
+  // state — restored to whatever a first-ever visit would show, not closed.
+  // That means most windows end up *open* (Map/Raid Bosses/Drop List/Up
+  // Next/NPC Info all default to open; only Options starts closed) and the
+  // background dim back on — the opposite of Exit Game just below, which
+  // deliberately closes everything since it's meant to leave nothing on
+  // screen. Confirmed first since there's no undo.
   const handleRestartConfirm = () => {
     setShowRestartConfirm(false);
     resetAll();
+    setSelectedBoss(null, "list");
+    clearItemFilter();
+    setSelectedRange(null);
+    setIsPanelOpen(false);
+    setIsLegendOpen(false);
+    setMapOpen(true);
+    setRaidBossesOpen(true);
+    setDropListOpen(true);
+    setOptionsOpen(false);
+    setUpcomingSpawnsOpen(true);
+    setNpcInfoOpen(true);
+    setIsDimmed(true);
   };
 
   // Not a real "quit" — there's nothing to quit out of in a web app — so
-  // this instead closes every window (including this menu, the legend, and
-  // the respawn-timing onboarding strip) and clears the background dim
-  // they were floating over, the closest read on "leave" that's actually
-  // reversible. dismissRespawnOnboarding is the one exception — same as
-  // its own Skip button, it's permanent (see RespawnOnboarding) — so it's
-  // only called while the strip could actually be showing; calling it
-  // blindly would silently lock in the fallback range for a player who's
-  // never even killed a boss yet, before they'd ever seen the prompt.
+  // this instead closes every window (including this menu and the legend)
+  // and clears the background dim they were floating over, the closest read
+  // on "leave" that's actually reversible.
   const handleExit = () => {
+    // So a later click on one of Background's epic-boss panels (see the
+    // returnToGameBossId effect below) reopens exactly what was open here,
+    // not a fixed guess.
+    setExitedWindowSnapshot({
+      map: isMapOpen,
+      raidBosses: isRaidBossesOpen,
+      dropList: isDropListOpen,
+      upcomingSpawns: isUpcomingSpawnsOpen,
+      npcInfo: isNpcInfoOpen,
+    });
     setIsPanelOpen(false);
     setIsLegendOpen(false);
     setMapOpen(false);
@@ -211,8 +253,41 @@ export default function MenuSection() {
     setUpcomingSpawnsOpen(false);
     setNpcInfoOpen(false);
     setIsDimmed(false);
-    if (!hasCustomRange && hasEverMarkedKilled) dismissRespawnOnboarding();
   };
+
+  // The other half of handleExit above: the player clicked back in via one
+  // of Background's epic-boss panels while exited. Restores whichever
+  // windows were open right before Exit Game (falling back to this app's
+  // normal "playing" defaults if there's no snapshot — e.g. the very first
+  // click ever, before Exit Game has run this session), re-dims the
+  // background, and selects the clicked boss so the map pans/centers onto
+  // it (see KonvaMapViewer's own selectedBossId effect) the same way
+  // clicking it in the Raid Bosses list would.
+  useEffect(() => {
+    if (!returnToGameBossId) return;
+    const snapshot = exitedWindowSnapshot;
+    setMapOpen(snapshot?.map ?? true);
+    setRaidBossesOpen(snapshot?.raidBosses ?? true);
+    setDropListOpen(snapshot?.dropList ?? true);
+    setUpcomingSpawnsOpen(snapshot?.upcomingSpawns ?? true);
+    setNpcInfoOpen(snapshot?.npcInfo ?? true);
+    setIsDimmed(true);
+    setSelectedBoss(returnToGameBossId, "map");
+    setExitedWindowSnapshot(null);
+    setReturnToGameBossId(null);
+  }, [
+    returnToGameBossId,
+    exitedWindowSnapshot,
+    setMapOpen,
+    setRaidBossesOpen,
+    setDropListOpen,
+    setUpcomingSpawnsOpen,
+    setNpcInfoOpen,
+    setIsDimmed,
+    setSelectedBoss,
+    setExitedWindowSnapshot,
+    setReturnToGameBossId,
+  ]);
 
   return (
     <StickyWindowGroup>

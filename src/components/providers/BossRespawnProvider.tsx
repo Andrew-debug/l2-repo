@@ -27,14 +27,18 @@ const RECORDS_STORAGE_KEY = "l2-boss-respawn-tracking";
 const GLOBAL_RANGE_STORAGE_KEY = "l2-boss-respawn-default-range";
 const SOUND_ENABLED_STORAGE_KEY = "l2-boss-respawn-sound";
 const SOUND_VOLUME_STORAGE_KEY = "l2-boss-respawn-sound-volume";
+const ALERT_BUTTON_VISIBLE_STORAGE_KEY = "l2-boss-respawn-alert-button-visible";
 const HIDDEN_STORAGE_KEY = "l2-boss-hidden";
-// The Options > Audio tab's volume slider is 5 discrete steps (0-4), not a
+// The Options > Audio tab's volume slider is 6 discrete steps (0-5), not a
 // continuous 0-100 range — matches the reference client's own stepped
 // sliders, and there's no real mixer behind this to need finer control.
 // Exported so the slider component itself doesn't hardcode the step count
 // a second time.
-export const VOLUME_STEPS = 5;
-const DEFAULT_VOLUME_STEP = VOLUME_STEPS - 1;
+export const VOLUME_STEPS = 6;
+// Level 1, not the slider's leftmost level 0 — audible but quiet out of the
+// box, so the "Test" button (see testAlertSound) actually produces sound
+// the first time someone tries it.
+const DEFAULT_VOLUME_STEP = 1;
 // The raw step-to-volume mapping (step / (VOLUME_STEPS - 1)) topped out at
 // 1.0 — the source clip itself is loud enough that even the slider's lowest
 // non-mute step was still too loud. Scaling every step down by half (so the
@@ -82,9 +86,9 @@ function readGlobalRange(): RespawnRange {
 }
 
 // Whether the user has ever explicitly chosen a range (vs. it just being on
-// FALLBACK_RANGE because nothing was saved yet) — lets the onboarding strip
-// and corner chip tell "never configured" apart from "configured, and it
-// happens to match the fallback."
+// FALLBACK_RANGE because nothing was saved yet) — lets the "not set" prompt
+// in Up Next and the corner chip tell "never configured" apart from
+// "configured, and it happens to match the fallback."
 function readHasCustomRange(): boolean {
   try {
     return window.localStorage.getItem(GLOBAL_RANGE_STORAGE_KEY) != null;
@@ -93,15 +97,14 @@ function readHasCustomRange(): boolean {
   }
 }
 
-// Defaults to on — an audible alert is the whole point of this feature, so
-// unlike the old browser-permission-gated version, there's no "ask first"
-// step; the player mutes it themselves if they don't want it.
+// Defaults to off — the player opts in to alert sound via the Up Next
+// "Alert" button rather than being opted in automatically.
 function readSoundEnabled(): boolean {
   try {
     const raw = window.localStorage.getItem(SOUND_ENABLED_STORAGE_KEY);
-    return raw == null ? true : raw === "1";
+    return raw == null ? false : raw === "1";
   } catch {
-    return true;
+    return false;
   }
 }
 
@@ -115,6 +118,41 @@ function readSoundVolume(): number {
       : DEFAULT_VOLUME_STEP;
   } catch {
     return DEFAULT_VOLUME_STEP;
+  }
+}
+
+// Defaults to on — the Alert button starts visible in Up Next until the
+// player dismisses it themselves (its own close button), at which point
+// this is what remembers "yes, I've seen it, hide it" across reloads. Only
+// Options' "Notification Button" checkbox brings it back.
+function readAlertButtonVisible(): boolean {
+  try {
+    const raw = window.localStorage.getItem(ALERT_BUTTON_VISIBLE_STORAGE_KEY);
+    return raw == null ? true : raw === "1";
+  } catch {
+    return true;
+  }
+}
+
+// Asks for the native browser notification permission the first time the
+// player turns the alert sound on — piggybacking on that click as the real
+// user gesture the prompt needs to fire at all. Purely cosmetic: nothing in
+// this app is gated on the answer (the sound alert works the same either
+// way), and deliberately so — a browser that's been told "denied" refuses
+// to ever show this prompt again for the same site, with no way for us to
+// detect or undo that short of the player digging into their own browser's
+// site settings. Actually gating the in-app alert on that answer would mean
+// one wrong click on the native popup permanently and silently breaks the
+// alert with no way back — worse than just not asking at all. So: ask once,
+// ignore whatever comes back, keep the real on/off switch entirely local.
+function askForNotificationPermissionOnce() {
+  if (typeof window === "undefined" || typeof Notification === "undefined") {
+    return;
+  }
+  if (Notification.permission === "default") {
+    Notification.requestPermission().catch(() => {
+      // Nothing depends on the outcome — see above.
+    });
   }
 }
 
@@ -146,27 +184,33 @@ interface BossRespawnContextType {
   // Every boss with a kill on record, regardless of current status — the
   // upcoming-spawns list filters/sorts this itself.
   trackedBossIds: string[];
-  // True once the player has marked any boss killed, ever — even if every
-  // record has since been cleared back to "alive." Unlike trackedBossIds
-  // (current state), this never goes back to false, since a record's key
-  // stays in `records` once created. Gates the onboarding strip: no point
-  // asking about respawn timing before there's a single timer to apply it
-  // to.
-  hasEverMarkedKilled: boolean;
   // Mutes the respawn-alert sound (see the status-transition effect below)
   // — the badge-the-title-while-hidden half of the alert always runs
-  // regardless, since it's silent by definition.
+  // regardless, since it's silent by definition. The one and only on/off
+  // switch for the whole alert system — deliberately not tied to the
+  // browser's own Notification permission (see askForNotificationPermissionOnce).
   soundEnabled: boolean;
   setSoundEnabled: (enabled: boolean) => void;
-  // 0..VOLUME_STEPS-1 (5 discrete steps) — the Options > Audio tab's
+  // 0..VOLUME_STEPS-1 (6 discrete steps) — the Options > Audio tab's
   // Notification Vol. slider. Applied to the alert audio element's own
   // `volume` before each play(), independent of soundEnabled (mute skips
   // playing entirely; this just scales it while unmuted).
   soundVolume: number;
   setSoundVolume: (step: number) => void;
-  // Marks the range as configured without necessarily changing its value —
-  // for the onboarding strip's "Skip" (keep the fallback, just stop asking).
-  dismissRespawnOnboarding: () => void;
+  // Plays the alert sound on demand — Up Next's "Test" button, so the
+  // player can preview it at their chosen volume without waiting for a
+  // real respawn transition. Deliberately ignores soundEnabled (muted or
+  // not, a test should still be audible — that's the point of testing),
+  // but not spammable: a click while the sound from a previous click (or a
+  // real alert) is still playing is silently ignored rather than
+  // restarting it, unlike the real alert's own rewind-and-replay behavior.
+  testAlertSound: () => void;
+  // Whether Up Next shows its Alert on/off button — the player can dismiss
+  // it themselves (its own close button, once they're happy with their
+  // choice and don't want it taking up room in the list anymore), and bring
+  // it back later from Options' "Notification Button" checkbox.
+  isAlertButtonVisible: boolean;
+  setIsAlertButtonVisible: (visible: boolean) => void;
   // Bosses dismissed as "not interested" — still tracked/clickable as
   // normal, just rendered dimmed/gray on the map instead of by status.
   isHidden: (bossId: string) => boolean;
@@ -190,8 +234,9 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     useState<RespawnRange>(FALLBACK_RANGE);
   const [hasCustomRange, setHasCustomRange] = useState(false);
   const [now, setNow] = useState(() => Date.now());
-  const [soundEnabled, setSoundEnabledState] = useState(true);
+  const [soundEnabled, setSoundEnabledState] = useState(false);
   const [soundVolume, setSoundVolumeState] = useState(DEFAULT_VOLUME_STEP);
+  const [isAlertButtonVisible, setIsAlertButtonVisibleState] = useState(true);
   // Last status seen per boss, purely to detect transitions for
   // notifications — not persisted, and never drives rendering itself.
   const prevStatusRef = useRef<Map<string, RespawnStatus>>(new Map());
@@ -205,11 +250,11 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
   // real title is stays correct even if that ever changes.
   const originalTitleRef = useRef<string | null>(null);
   const unreadCountRef = useRef(0);
-  // The one <link rel="icon"> this app actually controls (see the mount
-  // effect below, which consolidates down to a single element) and the
-  // plain, unbadged source image drawn onto it — kept separate so every
-  // badge redraw starts from a clean copy instead of compounding onto
-  // whatever the canvas already had.
+  // The one <link rel="icon"> this app has (see renderFaviconBadge below,
+  // the only code that ever creates or removes it) and the plain, unbadged
+  // source image drawn onto it — kept separate so every badge redraw
+  // starts from a clean copy instead of compounding onto whatever the
+  // canvas already had.
   const faviconLinkRef = useRef<HTMLLinkElement | null>(null);
   const baseFaviconImageRef = useRef<HTMLImageElement | null>(null);
   // The previous badge's object URL — revoked once the next one replaces
@@ -224,6 +269,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     setHasCustomRange(readHasCustomRange());
     setSoundEnabledState(readSoundEnabled());
     setSoundVolumeState(readSoundVolume());
+    setIsAlertButtonVisibleState(readAlertButtonVisible());
   }, []);
 
   // Created once — playing it again later just rewinds and restarts (see
@@ -235,16 +281,15 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
   // Redraws the favicon from a clean base image every call (never onto
   // whatever the canvas already had) — a plain circle-and-number badge in
   // the bottom-right corner, cleared entirely once `count` is back to 0.
-  // Sweeps and removes *every* icon-ish link before adding the new one —
-  // not just the one this code was tracking — self-healing against strays
-  // that reappear from outside this code (confirmed via logging: Next Fast
-  // Refresh re-injected the layout's static icon links mid-session, so the
-  // one-time mount cleanup below wasn't enough — the tracked link kept
-  // getting updated correctly, but the browser was showing one of the
-  // untouched originals sitting alongside it). Also replaces the <link>
-  // element itself rather than mutating href in place, and uses a blob:
-  // object URL rather than a data: URI, both extra precautions against
-  // browsers that don't repaint on a plain attribute/URI-scheme change.
+  // Only ever removes faviconLinkRef.current — the exact <link> this code
+  // itself created last time, tracked by reference, never a selector sweep
+  // — since layout.tsx's metadata deliberately has no `icon`/`shortcut`
+  // entries and favicon.ico lives in public/ (see layout.tsx's comment),
+  // nothing else ever creates a rel="icon" link for this to collide with.
+  // Replaces the <link> element itself rather than mutating href in place,
+  // and uses a blob: object URL rather than a data: URI, both extra
+  // precautions against browsers that don't repaint on a plain
+  // attribute/URI-scheme change.
   const renderFaviconBadge = useCallback((count: number) => {
     const base = baseFaviconImageRef.current;
     if (!base) return;
@@ -279,9 +324,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
       if (!blob) return;
       const url = URL.createObjectURL(blob);
 
-      document
-        .querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]')
-        .forEach((el) => el.remove());
+      faviconLinkRef.current?.remove();
 
       const newLink = document.createElement("link");
       newLink.rel = "icon";
@@ -297,21 +340,10 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     }, "image/png");
   }, []);
 
-  // Takes over the tab's favicon so the badge above can be drawn onto it.
-  // The page otherwise ships several favicon-ish links at once — Next's own
-  // favicon.ico file-convention link (sizes="48x48"), this app's metadata
-  // icon, and a legacy shortcut-icon link — and browsers don't agree on
-  // which one wins when several exist; removing all of them and installing
-  // exactly one <link rel="icon"> this code owns makes that unambiguous.
-  // (An earlier version of this kept the *first* existing link instead of
-  // removing everything — which happened to be the low-priority "shortcut
-  // icon" one, not the one browsers were actually displaying, so updating
-  // it did nothing visible.)
+  // Takes over the tab's favicon so the badge above can be drawn onto it —
+  // loads the plain source image once, then hands off to renderFaviconBadge
+  // above for the actual <link> creation.
   useEffect(() => {
-    document
-      .querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]')
-      .forEach((el) => el.remove());
-
     const img = new Image();
     img.src = "/favicon-32x32.png";
     img.onload = () => {
@@ -347,10 +379,6 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
       // Same as above — non-fatal.
     }
   }, []);
-
-  const dismissRespawnOnboarding = useCallback(() => {
-    setGlobalRange(globalRange);
-  }, [globalRange, setGlobalRange]);
 
   const markKilled = useCallback(
     (bossId: string) => {
@@ -421,11 +449,6 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     [records],
   );
 
-  const hasEverMarkedKilled = useMemo(
-    () => Object.keys(records).length > 0,
-    [records],
-  );
-
   const setSoundEnabled = useCallback((enabled: boolean) => {
     setSoundEnabledState(enabled);
     try {
@@ -436,6 +459,9 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     } catch {
       // Non-fatal — see persistRecords.
     }
+    // Riding along on this click as the real user gesture the browser's
+    // permission prompt needs — see askForNotificationPermissionOnce.
+    if (enabled) askForNotificationPermissionOnce();
   }, []);
 
   const setSoundVolume = useCallback((step: number) => {
@@ -448,12 +474,50 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
+  // Shared by the real status-transition alert and testAlertSound below —
+  // always rewinds and restarts, since the real alert relies on that to
+  // not get swallowed by an already-in-progress play() (see its own call
+  // site). testAlertSound is what actually guards against spamming, by
+  // simply not calling this while the previous play() hasn't finished.
+  const playAlertSound = useCallback(() => {
+    const audio = alertAudioRef.current;
+    if (!audio) return;
+    audio.volume = (soundVolume / (VOLUME_STEPS - 1)) * MAX_VOLUME_SCALE;
+    audio.currentTime = 0;
+    audio.play().catch(() => {
+      // Autoplay blocked (no user gesture yet) — silent, same as any other
+      // environment where the sound just can't play.
+    });
+  }, [soundVolume]);
+
+  const testAlertSound = useCallback(() => {
+    const audio = alertAudioRef.current;
+    // `paused` is false only while actually mid-playback — true once
+    // ended, so this only blocks a click that lands *during* a previous
+    // (test or real) play, not every click after the first.
+    if (audio && !audio.paused) return;
+    playAlertSound();
+  }, [playAlertSound]);
+
+  const setIsAlertButtonVisible = useCallback((visible: boolean) => {
+    setIsAlertButtonVisibleState(visible);
+    try {
+      window.localStorage.setItem(
+        ALERT_BUTTON_VISIBLE_STORAGE_KEY,
+        visible ? "1" : "0",
+      );
+    } catch {
+      // Non-fatal — see persistRecords.
+    }
+  }, []);
+
   const resetAll = useCallback(() => {
     try {
       window.localStorage.removeItem(RECORDS_STORAGE_KEY);
       window.localStorage.removeItem(GLOBAL_RANGE_STORAGE_KEY);
       window.localStorage.removeItem(SOUND_ENABLED_STORAGE_KEY);
       window.localStorage.removeItem(SOUND_VOLUME_STORAGE_KEY);
+      window.localStorage.removeItem(ALERT_BUTTON_VISIBLE_STORAGE_KEY);
       window.localStorage.removeItem(HIDDEN_STORAGE_KEY);
     } catch {
       // Non-fatal — see persistRecords.
@@ -470,8 +534,9 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     setHidden({});
     setGlobalRangeState(FALLBACK_RANGE);
     setHasCustomRange(false);
-    setSoundEnabledState(true);
+    setSoundEnabledState(false);
     setSoundVolumeState(DEFAULT_VOLUME_STEP);
+    setIsAlertButtonVisibleState(true);
     // A reset shouldn't leave a stale unread badge from before it ran.
     unreadCountRef.current = 0;
     if (originalTitleRef.current != null) {
@@ -506,17 +571,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
 
     if (transitions === 0) return;
 
-    if (soundEnabled) {
-      const audio = alertAudioRef.current;
-      if (audio) {
-        audio.volume = (soundVolume / (VOLUME_STEPS - 1)) * MAX_VOLUME_SCALE;
-        audio.currentTime = 0;
-        audio.play().catch(() => {
-          // Autoplay blocked (no user gesture on the page yet) — silent,
-          // same as any other environment where the sound just can't play.
-        });
-      }
-    }
+    if (soundEnabled) playAlertSound();
 
     if (document.hidden) {
       if (originalTitleRef.current == null) {
@@ -530,7 +585,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     trackedBossIds,
     getStatus,
     soundEnabled,
-    soundVolume,
+    playAlertSound,
     renderFaviconBadge,
   ]);
 
@@ -561,17 +616,18 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
         globalRange,
         setGlobalRange,
         hasCustomRange,
-        dismissRespawnOnboarding,
         markKilled,
         markAlive,
         getKilledAt,
         getStatus,
         trackedBossIds,
-        hasEverMarkedKilled,
         soundEnabled,
         setSoundEnabled,
         soundVolume,
         setSoundVolume,
+        testAlertSound,
+        isAlertButtonVisible,
+        setIsAlertButtonVisible,
         isHidden,
         hideBoss,
         unhideBoss,

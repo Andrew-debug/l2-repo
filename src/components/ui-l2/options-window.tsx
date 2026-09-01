@@ -1,14 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Header from "./header";
 import { WindowBorder } from "./window-l2";
 import { DraggableWindow, DragHandle } from "./draggable-window";
 import { IconStateButton } from "../ui/icon-state-button";
+import { TabButton } from "./tab-button";
 import { useOptionsPanel } from "@/components/providers/OptionsPanelProvider";
 import { useBackgroundDim } from "@/components/providers/BackgroundDimProvider";
 import { useHeaderVisibility } from "@/components/providers/HeaderVisibilityProvider";
+import { useEnterChat } from "@/components/providers/EnterChatProvider";
 import {
   useBossRespawn,
   VOLUME_STEPS,
@@ -34,50 +36,6 @@ const TABS: { id: Tab; label: string }[] = [
 ];
 
 const FOOTER_BUTTON_CLASS = "w-3.5 h-4.75 flex-1 text-[13px]";
-
-function TabButton({
-  label,
-  active,
-  disabled,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  disabled?: boolean;
-  onClick: () => void;
-}) {
-  const [hovered, setHovered] = useState(false);
-  // normal_tab: unselected. normal_tab_on: the active tab. normal_tab_on_over:
-  // hover — for a tab you could switch *to*, not the one you're already on
-  // (active wins over hovered: nothing to preview-highlight about clicking
-  // the tab you're already looking at). The disabled tab (Video — no
-  // settings behind it) never tracks hover at all either.
-  const src = disabled
-    ? "/icons/petinterface_tab2.png"
-    : active
-      ? "/icons/petinterface_tab1.png"
-      : hovered
-        ? "/icons/petinterface_tab2_over.png"
-        : "/icons/petinterface_tab2.png";
-
-  return (
-    <button
-      onClick={disabled ? undefined : onClick}
-      onMouseEnter={disabled ? undefined : () => setHovered(true)}
-      onMouseLeave={disabled ? undefined : () => setHovered(false)}
-      disabled={disabled}
-      className={cn(
-        "relative h-5 flex-1",
-        disabled ? "cursor-default opacity-60" : "cursor-pointer",
-      )}
-    >
-      <Image src={src} alt="" fill className="object-fill" />
-      <span className="relative text-[13px] text-system-text-dim bottom-0.5">
-        {label}
-      </span>
-    </button>
-  );
-}
 
 // A fully custom dropdown, not a native <select> — the browser's own
 // hover/keyboard-highlight color inside a native select's option list is
@@ -164,55 +122,80 @@ const BOSS_RESPAWN_TIME_OPTIONS: { id: string; label: string }[] = [
   { id: "12-16h", label: "12-16 hours" },
 ];
 
-// Same custom-dropdown shell as Dropdown above, but backed by real state
-// (globalRange) instead of local-only stand-in state — this is the one
-// control on the Game tab wired to an actual server-wide setting, so
-// picking a preset or typing a custom value takes effect immediately
-// (matching how the deleted Respawn Settings window used to work), no
-// separate Apply step.
-function BossRespawnTimeSelect() {
-  const { globalRange, setGlobalRange } = useBossRespawn();
+// Same custom-dropdown shell as Dropdown above, but reads/writes the draft
+// (see OptionsWindow's `draft`), not real state directly — like every other
+// control in this dialog, picking a preset or typing a custom value doesn't
+// take effect until Apply/OK. (It used to bypass the draft entirely and
+// apply immediately, matching the deleted Respawn Settings window's old
+// behavior — changed on request so it follows the rest of the dialog.)
+function BossRespawnTimeSelect({
+  range,
+  onRangeChange,
+  focusCustomSignal,
+}: {
+  range: RespawnRange;
+  onRangeChange: (range: RespawnRange) => void;
+  // Bumped by Up Next's "Set Time" prompt (via OptionsPanelProvider's
+  // focusRespawnTimeSignal) — switches into Custom mode on change, which
+  // the effect below then focuses.
+  focusCustomSignal: number;
+}) {
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
   const [selection, setSelection] = useState<string>(
-    () => findPresetIdByRange(globalRange) ?? CUSTOM_RESPAWN_ID,
+    () => findPresetIdByRange(range) ?? CUSTOM_RESPAWN_ID,
   );
   const [customText, setCustomText] = useState(() =>
-    findPresetIdByRange(globalRange)
+    findPresetIdByRange(range)
       ? ""
-      : globalRange.minHours === globalRange.maxHours
-        ? String(globalRange.minHours)
-        : `${globalRange.minHours}-${globalRange.maxHours}`,
+      : range.minHours === range.maxHours
+        ? String(range.minHours)
+        : `${range.minHours}-${range.maxHours}`,
   );
   const [customInvalid, setCustomInvalid] = useState(false);
+  // Pulsating glow around the input, on only right after focusCustomSignal
+  // sends the player here — cleared the moment they act on it (type
+  // something, or click elsewhere), since its whole job is a one-shot
+  // "type here" nudge, not a permanent decoration.
+  const [showGuideGlow, setShowGuideGlow] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  // Tracks what this component itself last pushed to globalRange, so the
-  // hydration-resync effect below only reacts to *external* changes (e.g.
-  // localStorage finishing its async read after mount) instead of fighting
-  // the user's own in-progress edit.
-  const lastAppliedRangeRef = useRef(globalRange);
+  // Tracks what this component itself last pushed via onRangeChange, so the
+  // resync effect below only reacts to *external* changes to the draft
+  // (e.g. the window re-staging its draft from the real globalRange on
+  // reopen) instead of fighting the user's own in-progress edit.
+  const lastAppliedRangeRef = useRef(range);
 
   useEffect(() => {
-    if (rangesEqual(globalRange, lastAppliedRangeRef.current)) return;
-    lastAppliedRangeRef.current = globalRange;
-    const matched = findPresetIdByRange(globalRange);
+    if (rangesEqual(range, lastAppliedRangeRef.current)) return;
+    lastAppliedRangeRef.current = range;
+    const matched = findPresetIdByRange(range);
     if (matched) {
       setSelection(matched);
     } else {
       setSelection(CUSTOM_RESPAWN_ID);
       setCustomText(
-        globalRange.minHours === globalRange.maxHours
-          ? String(globalRange.minHours)
-          : `${globalRange.minHours}-${globalRange.maxHours}`,
+        range.minHours === range.maxHours
+          ? String(range.minHours)
+          : `${range.minHours}-${range.maxHours}`,
       );
     }
-  }, [globalRange]);
+  }, [range]);
 
   useEffect(() => {
     if (selection === CUSTOM_RESPAWN_ID) inputRef.current?.focus();
   }, [selection]);
+
+  useEffect(() => {
+    if (focusCustomSignal <= 0) return;
+    // If selection is already Custom, the [selection] effect above won't
+    // re-fire (its dependency didn't change) — focus directly here too so
+    // asking again while already in Custom mode still re-focuses the input.
+    setSelection(CUSTOM_RESPAWN_ID);
+    inputRef.current?.focus();
+    setShowGuideGlow(true);
+  }, [focusCustomSignal]);
 
   useEffect(() => {
     if (!open) return;
@@ -223,9 +206,9 @@ function BossRespawnTimeSelect() {
     return () => document.removeEventListener("mousedown", handlePointerDown);
   }, [open]);
 
-  const emit = (range: RespawnRange) => {
-    lastAppliedRangeRef.current = range;
-    setGlobalRange(range);
+  const emit = (newRange: RespawnRange) => {
+    lastAppliedRangeRef.current = newRange;
+    onRangeChange(newRange);
   };
 
   const handlePreset = (id: string) => {
@@ -236,6 +219,7 @@ function BossRespawnTimeSelect() {
   };
 
   const handleCustomChange = (text: string) => {
+    setShowGuideGlow(false);
     setCustomText(text);
     const parsed = parseCustomRespawnRange(text);
     if (parsed) {
@@ -258,12 +242,20 @@ function BossRespawnTimeSelect() {
 
   return (
     <div ref={containerRef} className="relative w-30">
-      <div className="relative flex h-3.75 w-full items-center border border-window-content-border bg-window-bg pl-1 text-[13px] leading-3.5 text-white">
+      <div
+        className={cn(
+          "relative flex h-3.75 w-full items-center border border-window-content-border bg-window-bg pl-1 text-[13px] leading-3.5 text-white",
+          selection === CUSTOM_RESPAWN_ID &&
+            showGuideGlow &&
+            "respawn-input-glow",
+        )}
+      >
         {selection === CUSTOM_RESPAWN_ID ? (
           <input
             ref={inputRef}
             value={customText}
             onChange={(e) => handleCustomChange(e.target.value)}
+            onBlur={() => setShowGuideGlow(false)}
             placeholder="e.g. 6 or 12-16 (or 5m TEMP)"
             className={cn(
               "h-full w-full bg-transparent pr-4 text-[13px] leading-3.5 text-white placeholder:text-white/30 focus:outline-none",
@@ -390,13 +382,44 @@ function DisabledCheckbox({
   );
 }
 
-// The reference client's volume sliders are a row of discrete blocks (5
-// here — see VOLUME_STEPS), not a continuous drag-anywhere bar — no game
-// art exists for the real thing, so this reproduces the look with plain
-// divs: filled blocks (0..value) in the same gold used for the scrollbar
-// thumb/gold-button elsewhere, unfilled ones dim. Click a block to jump the
-// value straight to it, same as clicking a spot on the reference slider.
-function StepSlider({
+// Scaled down from the source PNGs' native sizes (slider_back.png 125x9,
+// slider_cursor*.png 8x15, slider_mark.png 4x13) to fit the dialog's actual
+// available width — all three shrunk by the same ~0.6 factor so the cursor
+// and marks stay in proportion to the track instead of looking oversized
+// next to it.
+const SLIDER_TRACK_WIDTH = 110;
+const SLIDER_TRACK_HEIGHT = 7;
+const SLIDER_CURSOR_WIDTH = 7;
+const SLIDER_CURSOR_HEIGHT = 9;
+const SLIDER_MARK_WIDTH = 3;
+const SLIDER_MARK_HEIGHT = 8;
+
+// Marks are spaced edge-to-edge across the *whole* track — level 0's mark
+// starts flush with the track's left end, the last level's mark ends flush
+// with its right end — not across the cursor's narrower travel range,
+// which used to leave a gap between the end marks and the track's actual
+// ends.
+function sliderMarkLeft(step: number): number {
+  return ((SLIDER_TRACK_WIDTH - SLIDER_MARK_WIDTH) * step) / (VOLUME_STEPS - 1);
+}
+
+// The cursor is wider than a mark, so it's centered on each mark's midpoint
+// rather than sharing the marks' own left-edge math — meaning it overhangs
+// the track by a couple pixels at both extremes, same as a real slider knob
+// riding slightly past the ends of its track.
+function sliderCursorLeft(step: number): number {
+  return sliderMarkLeft(step) + SLIDER_MARK_WIDTH / 2 - SLIDER_CURSOR_WIDTH / 2;
+}
+
+// The reference client's volume sliders are a real draggable cursor on a
+// track, not a row of discrete blocks — but still only ever sit at one of
+// VOLUME_STEPS fixed levels (marked by slider_mark.png ticks under the
+// track), never a free continuous position. Dragging doesn't ease between
+// levels: on every pointer move the cursor is redrawn at whichever level's
+// exact position is currently closest, so it visibly jumps straight from
+// one mark to the next/previous the moment the pointer crosses the
+// midpoint between them, rather than trailing the pointer continuously.
+function Slider({
   value,
   onChange,
   disabled,
@@ -407,87 +430,141 @@ function StepSlider({
   disabled?: boolean;
   className?: string;
 }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [hovered, setHovered] = useState(false);
+  const [pressed, setPressed] = useState(false);
+
+  const cursorSrc = pressed
+    ? "/icons/slider_cursor_down.png"
+    : hovered
+      ? "/icons/slider_cursor_over.png"
+      : "/icons/slider_cursor.png";
+
+  const stepFromClientX = (clientX: number) => {
+    const rect = trackRef.current?.getBoundingClientRect();
+    if (!rect) return value;
+    const x = clientX - rect.left;
+    const clamped = Math.min(Math.max(x, 0), SLIDER_TRACK_WIDTH);
+    return Math.round((clamped / SLIDER_TRACK_WIDTH) * (VOLUME_STEPS - 1));
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (disabled || e.button !== 0) return;
+    setPressed(true);
+    onChange?.(stepFromClientX(e.clientX));
+
+    const handleMouseMove = (moveEvent: MouseEvent) => {
+      onChange?.(stepFromClientX(moveEvent.clientX));
+    };
+    const handleMouseUp = () => {
+      setPressed(false);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+  };
+
   return (
     <div
+      ref={trackRef}
       className={cn(
-        "flex h-3 w-24 gap-px border border-window-content-border bg-black/40 p-px",
+        "relative shrink-0 select-none",
+        disabled ? "opacity-50" : "cursor-pointer",
         className,
       )}
+      style={{ width: SLIDER_TRACK_WIDTH, height: SLIDER_CURSOR_HEIGHT }}
+      onMouseDown={handleMouseDown}
+      onMouseEnter={() => !disabled && setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
+      <Image
+        src="/icons/slider_back.png"
+        alt=""
+        width={SLIDER_TRACK_WIDTH}
+        height={SLIDER_TRACK_HEIGHT}
+        className="pointer-events-none absolute top-1/2 left-0 -translate-y-1/2"
+      />
       {Array.from({ length: VOLUME_STEPS }).map((_, step) => (
-        <button
+        <Image
           key={step}
-          type="button"
-          disabled={disabled}
-          onClick={() => onChange?.(step)}
-          aria-label={`Level ${step + 1}`}
-          className={cn(
-            "flex-1",
-            step <= value ? "bg-[#bdae84]" : "bg-white/10",
-            !disabled && step > value && "hover:bg-white/20",
-            !disabled && step <= value && "hover:bg-[#d8c9a0]",
-            disabled && "cursor-default",
-          )}
+          src="/icons/slider_mark.png"
+          alt=""
+          width={SLIDER_MARK_WIDTH}
+          height={SLIDER_MARK_HEIGHT}
+          className="pointer-events-none absolute top-1/2 -translate-y-1/2"
+          style={{ left: sliderMarkLeft(step) }}
         />
       ))}
+      <Image
+        src={cursorSrc}
+        alt=""
+        width={SLIDER_CURSOR_WIDTH}
+        height={SLIDER_CURSOR_HEIGHT}
+        className="pointer-events-none absolute top-1/2 -translate-y-1/2"
+        style={{ left: sliderCursorLeft(value) }}
+      />
     </div>
   );
 }
 
 // Decorative row to match — same shape as the real Notification Vol.
 // slider below, just inert (no state, nothing plays SFX/music/voice in
-// this app). Kept visually present so the tab doesn't look broken/empty
-// next to the one real control.
-function DisabledStepSlider({ className }: { className?: string }) {
-  return (
-    <div
-      className={cn(
-        "flex h-3 w-24 gap-px border border-window-content-border bg-black/40 p-px opacity-50",
-        className,
-      )}
-    >
-      {Array.from({ length: VOLUME_STEPS }).map((_, step) => (
-        <div key={step} className="flex-1 bg-white/10" />
-      ))}
-    </div>
-  );
+// this app). Kept visually present, pinned to level 0, so the tab doesn't
+// look broken/empty next to the one real control.
+function DisabledSlider({ className }: { className?: string }) {
+  return <Slider value={0} disabled className={className} />;
 }
 
-function AudioTabContent() {
-  const { soundEnabled, setSoundEnabled, soundVolume, setSoundVolume } =
-    useBossRespawn();
-
+// Reads/writes the draft, not the real BossRespawnProvider state directly —
+// see OptionsWindow's `draft` for why (Apply/Cancel semantics: nothing here
+// takes effect until Apply/OK is clicked).
+function AudioTabContent({
+  soundEnabled,
+  soundVolume,
+  onSoundEnabledChange,
+  onSoundVolumeChange,
+}: {
+  soundEnabled: boolean;
+  soundVolume: number;
+  onSoundEnabledChange: (enabled: boolean) => void;
+  onSoundVolumeChange: (step: number) => void;
+}) {
   return (
-    <div className="mx-1.5 mt-1 flex flex-col gap-1.5 bg-window-bg px-3 py-2">
-      <div className="flex items-center justify-between">
-        <span className="text-[13px] text-white/50">SFX Vol.</span>
-        <DisabledStepSlider />
+    <div className="mx-1.5 mt-1 flex flex-col bg-window-bg px-3 py-2 leading-tight">
+      <div className="flex items-center gap-2">
+        <span className="flex-1 whitespace-nowrap text-right text-[13px] text-white/50">
+          SFX Vol.
+        </span>
+        <DisabledSlider />
       </div>
-      <div className="flex items-center justify-between">
-        <span className="text-[13px] text-white/50">Music Vol.</span>
-        <DisabledStepSlider />
+      <div className="flex items-center gap-2">
+        <span className="flex-1 whitespace-nowrap text-right text-[13px] text-white/50">
+          Music Vol.
+        </span>
+        <DisabledSlider />
       </div>
-      <div className="flex items-center justify-between">
-        <span className="text-[13px] text-white/50">System Voice</span>
-        <DisabledStepSlider />
+      <div className="flex items-center gap-2">
+        <span className="flex-1 whitespace-nowrap text-right text-[13px] text-white/50">
+          System Voice
+        </span>
+        <DisabledSlider />
       </div>
-      <div className="flex items-center justify-between">
-        <span className="text-[13px] text-white/50">Tutorial Voice</span>
-        <DisabledStepSlider />
-      </div>
-      <div className="flex items-center justify-between">
-        <span className="text-[13px] text-white">Notification Vol.</span>
-        <StepSlider
+      <div className="flex items-center gap-2">
+        <span className="flex-1 whitespace-nowrap text-right text-[13px] text-white">
+          Notification Vol.
+        </span>
+        <Slider
           value={soundVolume}
-          onChange={setSoundVolume}
+          onChange={onSoundVolumeChange}
           disabled={!soundEnabled}
         />
       </div>
       <Checkbox
         checked={!soundEnabled}
-        onChange={(muted) => setSoundEnabled(!muted)}
-        label="Mute all sounds"
-        className="mt-1"
+        onChange={(muted) => onSoundEnabledChange(!muted)}
+        label="Mute all sounds."
+        className="mt-1 ml-4.5"
       />
     </div>
   );
@@ -500,31 +577,156 @@ function AudioTabContent() {
 // reference's layout. Game only keeps Interface/Initialize/Transparent from
 // the reference, since everything else on that tab (language, display
 // filters, tracking, party loot, ...) has no equivalent here either.
+// Every checkbox/slider/dropdown across both tabs — including the
+// respawn-time control — is a staged edit (see `draft` below): nothing
+// takes effect until Apply or OK, and closing via Cancel or the header's X
+// discards it, restoring exactly what was showing when the dialog was
+// opened.
 export function OptionsWindow() {
-  const { isOpen, setIsOpen } = useOptionsPanel();
-  const { isBackgroundVisible, setIsBackgroundVisible } = useBackgroundDim();
+  const { isOpen, setIsOpen, focusRespawnTimeSignal } = useOptionsPanel();
+  const {
+    isBackgroundVisible,
+    setIsBackgroundVisible,
+    isDimmed,
+    setIsDimmed,
+    isBackgroundInteractive,
+    setIsBackgroundInteractive,
+  } = useBackgroundDim();
   const { isHeaderVisible, setIsHeaderVisible } = useHeaderVisibility();
+  const { enterChat, setEnterChat } = useEnterChat();
+  const {
+    isAlertButtonVisible,
+    setIsAlertButtonVisible,
+    soundEnabled,
+    setSoundEnabled,
+    soundVolume,
+    setSoundVolume,
+    globalRange,
+    setGlobalRange,
+  } = useBossRespawn();
   const [tab, setTab] = useState<Tab>("game");
-  const [transparent, setTransparent] = useState(false);
-  // None of these back real functionality (this isn't a game client) —
-  // local, inert toggles purely so the window doesn't read as broken when
-  // clicked, matching the reference's checked/unchecked starting state.
-  const [showRegion, setShowRegion] = useState(true);
-  // Unlike the other checkboxes on this tab, this one is real: it toggles
-  // the game-style cursor (globals.css's default `* { cursor: url(...) }`
-  // rule) on and off for the whole page, falling back to the plain web
-  // cursor when unchecked.
+  // Last-applied ("committed") values — what every checkbox reverts to when
+  // the window is closed via Cancel/X without hitting Apply/OK. Most of
+  // these are local and inert (this isn't a game client), purely so the
+  // window doesn't read as broken when clicked, matching the reference's
+  // checked/unchecked starting state. Two exceptions besides enterChat
+  // (context-backed, destructured above): gameCursor (toggles the
+  // game-style cursor via the effect below) and transparent (toggles every
+  // window's chrome between the app's default translucent background and a
+  // solid one, also via an effect below). Defaults to true/checked,
+  // matching every window's actual out-of-the-box look.
+  const [transparent, setTransparent] = useState(true);
   const [gameCursor, setGameCursor] = useState(true);
   const [arrow3d, setArrow3d] = useState(true);
-  const [enterChat, setEnterChat] = useState(true);
-  const [autoCode, setAutoCode] = useState(true);
   const [tracking, setTracking] = useState(true);
   const [declineDuels, setDeclineDuels] = useState(false);
   const [hideDropped, setHideDropped] = useState(false);
 
+  // What the checkboxes/slider on screen actually read from and write to.
+  // Deliberately not the committed state (or the real context setters)
+  // above — every control in this dialog is a draft edit until Apply/OK
+  // pushes it through applyDraft, so ticking a box (or closing the window
+  // afterward) never has a visible effect until then.
+  const makeDraft = useCallback(
+    () => ({
+      transparent,
+      gameCursor,
+      arrow3d,
+      enterChat,
+      tracking,
+      declineDuels,
+      hideDropped,
+      isHeaderVisible,
+      isBackgroundVisible,
+      isDimmed,
+      isBackgroundInteractive,
+      isAlertButtonVisible,
+      soundEnabled,
+      soundVolume,
+      globalRange,
+    }),
+    [
+      transparent,
+      gameCursor,
+      arrow3d,
+      enterChat,
+      tracking,
+      declineDuels,
+      hideDropped,
+      isHeaderVisible,
+      isBackgroundVisible,
+      isDimmed,
+      isBackgroundInteractive,
+      isAlertButtonVisible,
+      soundEnabled,
+      soundVolume,
+      globalRange,
+    ],
+  );
+  const [draft, setDraft] = useState(makeDraft);
+
+  const updateDraft = <K extends keyof ReturnType<typeof makeDraft>>(
+    key: K,
+    value: ReturnType<typeof makeDraft>[K],
+  ) => setDraft((prev) => ({ ...prev, [key]: value }));
+
+  // Re-stages the draft from whatever's currently committed every time the
+  // window opens — this is what makes a closed-without-applying edit
+  // disappear: nothing reset it, it just never survived to be re-shown.
+  const wasOpenRef = useRef(isOpen);
+  useEffect(() => {
+    if (isOpen && !wasOpenRef.current) setDraft(makeDraft());
+    wasOpenRef.current = isOpen;
+  }, [isOpen, makeDraft]);
+
+  // Commits the draft: pushes every value through to its real store (the
+  // context setters take effect immediately; the purely-local ones just
+  // become the new committed baseline for next time). Apply calls this and
+  // stays open; OK calls it and closes; Cancel/X skip it entirely, so the
+  // draft's edits are simply discarded.
+  const applyDraft = () => {
+    setTransparent(draft.transparent);
+    setGameCursor(draft.gameCursor);
+    setArrow3d(draft.arrow3d);
+    setEnterChat(draft.enterChat);
+    setTracking(draft.tracking);
+    setDeclineDuels(draft.declineDuels);
+    setHideDropped(draft.hideDropped);
+    setIsHeaderVisible(draft.isHeaderVisible);
+    setIsBackgroundVisible(draft.isBackgroundVisible);
+    setIsDimmed(draft.isDimmed);
+    setIsBackgroundInteractive(draft.isBackgroundInteractive);
+    setIsAlertButtonVisible(draft.isAlertButtonVisible);
+    setSoundEnabled(draft.soundEnabled);
+    setSoundVolume(draft.soundVolume);
+    setGlobalRange(draft.globalRange);
+  };
+  const handleApply = () => applyDraft();
+  const handleOk = () => {
+    applyDraft();
+    setIsOpen(false);
+  };
+  const handleCancel = () => setIsOpen(false);
+
   useEffect(() => {
     document.documentElement.classList.toggle("default-cursor", !gameCursor);
   }, [gameCursor]);
+
+  // Every window's WindowBorder reads its chrome background from the
+  // --color-window-bg custom property (Tailwind's bg-window-bg utility) —
+  // overriding it via a class on <html> when unchecked reaches every
+  // window at once, same mechanism as .default-cursor above.
+  useEffect(() => {
+    document.documentElement.classList.toggle("opaque-windows", !transparent);
+  }, [transparent]);
+
+  // Up Next's "Set Time" prompt bumps this (see useOptionsPanel's
+  // requestFocusRespawnTime) to jump straight to the respawn-time control —
+  // BossRespawnTimeSelect below watches the same signal to switch itself
+  // into Custom mode and focus its input.
+  useEffect(() => {
+    if (focusRespawnTimeSignal > 0) setTab("game");
+  }, [focusRespawnTimeSignal]);
 
   return (
     <DraggableWindow
@@ -536,7 +738,7 @@ export function OptionsWindow() {
       )}
     >
       <DragHandle>
-        <Header title="Options" canClose onClose={() => setIsOpen(false)} />
+        <Header title="Options" canClose onClose={handleCancel} />
       </DragHandle>
       <div className="flex flex-col border border-black">
         <div className="relative flex pl-2 pr-4 pb-0 pt-1">
@@ -572,9 +774,21 @@ export function OptionsWindow() {
             className="object-fill"
           />
 
-          <div className="relative m-1 min-h-24">
-            {tab === "game" && (
-              <>
+          <div className="relative m-1 flex min-h-24 flex-col">
+            {/* Every tab panel below is stacked in the same grid cell
+                (col-start-1/row-start-1) and always rendered — only the
+                inactive ones are visibility:hidden, not unmounted. That
+                makes the grid row auto-size to the *tallest* panel (Game)
+                regardless of which tab is showing, so switching to the
+                shorter Audio or Video tab keeps the same window height
+                instead of shrinking the dialog around it. */}
+            <div className="relative grid flex-1">
+              <div
+                className={cn(
+                  "col-start-1 row-start-1",
+                  tab !== "game" && "invisible pointer-events-none",
+                )}
+              >
                 <div className="flex items-center bg-window-bg mx-1.5 mt-1 pl-3 pt-1 gap-2">
                   <span className="text-[13px] text-white">Interface</span>
                   <div className="flex items-center gap-2">
@@ -598,8 +812,8 @@ export function OptionsWindow() {
                       }}
                     />
                     <Checkbox
-                      checked={transparent}
-                      onChange={setTransparent}
+                      checked={draft.transparent}
+                      onChange={(v) => updateDraft("transparent", v)}
                       label="Transparent"
                     />
                   </div>
@@ -621,14 +835,14 @@ export function OptionsWindow() {
                         since a real per-player visibility filter has no
                         equivalent here, but a real toggle for this did. */}
                     <Checkbox
-                      checked={isHeaderVisible}
-                      onChange={setIsHeaderVisible}
+                      checked={draft.isHeaderVisible}
+                      onChange={(v) => updateDraft("isHeaderVisible", v)}
                       label="Header"
                     />
                     <Checkbox
-                      checked={isBackgroundVisible}
-                      onChange={setIsBackgroundVisible}
-                      label="Monsters"
+                      checked={draft.isBackgroundVisible}
+                      onChange={(v) => updateDraft("isBackgroundVisible", v)}
+                      label="Background Epic Bosses"
                     />
                     <DisabledCheckbox checked label="Other PCs" />
                     <DisabledCheckbox checked label="Clan" className="pl-2.5" />
@@ -646,53 +860,72 @@ export function OptionsWindow() {
                 </div>
 
                 <div className="mx-1.5 mt-2 grid grid-cols-2 gap-x-2 gap-y-0.5 bg-window-bg px-3 py-1.5">
+                  {/* Repurposed from the reference's inert "Show Region" —
+                      brings back Up Next's Alert on/off button after the
+                      player has dismissed it via its own close button. */}
                   <Checkbox
-                    checked={showRegion}
-                    onChange={setShowRegion}
-                    label="Show Region"
+                    checked={draft.isAlertButtonVisible}
+                    onChange={(v) => updateDraft("isAlertButtonVisible", v)}
+                    label="Alert Button"
                   />
                   <DisabledCheckbox checked={false} label="Disable Game Tips" />
                   <Checkbox
-                    checked={gameCursor}
-                    onChange={setGameCursor}
+                    checked={draft.gameCursor}
+                    onChange={(v) => updateDraft("gameCursor", v)}
                     label="Game Cursor"
                   />
                   <Checkbox
-                    checked={arrow3d}
-                    onChange={setArrow3d}
+                    checked={draft.arrow3d}
+                    onChange={(v) => updateDraft("arrow3d", v)}
                     label="3D Arrow"
                   />
                 </div>
 
                 <div className="mx-1.5 mt-2 grid grid-cols-2 gap-x-2 gap-y-0.5 bg-window-bg px-3 py-1.5">
                   <Checkbox
-                    checked={enterChat}
-                    onChange={setEnterChat}
+                    checked={draft.enterChat}
+                    onChange={(v) => updateDraft("enterChat", v)}
                     label="Enter Chat"
                   />
+                  {/* Repurposed from the reference's inert "Auto Code" —
+                      the dark overlay over the epic-boss background art
+                      (see BackgroundDimProvider's isDimmed / Background.tsx).
+                      Unchecking it removes the darkening, same as what Exit
+                      Game does to the background when leaving. */}
                   <Checkbox
-                    checked={autoCode}
-                    onChange={setAutoCode}
-                    label="Auto Code"
+                    checked={draft.isDimmed}
+                    onChange={(v) => updateDraft("isDimmed", v)}
+                    label="Dim Background"
                   />
                   <DisabledCheckbox checked={false} label="Key Security" />
-                  <DisabledCheckbox checked label="Game Pad" />
+                  {/* Repurposed from the reference's inert "Game Pad" —
+                      whether the epic-boss background panels respond to
+                      hover/click at all (see BackgroundDimProvider's
+                      isBackgroundInteractive / Background.tsx's isPickable).
+                      Unchecking it lets a player see the art clearly, once
+                      undimmed, without the hover glow or risking an
+                      accidental click back into the game. */}
+                  <Checkbox
+                    checked={draft.isBackgroundInteractive}
+                    onChange={(v) => updateDraft("isBackgroundInteractive", v)}
+                    label="Epic Boss Hover"
+                  />
                 </div>
 
                 <div className="mx-1.5 mt-2 grid grid-cols-2 gap-x-2 gap-y-0.5 bg-window-bg px-3 py-1.5">
                   <Checkbox
-                    checked={tracking}
-                    onChange={setTracking}
+                    checked={draft.tracking}
+                    onChange={(v) => updateDraft("tracking", v)}
                     label="Tracking"
                   />
                   <Checkbox
-                    checked={declineDuels}
-                    onChange={setDeclineDuels}
+                    checked={draft.declineDuels}
+                    onChange={(v) => updateDraft("declineDuels", v)}
                     label="Decline Duels"
                   />
                   <Checkbox
-                    checked={hideDropped}
-                    onChange={setHideDropped}
+                    checked={draft.hideDropped}
+                    onChange={(v) => updateDraft("hideDropped", v)}
                     label="Hide Dropped Item(s)"
                     className="col-span-2 whitespace-nowrap"
                   />
@@ -700,43 +933,70 @@ export function OptionsWindow() {
 
                 <div className="flex items-center bg-window-bg mx-1.5 mt-2 mb-1 gap-1 pl-3 py-1">
                   <span className="text-[13px] text-white">Respawn time</span>
-                  <BossRespawnTimeSelect />
-                </div>
-                <div className="flex h-6 gap-px p-1 mb-1">
-                  <IconStateButton
-                    defaultIcon="/icons/smallbutton2.png"
-                    hoverIcon="/icons/smallbutton2_over.png"
-                    clickIcon="/icons/smallbutton2_down.png"
-                    className={FOOTER_BUTTON_CLASS}
-                    text="OK"
-                    onClick={() => setIsOpen(false)}
-                  />
-                  <IconStateButton
-                    defaultIcon="/icons/smallbutton2.png"
-                    hoverIcon="/icons/smallbutton2_over.png"
-                    clickIcon="/icons/smallbutton2_down.png"
-                    className={FOOTER_BUTTON_CLASS}
-                    text="Cancel"
-                    onClick={() => setIsOpen(false)}
-                  />
-                  <IconStateButton
-                    defaultIcon="/icons/smallbutton2.png"
-                    hoverIcon="/icons/smallbutton2_over.png"
-                    clickIcon="/icons/smallbutton2_down.png"
-                    className={FOOTER_BUTTON_CLASS}
-                    text="Apply"
+                  <BossRespawnTimeSelect
+                    range={draft.globalRange}
+                    onRangeChange={(v) => updateDraft("globalRange", v)}
+                    focusCustomSignal={focusRespawnTimeSignal}
                   />
                 </div>
-              </>
-            )}
+              </div>
 
-            {tab === "audio" && <AudioTabContent />}
+              <div
+                className={cn(
+                  "col-start-1 row-start-1",
+                  tab !== "audio" && "invisible pointer-events-none",
+                )}
+              >
+                <AudioTabContent
+                  soundEnabled={draft.soundEnabled}
+                  soundVolume={draft.soundVolume}
+                  onSoundEnabledChange={(v) => updateDraft("soundEnabled", v)}
+                  onSoundVolumeChange={(v) => updateDraft("soundVolume", v)}
+                />
+              </div>
 
-            {tab === "video" && (
-              <p className="py-6 text-center text-[13px] text-white/40">
-                Nothing to configure here.
-              </p>
-            )}
+              <div
+                className={cn(
+                  "col-start-1 row-start-1 flex items-center justify-center",
+                  tab !== "video" && "invisible pointer-events-none",
+                )}
+              >
+                <p className="py-6 text-center text-[13px] text-white/40">
+                  Nothing to configure here.
+                </p>
+              </div>
+            </div>
+
+            {/* Shared across every tab (not per-tab) — Apply/OK commit
+                whatever's staged across *all* tabs at once, not just
+                whichever one happens to be showing, so switching tabs
+                mid-edit never loses a pending change. */}
+            <div className="flex h-6 gap-px p-1 mb-1">
+              <IconStateButton
+                defaultIcon="/icons/smallbutton2.png"
+                hoverIcon="/icons/smallbutton2_over.png"
+                clickIcon="/icons/smallbutton2_down.png"
+                className={FOOTER_BUTTON_CLASS}
+                text="OK"
+                onClick={handleOk}
+              />
+              <IconStateButton
+                defaultIcon="/icons/smallbutton2.png"
+                hoverIcon="/icons/smallbutton2_over.png"
+                clickIcon="/icons/smallbutton2_down.png"
+                className={FOOTER_BUTTON_CLASS}
+                text="Cancel"
+                onClick={handleCancel}
+              />
+              <IconStateButton
+                defaultIcon="/icons/smallbutton2.png"
+                hoverIcon="/icons/smallbutton2_over.png"
+                clickIcon="/icons/smallbutton2_down.png"
+                className={FOOTER_BUTTON_CLASS}
+                text="Apply"
+                onClick={handleApply}
+              />
+            </div>
           </div>
         </div>
       </div>

@@ -4,6 +4,8 @@ import Header from "./header";
 import { WindowBorder } from "./window-l2";
 import { DraggableWindow, DragHandle } from "./draggable-window";
 import { IconStateButton } from "../ui/icon-state-button";
+import { formatShortcutLabel } from "@/hooks/use-app-shortcut";
+import { useEnterChat } from "@/components/providers/EnterChatProvider";
 import { cn } from "@/lib/utils";
 
 const MenuRow = ({
@@ -78,8 +80,11 @@ function SystemMenuPanel({
   // Petition/Options belong here too (see the reference screenshot) but
   // there are no 3-state icon assets for them yet — add once those PNGs
   // are sourced.
+  const { enterChat } = useEnterChat();
   const menuItems = [
     {
+      // Decorative — no real listener backs Alt+B (see the component doc
+      // comment above), so unlike Up Next below this label never changes.
       text: "Community(Alt+B)",
       defaultIcon: "/icons/board_icon.png",
       hoverIcon: "/icons/board_icon_over.png",
@@ -94,7 +99,7 @@ function SystemMenuPanel({
     },
 
     {
-      text: "Up Next(Alt+N)",
+      text: formatShortcutLabel("Up Next", "N", enterChat),
       defaultIcon: "/icons/mainwndtabicon4.png",
       hoverIcon: "/icons/mainwndtabicon4_over.png",
       clickIcon: "/icons/mainwndtabicon4_down.png",
@@ -133,6 +138,7 @@ function SystemMenuPanel({
   return (
     <DraggableWindow
       id="system-menu"
+      raiseOnMount
       className="absolute bottom-12 right-0 w-38.5"
       initialOffset={offset}
       onOffsetChange={onOffsetChange}

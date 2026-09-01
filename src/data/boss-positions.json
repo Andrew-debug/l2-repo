@@ -1,5 +1,45 @@
 [
   {
+    "bossId": "29001",
+    "absoluteX": 545,
+    "absoluteY": 2220
+  },
+  {
+    "bossId": "29014",
+    "absoluteX": 930,
+    "absoluteY": 1400
+  },
+  {
+    "bossId": "29022",
+    "absoluteX": 920,
+    "absoluteY": 2400
+  },
+  {
+    "bossId": "29020",
+    "absoluteX": 1229,
+    "absoluteY": 1397
+  },
+  {
+    "bossId": "29028",
+    "absoluteX": 1725,
+    "absoluteY": 730
+  },
+  {
+    "bossId": "29068",
+    "absoluteX": 1550,
+    "absoluteY": 1884
+  },
+  {
+    "bossId": "29006",
+    "absoluteX": 745,
+    "absoluteY": 1870
+  },
+  {
+    "bossId": "29047",
+    "absoluteX": 1591,
+    "absoluteY": 929
+  },
+  {
     "bossId": "25372",
     "absoluteX": 99,
     "absoluteY": 2473

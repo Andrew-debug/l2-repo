@@ -38,7 +38,8 @@ export const itemIcons: Record<string, string> = {
   "Bronze Helmet": "/items-icons/armour/D/armor_helmet_i00.png",
   Aspis: "/items-icons/armour/D/shield_aspis_i00.png",
   "Divine Tome": "/items-icons/weapon/D/weapon_divine_tome_i00.png",
-  "Enchanted Earring": "/items-icons/accessary/accessary_enchanted_earing_i00.png",
+  "Enchanted Earring":
+    "/items-icons/accessary/accessary_enchanted_earing_i00.png",
   "Enchanted Ring": "/items-icons/accessary/accessary_enchanted_ring_i00.png",
   "Enchanted Necklace":
     "/items-icons/accessary/accessary_enchanted_necklace_i00.png",
@@ -65,8 +66,7 @@ export const itemIcons: Record<string, string> = {
   "Dark Stockings": "/items-icons/armour/D/armor_t16_l_i00.png",
   "Mystic's Stockings": "/items-icons/armour/D/armor_t17_l_i00.png",
   "White Tunic Pattern": "/items-icons/craft/etc_letter_red_i00.png",
-  "Dark Stocking Fabric":
-    "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
+  "Dark Stocking Fabric": "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
   Tomahawk: "/items-icons/weapon/D/weapon_tomahawk_i00.png",
   "Mace of Prayer": "/items-icons/weapon/D/weapon_mace_of_prayer_i00.png",
   "Mace of Judgment": "/items-icons/weapon/D/weapon_mace_of_judgment_i00.png",
@@ -89,8 +89,7 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/accessary/accessary_near_forest_necklace_i00.png",
   "Tiger's Eye Earring Stone": "/items-icons/craft/etc_jewel_gold_i00.png",
   "Spiked Club": "/items-icons/weapon/D/weapon_spike_club_i00.png",
-  "Staff of Magic":
-    "/items-icons/weapon/D/weapon_staff_of_magicpower_i00.png",
+  "Staff of Magic": "/items-icons/weapon/D/weapon_staff_of_magicpower_i00.png",
   "Spiked Club Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Mithril Banded Mail":
     "/items-icons/armour/D/armor_mithril_banded_mail_i00.png",
@@ -101,15 +100,13 @@ export const itemIcons: Record<string, string> = {
   "Dagger of Mana": "/items-icons/weapon/D/weapon_dagger_of_mana_i00.png",
   "Mystic Knife": "/items-icons/weapon/D/weapon_mystic_knife_i00.png",
   "Shilen Knife": "/items-icons/weapon/D/weapon_knife_o'_silenus_i00.png",
-  "Mithril Banded Mail Material":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Mithril Banded Mail Material": "/items-icons/craft/etc_leather_gray_i00.png",
   "Mithril Banded Gaiters Material":
     "/items-icons/craft/etc_leather_gray_i00.png",
   "Shilen Knife Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Tome of Blood": "/items-icons/weapon/D/weapon_tome_of_blood_i00.png",
   "Sage's Blood": "/items-icons/weapon/D/weapon_blood_of_saints_i00.png",
-  "Tome of Blood Page":
-    "/items-icons/craft/etc_piece_of_paper_gray_i00.png",
+  "Tome of Blood Page": "/items-icons/craft/etc_piece_of_paper_gray_i00.png",
   "Blast Plate": "/items-icons/armour/D/armor_t40_u_i00.png",
   "Mithril Breastplate": "/items-icons/armour/D/armor_t19_u_i00.png",
   "Compound Scale Mail": "/items-icons/armour/D/armor_t20_u_i00.png",
@@ -132,15 +129,15 @@ export const itemIcons: Record<string, string> = {
   "Stockings of Knowledge": "/items-icons/armour/D/armor_t41_l_i00.png",
   "Sword of Magic": "/items-icons/weapon/D/weapon_sword_of_magic_i00.png",
   "Sword of Occult": "/items-icons/weapon/D/weapon_sword_of_occult_i00.png",
-  "Two-Handed Sword":
-    "/items-icons/weapon/D/weapon_two_handed_sword_i00.png",
+  "Two-Handed Sword": "/items-icons/weapon/D/weapon_two_handed_sword_i00.png",
   "Crimson Sword": "/items-icons/weapon/D/weapon_crimson_sword_i00.png",
   "Elven Sword": "/items-icons/weapon/D/weapon_elven_sword_i00.png",
   "Two-Handed Sword Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Manticore Skin Shirt": "/items-icons/armour/D/armor_t42_u_i00.png",
   "Manticore Skin Gaiters": "/items-icons/armour/D/armor_t42_l_i00.png",
   "Manticore Skin Shirt Texture": "/items-icons/craft/etc_leather_gray_i00.png",
-  "Manticore Skin Gaiters Pattern": "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Manticore Skin Gaiters Pattern":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
   "Strengthened Long Bow":
     "/items-icons/weapon/D/weapon_strengthening_long_bow_i00.png",
   "Strengthened Long Bow Shaft": "/items-icons/craft/etc_branch_gold_i00.png",
@@ -152,19 +149,16 @@ export const itemIcons: Record<string, string> = {
   "Brigandine Temper": "/items-icons/craft/etc_plate_glay_i00.png",
   "Mithril Scale Gaiters Material":
     "/items-icons/craft/etc_plate_silver_i00.png",
-  "Brigandine Gaiters Material":
-    "/items-icons/craft/etc_plate_silver_i00.png",
+  "Brigandine Gaiters Material": "/items-icons/craft/etc_plate_silver_i00.png",
   Maingauche: "/items-icons/weapon/D/weapon_maingauche_i00.png",
   "Cursed Maingauche": "/items-icons/weapon/D/weapon_maingauche_i01.png",
   "Maingauche Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Cursed Maingauche Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Mithril Tunic": "/items-icons/armour/D/armor_t51_u_i00.png",
   "Mithril Stockings": "/items-icons/armour/D/armor_t51_l_i00.png",
-  "Mithril Tunic Fabric":
-    "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
+  "Mithril Tunic Fabric": "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
   "Mithril Stocking Design": "/items-icons/craft/etc_leather_gray_i00.png",
-  "Crucifix of Blood":
-    "/items-icons/weapon/D/weapon_crucifix_of_blood_i00.png",
+  "Crucifix of Blood": "/items-icons/weapon/D/weapon_crucifix_of_blood_i00.png",
   "Crucifix of Blood Piece": "/items-icons/craft/etc_squares_gray_i00.png",
   "Elven Earring": "/items-icons/accessary/accessary_elven_earing_i00.png",
   "Elven Ring": "/items-icons/accessary/accessary_elven_ring_i00.png",
@@ -234,8 +228,7 @@ export const itemIcons: Record<string, string> = {
   "Manticore Skin Boot Lining": "/items-icons/craft/etc_leather_gray_i00.png",
   "Brigandine Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
   "Elven Mithril Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
-  "Manticore Skin Gloves Lining":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Manticore Skin Gloves Lining": "/items-icons/craft/etc_leather_gray_i00.png",
   "Brigandine Gauntlets Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "Elven Mithril Gloves Design": "/items-icons/craft/etc_pouch_brown_i00.png",
   "Sword of Revolution":
@@ -264,8 +257,7 @@ export const itemIcons: Record<string, string> = {
   "Mithril Gloves Design": "/items-icons/craft/etc_pouch_brown_i00.png",
   "Ogre Power Gauntlets Part": "/items-icons/craft/etc_plate_silver_i00.png",
   "Assault Boots Part": "/items-icons/craft/etc_plate_silver_i00.png",
-  "Salamander Skin Boot Lining":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Salamander Skin Boot Lining": "/items-icons/craft/etc_leather_gray_i00.png",
   "Plate Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
   "Sage's Worn Gloves Lining": "/items-icons/craft/etc_leather_gray_i00.png",
   Glaive: "/items-icons/weapon/D/weapon_glaive_i00.png",
@@ -294,8 +286,7 @@ export const itemIcons: Record<string, string> = {
   "Staff of Life Shaft": "/items-icons/craft/etc_branch_gold_i00.png",
   "Atuba Mace Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Salamander Skin Mail": "/items-icons/armour/D/armor_t45_ul_i00.png",
-  "Salamander Skin Mail Texture":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Salamander Skin Mail Texture": "/items-icons/craft/etc_leather_gray_i00.png",
   "Sage's Rag": "/items-icons/armour/D/armor_t44_ul_i00.png",
   "Sage's Rag Lining": "/items-icons/craft/etc_leather_gray_i00.png",
   "Light Crossbow": "/items-icons/weapon/D/weapon_cyclone_bow_i00.png",
@@ -306,8 +297,7 @@ export const itemIcons: Record<string, string> = {
   "Plate Gaiters": "/items-icons/armour/D/armor_t46_l_i00.png",
   "Half Plate Temper": "/items-icons/craft/etc_plate_glay_i00.png",
   "Plate Gaiters Part": "/items-icons/craft/etc_plate_silver_i00.png",
-  "Scallop Jamadhr":
-    "/items-icons/weapon/D/weapon_scallop_jamadhr_i00.png",
+  "Scallop Jamadhr": "/items-icons/weapon/D/weapon_scallop_jamadhr_i00.png",
   "Scallop Jamadhr Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Greater Dye of DEX <Dex+2 Con-2>":
     "/items-icons/consumable/dyes/etc_dex_hena_i02.png",
@@ -315,12 +305,10 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/consumable/dyes/etc_int_hena_i02.png",
   "Greater Dye of INT <Int+2 Wit-2>":
     "/items-icons/consumable/dyes/etc_int_hena_i02.png",
-  "Mithril Shirt":
-    "/items-icons/armour/C/armor_tempered_mithril_shirt_i00.png",
+  "Mithril Shirt": "/items-icons/armour/C/armor_tempered_mithril_shirt_i00.png",
   "Tempered Mithril Gaiters":
     "/items-icons/armour/C/armor_tempered_mithril_gaiters_i00.png",
-  "Mithril Shirt Fabric":
-    "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
+  "Mithril Shirt Fabric": "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
   "Tempered Mithril Gaiters Fragment":
     "/items-icons/craft/etc_plate_silver_i00.png",
   "Greater Dye of CON <Con+2 Str-2>":
@@ -351,14 +339,12 @@ export const itemIcons: Record<string, string> = {
   "Chain Hood Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "Chain Shield Fragment": "/items-icons/craft/etc_plate_silver_i00.png",
   "Cursed Dagger": "/items-icons/weapon/C/weapon_cursed_dagger_i00.png",
-  "Dark Elven Dagger":
-    "/items-icons/weapon/C/weapon_darkelven_dagger_i00.png",
+  "Dark Elven Dagger": "/items-icons/weapon/C/weapon_darkelven_dagger_i00.png",
   "Cursed Dagger Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Dark Elven Dagger Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Chain Mail Shirt": "/items-icons/armour/C/armor_t48_u_i00.png",
   "Chain Gaiters": "/items-icons/armour/C/armor_t48_l_i00.png",
-  "Chain Mail Shirt Material":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Chain Mail Shirt Material": "/items-icons/craft/etc_leather_gray_i00.png",
   "Chain Gaiters Part": "/items-icons/craft/etc_plate_silver_i00.png",
   Scythe: "/items-icons/weapon/C/weapon_scythe_i00.png",
   "Orcish Glaive": "/items-icons/weapon/C/weapon_orcish_glaive_i00.png",
@@ -386,8 +372,7 @@ export const itemIcons: Record<string, string> = {
   "Mithril Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
   "Chain Boots Part": "/items-icons/craft/etc_plate_silver_i00.png",
   "Karmian Boots Fabric": "/items-icons/craft/etc_leather_gray_i00.png",
-  "Plate Leather Boot Lining":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Plate Leather Boot Lining": "/items-icons/craft/etc_leather_gray_i00.png",
   "Dwarven Chain Boots Part": "/items-icons/craft/etc_plate_silver_i00.png",
   "Boots of Seal Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "Reinforced Mithril Gloves Design":
@@ -416,9 +401,12 @@ export const itemIcons: Record<string, string> = {
   "Moonstone Earring Wire": "/items-icons/craft/etc_jewel_box_i00.png",
   "Aquastone Ring Wire": "/items-icons/craft/etc_jewel_box_i00.png",
   "Aquastone Necklace Chain": "/items-icons/craft/etc_jewel_box_i00.png",
-  "Skull of the Dead C-Grade": "/items-icons/consumable/raid/etc_raid_a_i02.png",
-  "Skull of the Dead B-Grade": "/items-icons/consumable/raid/etc_raid_a_i01.png",
-  "Skull of the Dead A-Grade": "/items-icons/consumable/raid/etc_raid_a_i00.png",
+  "Skull of the Dead C-Grade":
+    "/items-icons/consumable/raid/etc_raid_a_i02.png",
+  "Skull of the Dead B-Grade":
+    "/items-icons/consumable/raid/etc_raid_a_i01.png",
+  "Skull of the Dead A-Grade":
+    "/items-icons/consumable/raid/etc_raid_a_i00.png",
   "Angelic Essence: C-Grade": "/items-icons/consumable/raid/etc_raid_e_i02.png",
   "Angel's Soul: B-Grade": "/items-icons/consumable/raid/etc_raid_e_i01.png",
   "Angel's Soul: A-Grade": "/items-icons/consumable/raid/etc_raid_e_i00.png",
@@ -426,8 +414,7 @@ export const itemIcons: Record<string, string> = {
   "Battle Axe": "/items-icons/weapon/C/weapon_battle_axe_i00.png",
   "Silver Axe": "/items-icons/weapon/C/weapon_war_pick_i00.png",
   "Skull Graver": "/items-icons/weapon/C/weapon_skull_graver_i00.png",
-  "Heavy Doom Hammer":
-    "/items-icons/weapon/C/weapon_heavy_doom_hammer_i00.png",
+  "Heavy Doom Hammer": "/items-icons/weapon/C/weapon_heavy_doom_hammer_i00.png",
   "Crystal Staff": "/items-icons/weapon/C/weapon_crystal_staff_i00.png",
   "Stick of Faith": "/items-icons/weapon/C/weapon_stick_of_faith_i00.png",
   "Heavy Doom Axe": "/items-icons/weapon/C/weapon_heavy_doom_axe_i00.png",
@@ -460,13 +447,11 @@ export const itemIcons: Record<string, string> = {
   "Dwarven Chain Gaiters Material":
     "/items-icons/craft/etc_leather_gray_i00.png",
   Stiletto: "/items-icons/weapon/C/weapon_stiletto_i00.png",
-  "Soulfire Dirk":
-    "/items-icons/weapon/C/weapon_dagger_of_magicflame_i00.png",
+  "Soulfire Dirk": "/items-icons/weapon/C/weapon_dagger_of_magicflame_i00.png",
   "Stiletto Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Soulfire Dirk Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Robe of Seal": "/items-icons/armour/D/armor_t44_ul_i00.png",
-  "Robe of Seal Fabric":
-    "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
+  "Robe of Seal Fabric": "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
   "Horn of Glory": "/items-icons/weapon/C/weapon_horn_of_glory_i00.png",
   "Horn of Glory Fragment": "/items-icons/craft/etc_claw_i00.png",
   "Greater Dye of INT <Int+3 Men-3>":
@@ -485,11 +470,9 @@ export const itemIcons: Record<string, string> = {
   "Shining Circlet Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "War Axe": "/items-icons/weapon/C/weapon_war_axe_i00.png",
   "Nirvana Axe": "/items-icons/weapon/C/weapon_nirvana_axe_i00.png",
-  "Stick of Eternity":
-    "/items-icons/weapon/C/weapon_stick_of_eternity_i00.png",
+  "Stick of Eternity": "/items-icons/weapon/C/weapon_stick_of_eternity_i00.png",
   "Paradia Staff": "/items-icons/weapon/C/weapon_paradia_staff_i00.png",
-  "Pa'agrian Hammer":
-    "/items-icons/weapon/C/weapon_paagrio_hammer_i00.png",
+  "Pa'agrian Hammer": "/items-icons/weapon/C/weapon_paagrio_hammer_i00.png",
   "Sage's Staff": "/items-icons/weapon/C/weapon_sages_staff_i00.png",
   "Club of Nature": "/items-icons/weapon/C/weapon_club_of_nature_i00.png",
   "Mace of The Underworld":
@@ -501,8 +484,7 @@ export const itemIcons: Record<string, string> = {
   "Pa'agrian Hammer Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Sage's Staff Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Club of Nature Head": "/items-icons/craft/etc_squares_gray_i00.png",
-  "Mace of The Underworld Head":
-    "/items-icons/craft/etc_squares_gray_i00.png",
+  "Mace of The Underworld Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Greater Dye of Men <Men+3 Wit-3>":
     "/items-icons/consumable/dyes/etc_men_hena_i02.png",
   "Greater Dye of WIT <Wit+3 Int-3>":
@@ -518,8 +500,7 @@ export const itemIcons: Record<string, string> = {
   "Composite Boots Part": "/items-icons/craft/etc_plate_silver_i00.png",
   "Mithril Gauntlets Design": "/items-icons/craft/etc_pouch_brown_i00.png",
   Caliburs: "/items-icons/weapon/C/weapon_caliburs_i00.png",
-  "Sword of Delusion":
-    "/items-icons/weapon/C/weapon_sword_of_delusion_i00.png",
+  "Sword of Delusion": "/items-icons/weapon/C/weapon_sword_of_delusion_i00.png",
   Tsurugi: "/items-icons/weapon/C/weapon_tsurugi_i00.png",
   "Homunkulus's Sword":
     "/items-icons/weapon/C/weapon_homunkuluss_sword_i00.png",
@@ -562,8 +543,7 @@ export const itemIcons: Record<string, string> = {
   "Grace Dagger Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Dark Screamer Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Heathen's Book": "/items-icons/weapon/C/weapon_heathens_book_i00.png",
-  "Heathen's Book Page":
-    "/items-icons/craft/etc_piece_of_paper_white_i00.png",
+  "Heathen's Book Page": "/items-icons/craft/etc_piece_of_paper_white_i00.png",
   "Theca Leather Boots":
     "/items-icons/armour/C/armor_theca_leather_boots_i00.png",
   "Theca Leather Gloves":
@@ -573,24 +553,19 @@ export const itemIcons: Record<string, string> = {
   "Drake Leather Gloves": "/items-icons/armour/C/armor_t21_g_i00.png",
   "Full Plate Gauntlets": "/items-icons/armour/C/armor_t62_g_i00.png",
   "Divine Gloves": "/items-icons/armour/C/armor_t57_g_i00.png",
-  "Theca Leather Boots Texture":
-    "/items-icons/craft/etc_leather_gray_i00.png",
-  "Theca Leather Gloves Texture":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Theca Leather Boots Texture": "/items-icons/craft/etc_leather_gray_i00.png",
+  "Theca Leather Gloves Texture": "/items-icons/craft/etc_leather_gray_i00.png",
   "Drake Leather Boots Design": "/items-icons/craft/etc_pouch_brown_i00.png",
   "Full Plate Boots Part": "/items-icons/craft/etc_plate_silver_i00.png",
-  "Drake Leather Gloves Design":
-    "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Drake Leather Gloves Design": "/items-icons/craft/etc_pouch_brown_i00.png",
   "Full Plate Gauntlets Part": "/items-icons/craft/etc_plate_silver_i00.png",
   "Divine Gloves Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "Crystal Dagger": "/items-icons/weapon/C/weapon_crystal_dagger_i00.png",
   "Crystal Dagger Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Full Plate Helmet": "/items-icons/armour/D/armor_leather_helmet_i00.png",
-  "Full Plate Shield":
-    "/items-icons/armour/C/shield_full_plate_shield_i00.png",
+  "Full Plate Shield": "/items-icons/armour/C/shield_full_plate_shield_i00.png",
   "Full Plate Helmet Design": "/items-icons/craft/etc_pouch_brown_i00.png",
-  "Full Plate Shield Fragment":
-    "/items-icons/craft/etc_plate_silver_i00.png",
+  "Full Plate Shield Fragment": "/items-icons/craft/etc_plate_silver_i00.png",
   Scorpion: "/items-icons/weapon/C/weapon_scorpion_i00.png",
   "Widow Maker": "/items-icons/weapon/C/weapon_widow_maker_i00.png",
   "Orcish Poleaxe": "/items-icons/weapon/C/weapon_orcish_poleaxe_i00.png",
@@ -601,18 +576,17 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/armour/C/armor_theca_leather_mail_i00.png",
   "Theca Leather Gaiters":
     "/items-icons/armour/C/armor_theca_leather_gaiters_i00.png",
+  "Demon's Tunic": "/items-icons/armour/C/armor_t54_u_i00.png",
+  "Demon's Stockings": "/items-icons/armour/C/armor_t54_l_i00.png",
   "Drake Leather Armor": "/items-icons/armour/C/armor_t21_ul_i00.png",
-  "Theca Leather Armor Pattern":
-    "/items-icons/craft/etc_letter_red_i00.png",
+  "Theca Leather Armor Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "Theca Leather Gaiters Pattern":
     "/items-icons/craft/etc_leather_gray_i00.png",
-  "Drake Leather Armor Texture":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Drake Leather Armor Texture": "/items-icons/craft/etc_leather_gray_i00.png",
   "Full Plate Armor": "/items-icons/armour/C/armor_t62_ul_i00.png",
   "Full Plate Armor Temper": "/items-icons/craft/etc_plate_silver_i00.png",
   "Pa'agrian Axe": "/items-icons/weapon/C/weapon_paagrio_axe_i00.png",
-  "Deadman's Staff":
-    "/items-icons/weapon/C/weapon_deadmans_staff_i00.png",
+  "Deadman's Staff": "/items-icons/weapon/C/weapon_deadmans_staff_i00.png",
   "Ghoul's Staff": "/items-icons/weapon/C/weapon_ghouls_staff_i00.png",
   "Demon's Staff": "/items-icons/weapon/C/weapon_demons_staff_i00.png",
   "Yaksa Mace": "/items-icons/weapon/C/weapon_yaksa_mace_i00.png",
@@ -621,24 +595,20 @@ export const itemIcons: Record<string, string> = {
   "Ghoul's Staff Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Demon's Staff Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Yaksa Mace Head": "/items-icons/craft/etc_squares_gray_i00.png",
-  "Samurai Longsword":
-    "/items-icons/weapon/C/weapon_samurai_longsword_i00.png",
+  "Samurai Longsword": "/items-icons/weapon/C/weapon_samurai_longsword_i00.png",
   "Berserker Blade": "/items-icons/weapon/C/weapon_berserker_blade_i00.png",
   "Samurai Longsword Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Berserker Blade Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Divine Tunic": "/items-icons/armour/C/armor_t57_u_i00.png",
   "Divine Stockings": "/items-icons/armour/C/armor_t57_l_i00.png",
-  "Divine Tunic Fabric":
-    "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
+  "Divine Tunic Fabric": "/items-icons/craft/etc_piece_of_cloth_white_i00.png",
   "Divine Stocking Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "Great Pata": "/items-icons/weapon/C/weapon_great_pata_i00.png",
   "Great Pata Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Necklace of Binding":
     "/items-icons/accessary/accessary_necklace_of_binding_i00.png",
-  "Nassen's Earring":
-    "/items-icons/accessary/accessary_nassens_earing_i00.png",
-  "Ring of Binding":
-    "/items-icons/accessary/accessary_ring_of_binding_i00.png",
+  "Nassen's Earring": "/items-icons/accessary/accessary_nassens_earing_i00.png",
+  "Ring of Binding": "/items-icons/accessary/accessary_ring_of_binding_i00.png",
   "Necklace of Binding Chain": "/items-icons/craft/etc_jewel_box_i00.png",
   "Nassen's Earring Gemstone": "/items-icons/craft/etc_gem_red_i00.png",
   "Ring of Binding Gemstone": "/items-icons/craft/etc_bead_silver_i00.png",
@@ -648,8 +618,7 @@ export const itemIcons: Record<string, string> = {
   "Stockings of Zubei": "/items-icons/armour/B/armor_t56_l_i00.png",
   "Avadon Robe": "/items-icons/armour/B/armor_t59_ul_i00.png",
   "Tunic of Zubei Fabric": "/items-icons/craft/etc_leather_gray_i00.png",
-  "Stockings of Zubei Fabric":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Stockings of Zubei Fabric": "/items-icons/craft/etc_leather_gray_i00.png",
   "Avadon Robe Fabric": "/items-icons/craft/etc_leather_gray_i00.png",
   "Heavy War Axe": "/items-icons/weapon/B/weapon_heavy_war_axe_i00.png",
   "Sprite's Staff": "/items-icons/weapon/B/weapon_sprites_staff_i00.png",
@@ -659,8 +628,7 @@ export const itemIcons: Record<string, string> = {
   "Blue Wolf Gaiters": "/items-icons/armour/B/armor_t68_l_i00.png",
   "Doom Plate Armor": "/items-icons/armour/B/armor_t71_ul_i00.png",
   "Blue Wolf Breastplate Part": "/items-icons/craft/etc_plate_silver_i00.png",
-  "Blue Wolf Gaiters Material":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Blue Wolf Gaiters Material": "/items-icons/craft/etc_leather_gray_i00.png",
   "Doom Plate Armor Temper": "/items-icons/craft/etc_lump_white_i00.png",
   "Bow of Peril": "/items-icons/weapon/B/weapon_hazard_bow_i00.png",
   "Bow of Peril Shaft": "/items-icons/craft/etc_branch_gold_i00.png",
@@ -688,12 +656,10 @@ export const itemIcons: Record<string, string> = {
   "Zubei's Leather Shirt": "/items-icons/armour/B/armor_t65_u_i00.png",
   "Zubei's Leather Gaiters": "/items-icons/armour/B/armor_t65_l_i00.png",
   "Avadon Leather Armor": "/items-icons/armour/B/armor_t67_ul_i00.png",
-  "Zubei's Leather Shirt Fabric":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Zubei's Leather Shirt Fabric": "/items-icons/craft/etc_leather_gray_i00.png",
   "Zubei's Leather Gaiter Texture":
     "/items-icons/craft/etc_leather_gray_i00.png",
-  "Avadon Leather Armor Lining":
-    "/items-icons/craft/etc_leather_gray_i00.png",
+  "Avadon Leather Armor Lining": "/items-icons/craft/etc_leather_gray_i00.png",
   "Great Axe": "/items-icons/weapon/B/weapon_great_axe_i00.png",
   "Great Axe Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Zubei's Boots": "/items-icons/armour/B/armor_t64_b_i02.png",
@@ -720,9 +686,8 @@ export const itemIcons: Record<string, string> = {
   "Zubei's Gaiter Material": "/items-icons/craft/etc_leather_gray_i00.png",
   "Avadon Gaiters Material": "/items-icons/craft/etc_leather_gray_i00.png",
   "Great Sword": "/items-icons/weapon/B/weapon_great_sword_i00.png",
-  "Keshanberk": "/items-icons/weapon/B/weapon_kshanberk_i00.png",
-  "Sword of Valhalla":
-    "/items-icons/weapon/B/weapon_sword_of_valhalla_i00.png",
+  Keshanberk: "/items-icons/weapon/B/weapon_kshanberk_i00.png",
+  "Sword of Valhalla": "/items-icons/weapon/B/weapon_sword_of_valhalla_i00.png",
   "Great Sword Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Keshanberk Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Sword of Valhalla Blade": "/items-icons/craft/etc_sword_body_i00.png",
@@ -734,7 +699,7 @@ export const itemIcons: Record<string, string> = {
   "Zubei's Shield Fragment": "/items-icons/craft/etc_plate_silver_i00.png",
   "Avadon Shield Fragment": "/items-icons/craft/etc_plate_silver_i00.png",
   "Avadon Circlet Pattern": "/items-icons/craft/etc_letter_red_i00.png",
-  "Kris": "/items-icons/weapon/B/weapon_kris_i00.png",
+  Kris: "/items-icons/weapon/B/weapon_kris_i00.png",
   "Hell Knife": "/items-icons/weapon/B/weapon_hell_knife_i00.png",
   "Kris Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Hell Knife Edge": "/items-icons/craft/etc_sword_body_i00.png",
@@ -748,8 +713,7 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/scrolls/B/etc_scroll_of_enchant_weapon_i03.png",
   "Spell Breaker": "/items-icons/weapon/B/weapon_spell_breaker_i00.png",
   "Spell Breaker Head": "/items-icons/craft/etc_squares_gray_i00.png",
-  "Ice Storm Hammer":
-    "/items-icons/weapon/B/weapon_ice_storm_hammer_i00.png",
+  "Ice Storm Hammer": "/items-icons/weapon/B/weapon_ice_storm_hammer_i00.png",
   "Ice Storm Hammer Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Greater Dye of CON <Con+4 Dex-4>":
     "/items-icons/consumable/dyes/etc_con_hena_i02.png",
@@ -786,8 +750,7 @@ export const itemIcons: Record<string, string> = {
   "Tunic of Doom Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "Blue Wolf Stockings Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "Stockings of Doom Pattern": "/items-icons/craft/etc_letter_red_i00.png",
-  "Sword of Damascus":
-    "/items-icons/weapon/B/weapon_sword_of_damascus_i00.png",
+  "Sword of Damascus": "/items-icons/weapon/B/weapon_sword_of_damascus_i00.png",
   "Sword of Damascus Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Sealed Dark Crystal Leather Armor":
     "/items-icons/armour/A/armor_t75_u_i02.png",
@@ -844,8 +807,7 @@ export const itemIcons: Record<string, string> = {
   "Ring of Black Ore Gemstone": "/items-icons/craft/etc_gem_black_i00.png",
   "Necklace of Black Ore Beads": "/items-icons/craft/etc_bead_silver_i00.png",
   "Deadman's Glory": "/items-icons/weapon/B/weapon_deadmans_glory_i00.png",
-  "Art of Battle Axe":
-    "/items-icons/weapon/B/weapon_art_of_battle_axe_i00.png",
+  "Art of Battle Axe": "/items-icons/weapon/B/weapon_art_of_battle_axe_i00.png",
   "Staff of Evil Spirits":
     "/items-icons/weapon/B/weapon_staff_of_evil_sprit_i00.png",
   "Deadman's Glory Stone": "/items-icons/craft/etc_squares_gray_i00.png",
@@ -863,8 +825,7 @@ export const itemIcons: Record<string, string> = {
   "Doom Helmet Pattern": "/items-icons/craft/etc_letter_red_i00.png",
   "Circlet of Ice Fairy Sirra":
     "/items-icons/cosmetics/accessory_ice_queen_i00.png",
-  "Silver Arrow":
-    "/items-icons/consumable/arrows/etc_silver_quiver_i00.png",
+  "Silver Arrow": "/items-icons/consumable/arrows/etc_silver_quiver_i00.png",
   "Kaim Vanul's Bones":
     "/items-icons/weapon/B/weapon_bone_of_kaim_vanul_i00.png",
   "Star Buster": "/items-icons/weapon/B/weapon_star_buster_i00.png",
@@ -890,11 +851,10 @@ export const itemIcons: Record<string, string> = {
   "Blue Wolf Gloves Fabric": "/items-icons/craft/etc_leather_gray_i00.png",
   "Blood Tornado": "/items-icons/weapon/A/weapon_blood_tornado_i00.png",
   "Blood Tornado Edge": "/items-icons/craft/etc_sword_body_i00.png",
-  "Sealed Dark Crystal breastplate":
+  "Sealed Dark Crystal Breastplate":
     "/items-icons/armour/A/armor_t74_u_i02.png",
   "Sealed Dark Crystal Gaiters": "/items-icons/armour/A/armor_t74_l_i02.png",
-  "Sealed Tallum Plate Armor":
-    "/items-icons/armour/A/armor_t77_ul_i02.png",
+  "Sealed Tallum Plate Armor": "/items-icons/armour/A/armor_t77_ul_i02.png",
   "Sealed Dark Crystal Breastplate Pattern":
     "/items-icons/craft/etc_letter_red_i00.png",
   "Sealed Dark Crystal Gaiters Pattern":
@@ -917,8 +877,7 @@ export const itemIcons: Record<string, string> = {
   "Ancient Book - Divine Inspiration (Original Language Version)":
     "/items-icons/consumable/books/etc_add_buffslot_i01.png",
   "Sealed Armor of Nightmare": "/items-icons/armour/A/armor_t80_ul_i02.png",
-  "Sealed Majestic Plate Armor":
-    "/items-icons/armour/A/armor_t83_ul_i02.png",
+  "Sealed Majestic Plate Armor": "/items-icons/armour/A/armor_t83_ul_i02.png",
   "Sealed Armor of Nightmare Pattern":
     "/items-icons/craft/etc_letter_red_i00.png",
   "Sealed Majestic Plate Armor Pattern":
@@ -975,7 +934,8 @@ export const itemIcons: Record<string, string> = {
     "/items-icons/armour/A/armor_leather_helmet_i02.png",
   "Sealed Shield of Nightmare":
     "/items-icons/armour/A/shield_shield_of_nightmare_i02.png",
-  "Sealed Helm of Nightmare Design": "/items-icons/craft/etc_pouch_brown_i00.png",
+  "Sealed Helm of Nightmare Design":
+    "/items-icons/craft/etc_pouch_brown_i00.png",
   "Sealed Shield of Nightmare Fragment":
     "/items-icons/craft/etc_jewel_box_i00.png",
   "Sealed Majestic Circlet Design":
@@ -984,8 +944,7 @@ export const itemIcons: Record<string, string> = {
   "Tallum Glaive Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Sealed Leather Armor of Nightmare":
     "/items-icons/armour/A/armor_t81_ul_i02.png",
-  "Sealed Majestic Leather Armor":
-    "/items-icons/armour/A/armor_t84_ul_i02.png",
+  "Sealed Majestic Leather Armor": "/items-icons/armour/A/armor_t84_ul_i02.png",
   "Sealed Leather Armor of Nightmare Fabric":
     "/items-icons/craft/etc_leather_gray_i00.png",
   "Sealed Majestic Leather Armor Fabric":
@@ -1010,7 +969,8 @@ export const itemIcons: Record<string, string> = {
   "Forgotten Blade Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Heaven's Divider Edge": "/items-icons/craft/etc_sword_body_i00.png",
   "Sealed Major Arcana Robe": "/items-icons/armour/S/armor_t90_ul_i02.png",
-  "Sealed Major Arcana Robe Part": "/items-icons/craft/etc_plate_silver_i00.png",
+  "Sealed Major Arcana Robe Part":
+    "/items-icons/craft/etc_plate_silver_i00.png",
   "Saint Spear": "/items-icons/weapon/S/weapon_saint_spear_i00.png",
   "Saint Spear Blade": "/items-icons/craft/etc_sword_body_i00.png",
   "Sealed Tateossian Earring":
@@ -1049,8 +1009,7 @@ export const itemIcons: Record<string, string> = {
   "Basalt Battlehammer":
     "/items-icons/weapon/S/weapon_basalt_battlehammer_i00.png",
   "Imperial Staff": "/items-icons/weapon/S/weapon_imperial_staff_i00.png",
-  "Dragon Hunter Axe":
-    "/items-icons/weapon/S/weapon_dragon_hunter_axe_i00.png",
+  "Dragon Hunter Axe": "/items-icons/weapon/S/weapon_dragon_hunter_axe_i00.png",
   "Arcana Mace": "/items-icons/weapon/S/weapon_arcana_mace_i00.png",
   "Basalt Battlehammer Head": "/items-icons/craft/etc_squares_gray_i00.png",
   "Imperial Staff Head": "/items-icons/craft/etc_bark_blue_i00.png",
@@ -1095,6 +1054,42 @@ export const itemIcons: Record<string, string> = {
   "High-Grade Life Stone: level 76":
     "/items-icons/consumable/life_stones/etc_mineral_rare_i03.png",
   "Demon Circlet": "/items-icons/cosmetics/accessary_demon_circlet_i00.png",
+  "Ring of Queen Ant":
+    "/items-icons/jewelry/B/accessory_ring_of_queen_ant_i00.png",
+  "Earring of Orfen":
+    "/items-icons/accessary/A/accessory_earring_of_orfen_i00.png",
+  "High-Grade Life Stone: level 49":
+    "/items-icons/consumable/life_stones/etc_mineral_rare_i00.png",
+  "High-Grade Life Stone: level 52":
+    "/items-icons/consumable/life_stones/etc_mineral_rare_i00.png",
+  "Top-Grade Life Stone: level 52":
+    "/items-icons/consumable/life_stones/etc_mineral_unique_i01.png",
+  "Earring of Zaken":
+    "/items-icons/accessary/S/accessory_earring_of_zaken_i00.png",
+  "High-Grade Life Stone: level 58":
+    "/items-icons/consumable/life_stones/etc_mineral_rare_i01.png",
+  "High-Grade Life Stone: level 61":
+    "/items-icons/consumable/life_stones/etc_mineral_rare_i01.png",
+  "Top-Grade Life Stone: level 58":
+    "/items-icons/consumable/life_stones/etc_mineral_unique_i01.png",
+  "Top-Grade Life Stone: level 61":
+    "/items-icons/consumable/life_stones/etc_mineral_unique_i01.png",
+  "Pirate Hat": "/items-icons/cosmetics/accessary_sea_robber_i00.png",
+  "Ancient Book - Divine Inspiration (Manuscript)":
+    "/items-icons/consumable/books/etc_add_buffslot_i02.png",
+  "Top-Grade Life Stone: level 76":
+    "/items-icons/consumable/life_stones/etc_mineral_unique_i03.png",
+  "Ring of Baium": "/items-icons/accessary/S/accessory_ring_of_baium_i00.png",
+  "Tallum Blade*Dark Legion's Edge":
+    "/items-icons/weapon/weapon_dual_sword_i00.png",
+  "Blessed Scroll of Escape":
+    "/items-icons/scrolls/etc_scroll_of_return_i01.png",
+  "Necklace of Valakas":
+    "/items-icons/accessary/S/accessory_necklace_of_valakas_i00.png",
+  "Earring of Antharas":
+    "/items-icons/accessary/S/accessory_earring_of_antaras_i00.png",
+  "Necklace of Frintezza":
+    "/items-icons/accessary/S/accessory_necklace_of_frintessa_i00.png",
 };
 
 export function getItemIcon(itemName: string): string | undefined {
@@ -1124,6 +1119,7 @@ const ICON_FOLDER_CATEGORY: Record<string, ItemCategory> = {
   weapon: "weapon",
   armour: "armor",
   accessary: "accessory",
+  jewelry: "accessory",
   cosmetics: "cosmetic",
   craft: "craft",
   scrolls: "scroll",
@@ -1343,10 +1339,7 @@ function getSortType(itemName: string): number {
   return SET_KEY_TYPE_BUCKET.get(getSetKey(itemName)) ?? CRAFT_FALLBACK_BUCKET;
 }
 
-export function compareDrops(
-  a: { item: string },
-  b: { item: string },
-): number {
+export function compareDrops(a: { item: string }, b: { item: string }): number {
   const tierDiff = getTier(a.item) - getTier(b.item);
   if (tierDiff !== 0) return tierDiff;
 

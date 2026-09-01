@@ -31,6 +31,11 @@ interface BossClusterMarkerKonvaProps {
   anchorX: number;
   anchorY: number;
   yOffset?: number;
+  // Overrides the member-count-based default (see CIRCLE_RADIUS_BASE/
+  // CIRCLE_RADIUS_PER_EXTRA_MEMBER) — for a cluster that wants its circle
+  // wider than its member count alone would produce, e.g. to leave more
+  // room around a fixed centerBossId marker.
+  radius?: number;
   expanded: boolean;
   onExpand: () => void;
   onMemberSelect: (id: string) => void;
@@ -49,6 +54,7 @@ export default function BossClusterMarkerKonva({
   anchorX,
   anchorY,
   yOffset = DEFAULT_CLUSTER_Y_OFFSET,
+  radius: radiusOverride,
   expanded,
   onExpand,
   onMemberSelect,
@@ -105,8 +111,9 @@ export default function BossClusterMarkerKonva({
         : variants.normal
     : null;
   const radius =
+    radiusOverride ??
     CIRCLE_RADIUS_BASE +
-    Math.max(0, members.length - 3) * CIRCLE_RADIUS_PER_EXTRA_MEMBER;
+      Math.max(0, members.length - 3) * CIRCLE_RADIUS_PER_EXTRA_MEMBER;
   const originY = anchorY + yOffset;
 
   return (

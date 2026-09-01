@@ -16,6 +16,8 @@ import { DropIcon, GRADE_ICON, dropLabel, gradeForDisplay } from "./drop-icon";
 import { ItemHoverTooltip } from "./item-hover-tooltip";
 import { usePersistedOffset } from "@/hooks/use-persisted-offset";
 import { usePersistedView } from "@/hooks/use-persisted-view";
+import { useAppShortcut, formatShortcutLabel } from "@/hooks/use-app-shortcut";
+import { useEnterChat } from "@/components/providers/EnterChatProvider";
 import { cn } from "@/lib/utils";
 
 const GRID_COLUMNS = 6;
@@ -134,20 +136,18 @@ export function BossLootDisplay() {
     return () => observer.disconnect();
   }, [view, sortedDrops.length]);
 
-  // Alt+V — matches the fold icon's own "Raid Boss Drop List(Alt+V)"
-  // tooltip and does the same thing MenuSection's drop-list toolbar button
-  // does (see toggleOpen). `e.code` (not `e.key`) so the physical key is
-  // what matters regardless of what character Alt produces on a given
-  // OS/layout.
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!e.altKey || e.code !== "KeyV" || e.repeat) return;
-      e.preventDefault();
-      toggleOpen();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [toggleOpen]);
+  const { enterChat } = useEnterChat();
+  const dropListShortcutLabel = formatShortcutLabel(
+    "Raid Boss Drop List",
+    "V",
+    enterChat,
+  );
+
+  // Matches the fold icon's own tooltip below and does the same thing
+  // MenuSection's drop-list toolbar button does (see toggleOpen). See
+  // useAppShortcut for the Alt-vs-bare-key branching (Options > Game tab's
+  // "Enter Chat" checkbox).
+  useAppShortcut("KeyV", toggleOpen);
 
   // Stays mounted while closed (invisible, not removed) instead of
   // returning null — this sits in a flex row with NPC Info/Respawn
@@ -168,7 +168,7 @@ export function BossLootDisplay() {
         <DragHandle>
           <FoldIcon
             icon="/icons/menuicon2.png"
-            label="Raid Boss Drop List(Alt+V)"
+            label={dropListShortcutLabel}
             onUnfold={() => setIsFolded(false)}
           />
         </DragHandle>
@@ -253,8 +253,9 @@ export function BossLootDisplay() {
                     {sortedDrops.map((drop, index) => {
                       const grade = gradeForDisplay(drop.item);
                       return (
-                        <button
+                        <div
                           key={`${drop.item}-${index}`}
+                          tabIndex={0}
                           onMouseEnter={(e) => {
                             setHoveredIndex(index);
                             setHoveredRect(
@@ -274,10 +275,8 @@ export function BossLootDisplay() {
                             setHoveredIndex((i) => (i === index ? null : i))
                           }
                           className={cn(
-                            "relative flex aspect-square items-center justify-center border bg-black/40 transition-colors",
-                            hoveredIndex === index
-                              ? "border-white/40"
-                              : "border-window-content-border",
+                            "drop-slot relative flex aspect-square items-center justify-center transition-colors",
+                            hoveredIndex === index && "border-white/40!",
                           )}
                         >
                           <DropIcon item={drop.item} className="size-9" />
@@ -285,7 +284,7 @@ export function BossLootDisplay() {
                             x{drop.count}
                           </span>
                           {grade !== "none" && (
-                            <span className="absolute top-0.5 left-0.5 size-3.25">
+                            <span className="absolute top-0 left-0 size-3.25">
                               <Image
                                 src={GRADE_ICON[grade]}
                                 alt={grade}
@@ -295,14 +294,14 @@ export function BossLootDisplay() {
                               />
                             </span>
                           )}
-                        </button>
+                        </div>
                       );
                     })}
                     {Array.from({ length: emptyCellCount }).map((_, i) => (
                       <div
                         key={`empty-${i}`}
                         aria-hidden
-                        className="aspect-square border border-window-content-border bg-black/40"
+                        className="drop-slot aspect-square opacity-55"
                       />
                     ))}
                   </div>

@@ -28,19 +28,62 @@ export function EpicBossStatusRail() {
   if (!isBackgroundVisible) return null;
 
   return (
-    <div className="absolute right-0 bottom-16 left-0 grid grid-cols-8 border-y border-[#bdae84]/28 bg-gradient-to-b from-black/20 to-black/72">
-      {EPIC_BOSS_NAMES.map((name) => (
+    // pointer-events-none — purely decorative (no interactive descendants),
+    // so it shouldn't block clicks on the epic-boss background art it sits
+    // over (see Background's return-to-game panels).
+    <div className="pointer-events-none absolute right-0 bottom-16 left-0 border-t border-black">
+      <div
+        className="border-t border-b border-t-window-inner-gray border-b-black"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(6,8,10,0.62) 0%, rgba(3,4,6,0.9) 100%)",
+        }}
+      >
         <div
-          key={name}
-          className="flex items-center justify-center gap-1.75 border-r border-[#bdae84]/16 py-2 last:border-r-0"
-        >
-          <span className="size-1.5 rounded-full bg-white/30" />
-          <span className="text-[12px] tracking-[0.14em] text-system-text">
-            {name.toUpperCase()}
-          </span>
-          <span className="text-[11px] text-white/45">—</span>
+          className="h-px"
+          style={{
+            background:
+              "linear-gradient(90deg, rgba(189,174,132,0) 0%, rgba(189,174,132,0.45) 12%, rgba(189,174,132,0.45) 88%, rgba(189,174,132,0) 100%)",
+          }}
+        />
+        <div className="grid grid-cols-8">
+          {EPIC_BOSS_NAMES.map((name, i) => (
+            <div
+              key={name}
+              className="relative flex items-center justify-center gap-2.25 py-2.25"
+            >
+              <span
+                className="size-1.25 rotate-45"
+                style={{
+                  background: "linear-gradient(135deg, #bdae84, #735929)",
+                }}
+              />
+              <span className="text-[12px] tracking-[0.16em] text-system-text">
+                {name.toUpperCase()}
+              </span>
+              <span className="text-[11px] text-white/38">—</span>
+              {i < EPIC_BOSS_NAMES.length - 1 && (
+                <>
+                  <div
+                    className="absolute top-1 right-0 bottom-1 w-px"
+                    style={{
+                      background:
+                        "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 50%, rgba(0,0,0,0) 100%)",
+                    }}
+                  />
+                  <div
+                    className="absolute top-1 -right-px bottom-1 w-px"
+                    style={{
+                      background:
+                        "linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0) 100%)",
+                    }}
+                  />
+                </>
+              )}
+            </div>
+          ))}
         </div>
-      ))}
+      </div>
     </div>
   );
 }

@@ -13,7 +13,7 @@ import { useBackgroundDim } from "@/components/providers/BackgroundDimProvider";
 // Playwright render, not guessed) — all three are static decorative
 // elements with no user-resizable content, so these stay accurate unless
 // their own markup changes.
-const HEADER_HEIGHT_PX = 108; // PageTitleBanner's own height (it sits top-3.5)
+const HEADER_HEIGHT_PX = 80; // PageTitleBanner's own height (it's a flush top-0 h-20 bar)
 const EPIC_RAIL_AND_DOCK_PX = 101; // epic rail + gap + dock, when the rail is shown (it sits bottom-16)
 const DOCK_ONLY_PX = 48; // just the dock (+ a little breathing room), when the rail is hidden
 // Extra breathing room so this row never sits flush against the header
@@ -110,7 +110,14 @@ export function MainContentRow() {
 
   return (
     <div
-      className="grid mx-auto gap-4 px-4"
+      // pointer-events-none so the empty space around/between windows
+      // (this row spans nearly the full viewport regardless of which
+      // windows are actually open) doesn't swallow clicks meant for the
+      // epic-boss background art beneath it (see Background's return-to-
+      // game panels) — every window below explicitly restores its own
+      // pointer-events-auto (see DraggableWindow's root and Map's own
+      // wrapper), so this doesn't affect any of them while open.
+      className="pointer-events-none grid mx-auto gap-4 px-4"
       style={{
         gridTemplateColumns: `auto minmax(0, ${MAP_MAX_PX}px) minmax(${GROUP_MIN_PX}px, 1fr)`,
         width: `min(100%, ${IDEAL_ROW_WIDTH_PX}px)`,
