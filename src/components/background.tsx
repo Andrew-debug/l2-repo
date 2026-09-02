@@ -197,6 +197,10 @@ export function Background() {
                 alt={name}
                 fill
                 sizes="12.5vw"
+                // Default quality (75, see next.config.ts) visibly softened
+                // this painterly source art on re-encode — same issue as
+                // boss-portrait-image.tsx, same fix.
+                quality={90}
                 className="aspect-square object-cover"
                 style={{ objectPosition: `${x}% center` }}
                 priority

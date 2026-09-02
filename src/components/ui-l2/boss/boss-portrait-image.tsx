@@ -71,6 +71,9 @@ export function BossPortraitImage({
         alt={boss.name}
         fill
         sizes={sizes ?? "10vw"}
+        // Default (75, see next.config.ts) visibly softened this painterly
+        // source art on re-encode; 90 keeps it close to the source.
+        quality={90}
         // aspect-4/3 matches this component's only current caller
         // (info-display.tsx's `aspect-4/3` wrapper) — update if a future
         // caller needs a different ratio.

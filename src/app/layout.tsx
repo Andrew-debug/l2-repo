@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Marcellus } from "next/font/google";
-// import { Analytics } from '@vercel/analytics/next'
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import localFont from "next/font/local";
@@ -107,7 +107,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
         />
         {children}
-        {/* <Analytics /> */}
+        <Analytics />
         <Toaster />
       </body>
     </html>
