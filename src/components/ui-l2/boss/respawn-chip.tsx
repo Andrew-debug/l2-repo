@@ -9,19 +9,19 @@ import { cn } from "@/lib/utils";
 // just points at the always-visible Respawn Settings window rather than
 // opening/focusing it — that window has no open/closed toggle today.
 export function RespawnChip() {
-  const { globalRange, hasCustomRange } = useBossRespawn();
+  const { globalRange } = useBossRespawn();
 
   return (
     <div
       className={cn(
         "absolute bottom-4 left-4 flex items-center gap-2 border bg-black/85 px-2.5 py-1.25 text-[11px]",
-        hasCustomRange
+        globalRange
           ? "border-window-content-border"
           : "border-dashed border-system-text/60",
       )}
     >
       <span className="text-system-text">Respawn</span>
-      {hasCustomRange ? (
+      {globalRange ? (
         <>
           <span className="text-white/80">
             {globalRange.minHours} – {globalRange.maxHours} h

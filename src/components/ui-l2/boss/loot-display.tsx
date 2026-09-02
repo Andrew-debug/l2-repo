@@ -131,9 +131,21 @@ export function BossLootDisplay() {
     };
 
     recompute();
-    const observer = new ResizeObserver(recompute);
+    // Debounced, unlike the synchronous call above: a live window drag can
+    // fire this many times a second, and each tick forces a style/layout
+    // read (getComputedStyle, clientWidth/clientHeight) — worth coalescing
+    // into one recompute after resizing settles rather than paying that
+    // cost on every intermediate frame.
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    const observer = new ResizeObserver(() => {
+      if (timeoutId != null) clearTimeout(timeoutId);
+      timeoutId = setTimeout(recompute, 120);
+    });
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      if (timeoutId != null) clearTimeout(timeoutId);
+    };
   }, [view, sortedDrops.length]);
 
   const { enterChat } = useEnterChat();
@@ -164,6 +176,7 @@ export function BossLootDisplay() {
         )}
         initialOffset={offset}
         onOffsetChange={setOffset}
+        snapIntoViewport={isFolded}
       >
         <DragHandle>
           <FoldIcon

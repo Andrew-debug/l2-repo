@@ -6,9 +6,9 @@ import { WindowBorder } from "../window-l2";
 import { DraggableWindow, DragHandle } from "../draggable-window";
 import { FoldIcon } from "../fold-icon";
 import { TabButton } from "../tab-button";
-import { IconStateButton } from "../../ui/icon-state-button";
 import { bosses, levelRanges } from "@/lib/boss-data";
 import Image from "next/image";
+import { X } from "lucide-react";
 import { STATUS_ICON, STATUS_TEXT_CLASS } from "@/lib/boss-status";
 import { MARKER_ICON_EPIC_SRC } from "@/components/map/markerIcon";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
@@ -46,11 +46,20 @@ function timerParts(
   if (status === "pending")
     return {
       primary: formatDuration((maxAt ?? now) - now),
-      secondary: "window closes",
+      secondary: "guaranteed up",
+    };
+  // "dead" with no minAt means no respawn window is configured at all
+  // (globalRange is null — "not set"/manual mode, see BossRespawnProvider)
+  // — nothing to count down to, so this shows how long ago it died instead
+  // of a countdown toward a window that doesn't exist.
+  if (minAt == null)
+    return {
+      primary: formatDuration(now - killedAt),
+      secondary: "killed ago",
     };
   return {
-    primary: formatDuration((minAt ?? now) - now),
-    secondary: "opens in",
+    primary: formatDuration(minAt - now),
+    secondary: "starts in",
   };
 }
 
@@ -97,7 +106,16 @@ export default function BossLevelNavigator() {
 
   const now = Date.now();
 
+  // getStatus/getKilledAt change identity every second (BossRespawnProvider's
+  // live clock — see its own comment), which would otherwise force this
+  // filter+map+sort over every boss to rerun every second even while this
+  // panel is folded down to its icon or closed outright, with nothing on
+  // screen to show for it. Bailing out early skips that unconditionally
+  // while nothing depends on the result.
+  const isVisible = isOpen && !isFolded;
+
   const rows = useMemo(() => {
+    if (!isVisible) return [];
     const inRange = bosses.filter(
       (b) =>
         (!selectedRange ||
@@ -111,9 +129,13 @@ export default function BossLevelNavigator() {
         const status = getStatus(boss.id);
         const killedAt = getKilledAt(boss.id);
         const minAt =
-          killedAt != null ? killedAt + globalRange.minHours * HOUR_MS : null;
+          killedAt != null && globalRange
+            ? killedAt + globalRange.minHours * HOUR_MS
+            : null;
         const maxAt =
-          killedAt != null ? killedAt + globalRange.maxHours * HOUR_MS : null;
+          killedAt != null && globalRange
+            ? killedAt + globalRange.maxHours * HOUR_MS
+            : null;
         const hidden = isHidden(boss.id);
         const sortGroup = hidden
           ? 4 // dismissed as "not interested" — absolutely last
@@ -147,7 +169,15 @@ export default function BossLevelNavigator() {
           a.sortAt - b.sortAt ||
           a.boss.level - b.boss.level,
       );
-  }, [selectedRange, query, getStatus, getKilledAt, globalRange, isHidden]);
+  }, [
+    isVisible,
+    selectedRange,
+    query,
+    getStatus,
+    getKilledAt,
+    globalRange,
+    isHidden,
+  ]);
 
   // The soonest-to-open dead boss (first "dead" row once alive/pending sort
   // ahead of it) reads as "up next" — a quieter highlight than alive/
@@ -159,200 +189,217 @@ export default function BossLevelNavigator() {
     (r) => r.status === "dead" && !r.hidden,
   );
 
-  // Stays mounted while closed (invisible, not removed) instead of
-  // returning null — this sits in the main flex row alongside Map/Drop
-  // List/NPC Info/Upcoming Spawns, and unmounting dropped its slot from the
-  // row, shifting its neighbors over. invisible keeps the slot reserved so
-  // closing one window never moves the others.
-  if (isFolded) {
-    return (
-      <DraggableWindow
-        id="raid-bosses"
-        className={cn(
-          "relative size-7.5",
-          (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
-        )}
-        initialOffset={offset}
-        onOffsetChange={setOffset}
-      >
-        <DragHandle>
-          <FoldIcon
-            icon="/icons/menuicon1.png"
-            label={raidBossesShortcutLabel}
-            onUnfold={() => setIsFolded(false)}
-          />
-        </DragHandle>
-      </DraggableWindow>
-    );
-  }
-
+  // Outer box always reserves the full 296px-wide (w-74) footprint,
+  // regardless of open/folded state — the same fix Map applies to itself
+  // (see Map.tsx's own wrapper comment). This sits in MainContentRow's
+  // leading grid column, sized `auto` (i.e. to this box's own intrinsic
+  // width): without a fixed-size outer box, folding down to the ~30px icon
+  // shrank the column itself, which slid Map and the Up Next/Drop List/NPC
+  // Info group left into the space this panel just vacated. Each
+  // DraggableWindow below is absolutely positioned inside this box instead
+  // of contributing to its size.
   return (
-    <DraggableWindow
-      id="raid-bosses"
-      className={cn(
-        "relative flex h-full min-h-0 w-74 shrink-0 flex-col",
-        (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
-      )}
-      initialOffset={offset}
-      onOffsetChange={setOffset}
-    >
-      <DragHandle>
-        <Header
-          title="Raid Bosses"
-          canFold
-          canClose
-          onFold={() => setIsFolded(true)}
-          onClose={() => setIsOpen(false)}
-        />
-      </DragHandle>
-      <div className="min-h-0 flex-1">
-        <WindowBorder>
-          <div className="flex h-full min-h-0 flex-col">
-            <div className="relative grid grid-cols-4 px-2.5 pt-0.75">
-              <Image
-                src="/icons/siege_back1.png"
-                alt=""
-                fill
-                sizes="296px"
-                className="aspect-square object-fill z-0"
-              />
-              <Image
-                fill
-                src="/icons/ssq_lvlback1.png"
-                alt=""
-                sizes="296px"
-                className="aspect-square object-fill"
-              />
-              <TabButton
-                label="All"
-                active={selectedRange === null}
-                onClick={() => setSelectedRange(null)}
-              />
-              {levelRanges.map((range) => (
-                <TabButton
-                  key={range.label}
-                  label={range.label}
-                  active={selectedRange?.label === range.label}
-                  onClick={() => setSelectedRange(range)}
-                />
-              ))}
-            </div>
+    <div className="relative h-full min-h-0 w-74 shrink-0">
+      {isFolded ? (
+        <DraggableWindow
+          id="raid-bosses"
+          className={cn(
+            "absolute top-0 left-0 size-7.5",
+            (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
+          )}
+          initialOffset={offset}
+          onOffsetChange={setOffset}
+          snapIntoViewport={isFolded}
+        >
+          <DragHandle>
+            <FoldIcon
+              icon="/icons/menuicon1.png"
+              label={raidBossesShortcutLabel}
+              onUnfold={() => setIsFolded(false)}
+            />
+          </DragHandle>
+        </DraggableWindow>
+      ) : (
+        <DraggableWindow
+          id="raid-bosses"
+          className={cn(
+            "absolute top-0 left-0 flex h-full min-h-0 w-74 flex-col",
+            (!isOpen || !isOffsetHydrated) && "invisible pointer-events-none",
+          )}
+          initialOffset={offset}
+          onOffsetChange={setOffset}
+        >
+          <DragHandle>
+            <Header
+              title="Raid Bosses"
+              canFold
+              canClose
+              onFold={() => setIsFolded(true)}
+              onClose={() => setIsOpen(false)}
+            />
+          </DragHandle>
+          <div className="min-h-0 flex-1">
+            <WindowBorder>
+              <div className="flex h-full min-h-0 flex-col">
+                <div className="relative grid grid-cols-4 px-2.5 pt-0.75">
+                  <Image
+                    src="/icons/siege_back1.png"
+                    alt=""
+                    fill
+                    sizes="296px"
+                    priority
+                    className="aspect-square object-fill z-0"
+                  />
+                  <Image
+                    fill
+                    src="/icons/ssq_lvlback1.png"
+                    alt=""
+                    sizes="296px"
+                    priority
+                    className="aspect-square object-fill"
+                  />
+                  <TabButton
+                    label="All"
+                    active={selectedRange === null}
+                    onClick={() => setSelectedRange(null)}
+                  />
+                  {levelRanges.map((range) => (
+                    <TabButton
+                      key={range.label}
+                      label={range.label}
+                      active={selectedRange?.label === range.label}
+                      onClick={() => setSelectedRange(range)}
+                    />
+                  ))}
+                </div>
 
-            <div className="flex items-center gap-1.5 border border-window-content-border bg-window-content-bg px-2 py-1">
-              <IconStateButton
-                defaultIcon="/icons/search_button.png"
-                hoverIcon="/icons/search_button_over.png"
-                clickIcon="/icons/search_button_down.png"
-                className="w-2.75 h-3.25 shrink-0"
-                sizes="14px"
-                onClick={() => filterInputRef.current?.focus()}
-              />
-              <input
-                ref={filterInputRef}
-                id="raid-boss-filter"
-                name="raidBossFilter"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Filter by name"
-                className="w-full bg-transparent text-[13px] text-white placeholder:text-white/30 focus:outline-none"
-              />
-            </div>
+                <div className="flex items-center gap-1.5 border border-window-content-border bg-window-content-bg px-2 py-1">
+                  <span className="text-xs text-white/30">⌕</span>
+                  <input
+                    ref={filterInputRef}
+                    id="raid-boss-filter"
+                    name="raidBossFilter"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Filter by name"
+                    autoComplete="off"
+                    className="w-full bg-transparent text-[13px] text-white placeholder:text-white/30 focus:outline-none"
+                  />
+                  {query.length > 0 && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setQuery("");
+                        filterInputRef.current?.focus();
+                      }}
+                      aria-label="Clear filter"
+                      className="shrink-0 text-white/40 hover:text-white/70"
+                    >
+                      <X className="size-3" />
+                    </button>
+                  )}
+                </div>
 
-            <ul className="flex min-h-0 flex-1 flex-col overflow-y-scroll custom-scrollbar">
-              {rows.map(
-                ({ boss, status, killedAt, minAt, maxAt, hidden }, index) => {
-                  const { primary, secondary } = timerParts(
-                    status,
-                    killedAt,
-                    minAt,
-                    maxAt,
-                    now,
-                  );
-                  const isNextDead =
-                    status === "dead" && index === firstDeadIndex;
-                  return (
-                    <li key={boss.id}>
-                      <button
-                        onClick={() =>
-                          setSelectedBoss(
-                            selectedBossId === boss.id ? null : boss.id,
-                            "list",
-                          )
-                        }
-                        className={cn(
-                          "flex w-full items-center gap-2 border-b border-window-content-border px-1.5 py-1.5 text-left transition-colors hover:bg-white/10",
-                          selectedBossId === boss.id && "bg-white/5",
-                          hidden && "opacity-45",
-                        )}
-                      >
-                        <Image
-                          src={
-                            hidden
-                              ? STATUS_ICON.dead
-                              : status === "alive" &&
-                                  boss.npcType === "EpicBoss"
-                                ? MARKER_ICON_EPIC_SRC
-                                : STATUS_ICON[status]
-                          }
-                          alt=""
-                          width={18}
-                          height={18}
-                          className={cn(
-                            "shrink-0",
-                            !hidden &&
-                              status === "dead" &&
-                              !isNextDead &&
-                              "opacity-55",
-                          )}
-                        />
-                        <div className="min-w-0 flex-1 leading-tight">
-                          <p
+                <ul className="flex min-h-0 flex-1 flex-col overflow-y-scroll custom-scrollbar">
+                  {rows.map(
+                    (
+                      { boss, status, killedAt, minAt, maxAt, hidden },
+                      index,
+                    ) => {
+                      const { primary, secondary } = timerParts(
+                        status,
+                        killedAt,
+                        minAt,
+                        maxAt,
+                        now,
+                      );
+                      const isNextDead =
+                        status === "dead" && index === firstDeadIndex;
+                      return (
+                        <li key={boss.id}>
+                          <button
+                            onClick={() =>
+                              setSelectedBoss(
+                                selectedBossId === boss.id ? null : boss.id,
+                                "list",
+                              )
+                            }
                             className={cn(
-                              "truncate text-[13px]",
-                              killedAt == null
-                                ? "text-white"
-                                : status !== "dead" &&
-                                    STATUS_TEXT_CLASS[status],
-                              isNextDead && "text-[#e8dcc0]",
+                              "flex w-full items-center gap-2 border-b border-window-content-border px-1.5 py-1.5 text-left transition-colors hover:bg-white/10",
+                              selectedBossId === boss.id && "bg-white/5",
+                              hidden && "opacity-45",
                             )}
                           >
-                            {boss.name}
-                          </p>
-                          <p className="text-[13px] text-white/40">
-                            Lv {boss.level}
-                          </p>
-                        </div>
-                        <div className="shrink-0 text-right">
-                          <p
-                            className={cn(
-                              "text-[11px]",
-                              status !== "dead"
-                                ? STATUS_TEXT_CLASS[status]
-                                : isNextDead
-                                  ? "text-white/80"
-                                  : "text-white/70",
-                            )}
-                          >
-                            {primary}
-                          </p>
-                          <p className="text-[13px] text-white/40">
-                            {secondary}
-                          </p>
-                        </div>
-                      </button>
-                    </li>
-                  );
-                },
-              )}
-              {rows.length === 0 && (
-                <p className="py-6 text-center text-xs text-white/40">
-                  No bosses match
-                </p>
-              )}
-            </ul>
+                            <Image
+                              src={
+                                hidden
+                                  ? STATUS_ICON.dead
+                                  : status === "alive" &&
+                                      boss.npcType === "EpicBoss"
+                                    ? MARKER_ICON_EPIC_SRC
+                                    : STATUS_ICON[status]
+                              }
+                              alt=""
+                              width={18}
+                              height={18}
+                              className={cn(
+                                "shrink-0",
+                                !hidden &&
+                                  status === "dead" &&
+                                  !isNextDead &&
+                                  "opacity-55",
+                              )}
+                            />
+                            <div className="min-w-0 flex-1 leading-tight">
+                              <p
+                                className={cn(
+                                  "truncate text-[13px]",
+                                  killedAt == null
+                                    ? "text-white"
+                                    : status !== "dead" &&
+                                        STATUS_TEXT_CLASS[status],
+                                  isNextDead && "text-[#e8dcc0]",
+                                )}
+                              >
+                                {boss.name}
+                              </p>
+                              <p className="text-[13px] text-white/40">
+                                Lv {boss.level}
+                              </p>
+                            </div>
+                            <div className="shrink-0 text-right">
+                              <p
+                                className={cn(
+                                  "text-[11px]",
+                                  status !== "dead"
+                                    ? STATUS_TEXT_CLASS[status]
+                                    : isNextDead
+                                      ? "text-white/80"
+                                      : "text-white/70",
+                                )}
+                              >
+                                {primary}
+                              </p>
+                              <p className="text-[13px] text-white/40">
+                                {secondary}
+                              </p>
+                            </div>
+                          </button>
+                        </li>
+                      );
+                    },
+                  )}
+                  {rows.length === 0 && (
+                    <p className="py-6 text-center text-xs text-white/40">
+                      No bosses match
+                    </p>
+                  )}
+                </ul>
+              </div>
+            </WindowBorder>
           </div>
-        </WindowBorder>
-      </div>
-    </DraggableWindow>
+        </DraggableWindow>
+      )}
+    </div>
   );
 }

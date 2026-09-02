@@ -372,10 +372,13 @@ body {
       linear-gradient(90deg, rgb(189, 174, 132), rgb(115, 89, 41));
   }
 
-  /* Pulsating white glow around the respawn-time input — guides the player
-     to it right after they're sent to Options > Game via the "Set Time"
-     prompt in Up Next (see BossRespawnTimeSelect's showGuideGlow). */
-  @keyframes respawn-input-glow {
+  /* Pulsating white glow guiding the player to a specific Options control
+     right after being sent there from elsewhere in the app — the
+     respawn-time input via Up Next's "Set Time" prompt (see
+     BossRespawnTimeSelect's showGuideGlow), and the Notification Vol.
+     slider via its "Alert: on" button (see AudioTabContent's own
+     showGuideGlow). */
+  @keyframes guide-glow {
     0%,
     100% {
       box-shadow:
@@ -389,8 +392,8 @@ body {
     }
   }
 
-  .respawn-input-glow {
-    animation: respawn-input-glow 1.2s ease-in-out infinite;
+  .guide-glow {
+    animation: guide-glow 1.2s ease-in-out infinite;
   }
 
   /* Item-slot styling for the drop list's grid cells: four gold L-shaped

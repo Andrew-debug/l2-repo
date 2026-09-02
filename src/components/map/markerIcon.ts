@@ -31,7 +31,7 @@ export interface IconVariants {
   normalBright: HTMLCanvasElement;
   gray: HTMLCanvasElement;
   grayBright: HTMLCanvasElement;
-  // "Could be up" — respawn window opened but hasn't been confirmed alive.
+  // "Could be up" — respawn time started but hasn't been confirmed alive.
   pending: HTMLCanvasElement;
   pendingBright: HTMLCanvasElement;
   // Epic-boss-only "engaged" icon, used instead of normal/normalBright.

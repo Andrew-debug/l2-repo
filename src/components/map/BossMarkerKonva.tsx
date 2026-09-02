@@ -7,7 +7,7 @@ import {
   MARKER_ICON_OFFSET_X_PX,
 } from "./markerIcon";
 import { useKonvaClickGuard } from "./useKonvaClickGuard";
-import { useBossRespawn } from "@/components/providers/BossRespawnProvider";
+import type { RespawnStatus } from "@/lib/respawn";
 
 export interface MapBoss {
   id: string;
@@ -25,36 +25,41 @@ interface BossMarkerKonvaProps {
   isSelected: boolean;
   onSelect: (id: string) => void;
   scale: number; // Current zoom scale from stage
-  // True while an active item-drop filter (see BossItemFilterProvider)
-  // doesn't include this boss. Rendered exactly like a user-hidden marker
-  // (dimmed gray, see below) rather than omitted — a boss that doesn't
-  // drop the searched item is still on the map, just deemphasized, so the
-  // player keeps their bearings instead of pins vanishing out from under
-  // them.
-  dimmed?: boolean;
+  // Both computed by the parent (from BossRespawnProvider) and passed down
+  // as plain values rather than read from context in here — this component
+  // renders once per boss on the map (up to ~200 at once), and the
+  // respawn context's value changes identity every second (it ticks a
+  // live clock for status/countdown purposes). Reading it directly in
+  // every single marker would re-render all of them every second whether
+  // or not any individual boss's status actually changed; hoisting it to
+  // the parent and wrapping this component in React.memo means each
+  // marker only re-renders when its own status/hidden value changes.
+  status: RespawnStatus;
+  // True if the player hid this boss, OR if an active item-drop filter
+  // (see BossItemFilterProvider) doesn't include it. Rendered exactly the
+  // same either way (dimmed gray) rather than omitted — a boss that
+  // doesn't drop the searched item is still on the map, just
+  // deemphasized, so the player keeps their bearings instead of pins
+  // vanishing out from under them.
+  hidden?: boolean;
 }
 
 // Just the pin icon — the popup showing name/state/action lives outside the
 // Konva canvas entirely now (see BossStateCard, rendered as a real HTML
 // overlay by KonvaMapViewer for the selected boss), since canvas-drawn text
 // reads small and blurry next to the rest of the app's crisp DOM text.
-export default function BossMarkerKonva({
+function BossMarkerKonva({
   boss,
   isSelected,
   onSelect,
   scale,
-  dimmed = false,
+  status,
+  hidden = false,
 }: BossMarkerKonvaProps) {
   const groupRef = useRef<Konva.Group>(null);
   const [isHovered, setIsHovered] = useState(false);
   const variants = useMarkerIconVariants();
   const { handleMouseDown, isGenuineClick } = useKonvaClickGuard();
-  const { getStatus, isHidden } = useBossRespawn();
-  const status = getStatus(boss.id);
-  // Either reason renders identically — see the dimmed prop's own comment
-  // for why a filter mismatch borrows the hidden treatment instead of
-  // unmounting the marker.
-  const hidden = isHidden(boss.id) || dimmed;
 
   const highlighted = isHovered || isSelected;
 
@@ -122,8 +127,15 @@ export default function BossMarkerKonva({
           width={iconSize}
           height={iconSize}
           opacity={hidden ? 0.45 : 1}
+          perfectDrawEnabled={false}
         />
       )}
     </Group>
   );
 }
+
+// Memoized so a parent re-render (KonvaMapViewer re-renders every second,
+// see the status/hidden prop comment above) only actually re-renders each
+// individual marker when its own props changed — the whole point of
+// hoisting status/hidden out of context and into props here.
+export default React.memo(BossMarkerKonva);

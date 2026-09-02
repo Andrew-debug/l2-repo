@@ -15,7 +15,7 @@ interface StateEntry {
 }
 
 // Order matches the game's own escalation, not the RespawnStatus union's —
-// cooldown (the default, quietest state) first, then window-open (the one
+// cooldown (the default, quietest state) first, then pending (the one
 // a boss hunter actually plays around), alive last (the rarest, loudest).
 // Code/meaning text lives in boss-status.ts, shared with the map marker's
 // tooltip (BossMarkerKonva) so the wording can't drift between the two.
@@ -23,13 +23,13 @@ const STATES: StateEntry[] = [
   {
     status: "dead",
     pin: "grey, small, no glow",
-    rail: "dimmed row, counts down to the window",
+    rail: "dimmed row, counts down to respawn start",
     action: "nothing to do",
   },
   {
     status: "pending",
     pin: "hollow ring",
-    rail: "highlighted, shows time left in window",
+    rail: "highlighted, shows time left until guaranteed up",
     action: "go look · Killed now",
   },
   {

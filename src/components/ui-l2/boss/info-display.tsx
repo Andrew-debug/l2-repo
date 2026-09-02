@@ -52,7 +52,11 @@ export default function BossInfoDisplay() {
       onOffsetChange={setOffset}
     >
       <DragHandle>
-        <Header title="Raid Boss" canClose onClose={() => setIsOpen(false)} />
+        <Header
+          title="Raid Boss Info"
+          canClose
+          onClose={() => setIsOpen(false)}
+        />
       </DragHandle>
       <div className="min-h-0 flex-1">
         <WindowBorder>

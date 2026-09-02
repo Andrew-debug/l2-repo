@@ -17,6 +17,7 @@ import {
 } from "@/components/providers/BossRespawnProvider";
 import {
   CUSTOM_RESPAWN_ID,
+  NOT_SET_RESPAWN_ID,
   findPresetIdByRange,
   findRespawnPreset,
   parseCustomRespawnRange,
@@ -25,6 +26,8 @@ import type { RespawnRange } from "@/lib/respawn";
 import { clearAllPersistedOffsets } from "@/hooks/use-persisted-offset";
 import { clearPersistedStackOrder } from "./draggable-window";
 import { unfoldAllPersistedWindows } from "@/hooks/use-persisted-fold-state";
+import { reopenAllPersistedWindows } from "@/hooks/use-persisted-window-open";
+import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 import { cn } from "@/lib/utils";
 
 type Tab = "video" | "audio" | "game";
@@ -117,11 +120,16 @@ function Dropdown({
   );
 }
 
-function rangesEqual(a: RespawnRange, b: RespawnRange): boolean {
+function rangesEqual(
+  a: RespawnRange | null,
+  b: RespawnRange | null,
+): boolean {
+  if (a == null || b == null) return a === b;
   return a.minHours === b.minHours && a.maxHours === b.maxHours;
 }
 
 const BOSS_RESPAWN_TIME_OPTIONS: { id: string; label: string }[] = [
+  { id: NOT_SET_RESPAWN_ID, label: "Not Set" },
   { id: "static-6h", label: "6 hours" },
   { id: "static-12h", label: "12 hours" },
   { id: "static-24h", label: "24 hours" },
@@ -139,8 +147,11 @@ function BossRespawnTimeSelect({
   onRangeChange,
   focusCustomSignal,
 }: {
-  range: RespawnRange;
-  onRangeChange: (range: RespawnRange) => void;
+  // null — "Not Set" — is the app's real default (see BossRespawnProvider's
+  // globalRange): no timer-based tracking, for a player who marks bosses
+  // dead/alive on the map themselves.
+  range: RespawnRange | null;
+  onRangeChange: (range: RespawnRange | null) => void;
   // Bumped by Up Next's "Set Time" prompt (via OptionsPanelProvider's
   // focusRespawnTimeSignal) — switches into Custom mode on change, which
   // the effect below then focuses.
@@ -149,11 +160,13 @@ function BossRespawnTimeSelect({
   const [open, setOpen] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [pressed, setPressed] = useState(false);
-  const [selection, setSelection] = useState<string>(
-    () => findPresetIdByRange(range) ?? CUSTOM_RESPAWN_ID,
+  const [selection, setSelection] = useState<string>(() =>
+    range == null
+      ? NOT_SET_RESPAWN_ID
+      : (findPresetIdByRange(range) ?? CUSTOM_RESPAWN_ID),
   );
   const [customText, setCustomText] = useState(() =>
-    findPresetIdByRange(range)
+    range == null || findPresetIdByRange(range)
       ? ""
       : range.minHours === range.maxHours
         ? String(range.minHours)
@@ -176,6 +189,10 @@ function BossRespawnTimeSelect({
   useEffect(() => {
     if (rangesEqual(range, lastAppliedRangeRef.current)) return;
     lastAppliedRangeRef.current = range;
+    if (range == null) {
+      setSelection(NOT_SET_RESPAWN_ID);
+      return;
+    }
     const matched = findPresetIdByRange(range);
     if (matched) {
       setSelection(matched);
@@ -212,7 +229,7 @@ function BossRespawnTimeSelect({
     return () => document.removeEventListener("mousedown", handlePointerDown);
   }, [open]);
 
-  const emit = (newRange: RespawnRange) => {
+  const emit = (newRange: RespawnRange | null) => {
     lastAppliedRangeRef.current = newRange;
     onRangeChange(newRange);
   };
@@ -220,6 +237,10 @@ function BossRespawnTimeSelect({
   const handlePreset = (id: string) => {
     setSelection(id);
     setOpen(false);
+    if (id === NOT_SET_RESPAWN_ID) {
+      emit(null);
+      return;
+    }
     const preset = findRespawnPreset(id);
     if (preset) emit({ minHours: preset.minHours, maxHours: preset.maxHours });
   };
@@ -251,9 +272,7 @@ function BossRespawnTimeSelect({
       <div
         className={cn(
           "relative flex h-3.75 w-full items-center border border-window-content-border bg-window-bg pl-1 text-[13px] leading-3.5 text-white",
-          selection === CUSTOM_RESPAWN_ID &&
-            showGuideGlow &&
-            "respawn-input-glow",
+          selection === CUSTOM_RESPAWN_ID && showGuideGlow && "guide-glow",
         )}
       >
         {selection === CUSTOM_RESPAWN_ID ? (
@@ -264,7 +283,12 @@ function BossRespawnTimeSelect({
             value={customText}
             onChange={(e) => handleCustomChange(e.target.value)}
             onBlur={() => setShowGuideGlow(false)}
-            placeholder="e.g. 6 or 12-16 (or 5m TEMP)"
+            placeholder="e.g. 6 or 12-16"
+            // Chrome remembers past values typed into a named field and
+            // offers them back in its own natively-styled suggestion
+            // dropdown — nothing here can restyle that, so the only fix is
+            // opting this field out of it entirely.
+            autoComplete="off"
             className={cn(
               "h-full w-full bg-transparent pr-4 text-[13px] leading-3.5 text-white placeholder:text-white/30 focus:outline-none",
               customInvalid && "text-red-400",
@@ -406,7 +430,7 @@ function DisabledCheckbox({
 const SLIDER_TRACK_WIDTH = 110;
 const SLIDER_TRACK_HEIGHT = 7;
 const SLIDER_CURSOR_WIDTH = 7;
-const SLIDER_CURSOR_HEIGHT = 9;
+const SLIDER_CURSOR_HEIGHT = 12;
 const SLIDER_MARK_WIDTH = 3;
 const SLIDER_MARK_HEIGHT = 8;
 
@@ -546,9 +570,12 @@ function DisabledSlider({ className }: { className?: string }) {
   return <Slider value={0} disabled className={className} />;
 }
 
-// Reads/writes the draft, not the real BossRespawnProvider state directly —
-// see OptionsWindow's `draft` for why (Apply/Cancel semantics: nothing here
-// takes effect until Apply/OK is clicked).
+// Reads/writes BossRespawnProvider's real soundEnabled/soundVolume directly
+// (not staged through OptionsWindow's `draft`) — unlike every other control
+// in this dialog, Audio applies instantly: dragging the slider or toggling
+// mute takes effect right away, including for Up Next's "Test" button and
+// real boss notifications. Cancel/X still rolls it back to whatever was
+// live when the window opened — see OptionsWindow's audioSnapshotRef.
 function AudioTabContent({
   soundEnabled,
   soundVolume,
@@ -584,11 +611,16 @@ function AudioTabContent({
         <span className="flex-1 whitespace-nowrap text-right text-[13px] text-white">
           Notification Vol.
         </span>
-        <Slider
-          value={soundVolume}
-          onChange={onSoundVolumeChange}
-          disabled={!soundEnabled}
-        />
+        {/* Not disabled while muted — Up Next's "Test" button deliberately
+            plays regardless of the mute state (see testAlertSound's own
+            comment: "a test should still be audible"), so locking the
+            volume slider behind soundEnabled meant a muted player couldn't
+            set a level for that preview (or for whenever they unmute) at
+            all — the slider just didn't respond to drags. Setting a volume
+            is a configuration action independent of whether sound is
+            currently on, same as a real OS volume slider staying live while
+            muted. */}
+        <Slider value={soundVolume} onChange={onSoundVolumeChange} />
       </div>
       <Checkbox
         checked={!soundEnabled}
@@ -607,11 +639,12 @@ function AudioTabContent({
 // reference's layout. Game only keeps Interface/Initialize/Transparent from
 // the reference, since everything else on that tab (language, display
 // filters, tracking, party loot, ...) has no equivalent here either.
-// Every checkbox/slider/dropdown across both tabs — including the
-// respawn-time control — is a staged edit (see `draft` below): nothing
-// takes effect until Apply or OK, and closing via Cancel or the header's X
-// discards it, restoring exactly what was showing when the dialog was
-// opened.
+// Every checkbox/slider/dropdown on Game/Video — including the respawn-time
+// control — is a staged edit (see `draft` below): nothing takes effect
+// until Apply or OK, and closing via Cancel or the header's X discards it,
+// restoring exactly what was showing when the dialog was opened. Audio is
+// the one exception: it applies live, with its own separate Cancel-rollback
+// mechanism — see audioSnapshotRef below for why.
 export function OptionsWindow() {
   const { isOpen, setIsOpen, focusRespawnTimeSignal } = useOptionsPanel();
   const {
@@ -645,52 +678,49 @@ export function OptionsWindow() {
   // (context-backed, destructured above): gameCursor (toggles the
   // game-style cursor via the effect below) and transparent (toggles every
   // window's chrome between the app's default translucent background and a
-  // solid one, also via an effect below). Defaults to true/checked,
-  // matching every window's actual out-of-the-box look.
-  const [transparent, setTransparent] = useState(true);
-  const [gameCursor, setGameCursor] = useState(true);
-  const [tracking, setTracking] = useState(true);
-  const [declineDuels, setDeclineDuels] = useState(false);
-  const [hideDropped, setHideDropped] = useState(false);
+  // solid one, also via an effect below). Both persisted to localStorage
+  // (like every other real checkbox in this dialog) so a reload keeps
+  // whatever the player last applied, defaulting to true/checked to match
+  // every window's actual out-of-the-box look.
+  const [transparent, setTransparent] = usePersistedBoolean(
+    "l2-window-transparent",
+    true,
+  );
+  const [gameCursor, setGameCursor] = usePersistedBoolean(
+    "l2-game-cursor",
+    true,
+  );
 
   // What the checkboxes/slider on screen actually read from and write to.
   // Deliberately not the committed state (or the real context setters)
-  // above — every control in this dialog is a draft edit until Apply/OK
-  // pushes it through applyDraft, so ticking a box (or closing the window
-  // afterward) never has a visible effect until then.
+  // above — every control on the Game/Video tabs is a draft edit until
+  // Apply/OK pushes it through applyDraft, so ticking a box (or closing the
+  // window afterward) never has a visible effect until then. Audio
+  // (soundEnabled/soundVolume) is the one exception — deliberately NOT part
+  // of this draft, see audioSnapshotRef below for why.
   const makeDraft = useCallback(
     () => ({
       transparent,
       gameCursor,
       enterChat,
-      tracking,
-      declineDuels,
-      hideDropped,
       isHeaderVisible,
       isBackgroundVisible,
       isDimmed,
       isBackgroundInteractive,
       isAlertButtonVisible,
       hideSetTimePrompt,
-      soundEnabled,
-      soundVolume,
       globalRange,
     }),
     [
       transparent,
       gameCursor,
       enterChat,
-      tracking,
-      declineDuels,
-      hideDropped,
       isHeaderVisible,
       isBackgroundVisible,
       isDimmed,
       isBackgroundInteractive,
       isAlertButtonVisible,
       hideSetTimePrompt,
-      soundEnabled,
-      soundVolume,
       globalRange,
     ],
   );
@@ -701,43 +731,61 @@ export function OptionsWindow() {
     value: ReturnType<typeof makeDraft>[K],
   ) => setDraft((prev) => ({ ...prev, [key]: value }));
 
+  // Audio applies live — see AudioTabContent's own props below, wired
+  // straight to soundEnabled/setSoundEnabled and soundVolume/setSoundVolume
+  // rather than through draft/updateDraft — so changing the mute checkbox
+  // or dragging the volume slider takes effect immediately, including for
+  // Up Next's "Test" button and real boss notifications. That still needs
+  // Cancel/X to mean something for audio though: this snapshot captures
+  // whatever was live the moment the window opened, and handleCancel below
+  // restores it. applyDraft moves the snapshot forward on Apply/OK, so a
+  // later Cancel (after more live edits post-Apply) only rolls back to the
+  // last applied point, not further.
+  const audioSnapshotRef = useRef({ soundEnabled, soundVolume });
+
   // Re-stages the draft from whatever's currently committed every time the
   // window opens — this is what makes a closed-without-applying edit
   // disappear: nothing reset it, it just never survived to be re-shown.
+  // Also re-captures the audio snapshot at the same moment.
   const wasOpenRef = useRef(isOpen);
   useEffect(() => {
-    if (isOpen && !wasOpenRef.current) setDraft(makeDraft());
+    if (isOpen && !wasOpenRef.current) {
+      setDraft(makeDraft());
+      audioSnapshotRef.current = { soundEnabled, soundVolume };
+    }
     wasOpenRef.current = isOpen;
-  }, [isOpen, makeDraft]);
+  }, [isOpen, makeDraft, soundEnabled, soundVolume]);
 
   // Commits the draft: pushes every value through to its real store (the
   // context setters take effect immediately; the purely-local ones just
   // become the new committed baseline for next time). Apply calls this and
   // stays open; OK calls it and closes; Cancel/X skip it entirely, so the
-  // draft's edits are simply discarded.
+  // draft's edits are simply discarded. Audio isn't part of the draft (see
+  // audioSnapshotRef above) — it's already live, so this just moves the
+  // snapshot forward to the current values.
   const applyDraft = () => {
     setTransparent(draft.transparent);
     setGameCursor(draft.gameCursor);
     setEnterChat(draft.enterChat);
-    setTracking(draft.tracking);
-    setDeclineDuels(draft.declineDuels);
-    setHideDropped(draft.hideDropped);
     setIsHeaderVisible(draft.isHeaderVisible);
     setIsBackgroundVisible(draft.isBackgroundVisible);
     setIsDimmed(draft.isDimmed);
     setIsBackgroundInteractive(draft.isBackgroundInteractive);
     setIsAlertButtonVisible(draft.isAlertButtonVisible);
     setHideSetTimePrompt(draft.hideSetTimePrompt);
-    setSoundEnabled(draft.soundEnabled);
-    setSoundVolume(draft.soundVolume);
     setGlobalRange(draft.globalRange);
+    audioSnapshotRef.current = { soundEnabled, soundVolume };
   };
   const handleApply = () => applyDraft();
   const handleOk = () => {
     applyDraft();
     setIsOpen(false);
   };
-  const handleCancel = () => setIsOpen(false);
+  const handleCancel = () => {
+    setSoundEnabled(audioSnapshotRef.current.soundEnabled);
+    setSoundVolume(audioSnapshotRef.current.soundVolume);
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     document.documentElement.classList.toggle("default-cursor", !gameCursor);
@@ -832,17 +880,25 @@ export function OptionsWindow() {
                       className="h-4.25 w-16 text-[13px]"
                       sizes="64px"
                       text="Initialize"
-                      // Resets window layout only — dragged positions,
-                      // stacking order, and folded state — not boss-tracking
-                      // data. That's "Restart" in the System Menu
-                      // (BossRespawnProvider's resetAll), a separate, more
-                      // destructive action. All three dispatch a live-reset
-                      // event, so mounted windows snap back immediately — no
-                      // page reload.
+                      // Resets window layout: dragged positions (every
+                      // window, including the System Menu's own panel and
+                      // its always-visible dock), stacking order, folded
+                      // state, and — reopening any of the 5 main windows
+                      // (Map/Raid Bosses/Up Next/Drop List/NPC Info) that
+                      // were closed — not boss-tracking data. That's
+                      // "Restart" in the System Menu (BossRespawnProvider's
+                      // resetAll), a separate, more destructive action. All
+                      // four dispatch a live-reset event, so mounted
+                      // windows snap back immediately — no page reload.
+                      // Deliberately doesn't touch isPanelOpen — the System
+                      // Menu panel stays open across this if it already
+                      // was; reopenAllPersistedWindows only covers the 5
+                      // main windows, not the System Menu panel itself.
                       onClick={() => {
                         clearAllPersistedOffsets();
                         clearPersistedStackOrder();
                         unfoldAllPersistedWindows();
+                        reopenAllPersistedWindows();
                       }}
                     />
                     <Checkbox
@@ -911,12 +967,22 @@ export function OptionsWindow() {
                   {/* Repurposed from the reference's inert "3D Arrow" —
                       unchecked by default (the "Boss respawn timer is not
                       set" prompt shows, same as before this setting
-                      existed); checking it hides that prompt from Up Next. */}
-                  <Checkbox
-                    checked={draft.hideSetTimePrompt}
-                    onChange={(v) => updateDraft("hideSetTimePrompt", v)}
-                    label="Hide 'Set Time'"
-                  />
+                      existed); checking it hides that prompt from Up Next.
+                      Once a respawn timer is actually set, the prompt it
+                      controls can't show at all regardless (Up Next's own
+                      condition already requires globalRange to still be
+                      null first) — so this locks to checked/disabled
+                      instead of leaving a live control that no longer does
+                      anything. */}
+                  {globalRange ? (
+                    <DisabledCheckbox checked label="Hide 'Set Time'" />
+                  ) : (
+                    <Checkbox
+                      checked={draft.hideSetTimePrompt}
+                      onChange={(v) => updateDraft("hideSetTimePrompt", v)}
+                      label="Hide 'Set Time'"
+                    />
+                  )}
                 </div>
 
                 <div className="mx-1.5 mt-2 grid grid-cols-2 gap-x-2 gap-y-0.5 bg-window-bg px-3 py-1.5">
@@ -951,19 +1017,10 @@ export function OptionsWindow() {
                 </div>
 
                 <div className="mx-1.5 mt-2 grid grid-cols-2 gap-x-2 gap-y-0.5 bg-window-bg px-3 py-1.5">
-                  <Checkbox
-                    checked={draft.tracking}
-                    onChange={(v) => updateDraft("tracking", v)}
-                    label="Tracking"
-                  />
-                  <Checkbox
-                    checked={draft.declineDuels}
-                    onChange={(v) => updateDraft("declineDuels", v)}
-                    label="Decline Duels"
-                  />
-                  <Checkbox
-                    checked={draft.hideDropped}
-                    onChange={(v) => updateDraft("hideDropped", v)}
+                  <DisabledCheckbox checked label="Tracking" />
+                  <DisabledCheckbox checked={false} label="Decline Duels" />
+                  <DisabledCheckbox
+                    checked={false}
                     label="Hide Dropped Item(s)"
                     className="col-span-2 whitespace-nowrap"
                   />
@@ -985,11 +1042,14 @@ export function OptionsWindow() {
                   tab !== "audio" && "invisible pointer-events-none",
                 )}
               >
+                {/* Live, not draft-backed — see audioSnapshotRef above for
+                    why Audio is the one tab that applies instantly instead
+                    of waiting for Apply/OK. */}
                 <AudioTabContent
-                  soundEnabled={draft.soundEnabled}
-                  soundVolume={draft.soundVolume}
-                  onSoundEnabledChange={(v) => updateDraft("soundEnabled", v)}
-                  onSoundVolumeChange={(v) => updateDraft("soundVolume", v)}
+                  soundEnabled={soundEnabled}
+                  soundVolume={soundVolume}
+                  onSoundEnabledChange={setSoundEnabled}
+                  onSoundVolumeChange={setSoundVolume}
                 />
               </div>
 

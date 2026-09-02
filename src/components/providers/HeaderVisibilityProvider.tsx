@@ -3,9 +3,9 @@
 import {
   createContext,
   useContext,
-  useState,
   type ReactNode,
 } from "react";
+import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 
 interface HeaderVisibilityContextType {
   // Whether PageTitleBanner (the "LINEAGE 2 BOSS TRACKING" banner) is
@@ -14,6 +14,12 @@ interface HeaderVisibilityContextType {
   // reserved top space when it's hidden, instead of leaving a gap.
   isHeaderVisible: boolean;
   setIsHeaderVisible: (visible: boolean) => void;
+  // True once isHeaderVisible has been read from localStorage — see
+  // usePersistedBoolean's own isHydrated. PageTitleBanner gates its own
+  // rendering on this so the SSR default (visible) never flashes on screen
+  // for a player who turned it off, before snapping to the real value a
+  // moment later.
+  isHeaderVisibleHydrated: boolean;
 }
 
 const HeaderVisibilityContext = createContext<
@@ -25,11 +31,12 @@ export function HeaderVisibilityProvider({
 }: {
   children: ReactNode;
 }) {
-  const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+  const [isHeaderVisible, setIsHeaderVisible, isHeaderVisibleHydrated] =
+    usePersistedBoolean("l2-header-visible", true);
 
   return (
     <HeaderVisibilityContext.Provider
-      value={{ isHeaderVisible, setIsHeaderVisible }}
+      value={{ isHeaderVisible, setIsHeaderVisible, isHeaderVisibleHydrated }}
     >
       {children}
     </HeaderVisibilityContext.Provider>

@@ -24,7 +24,7 @@ const BUTTON_CLASS = "w-16 h-4.5 text-[13px]";
 // visually disagree even though the wording differs by context.
 const STATUS_HINT_LABEL: Record<"alive" | "pending" | "dead", string> = {
   alive: "up now",
-  pending: "window open",
+  pending: "could be up",
   dead: "on cooldown",
 };
 
@@ -86,6 +86,7 @@ export default function Map() {
         )}
         initialOffset={offset}
         onOffsetChange={setOffset}
+        snapIntoViewport={isFolded}
       >
         <DragHandle>
           <FoldIcon
@@ -187,6 +188,7 @@ export default function Map() {
                     className="w-16 h-4.5 text-[13px]"
                     sizes="64px"
                     text="World info."
+                    disabled
                   />
                 </div>
               </div>
@@ -208,6 +210,7 @@ export default function Map() {
                   className={BUTTON_CLASS}
                   sizes="64px"
                   text="Current Loc."
+                  disabled
                 />
                 <IconStateButton
                   defaultIcon="/icons/smallbutton2.png"
@@ -216,6 +219,7 @@ export default function Map() {
                   className={BUTTON_CLASS}
                   sizes="64px"
                   text="Party Member"
+                  disabled
                 />
                 <IconStateButton
                   defaultIcon="/icons/smallbutton2.png"
@@ -224,6 +228,7 @@ export default function Map() {
                   className={BUTTON_CLASS}
                   sizes="64px"
                   text="Target Loc."
+                  disabled
                 />
                 {isSmall ? (
                   <IconStateButton

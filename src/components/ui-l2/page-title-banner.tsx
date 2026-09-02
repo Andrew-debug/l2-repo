@@ -16,14 +16,20 @@ const INNER_CLIP =
   "polygon(1px 1px, calc(100% - 1px) 1px, calc(100% - 1px) 41px, calc(62% - 1px) 41px, calc(60% - 1px) 79px, calc(40% + 1px) 79px, calc(38% + 1px) 41px, 1px 41px)";
 
 export function PageTitleBanner() {
-  const { isHeaderVisible } = useHeaderVisibility();
+  const { isHeaderVisible, isHeaderVisibleHydrated } = useHeaderVisibility();
   const { trackedBossIds, getStatus } = useBossRespawn();
-  if (!isHeaderVisible) return null;
+  // Renders nothing at all until the real persisted value has loaded —
+  // isHeaderVisible defaults to true (matching SSR, which has no
+  // localStorage), so rendering based on that default would flash the
+  // banner on screen for a moment for a player who'd actually turned it
+  // off, before snapping away once hydrated. See usePersistedBoolean's own
+  // isHydrated comment.
+  if (!isHeaderVisibleHydrated || !isHeaderVisible) return null;
 
   const upNowCount = trackedBossIds.filter(
     (id) => getStatus(id) === "alive",
   ).length;
-  const inWindowCount = trackedBossIds.filter(
+  const couldBeUpCount = trackedBossIds.filter(
     (id) => getStatus(id) === "pending",
   ).length;
 
@@ -57,7 +63,7 @@ export function PageTitleBanner() {
         }}
       />
 
-      <div className="absolute top-0 left-0 box-border flex h-10.5 w-[38%] items-center gap-3.5 pl-5.5">
+      <div className="pointer-events-auto absolute top-0 left-0 box-border flex h-10.5 w-[38%] items-center gap-3.5 pl-5.5">
         <span className="text-[11px] tracking-[0.3em] text-system-text">
           CHRONICLE: INTERLUDE
         </span>
@@ -67,22 +73,26 @@ export function PageTitleBanner() {
         </span>
       </div>
 
-      <div className="absolute top-0 right-0 box-border flex h-10.5 w-[38%] items-center justify-end gap-3.5 pr-5.5">
-        <span className="flex items-center gap-1.25 text-[11px] tracking-[0.12em] text-[#7ed957]">
-          <span className="size-1.5 rounded-full bg-[#7ed957] shadow-[0_0_6px_#7ed957]" />
-          {upNowCount} UP NOW
-        </span>
-        <span className="flex items-center gap-1.25 text-[11px] tracking-[0.12em] text-[#f5c518]">
-          <span className="size-1.5 rounded-full bg-[#f5c518] shadow-[0_0_6px_#f5c518]" />
-          {inWindowCount} IN WINDOW
-        </span>
+      <div className="pointer-events-auto absolute top-0 right-0 box-border flex h-10.5 w-[38%] items-center justify-end gap-3.5 pr-5.5">
+        {upNowCount > 0 && (
+          <span className="flex items-center gap-1.25 text-[11px] tracking-[0.12em] text-[#7ed957]">
+            <span className="size-1.5 rounded-full bg-[#7ed957] shadow-[0_0_6px_#7ed957]" />
+            {upNowCount} UP NOW
+          </span>
+        )}
+        {couldBeUpCount > 0 && (
+          <span className="flex items-center gap-1.25 text-[11px] tracking-[0.12em] text-[#f5c518]">
+            <span className="size-1.5 rounded-full bg-[#f5c518] shadow-[0_0_6px_#f5c518]" />
+            {couldBeUpCount} COULD BE UP
+          </span>
+        )}
         <span className="size-1 rotate-45 bg-[#8d7c50]" />
         <span className="text-[11px] tracking-[0.22em] text-system-text">
           l2bosstracker.com
         </span>
       </div>
 
-      <div className="absolute top-1/2 left-1/2 w-[22%] -translate-x-1/2 -translate-y-1/2  text-center">
+      <div className="pointer-events-auto absolute top-1/2 left-1/2 w-[22%] -translate-x-1/2 -translate-y-1/2  text-center">
         <div
           className="font-marcellus text-[25px] leading-[1.05] tracking-[0.17em] text-[#e8dcc0]"
           style={{

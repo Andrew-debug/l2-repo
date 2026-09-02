@@ -154,8 +154,16 @@ export function Background() {
     isDimmed,
     isBackgroundVisible,
     isBackgroundInteractive,
+    isHydrated,
     setReturnToGameBossId,
   } = useBackgroundDim();
+  // Renders nothing at all until the real persisted values have loaded —
+  // isBackgroundVisible/isDimmed default to true (matching SSR, which has
+  // no localStorage), so rendering based on those defaults would flash the
+  // background/dim overlay on screen for a moment for a player who'd
+  // actually turned either off, before snapping away once hydrated. See
+  // usePersistedBoolean's own isHydrated comment.
+  if (!isHydrated) return null;
   // Only while exited (dim off — see menu-section.tsx's handleExit) *and*
   // Options' "Interactive Background" checkbox is on do these panels act as
   // a "return to game" picker. While dimmed/playing normally, or with that
@@ -205,8 +213,8 @@ export function Background() {
                   className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 group-hover:opacity-100"
                   style={{
                     background:
-                      "radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0.08) 55%, rgba(255,255,255,0) 80%)",
-                    boxShadow: "inset 0 0 40px 8px rgba(255,255,255,0.55)",
+                      "radial-gradient(ellipse at center, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.04) 55%, rgba(255,255,255,0) 80%)",
+                    boxShadow: "inset 0 0 40px 8px rgba(255,255,255,0.28)",
                   }}
                 />
               )}

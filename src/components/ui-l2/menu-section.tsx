@@ -200,6 +200,15 @@ export default function MenuSection() {
   // Persisted to localStorage so a reload reopens it wherever it was last
   // dropped.
   const [panelOffset, setPanelOffset] = usePersistedOffset("system-menu");
+  // The dock itself (the always-visible icon toolbar below) — previously had
+  // no persisted offset at all, so dragging it did nothing on reload *and*
+  // Options' "Initialize" couldn't snap it back like every other window.
+  // Deliberately a separate key from "system-menu" above (the panel's own
+  // offset) — same reasoning as Map's shared-vs-separate offsets, except
+  // here the dock and panel are independent windows with independent
+  // positions, not two forms of the same one.
+  const [dockOffset, setDockOffset, isDockOffsetHydrated] =
+    usePersistedOffset("system-menu-dock");
   const { enterChat } = useEnterChat();
   const toolbarItems = getToolbarItems(enterChat);
 
@@ -318,7 +327,14 @@ export default function MenuSection() {
         />
       )}
       {isLegendOpen && <StatesLegend onClose={() => setIsLegendOpen(false)} />}
-      <DraggableWindow className="absolute bottom-0 right-0">
+      <DraggableWindow
+        className={cn(
+          "absolute bottom-0 right-0",
+          !isDockOffsetHydrated && "invisible pointer-events-none",
+        )}
+        initialOffset={dockOffset}
+        onOffsetChange={setDockOffset}
+      >
         <div className="flex">
           <DragHandle className="shrink-0">
             <SideHandle />

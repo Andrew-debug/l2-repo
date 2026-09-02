@@ -3,9 +3,10 @@
 import {
   createContext,
   useContext,
-  useState,
   type ReactNode,
 } from "react";
+import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
+import { useWindowOpenReset } from "@/hooks/use-persisted-window-open";
 
 interface NpcInfoPanelContextType {
   // Whether the NPC Info window is shown at all — no fold state here,
@@ -23,7 +24,8 @@ const NpcInfoPanelContext = createContext<NpcInfoPanelContextType | undefined>(
 );
 
 export function NpcInfoPanelProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = usePersistedBoolean("l2-npc-info-open", true);
+  useWindowOpenReset(setIsOpen);
 
   const toggleOpen = () => setIsOpen((prev) => !prev);
 

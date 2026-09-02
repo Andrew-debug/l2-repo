@@ -16,6 +16,11 @@ interface IconStateButtonProps {
   outlineClickIcon?: string;
   onClick?: () => void;
   className?: string;
+  // Same treatment as TabButton's own disabled state: dimmed, default
+  // cursor, no hover/click icon swap, no onClick — for a button that's
+  // present (matching the reference client's layout) but has nothing wired
+  // behind it yet.
+  disabled?: boolean;
   // ReactNode, not just string — lets a caller color part of the label
   // (e.g. a status word) differently from the rest, like Up Next's
   // "Alert: <on/off>" button.
@@ -40,6 +45,7 @@ export function IconStateButton({
   outlineClickIcon,
   onClick,
   className,
+  disabled,
   text,
   fit = "contain",
   sizes = "12px",
@@ -59,11 +65,13 @@ export function IconStateButton({
   }, []);
 
   const handleMouseDown = (e: MouseEvent) => {
+    if (disabled) return;
     if (e.button !== 0) return; // left click only — ignore right/middle click
     setIsMouseDown(true);
   };
 
   const handleMouseUp = (e: MouseEvent) => {
+    if (disabled) return;
     if (e.button !== 0) return;
     if (isHovered) {
       onClick?.();
@@ -71,20 +79,24 @@ export function IconStateButton({
   };
 
   const handleMouseEnter = () => {
+    if (disabled) return;
     setIsHovered(true);
   };
 
   const handleMouseLeave = () => {
+    if (disabled) return;
     setIsHovered(false);
   };
 
   const getCurrentIcon = () => {
+    if (disabled) return defaultIcon;
     if (isMouseDown && isHovered) return clickIcon;
     if (isHovered) return hoverIcon;
     return defaultIcon;
   };
 
   const getCurrentOutlineIcon = () => {
+    if (disabled) return outlineDefaultIcon;
     if (isMouseDown && isHovered) return outlineClickIcon;
     if (isHovered) return outlineHoverIcon;
     return outlineDefaultIcon;
@@ -93,12 +105,14 @@ export function IconStateButton({
 
   return (
     <button
+      disabled={disabled}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={cn(
         "relative flex items-center justify-center",
+        disabled ? "cursor-default opacity-50" : "cursor-pointer",
         // Longhand, not `size-3` — the installed tailwind-merge doesn't
         // recognize size-* as conflicting with a later w-*/h-* override, so
         // custom width/height passed via className was silently ignored.

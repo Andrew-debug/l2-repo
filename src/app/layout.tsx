@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Marcellus } from "next/font/google";
+import { Marcellus } from "next/font/google";
 // import { Analytics } from '@vercel/analytics/next'
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
@@ -11,14 +11,19 @@ const marcellus = Marcellus({
   weight: ["400"],
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
-
 // Its own internal name is "fs Tahoma 8px" — a vector trace of the client's
-// bitmap font, pixel-aligned at 8px (or clean multiples: 16/24/32px). Not
-// wired up as the body font yet — see the font-check block in page.tsx.
+// bitmap font, pixel-aligned at 8px (or clean multiples: 16/24/32px). Wired
+// up as the actual body font via globals.css' plain `body { font-family:
+// var(--font-fs-tahoma-8px), ... }` rule (see there) — deliberately NOT via
+// a `font-fs-tahoma-8px` Tailwind utility class on <body>, since a Tailwind
+// utility lives in the `utilities` cascade layer, which always outranks the
+// plain `body` selector's `base` layer regardless of selector specificity.
+// (This is exactly the bug that used to silently break this rule: <body>
+// carried both this rule *and* the `font-sans` utility class, and the
+// utility layer's `font-family: var(--font-sans)` — resolving to Inter —
+// always won, so the pixel font was never actually painted anywhere despite
+// the CSS looking correct. Removed `font-sans` and the Inter import
+// entirely once found — nothing else in the app used either.)
 const fsTahoma8px = localFont({
   src: "../../public/fonts/fs-tahoma-8px.otf",
   variable: "--font-fs-tahoma-8px",
@@ -53,7 +58,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${marcellus.variable} ${fsTahoma8px.variable} font-sans antialiased`}
+        className={`${marcellus.variable} ${fsTahoma8px.variable} antialiased`}
       >
         {children}
         {/* <Analytics /> */}

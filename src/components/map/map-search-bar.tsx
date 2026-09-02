@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { X } from "lucide-react";
 import { bosses, type Boss } from "@/lib/boss-data";
 import { compareDrops } from "@/lib/item-icons";
 import { useBossSelection } from "@/components/providers/BossSelectionProvider";
@@ -99,14 +100,7 @@ export function MapSearchBar({ onClose }: MapSearchBarProps) {
           cross-axis size the instant this mounted, visibly shifting the
           buttons by the difference (was h-5, 2px taller). */}
       <div className="flex h-4.5 items-center gap-1.5 border border-window-content-border bg-window-content-bg px-1.5">
-        <IconStateButton
-          defaultIcon="/icons/search_button.png"
-          hoverIcon="/icons/search_button_over.png"
-          clickIcon="/icons/search_button_down.png"
-          className="w-2.75 h-3.25 shrink-0"
-          sizes="14px"
-          onClick={() => inputRef.current?.focus()}
-        />
+        <span className="text-xs text-white/30">⌕</span>
         <input
           ref={inputRef}
           id="map-search"
@@ -117,8 +111,22 @@ export function MapSearchBar({ onClose }: MapSearchBarProps) {
             if (e.key === "Escape") onClose();
           }}
           placeholder="Search a boss or an item"
+          autoComplete="off"
           className="w-full bg-transparent text-[13px] text-white placeholder:text-white/40 focus:outline-none"
         />
+        {query.length > 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              setQuery("");
+              inputRef.current?.focus();
+            }}
+            aria-label="Clear search"
+            className="shrink-0 text-white/40 hover:text-white/70"
+          >
+            <X className="size-3" />
+          </button>
+        )}
       </div>
 
       <div className="custom-scrollbar absolute top-full right-0 left-0 z-50 mt-1 max-h-64 overflow-y-auto border border-window-content-border bg-window-content-bg text-[13px] text-white shadow-lg">

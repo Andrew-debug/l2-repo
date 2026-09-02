@@ -10,13 +10,20 @@ export interface RespawnRange {
  * killed and its respawn window. Nothing is stored beyond `killedAt` — this
  * always recomputes from wall-clock time, so it stays correct as time passes
  * without needing an update elsewhere.
+ *
+ * `range` is null in "not set" (manual) mode — a player who doesn't want
+ * timer-based tracking at all, and just marks bosses dead/alive on the map
+ * themselves. With no window to count against, a killed boss simply stays
+ * "dead" indefinitely (never auto-transitions to pending/alive) until the
+ * player marks it alive by hand.
  */
 export function computeRespawnStatus(
   killedAt: number | null,
-  range: RespawnRange,
+  range: RespawnRange | null,
   now: number = Date.now(),
 ): RespawnStatus {
   if (killedAt == null) return "alive";
+  if (range == null) return "dead";
 
   const elapsedHours = (now - killedAt) / (1000 * 60 * 60);
   if (elapsedHours < range.minHours) return "dead";

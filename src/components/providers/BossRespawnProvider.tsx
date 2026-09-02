@@ -15,10 +15,6 @@ import {
   type RespawnRange,
   type RespawnStatus,
 } from "@/lib/respawn";
-import {
-  DEFAULT_RESPAWN_PRESET_ID,
-  getPresetRange,
-} from "@/lib/respawn-presets";
 import { clearAllPersistedOffsets } from "@/hooks/use-persisted-offset";
 import { clearPersistedStackOrder } from "@/components/ui-l2/draggable-window";
 import { unfoldAllPersistedWindows } from "@/hooks/use-persisted-fold-state";
@@ -42,8 +38,8 @@ export const VOLUME_STEPS = 6;
 const DEFAULT_VOLUME_STEP = 1;
 // The raw step-to-volume mapping (step / (VOLUME_STEPS - 1)) topped out at
 // 1.0 — the source clip itself is loud enough that even the slider's lowest
-// non-mute step was still too loud. Scaling every step down by half (so the
-// slider's own max only ever reaches 50% real volume) fixes that without
+// non-mute step was still too loud. Scaling every step down (so the
+// slider's own max only ever reaches 30% real volume) fixes that without
 // changing the slider's own 5-step feel.
 const MAX_VOLUME_SCALE = 0.3;
 // PoE Trade-style alert: plays whenever a tracked boss's status changes,
@@ -55,9 +51,6 @@ const NOTIFICATION_SOUND_SRC = "/sounds/la2-questitem-get.mp3";
 // How often derived statuses (dead/pending/alive) get recomputed — status is
 // purely a function of wall-clock time, so nothing else triggers a refresh.
 const TICK_INTERVAL_MS = 1_000;
-const FALLBACK_RANGE: RespawnRange = getPresetRange(
-  DEFAULT_RESPAWN_PRESET_ID,
-) ?? { minHours: 12, maxHours: 16 };
 
 // One respawn timer applies to every boss — servers run their own single
 // rate, they don't vary it per boss — so all this tracks per boss is when
@@ -77,24 +70,14 @@ function readRecords(): BossRespawnRecords {
   }
 }
 
-function readGlobalRange(): RespawnRange {
+// null (the default) means "not set" — no timer-based tracking at all, see
+// globalRange's own doc comment below.
+function readGlobalRange(): RespawnRange | null {
   try {
     const raw = window.localStorage.getItem(GLOBAL_RANGE_STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as RespawnRange) : FALLBACK_RANGE;
+    return raw ? (JSON.parse(raw) as RespawnRange) : null;
   } catch {
-    return FALLBACK_RANGE;
-  }
-}
-
-// Whether the user has ever explicitly chosen a range (vs. it just being on
-// FALLBACK_RANGE because nothing was saved yet) — lets the "not set" prompt
-// in Up Next and the corner chip tell "never configured" apart from
-// "configured, and it happens to match the fallback."
-function readHasCustomRange(): boolean {
-  try {
-    return window.localStorage.getItem(GLOBAL_RANGE_STORAGE_KEY) != null;
-  } catch {
-    return false;
+    return null;
   }
 }
 
@@ -184,12 +167,13 @@ function readHidden(): Record<string, true> {
 }
 
 interface BossRespawnContextType {
-  // The one respawn window applied to every boss.
-  globalRange: RespawnRange;
-  setGlobalRange: (range: RespawnRange) => void;
-  // False until setGlobalRange has actually been called (by the user, or by
-  // the onboarding strip's Skip) at least once.
-  hasCustomRange: boolean;
+  // The one respawn window applied to every boss — null (the default) means
+  // "not set": no timer-based tracking at all, for a player who'd rather
+  // just mark bosses dead/alive on the map themselves. A killed boss stays
+  // "dead" indefinitely in that mode (see computeRespawnStatus) instead of
+  // counting down toward pending/alive.
+  globalRange: RespawnRange | null;
+  setGlobalRange: (range: RespawnRange | null) => void;
   markKilled: (bossId: string) => void;
   markAlive: (bossId: string) => void;
   getKilledAt: (bossId: string) => number | null;
@@ -225,9 +209,9 @@ interface BossRespawnContextType {
   isAlertButtonVisible: boolean;
   setIsAlertButtonVisible: (visible: boolean) => void;
   // Options > Game tab's "Hide 'Set Time'" checkbox — suppresses Up Next's
-  // "Boss respawn timer is not set" prompt (only relevant while
-  // hasCustomRange is false to begin with). Defaults to false, so the
-  // prompt shows unless the player explicitly opts to hide it.
+  // "Boss respawn timer is not set" prompt (only relevant while globalRange
+  // is still null to begin with). Defaults to false, so the prompt shows
+  // unless the player explicitly opts to hide it.
   hideSetTimePrompt: boolean;
   setHideSetTimePrompt: (hide: boolean) => void;
   // Bosses dismissed as "not interested" — still tracked/clickable as
@@ -249,9 +233,9 @@ const BossRespawnContext = createContext<BossRespawnContextType | undefined>(
 export function BossRespawnProvider({ children }: { children: ReactNode }) {
   const [records, setRecords] = useState<BossRespawnRecords>({});
   const [hidden, setHidden] = useState<Record<string, true>>({});
-  const [globalRange, setGlobalRangeState] =
-    useState<RespawnRange>(FALLBACK_RANGE);
-  const [hasCustomRange, setHasCustomRange] = useState(false);
+  const [globalRange, setGlobalRangeState] = useState<RespawnRange | null>(
+    null,
+  );
   const [now, setNow] = useState(() => Date.now());
   const [soundEnabled, setSoundEnabledState] = useState(false);
   const [soundVolume, setSoundVolumeState] = useState(DEFAULT_VOLUME_STEP);
@@ -280,13 +264,19 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
   // The previous badge's object URL — revoked once the next one replaces
   // it (blob URLs otherwise leak for the life of the tab).
   const faviconBlobUrlRef = useRef<string | null>(null);
+  // renderFaviconBadge is called from several places (mount, status
+  // transitions, focus/visibility, resetAll) and its canvas.toBlob callback
+  // is async with no ordering guarantee — a call that fires first can still
+  // resolve last. Each call stamps its id here before encoding; a callback
+  // that finds a newer id already stored lost the race and bails out
+  // instead of clobbering the link/URL a later call already applied.
+  const faviconRenderIdRef = useRef(0);
 
   // Hydrate from localStorage after mount (avoids SSR/client mismatch).
   useEffect(() => {
     setRecords(readRecords());
     setHidden(readHidden());
     setGlobalRangeState(readGlobalRange());
-    setHasCustomRange(readHasCustomRange());
     setSoundEnabledState(readSoundEnabled());
     setSoundVolumeState(readSoundVolume());
     setIsAlertButtonVisibleState(readAlertButtonVisible());
@@ -314,6 +304,8 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
   const renderFaviconBadge = useCallback((count: number) => {
     const base = baseFaviconImageRef.current;
     if (!base) return;
+
+    const renderId = ++faviconRenderIdRef.current;
 
     const size = 32;
     const canvas = document.createElement("canvas");
@@ -343,6 +335,11 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
 
     canvas.toBlob((blob) => {
       if (!blob) return;
+      // A newer renderFaviconBadge call already won — applying this stale
+      // result would remove the current (correct) link and, worse, revoke
+      // the blob URL the newer call just handed to <link>, which is what
+      // produced the blob: ... net::ERR_FILE_NOT_FOUND requests.
+      if (renderId !== faviconRenderIdRef.current) return;
       const url = URL.createObjectURL(blob);
 
       faviconLinkRef.current?.remove();
@@ -388,9 +385,8 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     }
   }, []);
 
-  const setGlobalRange = useCallback((range: RespawnRange) => {
+  const setGlobalRange = useCallback((range: RespawnRange | null) => {
     setGlobalRangeState(range);
-    setHasCustomRange(true);
     try {
       window.localStorage.setItem(
         GLOBAL_RANGE_STORAGE_KEY,
@@ -566,8 +562,7 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
     unfoldAllPersistedWindows();
     setRecords({});
     setHidden({});
-    setGlobalRangeState(FALLBACK_RANGE);
-    setHasCustomRange(false);
+    setGlobalRangeState(null);
     setSoundEnabledState(false);
     setSoundVolumeState(DEFAULT_VOLUME_STEP);
     setIsAlertButtonVisibleState(true);
@@ -650,7 +645,6 @@ export function BossRespawnProvider({ children }: { children: ReactNode }) {
       value={{
         globalRange,
         setGlobalRange,
-        hasCustomRange,
         markKilled,
         markAlive,
         getKilledAt,

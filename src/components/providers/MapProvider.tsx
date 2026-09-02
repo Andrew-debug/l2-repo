@@ -1,7 +1,9 @@
 "use client";
 
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, { createContext, useContext, ReactNode } from "react";
+import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 import { usePersistedFoldState } from "@/hooks/use-persisted-fold-state";
+import { useWindowOpenReset } from "@/hooks/use-persisted-window-open";
 import { usePersistedView } from "@/hooks/use-persisted-view";
 
 export type MapSize = "large" | "small";
@@ -48,7 +50,11 @@ export function MapProvider({ children }: MapProviderProps) {
     defaultSize,
     MAP_SIZE_OPTIONS,
   );
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = usePersistedBoolean("l2-map-open", true);
+  // Options' "Initialize" needs to reopen this window even while it's
+  // closed — see useWindowOpenReset for why this can't just be a direct
+  // setIsOpen(true) call from OptionsWindow itself.
+  useWindowOpenReset(setIsOpen);
   const [isFolded, setIsFolded] = usePersistedFoldState("map");
 
   const toggleMapOpen = () => {

@@ -225,6 +225,19 @@ interface DraggableWindowProps {
   // makes mounting behave like a fresh click: jump straight to the front
   // and bump the persisted order, instead of restoring the old position.
   raiseOnMount?: boolean;
+  // Corrects this window's offset to keep it fully within the viewport —
+  // checked whenever this prop is truthy (mount, or a caller flipping it
+  // true) and again on every window resize afterward. Only ever passed on
+  // the small folded-icon form of a window: the sticky-edge resistance in
+  // handleDragStart below still lets a drag *bleed* past the viewport edge
+  // once the pointer travels far enough (see STICKY_BREAKAWAY_PX) — fine
+  // for a full-size window, which is big enough that some part almost
+  // always stays reachable even at an extreme offset, but a 30px fold icon
+  // pushed past the edge that way has nothing left on screen to click and
+  // drag back. Corrects whichever axis actually overflowed and leaves the
+  // other alone, landing exactly on the screen edge at its current
+  // position rather than re-centering the whole thing.
+  snapIntoViewport?: boolean;
 }
 
 // Holding the mouse down on a <DragHandle> and moving repositions the whole
@@ -248,6 +261,7 @@ export function DraggableWindow({
   alwaysOnTop,
   id,
   raiseOnMount,
+  snapIntoViewport,
 }: DraggableWindowProps) {
   const [offset, setOffsetState] = useState(initialOffset ?? { x: 0, y: 0 });
   const [zIndex, setZIndex] = useState(0);
@@ -345,6 +359,40 @@ export function DraggableWindow({
   // without making handleDragStart depend on (and get recreated by) it.
   const onOffsetChangeRef = useRef(onOffsetChange);
   onOffsetChangeRef.current = onOffsetChange;
+
+  // See snapIntoViewport's own doc comment above. useLayoutEffect (not
+  // useEffect) so a correction lands before paint — same "avoid a visible
+  // flash at the wrong position" reasoning as the initialOffset resync
+  // effect above. offset.x/offset.y are in the dependency list (not just
+  // snapIntoViewport) so this also re-checks whenever the shared offset
+  // changes afterward — e.g. that same resync effect syncing in an
+  // already-out-of-bounds value inherited from the window's full-size form.
+  useLayoutEffect(() => {
+    if (!snapIntoViewport) return;
+    const element = elementRef.current;
+    if (!element) return;
+
+    const clamp = () => {
+      const rect = element.getBoundingClientRect();
+      let dx = 0;
+      if (rect.right > window.innerWidth) dx = rect.right - window.innerWidth;
+      else if (rect.left < 0) dx = rect.left;
+      let dy = 0;
+      if (rect.bottom > window.innerHeight)
+        dy = rect.bottom - window.innerHeight;
+      else if (rect.top < 0) dy = rect.top;
+      if (dx === 0 && dy === 0) return;
+      setOffsetState((prev) => {
+        const next = { x: prev.x - dx, y: prev.y - dy };
+        onOffsetChangeRef.current?.(next);
+        return next;
+      });
+    };
+
+    clamp();
+    window.addEventListener("resize", clamp);
+    return () => window.removeEventListener("resize", clamp);
+  }, [snapIntoViewport, offset.x, offset.y]);
 
   const bringToFront = useCallback(() => {
     if (alwaysOnTop) return; // pinned — see ALWAYS_ON_TOP_Z_INDEX above

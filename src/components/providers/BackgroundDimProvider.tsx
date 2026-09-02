@@ -6,6 +6,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 
 // Which of the main game windows were open right before Exit Game closed
 // them (see menu-section.tsx's handleExit) — restored verbatim when the
@@ -54,6 +55,12 @@ interface BackgroundDimContextType {
   // it back to null once handled.
   returnToGameBossId: string | null;
   setReturnToGameBossId: (bossId: string | null) => void;
+  // True once isDimmed/isBackgroundVisible/isBackgroundInteractive have all
+  // been read from localStorage — see usePersistedBoolean's own isHydrated.
+  // Background gates its own rendering on this so the SSR defaults (visible,
+  // dimmed) never flash on screen for a player who turned either off,
+  // before snapping to the real values a moment later.
+  isHydrated: boolean;
 }
 
 const BackgroundDimContext = createContext<
@@ -61,10 +68,27 @@ const BackgroundDimContext = createContext<
 >(undefined);
 
 export function BackgroundDimProvider({ children }: { children: ReactNode }) {
-  const [isDimmed, setIsDimmed] = useState(true);
-  const [isBackgroundVisible, setIsBackgroundVisible] = useState(true);
-  const [isBackgroundInteractive, setIsBackgroundInteractive] =
-    useState(true);
+  const [isDimmed, setIsDimmed, isDimmedHydrated] = usePersistedBoolean(
+    "l2-background-dimmed",
+    true,
+  );
+  const [
+    isBackgroundVisible,
+    setIsBackgroundVisible,
+    isBackgroundVisibleHydrated,
+  ] = usePersistedBoolean("l2-background-visible", true);
+  const [
+    isBackgroundInteractive,
+    setIsBackgroundInteractive,
+    isBackgroundInteractiveHydrated,
+  ] = usePersistedBoolean("l2-background-interactive", true);
+  // All three hydrate synchronously together (same initial layout-effect
+  // pass), so this is really just one signal — combined via && rather than
+  // picking one arbitrarily so it stays correct even if that ever changes.
+  const isHydrated =
+    isDimmedHydrated &&
+    isBackgroundVisibleHydrated &&
+    isBackgroundInteractiveHydrated;
   const [exitedWindowSnapshot, setExitedWindowSnapshot] =
     useState<ExitedWindowSnapshot | null>(null);
   const [returnToGameBossId, setReturnToGameBossId] = useState<string | null>(
@@ -84,6 +108,7 @@ export function BackgroundDimProvider({ children }: { children: ReactNode }) {
         setExitedWindowSnapshot,
         returnToGameBossId,
         setReturnToGameBossId,
+        isHydrated,
       }}
     >
       {children}

@@ -3,9 +3,9 @@
 import {
   createContext,
   useContext,
-  useState,
   type ReactNode,
 } from "react";
+import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 
 interface EnterChatContextType {
   // Options > Game tab's "Enter Chat" checkbox — repurposed from the
@@ -25,7 +25,7 @@ const EnterChatContext = createContext<EnterChatContextType | undefined>(
 );
 
 export function EnterChatProvider({ children }: { children: ReactNode }) {
-  const [enterChat, setEnterChat] = useState(false);
+  const [enterChat, setEnterChat] = usePersistedBoolean("l2-enter-chat", false);
 
   return (
     <EnterChatContext.Provider value={{ enterChat, setEnterChat }}>

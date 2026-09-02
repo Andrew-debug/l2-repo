@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useRef, useState, useEffect, useMemo } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
 import { Stage, Layer, Image as KonvaImage, Group, Rect } from "react-konva";
 import Konva from "konva";
 import BossMarkerKonva from "./BossMarkerKonva";
@@ -154,6 +160,28 @@ export default function KonvaMapViewer({
   const [isDragging, setIsDragging] = useState(false);
   const [expandedClusterId, setExpandedClusterId] = useState<string | null>(
     null,
+  );
+  // Stable across the once-a-second re-render BossRespawnProvider's live
+  // clock causes (see BossMarkerKonva's status/hidden prop comment) — only
+  // changes reference when selectedBossId itself does, which is the point:
+  // every plain marker below shares this same function as its onSelect
+  // prop, so React.memo can actually bail out on ticks where nothing about
+  // a given marker changed, instead of treating a fresh inline arrow
+  // function as "changed" every single second.
+  const handleMarkerSelect = useCallback(
+    (id: string) => {
+      setSelectedBoss(selectedBossId === id ? null : id, "map");
+      setExpandedClusterId(null);
+    },
+    [selectedBossId, setSelectedBoss],
+  );
+  // Same idea, for the one marker (an expanded cluster's center boss) that
+  // doesn't also clear expandedClusterId on select.
+  const handleClusterCenterSelect = useCallback(
+    (id: string) => {
+      setSelectedBoss(selectedBossId === id ? null : id, "map");
+    },
+    [selectedBossId, setSelectedBoss],
   );
   const [itemChipHovered, setItemChipHovered] = useState(false);
   const MAP_BOSSES = useMemo(
@@ -670,12 +698,17 @@ export default function KonvaMapViewer({
 
   // "Respawns in 3h 12m" / "Could be up · closes in 40m" / "Respawned 6m
   // ago" — null only when the boss has never been marked killed, since
-  // there's nothing to count from.
+  // there's nothing to count from. With no respawn window set (globalRange
+  // null — "not set"/manual mode, see BossRespawnProvider), status is
+  // always "dead" once killed and stays that way until marked alive by
+  // hand, so there's no countdown to show — just how long ago it died.
   function bossTimerLabel(bossId: string): string | null {
     const killedAt = getKilledAt(bossId);
     if (killedAt == null) return null;
 
     const elapsedMs = Date.now() - killedAt;
+    if (!globalRange) return `Killed ${formatDuration(elapsedMs)} ago`;
+
     const minMs = globalRange.minHours * 60 * 60 * 1000;
     const maxMs = globalRange.maxHours * 60 * 60 * 1000;
 
@@ -756,12 +789,11 @@ export default function KonvaMapViewer({
                 key={boss.id}
                 boss={boss}
                 isSelected={selectedBossId === boss.id}
-                onSelect={(id) => {
-                  setSelectedBoss(selectedBossId === id ? null : id, "map");
-                  setExpandedClusterId(null);
-                }}
-                dimmed={
-                  matchingBossIds ? !matchingBossIds.has(boss.id) : false
+                onSelect={handleMarkerSelect}
+                status={getStatus(boss.id)}
+                hidden={
+                  isHidden(boss.id) ||
+                  (matchingBossIds ? !matchingBossIds.has(boss.id) : false)
                 }
                 scale={scale}
               />
@@ -799,10 +831,9 @@ export default function KonvaMapViewer({
                       absoluteY: anchor.absoluteY + yOffset,
                     }}
                     isSelected={selectedBossId === solo.id}
-                    onSelect={(id) => {
-                      setSelectedBoss(selectedBossId === id ? null : id, "map");
-                      setExpandedClusterId(null);
-                    }}
+                    onSelect={handleMarkerSelect}
+                    status={getStatus(solo.id)}
+                    hidden={isHidden(solo.id)}
                     scale={scale}
                   />
                 );
@@ -827,11 +858,11 @@ export default function KonvaMapViewer({
                       setExpandedClusterId(cluster.id);
                       if (selectedBossId) setSelectedBoss(null, "map");
                     }}
-                    onMemberSelect={(id) =>
-                      setSelectedBoss(selectedBossId === id ? null : id, "map")
-                    }
+                    onMemberSelect={handleClusterCenterSelect}
                     selectedBossId={selectedBossId}
                     scale={scale}
+                    getStatus={getStatus}
+                    isHidden={isHidden}
                   />
                   {/* Only mounted while expanded — the collapsed state
                       shows just the cluster's own status icon, never this
@@ -840,13 +871,13 @@ export default function KonvaMapViewer({
                     <BossMarkerKonva
                       boss={centerBoss}
                       isSelected={selectedBossId === centerBoss.id}
-                      onSelect={(id) =>
-                        setSelectedBoss(selectedBossId === id ? null : id, "map")
-                      }
-                      dimmed={
-                        matchingBossIds
+                      onSelect={handleClusterCenterSelect}
+                      status={getStatus(centerBoss.id)}
+                      hidden={
+                        isHidden(centerBoss.id) ||
+                        (matchingBossIds
                           ? !matchingBossIds.has(centerBoss.id)
-                          : false
+                          : false)
                       }
                       scale={scale}
                     />

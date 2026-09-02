@@ -24,8 +24,14 @@ const EPIC_BOSS_NAMES = [
 // Background/Options read), since it's meant to read as part of that
 // backdrop, not a standalone widget.
 export function EpicBossStatusRail() {
-  const { isBackgroundVisible } = useBackgroundDim();
-  if (!isBackgroundVisible) return null;
+  const { isBackgroundVisible, isHydrated } = useBackgroundDim();
+  // Same hydration-flash fix as Background itself: isBackgroundVisible
+  // defaults to true (matching SSR, which has no localStorage), so
+  // rendering based on that default would flash this rail on screen for a
+  // moment for a player who'd actually turned the background off, before
+  // snapping away once hydrated. See usePersistedBoolean's own isHydrated
+  // comment.
+  if (!isHydrated || !isBackgroundVisible) return null;
 
   return (
     // pointer-events-none — purely decorative (no interactive descendants),

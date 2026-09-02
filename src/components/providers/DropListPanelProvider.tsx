@@ -1,7 +1,9 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
+import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 import { usePersistedFoldState } from "@/hooks/use-persisted-fold-state";
+import { useWindowOpenReset } from "@/hooks/use-persisted-window-open";
 
 interface DropListPanelContextType {
   // Whether the Raid Boss Drop List window is shown at all.
@@ -26,7 +28,8 @@ const DropListPanelContext = createContext<
 >(undefined);
 
 export function DropListPanelProvider({ children }: { children: ReactNode }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = usePersistedBoolean("l2-drop-list-open", true);
+  useWindowOpenReset(setIsOpen);
   const [isFolded, setIsFolded] = usePersistedFoldState("drop-list");
 
   const toggleOpen = () => {

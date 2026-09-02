@@ -9,23 +9,27 @@ import { levelRanges, type Boss } from "@/lib/boss-data";
 // Convention: public/bosses/<levelRange>/<Boss Name>/<Boss Name>.webp
 // e.g. level 23 -> /bosses/20-29/Greyclaw Kutus/Greyclaw Kutus.webp
 // The level-range folder must match a levelRanges label exactly, the boss
-// folder/file must match boss.name exactly, and the file must be .webp —
-// no fuzzy matching, no alternate extensions. If it 404s, that's a mistake
-// in the asset folder to go fix, not something to guess around here.
+// folder/file must match boss.name exactly (minus commas, see below), and
+// the file must be .webp — no fuzzy matching, no alternate extensions. If
+// it 404s, that's a mistake in the asset folder to go fix, not something to
+// guess around here.
 //
-// Epic bosses (npcType "EpicBoss") break both parts of that convention:
-// they live under a flat /bosses/epic/ folder instead of a level range, and
-// the folder/file name has spaces stripped (e.g. "Queen Ant" -> "QueenAnt")
-// rather than matching boss.name verbatim.
+// Commas are stripped from the name before building the path — a comma in
+// a local image's path (e.g. "Spirit of Andras, the Betrayer") makes
+// Next's built-in image optimizer fail with a 400 ("not a valid image")
+// even though the exact same file serves fine unoptimized. Asset
+// folders/files for these bosses are named without the comma to match;
+// boss.name itself (the display name) is untouched.
 function getBossImagePath(boss: Boss): string {
+  const name = boss.name.replace(/,/g, "");
   if (boss.npcType === "EpicBoss") {
-    const fileName = boss.name.replace(/\s+/g, "");
+    const fileName = name.replace(/\s+/g, "");
     return `/bosses/epic/${fileName}/${fileName}.webp`;
   }
   const range = levelRanges.find(
     (r) => boss.level >= r.min && boss.level <= r.max,
   );
-  return `/bosses/${range?.label}/${boss.name}/${boss.name}.webp`;
+  return `/bosses/${range?.label}/${name}/${name}.webp`;
 }
 
 export function BossPortraitImage({

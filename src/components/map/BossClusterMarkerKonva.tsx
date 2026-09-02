@@ -5,6 +5,7 @@ import Konva from "konva";
 import { useMarkerIconVariants, MARKER_ICON_OFFSET_X_PX } from "./markerIcon";
 import { useKonvaClickGuard } from "./useKonvaClickGuard";
 import BossMarkerKonva, { type MapBoss } from "./BossMarkerKonva";
+import type { RespawnStatus } from "@/lib/respawn";
 
 const ANIMATION_DURATION_MS = 350;
 // Same size as a normal single boss marker.
@@ -42,11 +43,17 @@ interface BossClusterMarkerKonvaProps {
   selectedBossId: string | null;
   scale: number;
   // Active item-drop filter, if any — null/undefined means no filter.
-  // Members outside this set render dimmed (see BossMarkerKonva's `dimmed`
+  // Members outside this set render dimmed (see BossMarkerKonva's `hidden`
   // prop), and the collapsed anchor icon itself dims when *none* of the
   // cluster's members match, so a filtered-out cluster is still visible
   // (just deemphasized) instead of disappearing.
   matchingBossIds?: Set<string> | null;
+  // Passed through to each expanded member's BossMarkerKonva as plain
+  // status/hidden props rather than having this component (or the markers
+  // themselves) read BossRespawnProvider's context directly — see
+  // BossMarkerKonva's status prop comment for why.
+  getStatus: (bossId: string) => RespawnStatus;
+  isHidden: (bossId: string) => boolean;
 }
 
 export default function BossClusterMarkerKonva({
@@ -61,6 +68,8 @@ export default function BossClusterMarkerKonva({
   selectedBossId,
   scale,
   matchingBossIds,
+  getStatus,
+  isHidden,
 }: BossClusterMarkerKonvaProps) {
   const [isHovered, setIsHovered] = useState(false);
   const variants = useMarkerIconVariants();
@@ -163,7 +172,11 @@ export default function BossClusterMarkerKonva({
               boss={memberBoss}
               isSelected={selectedBossId === member.id}
               onSelect={onMemberSelect}
-              dimmed={matchingBossIds ? !matchingBossIds.has(member.id) : false}
+              status={getStatus(member.id)}
+              hidden={
+                isHidden(member.id) ||
+                (matchingBossIds ? !matchingBossIds.has(member.id) : false)
+              }
               scale={scale}
             />
           );

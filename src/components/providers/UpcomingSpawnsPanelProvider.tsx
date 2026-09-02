@@ -1,7 +1,9 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, type ReactNode } from "react";
+import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 import { usePersistedFoldState } from "@/hooks/use-persisted-fold-state";
+import { useWindowOpenReset } from "@/hooks/use-persisted-window-open";
 
 interface UpcomingSpawnsPanelContextType {
   // Whether the Upcoming Spawns window is shown at all.
@@ -30,7 +32,8 @@ export function UpcomingSpawnsPanelProvider({
 }: {
   children: ReactNode;
 }) {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = usePersistedBoolean("l2-up-next-open", true);
+  useWindowOpenReset(setIsOpen);
   const [isFolded, setIsFolded] = usePersistedFoldState("up-next");
 
   const toggleOpen = () => {

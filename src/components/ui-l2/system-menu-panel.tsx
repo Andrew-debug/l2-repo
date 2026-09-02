@@ -83,21 +83,19 @@ function SystemMenuPanel({
   // are sourced.
   const { enterChat } = useEnterChat();
   const menuItems = [
-    {
-      // Decorative — no real listener backs Alt+B (see the component doc
-      // comment above), so unlike Up Next below this label never changes.
-      text: "Community(Alt+B)",
-      defaultIcon: "/icons/board_icon.png",
-      hoverIcon: "/icons/board_icon_over.png",
-      clickIcon: "/icons/board_icon_down.png",
-    },
-    {
-      text: "Help",
-      defaultIcon: "/icons/systemicon3.png",
-      hoverIcon: "/icons/systemicon3_over.png",
-      clickIcon: "/icons/systemicon3_down.png",
-      onClick: onHelpClick,
-    },
+    // {
+    //   text: "Community(Alt+B)",
+    //   defaultIcon: "/icons/board_icon.png",
+    //   hoverIcon: "/icons/board_icon_over.png",
+    //   clickIcon: "/icons/board_icon_down.png",
+    // },
+    // {
+    //   text: "Help",
+    //   defaultIcon: "/icons/systemicon3.png",
+    //   hoverIcon: "/icons/systemicon3_over.png",
+    //   clickIcon: "/icons/systemicon3_down.png",
+    //   onClick: onHelpClick,
+    // },
 
     {
       text: formatShortcutLabel("Up Next", "N", enterChat),
@@ -107,7 +105,7 @@ function SystemMenuPanel({
       onClick: onUpcomingSpawnsClick,
     },
     {
-      text: "NPC Info",
+      text: "Raid Boss Info",
       defaultIcon: "/icons/mainwndtabicon1.png",
       hoverIcon: "/icons/mainwndtabicon1_over.png",
       clickIcon: "/icons/mainwndtabicon1_down.png",

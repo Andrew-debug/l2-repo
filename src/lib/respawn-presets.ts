@@ -21,11 +21,16 @@ export const RESPAWN_PRESETS: RespawnPreset[] = [
   { id: "48-96h", label: "48 – 96h (epic)", minHours: 48, maxHours: 96 },
 ];
 
-export const DEFAULT_RESPAWN_PRESET_ID = "12-16h";
-
 // Sentinel used by the UI to switch a <select> into free-entry min/max
 // fields instead of picking one of the fixed presets above.
 export const CUSTOM_RESPAWN_ID = "custom";
+
+// Sentinel for "no respawn window configured" — BossRespawnProvider's real
+// default (see its own globalRange comment): a player who doesn't want
+// timer-based tracking at all just marks bosses dead/alive by hand, with no
+// countdown attached. Distinct from CUSTOM_RESPAWN_ID, which still implies
+// a real (freely-entered) range.
+export const NOT_SET_RESPAWN_ID = "not-set";
 
 export function findRespawnPreset(id: string): RespawnPreset | undefined {
   return RESPAWN_PRESETS.find((preset) => preset.id === id);
