@@ -37,6 +37,16 @@ export default function Home() {
       <BackgroundDimProvider>
         <HeaderVisibilityProvider>
           <div className="relative w-full h-dvh overflow-hidden border border-window-inner-gray">
+            {/* Only server-rendered link into the crawlable /bosses pages —
+                everything else on this screen is a client component, and the
+                boss map itself renders to a <canvas> that search engines
+                can't read at all. */}
+            <a
+              href="/bosses"
+              className="absolute bottom-1 left-1 z-50 text-[10px] tracking-wide text-white/25 hover:text-white/60"
+            >
+              Full boss list &amp; drop tables
+            </a>
             <BossRespawnProvider>
               <Background />
               <EpicBossStatusRail />

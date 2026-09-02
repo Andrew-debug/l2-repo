@@ -30,9 +30,41 @@ const fsTahoma8px = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "L2 Boss Tracker - Lineage 2 Raid Boss Map",
+  metadataBase: new URL("https://l2bosstracker.com"),
+  title: {
+    default:
+      "L2 Boss Tracker — Lineage 2 Raid Boss Map, Spawn Locations & Drop Lists",
+    template: "%s | L2 Boss Tracker",
+  },
   description:
-    "Track and locate Lineage 2 raid bosses, filter by level and item drops",
+    "Interactive Lineage 2 raid boss map with live spawn/respawn timers, level and item-drop filters, and full drop tables for every raid boss and epic boss (Queen Ant, Orfen, Zaken, Baium, Valakas, Antharas, Core, Frintezza) in the Interlude chronicle.",
+  keywords: [
+    "l2 bosses",
+    "lineage 2 raid boss",
+    "lineage 2 boss map",
+    "l2 raid boss locations",
+    "l2 boss drop list",
+    "l2 epic boss",
+    "lineage 2 interlude bosses",
+    "l2 boss respawn timer",
+  ],
+  applicationName: "L2 Boss Tracker",
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: "L2 Boss Tracker",
+    title: "L2 Boss Tracker — Lineage 2 Raid Boss Map, Spawn Locations & Drop Lists",
+    description:
+      "Interactive map of every Lineage 2 raid boss and epic boss, with live respawn timers and full drop tables.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "L2 Boss Tracker — Lineage 2 Raid Boss Map",
+    description:
+      "Interactive map of every Lineage 2 raid boss and epic boss, with live respawn timers and full drop tables.",
+  },
+  robots: { index: true, follow: true },
   // No `icon`/`shortcut` entries here on purpose, and favicon.ico lives in
   // public/ (a plain static file) rather than src/app/ (Next's auto-linked
   // icon convention) — BossRespawnProvider's favicon badge is the sole
@@ -50,6 +82,15 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "L2 Boss Tracker",
+  url: "https://l2bosstracker.com",
+  description:
+    "Interactive Lineage 2 raid boss map with live spawn/respawn timers, level and item-drop filters, and full drop tables for every raid boss and epic boss.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -60,6 +101,11 @@ export default function RootLayout({
       <body
         className={`${marcellus.variable} ${fsTahoma8px.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         {children}
         {/* <Analytics /> */}
         <Toaster />
