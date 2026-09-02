@@ -3,6 +3,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* The real app (draggable windows, Konva map, keyboard shortcuts) needs
+   real screen real estate in both dimensions, not just a wide-enough
+   viewport — a short window (e.g. a laptop with browser chrome eating
+   vertical space, or a tablet in landscape) is just as unusable as a
+   narrow phone one. "Desktop" therefore requires width AND height past
+   these thresholds; anything short of either counts as mobile and gets
+   MobileSplash instead — see page.tsx/mobile-splash.tsx's own comments. */
+@custom-variant desktop (@media (min-width: 1023px) and (min-height: 863px));
+
 :root {
   --background: oklch(0.12 0.01 270);
   --foreground: oklch(0.92 0.02 85);

@@ -30,6 +30,25 @@ import { reopenAllPersistedWindows } from "@/hooks/use-persisted-window-open";
 import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 import { cn } from "@/lib/utils";
 
+// gameCursor lives only in this component's own usePersistedBoolean call —
+// unlike Header/Background/EnterChat (each a real context, always mounted
+// and reachable from anywhere), there's no shared setter another component
+// can call. Same live-reset-event approach as
+// use-persisted-offset.ts/use-persisted-window-open.ts for the same reason:
+// an external localStorage write alone wouldn't update this component's
+// already-in-memory state, so the System Menu's "Restart" needs a way to
+// reach it live.
+const GAME_CURSOR_RESET_EVENT = "l2-game-cursor-reset";
+
+export function resetGameCursor() {
+  try {
+    window.localStorage.setItem("l2-game-cursor", "1");
+  } catch {
+    // Non-fatal — see usePersistedBoolean's own read/write try/catch.
+  }
+  window.dispatchEvent(new Event(GAME_CURSOR_RESET_EVENT));
+}
+
 type Tab = "video" | "audio" | "game";
 
 const TABS: { id: Tab; label: string }[] = [
@@ -790,6 +809,16 @@ export function OptionsWindow() {
   useEffect(() => {
     document.documentElement.classList.toggle("default-cursor", !gameCursor);
   }, [gameCursor]);
+
+  // See resetGameCursor's own comment above — the System Menu's "Restart"
+  // dispatches this so the checkbox (and the actual cursor) snap back to
+  // the default live, without a page reload.
+  useEffect(() => {
+    const handleReset = () => setGameCursor(true);
+    window.addEventListener(GAME_CURSOR_RESET_EVENT, handleReset);
+    return () =>
+      window.removeEventListener(GAME_CURSOR_RESET_EVENT, handleReset);
+  }, [setGameCursor]);
 
   // Every window's WindowBorder reads its chrome background from the
   // --color-window-bg custom property (Tailwind's bg-window-bg utility) —

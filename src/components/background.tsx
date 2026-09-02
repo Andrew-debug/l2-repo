@@ -196,10 +196,22 @@ export function Background() {
                 src={`/bosses/epic/${name}/${name}.webp`}
                 alt={name}
                 fill
-                sizes="12.5vw"
-                // Default quality (75, see next.config.ts) visibly softened
-                // this painterly source art on re-encode — same issue as
-                // boss-portrait-image.tsx, same fix.
+                // Explicit "100vw" on purpose — this panel is only ever an
+                // eighth of the screen, but an accurate small hint (e.g.
+                // "12.5vw") makes Next fetch a tightly-cropped, small
+                // source, and quality=90's compression is visible at that
+                // native size with nothing to smooth it out. "100vw" (also
+                // `fill`'s implicit default, spelled out here only to
+                // silence Next's dev-mode "missing sizes" warning — same
+                // behavior either way) requests the source's full available
+                // resolution instead — the browser then downscales it in
+                // CSS, which hides compression artifacts far better than a
+                // "correctly" small fetch does. Costs a bit more bandwidth
+                // per panel; worth it for this painterly art. Same
+                // reasoning as quality={90} below — restores how this
+                // looked before the
+                // "final" commit added the sizes hint.
+                sizes="100vw"
                 quality={90}
                 className="aspect-square object-cover"
                 style={{ objectPosition: `${x}% center` }}

@@ -74,7 +74,7 @@ export default async function BossPage({
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
-      <div className="mx-auto max-w-3xl px-6 py-12">
+      <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
         <p className="mb-6 text-[13px] text-foreground/70">
           <Link href="/" className="text-system-text hover:underline">
             Map
@@ -146,12 +146,18 @@ export default async function BossPage({
         </h2>
         {boss.drops.length > 0 ? (
           <div className="mt-3 overflow-x-auto">
-            <table className="w-full border-collapse text-[14px]">
+            {/* table-fixed + explicit column widths so the Item column
+                wraps long names (e.g. "Blessed Scroll: Enchant Armor
+                (Grade D)") instead of forcing horizontal scroll on narrow
+                screens — auto layout would size columns to fit content on
+                one line, which is fine at desktop widths but pushes the
+                table wider than the viewport on mobile. */}
+            <table className="w-full table-fixed border-collapse text-[13px] sm:text-[14px]">
               <thead>
                 <tr className="border-b border-border text-left text-foreground/60">
-                  <th className="py-1.5 pr-4 font-normal">Item</th>
-                  <th className="py-1.5 pr-4 font-normal">Chance</th>
-                  <th className="py-1.5 pr-4 font-normal">Count</th>
+                  <th className="w-[55%] py-1.5 pr-2 font-normal">Item</th>
+                  <th className="w-[22%] py-1.5 pr-2 font-normal">Chance</th>
+                  <th className="w-[23%] py-1.5 font-normal">Count</th>
                 </tr>
               </thead>
               <tbody>
@@ -159,24 +165,28 @@ export default async function BossPage({
                   const icon = itemIcons[d.item];
                   return (
                     <tr key={i} className="border-b border-border/40">
-                      <td className="flex items-center gap-2 py-1.5 pr-4">
-                        {icon && (
-                          <Image
-                            src={icon}
-                            alt=""
-                            width={20}
-                            height={20}
-                            className="shrink-0"
-                          />
-                        )}
-                        {d.item}
+                      {/* `flex` lives on this inner div, not the <td> itself
+                          — flex directly on a table cell drops its
+                          table-cell display, which breaks the column-width
+                          layout above. */}
+                      <td className="py-1.5 pr-2">
+                        <div className="flex items-start gap-2">
+                          {icon && (
+                            <Image
+                              src={icon}
+                              alt=""
+                              width={20}
+                              height={20}
+                              className="mt-0.5 shrink-0"
+                            />
+                          )}
+                          <span>{d.item}</span>
+                        </div>
                       </td>
-                      <td className="py-1.5 pr-4 text-foreground/80">
+                      <td className="py-1.5 pr-2 text-foreground/80">
                         {d.chance}
                       </td>
-                      <td className="py-1.5 pr-4 text-foreground/80">
-                        {d.count}
-                      </td>
+                      <td className="py-1.5 text-foreground/80">{d.count}</td>
                     </tr>
                   );
                 })}

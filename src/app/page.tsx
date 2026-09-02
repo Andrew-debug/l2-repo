@@ -25,6 +25,7 @@ import { MainContentRow } from "@/components/ui-l2/main-content-row";
 import { OptionsPanelProvider } from "@/components/providers/OptionsPanelProvider";
 import { OptionsWindow } from "@/components/ui-l2/options-window";
 import { RespawnChip } from "@/components/ui-l2/boss/respawn-chip";
+import { MobileSplash } from "@/components/mobile-splash";
 async function handleCloseAction() {
   "use server";
   console.log("This logs in your VSCode terminal, not the browser");
@@ -33,60 +34,73 @@ async function handleCloseAction() {
 
 export default function Home() {
   return (
-    <EnterChatProvider>
-      <BackgroundDimProvider>
-        <HeaderVisibilityProvider>
-          <div className="relative w-full h-dvh overflow-hidden border border-window-inner-gray">
-            {/* Only server-rendered link into the crawlable /bosses pages —
-                everything else on this screen is a client component, and the
-                boss map itself renders to a <canvas> that search engines
-                can't read at all. */}
-            <a
-              href="/bosses"
-              className="absolute bottom-1 left-1 z-50 text-[10px] tracking-wide text-white/25 hover:text-white/60"
-            >
-              Full boss list &amp; drop tables
-            </a>
-            <BossRespawnProvider>
-              <Background />
-              <EpicBossStatusRail />
-              <PageTitleBanner />
+    <>
+      {/* MobileSplash is `desktop:hidden` internally; this whole app below
+          is `hidden desktop:block` — "desktop" is a custom variant (see
+          globals.css) requiring BOTH width >= 1023px AND height >= 863px,
+          not just a wide-enough viewport, so a short window counts as
+          mobile too. Below that threshold, only the splash renders
+          (visually; see MobileSplash's own comment on the CSS-only
+          tradeoff); at/above it, only the real app does. The app itself has
+          no touch/small-screen layout at all (draggable windows, a Konva
+          canvas map, keyboard shortcuts), so there's no responsive version
+          of it to fall back to — mobile gets a dedicated screen instead. */}
+      <MobileSplash />
+      <div className="hidden h-dvh w-full desktop:block">
+        <EnterChatProvider>
+          <BackgroundDimProvider>
+            <HeaderVisibilityProvider>
+              <div className="relative w-full h-dvh overflow-hidden border border-window-inner-gray">
+                {/* Only server-rendered link into the crawlable /bosses
+                    pages — everything else on this screen is a client
+                    component, and the boss map itself renders to a
+                    <canvas> that search engines can't read at all. */}
+                <a
+                  href="/bosses"
+                  className="absolute bottom-1 left-1 z-50 text-[10px] tracking-wide text-white/25 hover:text-white/60"
+                >
+                  Full boss list &amp; drop tables
+                </a>
+                <BossRespawnProvider>
+                  <Background />
+                  <EpicBossStatusRail />
+                  <PageTitleBanner />
 
-              {/* <Header /> */}
-              {/* <MainPage /> */}
+                  {/* <Header /> */}
+                  {/* <MainPage /> */}
 
-              <OptionsPanelProvider>
-                <OptionsWindow />
+                  <OptionsPanelProvider>
+                    <OptionsWindow />
 
-                <MapProvider>
-                  <RaidBossesPanelProvider>
-                    <DropListPanelProvider>
-                      <UpcomingSpawnsPanelProvider>
-                        <NpcInfoPanelProvider>
-                          <BossSelectionProvider>
-                            <BossPositionsProvider>
-                              <BossItemFilterProvider>
-                                <BossLevelFilterProvider>
-                                  <MainContentRow />
+                    <MapProvider>
+                      <RaidBossesPanelProvider>
+                        <DropListPanelProvider>
+                          <UpcomingSpawnsPanelProvider>
+                            <NpcInfoPanelProvider>
+                              <BossSelectionProvider>
+                                <BossPositionsProvider>
+                                  <BossItemFilterProvider>
+                                    <BossLevelFilterProvider>
+                                      <MainContentRow />
 
-                                  <RespawnChip />
+                                      <RespawnChip />
 
-                                  {/* <Chat /> */}
+                                      {/* <Chat /> */}
 
-                                  <MenuSection />
-                                </BossLevelFilterProvider>
-                              </BossItemFilterProvider>
-                            </BossPositionsProvider>
-                          </BossSelectionProvider>
-                        </NpcInfoPanelProvider>
-                      </UpcomingSpawnsPanelProvider>
-                    </DropListPanelProvider>
-                  </RaidBossesPanelProvider>
-                </MapProvider>
-              </OptionsPanelProvider>
-            </BossRespawnProvider>
+                                      <MenuSection />
+                                    </BossLevelFilterProvider>
+                                  </BossItemFilterProvider>
+                                </BossPositionsProvider>
+                              </BossSelectionProvider>
+                            </NpcInfoPanelProvider>
+                          </UpcomingSpawnsPanelProvider>
+                        </DropListPanelProvider>
+                      </RaidBossesPanelProvider>
+                    </MapProvider>
+                  </OptionsPanelProvider>
+                </BossRespawnProvider>
 
-            {/* <footer className="border-t border-border bg-card/50 py-4">
+                {/* <footer className="border-t border-border bg-card/50 py-4">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="flex items-center gap-4 text-xs text-muted-foreground">
@@ -118,9 +132,11 @@ export default function Home() {
           </div>
         </div>
       </footer> */}
-          </div>
-        </HeaderVisibilityProvider>
-      </BackgroundDimProvider>
-    </EnterChatProvider>
+              </div>
+            </HeaderVisibilityProvider>
+          </BackgroundDimProvider>
+        </EnterChatProvider>
+      </div>
+    </>
   );
 }

@@ -61,7 +61,7 @@ export default function BossesPage() {
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
-      <div className="mx-auto max-w-4xl px-6 py-12">
+      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
         <p className="mb-6 text-[13px]">
           <Link href="/" className="text-system-text hover:underline">
             &larr; Back to the interactive boss map
@@ -115,19 +115,29 @@ export default function BossesPage() {
                   Level {range.label} Raid Bosses
                 </h2>
                 <div className="mt-3 overflow-x-auto">
-                  <table className="w-full border-collapse text-[14px]">
+                  {/* table-fixed + explicit widths so a long boss name
+                      wraps instead of forcing horizontal scroll on
+                      mobile — see the per-boss drop table's own comment
+                      on the same tradeoff. */}
+                  <table className="w-full table-fixed border-collapse text-[13px] sm:text-[14px]">
                     <thead>
                       <tr className="border-b border-border text-left text-foreground/60">
-                        <th className="py-1.5 pr-4 font-normal">Boss</th>
-                        <th className="py-1.5 pr-4 font-normal">Level</th>
-                        <th className="py-1.5 pr-4 font-normal">Race</th>
-                        <th className="py-1.5 pr-4 font-normal">HP</th>
+                        <th className="w-[40%] py-1.5 pr-2 font-normal">
+                          Boss
+                        </th>
+                        <th className="w-[15%] py-1.5 pr-2 font-normal">
+                          Level
+                        </th>
+                        <th className="w-[25%] py-1.5 pr-2 font-normal">
+                          Race
+                        </th>
+                        <th className="w-[20%] py-1.5 font-normal">HP</th>
                       </tr>
                     </thead>
                     <tbody>
                       {list.map((b) => (
                         <tr key={b.id} className="border-b border-border/40">
-                          <td className="py-1.5 pr-4">
+                          <td className="py-1.5 pr-2">
                             <Link
                               href={`/bosses/${b.slug}`}
                               className="text-button-text hover:underline"
@@ -135,13 +145,13 @@ export default function BossesPage() {
                               {b.name}
                             </Link>
                           </td>
-                          <td className="py-1.5 pr-4 text-foreground/80">
+                          <td className="py-1.5 pr-2 text-foreground/80">
                             {b.level}
                           </td>
-                          <td className="py-1.5 pr-4 text-foreground/80">
+                          <td className="py-1.5 pr-2 text-foreground/80">
                             {b.race}
                           </td>
-                          <td className="py-1.5 pr-4 text-foreground/80">
+                          <td className="py-1.5 text-foreground/80">
                             {b.hp.toLocaleString()}
                           </td>
                         </tr>

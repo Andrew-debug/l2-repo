@@ -23,10 +23,12 @@ import { useBossSelection } from "@/components/providers/BossSelectionProvider";
 import { useBossItemFilter } from "@/components/providers/BossItemFilterProvider";
 import { useBossLevelFilter } from "@/components/providers/BossLevelFilterProvider";
 import { useBackgroundDim } from "@/components/providers/BackgroundDimProvider";
+import { useHeaderVisibility } from "@/components/providers/HeaderVisibilityProvider";
 import { usePersistedOffset } from "@/hooks/use-persisted-offset";
 import { usePersistedBoolean } from "@/hooks/use-persisted-boolean";
 import { useAppShortcut, formatShortcutLabel } from "@/hooks/use-app-shortcut";
 import { useEnterChat } from "@/components/providers/EnterChatProvider";
+import { resetGameCursor } from "./options-window";
 import { cn } from "@/lib/utils";
 import { DOCK_CONTENT_WIDTH } from "./dock-layout";
 
@@ -190,11 +192,13 @@ export default function MenuSection() {
   const { setSelectedRange } = useBossLevelFilter();
   const {
     setIsDimmed,
+    setIsBackgroundVisible,
     exitedWindowSnapshot,
     setExitedWindowSnapshot,
     returnToGameBossId,
     setReturnToGameBossId,
   } = useBackgroundDim();
+  const { setIsHeaderVisible } = useHeaderVisibility();
   // Lifted out of SystemMenuPanel since it unmounts on close — kept here,
   // in the always-mounted parent, so it survives to the next open.
   // Persisted to localStorage so a reload reopens it wherever it was last
@@ -209,7 +213,7 @@ export default function MenuSection() {
   // positions, not two forms of the same one.
   const [dockOffset, setDockOffset, isDockOffsetHydrated] =
     usePersistedOffset("system-menu-dock");
-  const { enterChat } = useEnterChat();
+  const { enterChat, setEnterChat } = useEnterChat();
   const toolbarItems = getToolbarItems(enterChat);
 
   // Matches the hammer icon's own tooltip (toolbarItems above) and does the
@@ -220,13 +224,20 @@ export default function MenuSection() {
   // Destructive — wipes every tracked kill, hidden boss, and preference
   // (see BossRespawnProvider.resetAll), plus every other piece of UI state
   // that isn't that provider's concern: the current boss selection (list or
-  // map), the active item/level filters, and every window's open/closed
-  // state — restored to whatever a first-ever visit would show, not closed.
-  // That means most windows end up *open* (Map/Raid Bosses/Drop List/Up
-  // Next/NPC Info all default to open; only Options starts closed) and the
-  // background dim back on — the opposite of Exit Game just below, which
-  // deliberately closes everything since it's meant to leave nothing on
-  // screen. Confirmed first since there's no undo.
+  // map), the active item/level filters, every window's open/closed state,
+  // and the four Options > Game/Video settings that have a real effect
+  // outside the dialog itself (Header, Background Epic Bosses, Game Cursor,
+  // Enter Chat) — restored to whatever a first-ever visit would show, not
+  // closed. That means most windows end up *open* (Map/Raid Bosses/Drop
+  // List/Up Next/NPC Info all default to open; only Options starts closed)
+  // and the background dim back on — the opposite of Exit Game just below,
+  // which deliberately closes everything since it's meant to leave nothing
+  // on screen. Confirmed first since there's no undo.
+  //
+  // Deliberately does NOT touch every Options setting — just these four,
+  // the ones a player would actually notice are "stuck" after a restart.
+  // Transparent/Epic Boss Hover/Alert Button/Hide 'Set Time'/Respawn time
+  // are left alone, same as before.
   const handleRestartConfirm = () => {
     setShowRestartConfirm(false);
     resetAll();
@@ -242,6 +253,10 @@ export default function MenuSection() {
     setUpcomingSpawnsOpen(true);
     setNpcInfoOpen(true);
     setIsDimmed(true);
+    setIsHeaderVisible(true);
+    setIsBackgroundVisible(true);
+    setEnterChat(false);
+    resetGameCursor();
   };
 
   // Not a real "quit" — there's nothing to quit out of in a web app — so
