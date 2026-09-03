@@ -85,6 +85,37 @@ export default function BossesPage() {
     ],
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Where can I find a Lineage 2 boss map?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "L2 Boss Tracker provides an interactive Lineage 2 boss map with raid boss locations, epic boss locations, and live spawn and respawn timers.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Where can I find Lineage 2 boss drops?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Use the L2 Boss Tracker boss directory to open any raid boss or epic boss and view its full drop table, item chances, and item counts.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Which Lineage 2 chronicle does the boss database cover?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The directory covers the Interlude chronicle, including raid bosses and epic bosses such as Queen Ant, Orfen, Core, Zaken, Baium, Antharas, Valakas, and Frintezza.",
+        },
+      },
+    ],
+  };
+
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <script
@@ -96,6 +127,11 @@ export default function BossesPage() {
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
         <p className="mb-6 text-[13px]">
@@ -197,6 +233,38 @@ export default function BossesPage() {
               </section>
             ),
         )}
+
+        <section className="mt-12 border-t border-border pt-8">
+          <h2 className="font-marcellus text-[20px] text-system-text">
+            Lineage 2 Boss Map &amp; Drop FAQ
+          </h2>
+          <dl className="mt-4 space-y-5 text-[14px] leading-relaxed">
+            <div>
+              <dt className="font-semibold text-system-text">
+                Where can I find a Lineage 2 boss map?
+              </dt>
+              <dd className="mt-1 text-foreground/80">
+                The <Link href="/" className="text-system-text hover:underline">interactive L2 boss map</Link> shows raid and epic boss locations with live spawn and respawn timers.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-system-text">
+                Where can I find Lineage 2 boss drops?
+              </dt>
+              <dd className="mt-1 text-foreground/80">
+                Open any boss above to see its full drop table, item chances, and item counts.
+              </dd>
+            </div>
+            <div>
+              <dt className="font-semibold text-system-text">
+                Which Lineage 2 chronicle does this database cover?
+              </dt>
+              <dd className="mt-1 text-foreground/80">
+                This directory covers the Interlude chronicle, including raid bosses and epic bosses.
+              </dd>
+            </div>
+          </dl>
+        </section>
       </div>
     </div>
   );

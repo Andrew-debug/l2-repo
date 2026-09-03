@@ -80,11 +80,25 @@ export const metadata: Metadata = {
 
 const websiteJsonLd = {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "L2 Boss Tracker",
-  url: "https://l2bosstracker.com",
-  description:
-    "Interactive Lineage 2 raid boss map with live spawn/respawn timers, level and item-drop filters, and full drop tables for every raid boss and epic boss.",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://l2bosstracker.com/#website",
+      name: "L2 Boss Tracker",
+      url: "https://l2bosstracker.com",
+      description:
+        "Interactive Lineage 2 raid boss map with live spawn and respawn timers, level and item-drop filters, and full drop tables for every raid boss and epic boss.",
+      publisher: { "@id": "https://l2bosstracker.com/#organization" },
+      inLanguage: ["en", "ru", "uk"],
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://l2bosstracker.com/#organization",
+      name: "L2 Boss Tracker",
+      url: "https://l2bosstracker.com",
+      logo: "https://l2bosstracker.com/android-chrome-512x512.png",
+    },
+  ],
 };
 
 export default function RootLayout({
