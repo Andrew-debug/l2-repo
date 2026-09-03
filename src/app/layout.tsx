@@ -54,7 +54,8 @@ export const metadata: Metadata = {
     type: "website",
     url: "/",
     siteName: "L2 Boss Tracker",
-    title: "L2 Boss Tracker — Lineage 2 Raid Boss Map, Spawn Locations & Drop Lists",
+    title:
+      "L2 Boss Tracker — Lineage 2 Raid Boss Map, Spawn Locations & Drop Lists",
     description:
       "Interactive map of every Lineage 2 raid boss and epic boss, with live respawn timers and full drop tables.",
   },
@@ -65,18 +66,13 @@ export const metadata: Metadata = {
       "Interactive map of every Lineage 2 raid boss and epic boss, with live respawn timers and full drop tables.",
   },
   robots: { index: true, follow: true },
-  // No `icon`/`shortcut` entries here on purpose, and favicon.ico lives in
-  // public/ (a plain static file) rather than src/app/ (Next's auto-linked
-  // icon convention) — BossRespawnProvider's favicon badge is the sole
-  // owner of the tab's <link rel="icon">, created and replaced entirely by
-  // its own effect. Letting Next's metadata/file-convention system also
-  // render one was the actual cause of a Fast Refresh crash: that link is
-  // React-managed, and BossRespawnProvider used to forcibly remove it via
-  // raw DOM calls to avoid browsers arbitrating between two different
-  // rel="icon" links — which left React holding a reference to a node
-  // that no longer had a parent, so the next reconciliation's removeChild
-  // call threw. `apple` is left as metadata since nothing else touches it.
   icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
     apple: "/apple-icon.png",
   },
   manifest: "/site.webmanifest",

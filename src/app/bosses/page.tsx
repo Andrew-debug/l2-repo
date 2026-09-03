@@ -3,14 +3,22 @@ import Link from "next/link";
 import { bosses, levelRanges } from "@/lib/boss-data";
 
 export const metadata: Metadata = {
-  title: "L2 Bosses List — All Lineage 2 Raid & Epic Boss Locations, Levels, Drops",
+  title: "L2 Bosses & Lineage 2 Raid Boss List — Locations, Levels, Drops",
   description:
-    "Every Lineage 2 raid boss and epic boss (Queen Ant, Orfen, Zaken, Baium, Valakas, Antharas, Core, Frintezza) with level, HP, spawn location and full drop table. Interlude chronicle.",
-  alternates: { canonical: "/bosses" },
+    "Find every L2 boss and Lineage 2 raid boss in the Interlude chronicle: levels, HP, spawn locations, respawn information and complete drop tables for raid and epic bosses.",
+  alternates: {
+    canonical: "/bosses",
+    languages: {
+      en: "/bosses",
+      ru: "/ru/bosses",
+      uk: "/uk/bosses",
+      "x-default": "/bosses",
+    },
+  },
   openGraph: {
-    title: "L2 Bosses List — Lineage 2 Raid & Epic Boss Directory",
+    title: "L2 Bosses & Lineage 2 Raid Boss List",
     description:
-      "Every Lineage 2 raid boss and epic boss with level, HP, spawn location and full drop table.",
+      "Every L2 raid boss and epic boss with level, HP, spawn location and full drop table.",
     url: "/bosses",
     type: "website",
   },
@@ -29,7 +37,9 @@ const epicBossOrder = [
 
 export default function BossesPage() {
   const epicBosses = epicBossOrder
-    .map((name) => bosses.find((b) => b.npcType === "EpicBoss" && b.name === name))
+    .map((name) =>
+      bosses.find((b) => b.npcType === "EpicBoss" && b.name === name),
+    )
     .filter((b): b is (typeof bosses)[number] => Boolean(b));
 
   const raidBossesByRange = levelRanges.map((range) => ({
@@ -37,7 +47,9 @@ export default function BossesPage() {
     list: bosses
       .filter(
         (b) =>
-          b.npcType !== "EpicBoss" && b.level >= range.min && b.level <= range.max,
+          b.npcType !== "EpicBoss" &&
+          b.level >= range.min &&
+          b.level <= range.max,
       )
       .sort((a, b) => a.level - b.level || a.name.localeCompare(b.name)),
   }));
@@ -54,12 +66,36 @@ export default function BossesPage() {
     })),
   };
 
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://l2bosstracker.com/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "L2 Bosses",
+        item: "https://l2bosstracker.com/bosses",
+      },
+    ],
+  };
+
   return (
     <div className="min-h-dvh bg-background text-foreground">
       <script
         type="application/ld+json"
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
         <p className="mb-6 text-[13px]">
@@ -69,13 +105,12 @@ export default function BossesPage() {
         </p>
 
         <h1 className="font-marcellus text-[28px] leading-tight text-system-text">
-          Lineage 2 Bosses: Full Raid &amp; Epic Boss List
+          L2 Bosses: Full Lineage 2 Raid &amp; Epic Boss List
         </h1>
         <p className="mt-4 text-[15px] leading-relaxed text-foreground/90">
-          A complete list of every raid boss and epic boss in the Interlude
-          chronicle of Lineage 2, with level, HP, spawn location and a full
-          drop table for each. Click any boss below for its detailed page, or
-          use the{" "}
+          A complete list of every L2 raid boss and epic boss in the Interlude
+          chronicle of Lineage 2, with level, HP, spawn location and a full drop
+          table for each. Click any boss below for its detailed page, or use the{" "}
           <Link href="/" className="text-system-text hover:underline">
             interactive L2 boss map
           </Link>{" "}
@@ -87,8 +122,8 @@ export default function BossesPage() {
             Epic Bosses
           </h2>
           <p className="mt-2 text-[14px] text-foreground/80">
-            The eight world bosses — the toughest, most contested spawns in
-            the game.
+            The eight world bosses — the toughest, most contested spawns in the
+            game.
           </p>
           <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-4">
             {epicBosses.map((b) => (
