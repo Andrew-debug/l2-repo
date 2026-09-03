@@ -244,7 +244,12 @@ export default function BossesPage() {
                 Where can I find a Lineage 2 boss map?
               </dt>
               <dd className="mt-1 text-foreground/80">
-                The <Link href="/" className="text-system-text hover:underline">interactive L2 boss map</Link> shows raid and epic boss locations with live spawn and respawn timers.
+                The{" "}
+                <Link href="/" className="text-system-text hover:underline">
+                  interactive L2 boss map
+                </Link>{" "}
+                shows raid and epic boss locations with live spawn and respawn
+                timers.
               </dd>
             </div>
             <div>
@@ -252,7 +257,8 @@ export default function BossesPage() {
                 Where can I find Lineage 2 boss drops?
               </dt>
               <dd className="mt-1 text-foreground/80">
-                Open any boss above to see its full drop table, item chances, and item counts.
+                Open any boss above to see its full drop table, item chances,
+                and item counts.
               </dd>
             </div>
             <div>
@@ -260,7 +266,8 @@ export default function BossesPage() {
                 Which Lineage 2 chronicle does this database cover?
               </dt>
               <dd className="mt-1 text-foreground/80">
-                This directory covers the Interlude chronicle, including raid bosses and epic bosses.
+                This directory covers the Interlude chronicle, including raid
+                bosses and epic bosses.
               </dd>
             </div>
           </dl>

@@ -2543,9 +2543,7 @@
     {
       "id": 25082,
       "name": "Leader of the Cat Gang",
-      "synonyms": [
-        "Leader of Cat Gang"
-      ],
+      "synonyms": ["Leader of Cat Gang"],
       "title": "Raid Boss",
       "level": 39,
       "npcType": "RaidBoss",
@@ -3200,9 +3198,7 @@
     {
       "id": 25102,
       "name": "Shacram",
-      "synonyms": [
-        "Chacram"
-      ],
+      "synonyms": ["Chacram"],
       "title": "Raid Boss",
       "level": 45,
       "npcType": "RaidBoss",
@@ -3559,9 +3555,7 @@
     {
       "id": 25112,
       "name": "Agent of Beres, Meana",
-      "synonyms": [
-        "Agent of Beres Meana"
-      ],
+      "synonyms": ["Agent of Beres Meana"],
       "title": "Raid Boss",
       "level": 30,
       "npcType": "RaidBoss",
@@ -3785,9 +3779,7 @@
     {
       "id": 25118,
       "name": "Guilotine, Warden of the Execution Grounds",
-      "synonyms": [
-        "Guilotine Warden of the Execution Grounds"
-      ],
+      "synonyms": ["Guilotine Warden of the Execution Grounds"],
       "title": "Raid Boss",
       "level": 35,
       "npcType": "RaidBoss",
@@ -6332,9 +6324,7 @@
     {
       "id": 25192,
       "name": "Earth Protector Panathen",
-      "synonyms": [
-        "Earth Protector Panathena"
-      ],
+      "synonyms": ["Earth Protector Panathena"],
       "title": "Raid Boss",
       "level": 43,
       "npcType": "RaidBoss",
@@ -7205,9 +7195,7 @@
     {
       "id": 25226,
       "name": "Roaring Lord Kastor",
-      "synonyms": [
-        "Roaring Lord Castor"
-      ],
+      "synonyms": ["Roaring Lord Castor"],
       "title": "Raid Boss",
       "level": 62,
       "npcType": "RaidBoss",
@@ -7460,9 +7448,7 @@
     {
       "id": 25233,
       "name": "Spirit of Andras, the Betrayer",
-      "synonyms": [
-        "Spirit of Andras the Betrayer"
-      ],
+      "synonyms": ["Spirit of Andras the Betrayer"],
       "title": "Raid Boss",
       "level": 69,
       "npcType": "RaidBoss",
@@ -8041,9 +8027,7 @@
     {
       "id": 25248,
       "name": "Doom Blade Tanatos",
-      "synonyms": [
-        "Doom Blade Thanatos"
-      ],
+      "synonyms": ["Doom Blade Thanatos"],
       "title": "Raid Boss",
       "level": 72,
       "npcType": "RaidBoss",
@@ -8243,9 +8227,7 @@
     {
       "id": 25255,
       "name": "Gargoyle Lord Tiphon",
-      "synonyms": [
-        "Gargoyle Lord Typhon"
-      ],
+      "synonyms": ["Gargoyle Lord Typhon"],
       "title": "Raid Boss",
       "level": 65,
       "npcType": "RaidBoss",
@@ -9692,9 +9674,7 @@
     {
       "id": 25293,
       "name": "Hestia, Guardian Deity of the Hot Springs",
-      "synonyms": [
-        "Hestia Guardian Deity of the Hot Springs"
-      ],
+      "synonyms": ["Hestia Guardian Deity of the Hot Springs"],
       "title": "Raid Boss",
       "level": 78,
       "npcType": "RaidBoss",
@@ -15232,9 +15212,7 @@
     {
       "id": 25475,
       "name": "Ghost Knight Kabed",
-      "synonyms": [
-        "Ghost Knight Cabed"
-      ],
+      "synonyms": ["Ghost Knight Cabed"],
       "title": "Raid Boss",
       "level": 55,
       "npcType": "RaidBoss",
@@ -16964,9 +16942,7 @@
     {
       "id": 29054,
       "name": "Benom",
-      "synonyms": [
-        "Venom"
-      ],
+      "synonyms": ["Venom"],
       "title": "Triol's Leader",
       "level": 75,
       "npcType": "RaidBoss",
@@ -17198,9 +17174,7 @@
     {
       "id": 29062,
       "name": "High Priestess van Halter",
-      "synonyms": [
-        "Andreas Van Halter"
-      ],
+      "synonyms": ["Andreas Van Halter"],
       "title": "Seer of Pagan",
       "level": 87,
       "npcType": "RaidBoss",
@@ -17351,11 +17325,7 @@
     {
       "id": 29096,
       "name": "Lord of Splendor Anays",
-      "synonyms": [
-        "Lord of Splendor Anais",
-        "Anays",
-        "Anais"
-      ],
+      "synonyms": ["Lord of Splendor Anais", "Anays", "Anais"],
       "title": "Raid Boss",
       "level": 87,
       "npcType": "RaidBoss",
@@ -19119,9 +19089,7 @@
       "id": 29047,
       "name": "Frintezza",
       "title": "Epic Boss (Scarlet van Halisha)",
-      "synonyms": [
-        "Scarlet van Halisha"
-      ],
+      "synonyms": ["Scarlet van Halisha"],
       "level": 85,
       "npcType": "EpicBoss",
       "routeVideoUrl": "https://youtu.be/3GmivtYwUrM",
